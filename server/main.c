@@ -215,9 +215,11 @@ char	**argv;
 	(void) setlocale(LC_CTYPE, "ja_JP.EUC");
 #endif
 	opening();
+#ifndef __NetBSD__
 	if (setuid(geteuid())) {
 		fprintf(stderr, "error at setuid.\r\n"); exit(1);
 	}
+#endif
 
 	parse_arg(argc, argv);		
 	read_runcmd();			
