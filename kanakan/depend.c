@@ -50,7 +50,6 @@
 # define FD_CLR __FD_CLR
 #endif
 
-extern	int	errno;
 extern	int	serv_errno;
 extern	Global	*work_base;
 char	*malloc();
@@ -318,7 +317,7 @@ char	*passwd;
 		serv_errno = SJ3_IncorrectPasswd; goto error1;
 	}
 
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
 	if ((dp = (Uchar *)malloc((long)sbuf.st_size)) == NULL) {
 #else
 	if ((dp = (Uchar *)malloc(sbuf.st_size)) == NULL) {
@@ -330,7 +329,7 @@ char	*passwd;
 	}
 	memset(dfp, '\0', sizeof(*dfp));
 
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
 	if (fgetfile(fp, 0L, (long)sbuf.st_size, dp) == ERROR) goto error3;
 #else
 	if (fgetfile(fp, 0L, sbuf.st_size, dp) == ERROR) goto error3;

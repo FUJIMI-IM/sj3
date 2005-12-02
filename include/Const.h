@@ -70,11 +70,11 @@
 #define ProtoName               "tcp"
 #define	PortNumber		"3000"
 #else
-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
-#define        PortNumber              3086
-#else /* ! __FreeBSD__ __NetBSD__ __OpenBSD__ */
+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
+#define	PortNumber		3086
+#else /* ! __FreeBSD__ __NetBSD__ __OpenBSD__ __DragonFly__ */
 #define	PortNumber		3000
-#endif /* ! __FreeBSD__ __NetBSD__ __OpenBSD__ */
+#endif /* ! __FreeBSD__ __NetBSD__ __OpenBSD__ __DragonFly__ */
 #endif
 #define	DirectryMode		0755
 #define	DictFileMode		0644

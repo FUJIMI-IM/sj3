@@ -53,8 +53,6 @@
 #define SJIS_PROTO 1
 #define EUC_PROTO 2
 
-extern	int	errno;
-
 extern	Global	*work_base;
 extern	STDY	*stdy_base;
 extern	int	serv_errno;
@@ -82,7 +80,6 @@ static	Client	*cur_cli;
 static Uchar defaultchar[2] = {(Uchar)0x81, (Uchar)0x40};   
 static int  defuse=0, defuse2=0;
 
-char	*malloc();
 DictFile *opendict();
 int	closedict();
 StdyFile *openstdy();
