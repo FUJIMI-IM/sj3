@@ -40,14 +40,13 @@
 
 
 
+#include <string.h>
+#include <unistd.h>
 
 
 
 
-
-char	*ttyname();
-char	*getttys();
-char	*strrchr();
+static char	*getttys();
 static	char	*ttys	= "/etc/ttys";
 
 #define	NULL	0
