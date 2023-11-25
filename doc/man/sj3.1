@@ -1,0 +1,121 @@
+.\"
+.\"Copyright (c) 1991-1994  Sony Corporation
+.\"
+.\"Permission is hereby granted, free of charge, to any person obtaining
+.\"a copy of this software and associated documentation files (the
+.\""Software"), to deal in the Software without restriction, including
+.\"without limitation the rights to use, copy, modify, merge, publish,
+.\"distribute, sublicense, and/or sell copies of the Software, and to
+.\"permit persons to whom the Software is furnished to do so, subject to
+.\"the following conditions:
+.\"
+.\"The above copyright notice and this permission notice shall be
+.\"included in all copies or substantial portions of the Software.
+.\"
+.\"THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+.\"EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+.\"MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+.\"IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+.\"DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+.\"OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+.\"THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+.\"
+.\"Except as contained in this notice, the name of Sony Corporation
+.\"shall not be used in advertising or otherwise to promote the sale, use
+.\"or other dealings in this Software without prior written authorization
+.\"from Sony Corporation.
+.\"
+.\"$SonyRCSfile: sj3.1,v $
+.\"$SonyRevision: 1.1 $
+.\"$SonyDate: 1994/06/03 08:00:50 $
+.\"
+.\" Japanese input frontend processor
+.TH SJ3 1 "October 1990"
+.SH 名称
+sj3 \- 日本語入力フロントエンドプロセッサ
+.SH 形式
+.B sj3
+[ \fB\-f\fP shell ] [ \fB\-h\fP ] [ \fB\-H\fP hostname ...] [ \fB\-L\fP ]
+[ \fB-o\fP ] [ \fB\-e\fP program [ arguments ...]]
+.SH 解説
+.I sj3
+は、仮名漢字変換サーバ
+.IR " sj3serv" (1)
+とソケットを使用したプロセス間通信により仮名漢字変換を
+行う日本語入力フロントエンドプロセッサです。
+.PP
+.I sj3
+はターミナル上で起動し、ターミナルから入力されたローマ字もしくは
+半角カタカナを仮名漢字変換します。そして変換結果を、
+.I sj3
+上で動かしているアプリケーションに渡します。
+.PP
+.I sj3
+は起動時にホームディレクトリ内の‘.sjrc’というセットアップ
+ファイルを読み込み、その設定に従って動作をします。このファイルがなければ
+デフォルトの動作をします。
+また
+.I " sj3
+のローマ字仮名変換は、ホームディレクトリ内の‘.sjrk’ファイルで定義されて
+いる規則に従います。このファイルがなければ、デフォルトの定義ファイル
+の規則に従います。
+.SH オプション
+.TP
+.BI \-f " shell"
+このオプションは、
+.I sj3
+起動時に実行されるシェルを指定します。デフォルトは
+.I " /bin/csh
+です。
+.TP
+.BI \-h
+オプションの説明を表示し、
+.I sj3
+は起動しません。
+.TP
+.BI \-H " hostname \.\.\."
+このオプションは、接続するサーバとなるホスト名リストを指定します。
+サーバとなるホストを複数指定した場合、その順番に接続を試みます。
+このオプションが省略され、環境変数
+.B " SJ3SERV
+もしくはセットアップファイル
+でもサーバの指定がなければ、localhost 上のサーバとの接続を試みます。
+すべてのサーバとの接続が出来なかった場合でも
+.I " sj3
+は起動しますが、仮名漢字変換はできません。
+.TP
+.BI \-L
+このオプションは、起動されるシェルをログインシェルとすることを示します。
+.TP
+.BI \-o
+このオプションは、使用しているキーボードが NWP-410 であることを示します。
+.TP
+.BI \-e " program \[arguments \.\.\.\]"
+このオプションは、
+.I sj3
+起動時に実行されるプログラム及びその引数を指定します。
+.ft B
+これは、コマンド行上の最後のオプションでなければなりません。
+.SH 環境変数
+.TP 15
+.B SJ3SERV
+接続するサーバとなるホスト名リストを取得します。
+.TP 15
+.B SJRC
+セットアップファイルのファイル名を取得します。
+.TP 15
+.B SJRK
+ローマ字仮名変換規則定義ファイルのファイル名を取得します。
+.SH 関連ファイル
+.PD 0
+.TP 15
+/usr/dict/sj3/user/$USER/private.dic
+仮名漢字変換ユーザ辞書
+.TP
+/usr/dict/sj3/user/$USER/study.dat
+仮名漢字変換学習ファイル
+.TP
+/usr/lib/sj3/sjrk
+デフォルトローマ字仮名変換規則定義ファイル
+.SH 関連事項
+sj3serv(1), sj3lib(3) 

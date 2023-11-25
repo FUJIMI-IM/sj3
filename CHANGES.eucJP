@@ -1,0 +1,284 @@
+#
+# $SonyId: CHANGES.eucJP,v 1.31 1998/04/08 13:11:09 notanaka Exp $
+#
+
+[After X11R6 contrib release]
+
+number: 1
+date: 1994/08/01
+contents: sjis2euc と euc2sjis が半角カタカナも変換してくれると勘違いしていた。
+source: sj3rkcv/wc16_str.c
+
+number: 2
+date: 1994/08/17
+from: ASHIDA Isao
+contents: (sj3-bugs 1) Lynux でコンパイルができない
+source: dict/tool/hindo.c
+source: dict/tool/offset.c
+source: kanakan/depend.c
+source: server/comuni.c
+
+number: 3
+date: 1994/10/21
+contents: MaxClient の上限値を 512 にする。Client 構造体を動的に取る。
+source: include/Const.h
+source: include/Struct.h
+source: server/comuni.c
+source: server/execute.c
+
+number: 4
+date: 1994/10/21
+contents: ユーザ辞書と学習ファイルのパーミッションのデフォルトを 600 にする。
+source: include/Struct.h
+source: server/execute.c
+source: server/setup.c
+
+number: 5
+date: 1994/11/16
+contents: fix spell miss(trdwr -> tirdwr) in warning message
+source: server/comuni.c
+
+number: 6
+date: 1994/11/17
+contents: SJIS の環境で、sj3 の変換結果の文字列がむちゃくちゃになる。
+source: sj3rkcv/wc16_str.c
+
+number: 7
+date: 1994/11/22
+contents: sj3_zentohan*()が全カタの「ム」以降の文字でおかしい(使ってないけど)
+source: sj3rkcv/sj3_rkcv.c
+
+number: 8
+date: 1994/12/09
+contents: sj3servで複数の辞書を扱えるようにして、sj3libにインタフェースを追加
+source(add): doc/man/sj3mkdic.1
+source: dict/dict/Imakefile
+source: dict/tool/Imakefile
+source: dict/tool/makedict.c
+source: dict/tool/makeseg.c
+source: include/sj_global.h
+source: kanakan/global.c
+source: patchlevel.h
+source: server/execute.c
+source: server/main.c
+source: server/setup.c
+source: server/time_stamp.c
+source: server/version.c
+source: sj3/eucmessage.c
+source: sj3/libif.c
+source: sj3/sjrc.c
+source: sj3/version.c
+source: sj3lib/sj.c
+source: sj3rkcv/rk_conv.c
+
+number: 9
+date: 1995/02/03
+from: Haruyuki Kawabe
+contents: (sj3-bugs 3) [sj3serv]: [FileReadError]
+source: kanakan/depend.c
+source: server/version.c
+
+number: 10
+date: 1995/02/03
+contents: FreeBSD で sj3 が動作するようにした。
+source: dict/tool/file.c
+source: kanakan/depend.c
+source: server/main.c
+source: server/time_stamp.c
+source: server/version.c
+source: sj3/sj3.c
+source: sj3/sjgetchar.c
+source: sj3/version.c
+source: sj3lib/level1.c
+
+number: 11
+date: 1995/02/10
+from: Manabe Takashi
+contents: Linux で sj3 を動かすためのパッチをあてた。
+source: include/sj_sysvdef.h  
+source: sj3/sj3.c
+source: sj3/sjgetchar.c
+source: sj3/version.c
+
+number: 12
+date: 1995/02/10
+contents: sj3_zentohan()で漢字を入力すると字が化ける（使ってないけど）
+source: sj3rkcv/sj3_rkcv.c
+
+[After fix-1 release]
+
+number: 13
+date: 1995/03/14
+from: Tsuyoshi Tada
+contents: NetBSD/i386 でのコンパイルができるようにした。
+source: sj3/sj3.c
+source: sj3/sjgetchar.c
+
+number: 14
+date: 1995/04/05
+contents: put_flush() が正常終了時に return value を返していない。
+source: sj3lib/level1.c
+
+number: 15
+date: 1995/04/07
+contents: NetBSD で環境変数 LANG が設定されていないと core dump する。
+source: sj3/sj3.c
+source: sj3/version.c
+
+number: 16
+date: 1995/04/17
+contents: put_over() の引数が多いところがある（とりあえず実害はない）。
+source: sj3lib/level1.c
+
+number: 17
+date: 1995/05/30
+from: Yoshikatsu Kawabe
+contents: (sj3-bugs 5) [SJ3]: Contrib new utility (sj3stat)
+source(add): sj3stat/Imakefile
+source(add): sj3stat/sj3stat.c
+source: Imakefile
+
+number: 18
+date: 1995/07/18
+from: Ryuichi MATSUMOTO
+contents: (sj3-bugs 4) SJ3: Illegal Conversion (-ku, ku-ru)
+source: dict/dict/visual.dic
+
+number: 19
+date: 1995/07/18
+contents: sj3stat で client の情報が正しく取れない。
+source: server/execute.c
+source: server/version.c
+source: server/time_stamp.c
+
+number: 20
+date: 1995/07/21
+contents: 単語登録の読み文字列で[ａ-ｚ],[ヴヵヶ],[＃＠〒]が正しく使用できない。
+source: kanakan/peepdic.c
+source: kanakan/s2ctbl.c
+source: kanakan/sj2code.c
+source: server/version.c
+source: server/time_stamp.c
+
+number: 21
+date: 1996/02/15
+contents: locale が正しく設定されていないと sj3dic が core dump する。
+source: sj3dic/sj3dic.c
+source: sj3dic/sjtool.h
+source: sj3dic/codecnv.c
+source: sj3dic/sjrc.c
+
+number: 22
+date: 1996/02/23
+contents: sj3 の変換候補に読みを全角仮名にした候補をくわえた。
+source: sj3/douon.c
+source: sj3/libif.c
+source: sj3/version.c
+source: sj3h/sj3libsj3.h
+source: sj3h/sj.h
+
+number: 23
+date: 1996/02/23
+contents: 読みの全角仮名の候補を選択したとき、ユーザ辞書に登録されるようにした。
+source: sj3/douon.c
+source: sj3/version.c
+
+number: 24
+date: 1996/05/27
+contents: 上記の修正についてマニュアルに記述を追加した。
+source: doc/doc/Nihongo.ps.Z
+
+number: 25
+date: 1996/05/27
+contents: 辞書が正常に作成できないことがある(SunOS Release 4.1.x)。
+source: dict/tool/cnvhinsi.c
+source: sj3h/sj3libsj3.h
+
+number: 26
+date: 1996/09/05
+contents: sj3serv で使用されないグループ指定に関する文章とソースを削除した。
+source: doc/man/sj3mkdic.1
+source(delete): kanakan/srchgrp.c
+
+number: 27
+date: 1997/01/21
+from: Hidekazu Kuroki
+contents: (sj3-bugs 10) FreeBSD port のための修正
+source(add): server/rc.sj3serv.FreeBSD
+source(add): doc/Imakefile
+source(add): doc/doc/Imakefile
+source(add): doc/man/Imakefile
+source: Imakefile
+source: demo/sample.c
+source: dict/dict/Imakefile
+source: dict/tool/Imakefile
+source: include/Const.h
+source: server/Imakefile
+source: sj3/Imakefile
+source: sj3/edit.c
+source: sj3/funckey.c
+source: sj3/henkan.c
+source: sj3/romaji.c
+source: sj3/sj3.c
+source: sj3/sjrc.c
+source: sj3dic/Imakefile
+source: sj3h/sj2.h
+source: sj3lib/Imakefile
+source: sj3stat/Imakefile
+source: sj3stat/sj3stat.c
+
+number: 28
+date: 1997/01/22
+from: Toya
+contents: (sj3-bugs 9) [NOT bug...] easier(?) installation to non-default directory
+source(add): include/Paths.h.in
+source(add): sj3.tmpl
+source: Imakefile
+source: dict/dict/Imakefile
+source: dict/tool/Imakefile
+source: doc/man/Imakefile
+source: doc/doc/Imakefile
+source: include/Const.h
+source: server/Imakefile
+source: sj3/Imakefile
+source: sj3/funckey.c
+source: sj3/sjrc.c
+source: sj3dic/Imakefile
+source: sj3lib/Imakefile
+source: sj3stat/Imakefile
+
+number: 29
+date: 1997/01/22
+from: Iwama Yoshihiko
+contents: (sj3-bugs 12) sj3: Can't compile sj3 command on BSD/OS
+source: demo/sample.c
+source: sj3/sj3.c
+source: sj3/sjgetchar.c
+source: sj3dic/codecnv.c
+source: sj3dic/sjrc.c
+
+number: 30
+date: 1997/10/07
+from: UO Youjiro
+contents: (sj3-bugs 20) not work sj3serv on bsdi platform
+source: kanakan/depend.c
+
+number: 31
+date: 1998/01/14
+from: SL Baur
+contents: (sj3-bugs 22) [PATCH] Port of sj3-2.0.1.17 to Linux/Libc6
+source: include/sj_sysvdef.h
+source: kanakan/depend.c
+source: server/comuni.c
+source: sj3lib/string.c
+source: sj3/display.c
+source: sj3/sjgetchar.c
+source: sj3/sj3.c
+
+number: 32
+date: 1998/03/23
+from: MURANAKA Masaki
+contents: (sj3-bugs 23) Security bug on SJ3SERV
+source: server/execute.c
+source: server/time_stamp.c
+source: server/version.c

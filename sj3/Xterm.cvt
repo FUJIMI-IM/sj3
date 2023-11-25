@@ -1,0 +1,64 @@
+##
+## Copyright (c) 1994  Sony Corporation
+## 
+## Permission is hereby granted, free of charge, to any person obtaining
+## a copy of this software and associated documentation files (the
+## "Software"), to deal in the Software without restriction, including
+## without limitation the rights to use, copy, modify, merge, publish,
+## distribute, sublicense, and/or sell copies of the Software, and to
+## permit persons to whom the Software is furnished to do so, subject to
+## the following conditions:
+## 
+## The above copyright notice and this permission notice shall be
+## included in all copies or substantial portions of the Software.
+## 
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+## EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+## MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+## IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+## DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+## OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+## THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## 
+## Except as contained in this notice, the name of Sony Corporation
+## shall not be used in advertising or otherwise to promote the sale, use
+## or other dealings in this Software without prior written authorization
+## from Sony Corporation.
+##
+
+##
+## $SonyRCSfile: Xterm.cvt,v $  
+## $SonyRevision: 1.1 $ 
+## $SonyDate: 1994/06/03 08:03:08 $
+##
+#	sj3 command key alias file 
+#	for xterm
+#
+F1	^[[11~
+F2	^[[12~
+F3	^[[13~
+F4	^[[14~
+F5	^[[15~
+F6	^[[17~
+F7	^[[18~
+F8	^[[19~
+F9	^[[20~
+F10	^[[21~
+#F11	^[[23~
+#F12	^[[24~
+#F13	^[[25~
+#F14	^[[26~
+#F15	^[[28~
+#F16	^[[29~
+#F17	^[[31~
+#F18	^[[32~
+#F19	^[[33~
+#F20	^[[34~
+Select	^[[4~
+Kanji	^[[7~
+Cancel	^[[8~
+Execute	^[[9~
+Up	^[[A
+Down	^[[B
+Right	^[[C
+Left	^[[D

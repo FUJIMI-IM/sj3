@@ -1,0 +1,172 @@
+/*
+ * Copyright (c) 1991-1994  Sony Corporation
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+ * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * Except as contained in this notice, the name of Sony Corporation
+ * shall not be used in advertising or otherwise to promote the sale, use
+ * or other dealings in this Software without prior written authorization
+ * from Sony Corporation.
+ */
+
+/*
+ * $SonyRCSfile: Imakefile,v $  
+ * $SonyRevision: 1.1 $ 
+ * $SonyDate: 1994/06/03 08:01:25 $
+ */
+
+INCLUDES = -I../include
+
+SRCS = \
+	adddic.c \
+	addelcmn.c \
+	alloc.c \
+	charsize.c \
+	chrtbl.c \
+	cl2knj.c \
+	clstudy.c \
+	cmpstr.c \
+	conjunc.c \
+	connect.c \
+	cvtclknj.c \
+	cvtdict.c \
+	cvtkanji.c \
+	deldic.c \
+	depend.c \
+	dict.c \
+	functbl.c \
+	fuzoku.c \
+	fzkyomi.c \
+	getkanji.c \
+	getrank.c \
+	global.c \
+	hzstrlen.c \
+	init.c \
+	istrcmp.c \
+	memcpy.c \
+	memory.c \
+	memset.c \
+	mk2claus.c \
+	mkbunset.c \
+	mkjiritu.c \
+	mkkouho.c \
+	mknumber.c \
+	mvmemd.c \
+	mvmemi.c \
+	peepdic.c \
+	ph2knj.c \
+	ph_khtbl.c \
+	priority.c \
+	prtytbl.c \
+	s2ctbl.c \
+	selclrec.c \
+	selsuuji.c \
+	setconj.c \
+	setjrec.c \
+	setkouho.c \
+	setubi.c \
+	sj2code.c \
+	skiphblk.c \
+	skipkstr.c \
+	srchdict.c \
+	srchhead.c \
+	srchidx.c \
+	srchnum.c \
+	sstrcmp.c \
+	sstrlen.c \
+	sstrncmp.c \
+	stbtbl.c \
+	stttbl.c \
+	study.c \
+	suujitbl.c \
+	terminat.c \
+	termtbl.c \
+	wakachi.c
+
+OBJS = \
+	adddic.o \
+	addelcmn.o \
+	alloc.o \
+	charsize.o \
+	chrtbl.o \
+	cl2knj.o \
+	clstudy.o \
+	cmpstr.o \
+	conjunc.o \
+	connect.o \
+	cvtclknj.o \
+	cvtdict.o \
+	cvtkanji.o \
+	deldic.o \
+	depend.o \
+	dict.o \
+	functbl.o \
+	fuzoku.o \
+	fzkyomi.o \
+	getkanji.o \
+	getrank.o \
+	global.o \
+	hzstrlen.o \
+	init.o \
+	istrcmp.o \
+	memcpy.o \
+	memory.o \
+	memset.o \
+	mk2claus.o \
+	mkbunset.o \
+	mkjiritu.o \
+	mkkouho.o \
+	mknumber.o \
+	mvmemd.o \
+	mvmemi.o \
+	peepdic.o \
+	ph2knj.o \
+	ph_khtbl.o \
+	priority.o \
+	prtytbl.o \
+	s2ctbl.o \
+	selclrec.o \
+	selsuuji.o \
+	setconj.o \
+	setjrec.o \
+	setkouho.o \
+	setubi.o \
+	sj2code.o \
+	skiphblk.o \
+	skipkstr.o \
+	srchdict.o \
+	srchhead.o \
+	srchidx.o \
+	srchnum.o \
+	sstrcmp.o \
+	sstrlen.o \
+	sstrncmp.o \
+	stbtbl.o \
+	stttbl.o \
+	study.o \
+	suujitbl.o \
+	terminat.o \
+	termtbl.o \
+	wakachi.o
+
+NormalLibraryObjectRule()
+NormalLibraryTarget(kanakan,$(OBJS))
+DependTarget()
+

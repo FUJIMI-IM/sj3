@@ -1,0 +1,326 @@
+/*
+ * Copyright (c) 1991-1994  Sony Corporation
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+ * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * Except as contained in this notice, the name of Sony Corporation
+ * shall not be used in advertising or otherwise to promote the sale, use
+ * or other dealings in this Software without prior written authorization
+ * from Sony Corporation.
+ *
+ */
+
+/*
+ * $SonyRCSfile: termtbl.c,v $  
+ * $SonyRevision: 1.1 $ 
+ * $SonyDate: 1994/06/03 08:02:42 $
+ */
+
+
+
+#include "sj_rename.h"
+#include "sj_typedef.h"
+#include "sj_const.h"
+#include "sj_prty.h"
+
+
+Uchar	termtbl[] = {
+	0,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_JOSHI_A,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + 8,
+	T_KANOU + P_JOSHI_B,
+
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_E,
+	T_KANOU + P_JOSHI_B,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	0       + P_FUKA,
+	T_KANOU + P_RENYOU_J,
+	T_KANOU + P_RENYOU_J,
+	T_KANOU + P_RENYOU_J,
+	T_KANOU + P_RENYOU_J,
+
+	T_KANOU + P_RENYOU_M,
+	T_KANOU + P_RENYOU_M,
+	T_KANOU + P_RENYOU_M,
+	T_KANOU + P_RENYOU_M,
+	T_KANOU + P_RENYOU_M,
+	T_KANOU + P_RENYOU_M,
+	0,
+	0,
+	0,
+	T_KANOU + P_RENYOU_J,
+
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_RENYOU_J,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	0       + P_FUKA,
+
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	0       + P_FUKA,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_RENYOU_F,
+
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_F,
+	T_SHUUJO+ P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + RENTAI + 8,
+	T_KANOU + RENTAI + 10,
+	T_KANOU + RENTAI + 7,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + RENTAI + 7,
+	T_KANOU + RENTAI + 6,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + RENTAI + 7,
+
+	T_KANOU + RENTAI + 6,
+	T_KANOU + RENTAI + 6,
+	T_SHUUJO+ RENTAI + 6,
+	T_KANOU + RENTAI + 6,
+	T_KANOU + RENTAI + 7,
+	T_KANOU + RENTAI + 6,
+	T_KANOU + RENTAI + 6,
+	T_KANOU + RENTAI + 6,
+	T_KANOU + RENTAI + 6,
+	T_KANOU + RENTAI + 6,
+
+	0       + P_FUKA,
+	T_KANOU + RENTAI + 6,
+	0       + P_FUKA,
+	T_KANOU + 3,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	T_KANOU + P_KAMEI,
+	T_KANOU + P_MEIREI,
+	T_KANOU + P_MEIREI,
+	T_SHUUJO+ P_MEIREI,
+	T_SHUUJO+ P_MEIREI,
+
+	T_KANOU + P_MEISI,
+	0       + P_FUKA,
+	T_KANOU + P_FUKA,
+	T_KANOU + P_MEISI,
+	T_KANOU + P_DAIMEISI,
+	T_KANOU + P_DAIMEISI,
+	T_KANOU + P_MEISI,
+	T_KANOU + P_JOSHI_D,
+	T_KANOU + P_JOSHI_E,
+
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_DAIMEISI,
+	T_KANOU + P_FUKUSI,
+	T_KANOU + P_FUKUSI,
+	T_KANOU + P_SHUUSI,
+	0       + P_FUKA,
+	T_KANOU + P_DAIMEISI,
+	T_KANOU + 7,
+	0       + P_FUKA,
+	T_SHUUJO+ P_JOSHI_E,
+
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_JOSHI_A,
+	T_KANOU + P_MEISI,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_F_FUKUSI,
+	0,
+	T_KANOU + P_JOSHI_F,
+	0,
+	0,
+
+	0       + P_FUKA,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	T_KANOU + P_RENYOU_F,
+	T_KANOU + P_RENYOU_J,
+	T_KANOU + P_RENYOU_F,
+	0       + P_FUKA,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_SHUUSI,
+
+	T_KANOU + P_SHUUSI,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	0       + P_FUKA,
+	T_SHUUJO+ P_SHUUSI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + 1,
+	T_KANOU + P_JOSHI_F,
+	T_KANOU + P_JOSHI_F,
+	T_KANOU + P_JOSHI_C,
+
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_F,
+	T_KANOU + P_SHUUSI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_JOSHI_D,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_D,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_D,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_D,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_D,
+	T_KANOU + P_JOSHI_D,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+
+	T_SHUUJO+ P_SHUUSI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_B,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_JOSHI_C,
+	T_KANOU + P_KEISIKI,
+	T_KANOU + P_KEISIKI,
+
+	0       + P_JOSHI_C,
+	T_KANOU + P_SUUSI,
+	T_KANOU + P_SETUZOKU,
+	T_KANOU + P_KANDOU,
+	T_KANOU + P_SETTOU,
+	T_KANOU + P_FUKUSI,
+	T_KANOU + P_FZKKGU,
+	T_KANOU + P_MEISI,
+	T_KANOU + P_MEISI,
+	T_KANOU + P_MEISI,
+
+	T_KANOU + P_MEISI,
+	0       + P_SETUBI,
+	T_KANOU + P_SETUBI,
+	T_KANOU + P_JOSUUSI,
+	T_KANOU + P_RENTAISI,
+	T_KANOU + P_TANKAN
+};

@@ -1,0 +1,332 @@
+##
+## Copyright (c) 1994  Sony Corporation
+## 
+## Permission is hereby granted, free of charge, to any person obtaining
+## a copy of this software and associated documentation files (the
+## "Software"), to deal in the Software without restriction, including
+## without limitation the rights to use, copy, modify, merge, publish,
+## distribute, sublicense, and/or sell copies of the Software, and to
+## permit persons to whom the Software is furnished to do so, subject to
+## the following conditions:
+## 
+## The above copyright notice and this permission notice shall be
+## included in all copies or substantial portions of the Software.
+## 
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+## EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+## MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+## IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+## DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+## OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+## THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## 
+## Except as contained in this notice, the name of Sony Corporation
+## shall not be used in advertising or otherwise to promote the sale, use
+## or other dealings in this Software without prior written authorization
+## from Sony Corporation.
+##
+
+##
+## $SonyRCSfile: Sjrk,v $  
+## $SonyRevision: 1.1 $ 
+## $SonyDate: 1994/06/03 08:03:07 $
+##
+#
+#	ローマ字かな変換規則定義ファイル
+#	デフォルトファイル
+#
+#フォーマット(区切りはスペースもしくはタブ)
+#[in_romaji]	[out_kana]	[out_romaji]
+A	あ
+I	い
+U	う
+E	え
+O	お
+
+KA	か
+KI	き
+KU	く
+KE	け
+KO	こ
+CA	か
+CI	き
+CU	く
+CE	け
+CO	こ
+KYA	きゃ
+KYI	き
+KYU	きゅ
+KYE	きぇ
+KYO	きょ
+QYA	きゃ
+QYI	き
+QYU	きゅ
+QYE	きぇ
+QYO	きょ
+
+SA	さ
+SI	し
+SU	す
+SE	せ
+SO	そ
+SYA	しゃ
+SYI	し
+SYU	しゅ
+SYE	しぇ
+SYO	しょ
+SHA	しゃ
+SHI	し
+SHU	しゅ
+SHE	しぇ
+SHO	しょ
+
+TA	た
+TI	ち
+TU	つ
+TE	て
+TO	と
+TSA	た
+TSI	ち
+TSU	つ
+TSE	て
+TSO	と
+THA	たぁ
+THI	てぃ
+THU	とぅ
+TYA	ちゃ
+TYI	ち
+TYU	ちゅ
+TYE	ちぇ
+TYO	ちょ
+TSYA	ちゃ
+TSYI	ち
+TSYU	ちゅ
+TSYE	ちぇ
+TSYO	ちょ
+CHA	ちゃ
+CHI	ち
+CHU	ちゅ
+CHE	ちぇ
+CHO	ちょ
+CYA	ちゃ
+CYI	ち
+CYU	ちゅ
+CYE	ちぇ
+CYO	ちょ
+
+NA	な
+NI	に
+NU	ぬ
+NE	ね
+NO	の
+NYA	にゃ
+NYI	に
+NYU	にゅ
+NYE	にぇ
+NYO	にょ
+
+HA	は
+HI	ひ
+HU	ふ
+HE	へ
+HO	ほ
+HYA	ひゃ
+HYI	ひ
+HYU	ひゅ
+HYE	ひぇ
+HYO	ひょ
+FA	ふぁ
+FI	ふぃ
+FU	ふ
+FE	ふぇ
+FO	ふぉ
+FYA	ふゃ
+FYI	ふぃ
+FYU	ふゅ
+FYE	ふぇ
+FYO	ふょ
+
+MA	ま
+MI	み
+MU	む
+ME	め
+MO	も
+MYA	みゃ
+MYI	み
+MYU	みゅ
+MYE	みぇ
+MYO	みょ
+
+YA	や
+YI	い
+YU	ゆ
+YE	いぇ
+YO	よ
+RA	ら
+RI	り
+RU	る
+RE	れ
+RO	ろ
+LA	ら
+LI	り
+LU	る
+LE	れ
+LO	ろ
+RYA	りゃ
+RYI	り
+RYU	りゅ
+RYE	りぇ
+RYO	りょ
+LYA	りゃ
+LYI	り
+LYU	りゅ
+LYE	りぇ
+LYO	りょ
+
+WA	わ
+WI	うぃ
+WU	う
+WE	うぇ
+WO	を
+
+GA	が
+GI	ぎ
+GU	ぐ
+GE	げ
+GO	ご
+GYA	ぎゃ
+GYI	ぎ
+GYU	ぎゅ
+GYE	ぎぇ
+GYO	ぎょ
+
+ZA	ざ
+ZI	じ
+ZU	ず
+ZE	ぜ
+ZO	ぞ
+ZYA	じゃ
+ZYI	じ
+ZYU	じゅ
+ZYE	じぇ
+ZYO	じょ
+JA	じゃ
+JI	じ
+JU	じゅ
+JE	じぇ
+JO	じょ
+JYA	じゃ
+JYI	じ
+JYU	じゅ
+JYE	じぇ
+JYO	じょ
+
+DA	だ
+DI	ぢ
+DU	づ
+DE	で
+DO	ど
+DYA	ぢゃ
+DYI	ぢ
+DYU	ぢゅ
+DYE	ぢぇ
+DYO	ぢょ
+DHA	だぁ
+DHI	でぃ
+DHU	どぅ
+DHYU	でゅ
+
+BA	ば
+BI	び
+BU	ぶ
+BE	べ
+BO	ぼ
+BYA	びゃ
+BYI	び
+BYU	びゅ
+BYE	びぇ
+BYO	びょ
+VA	ヴぁ
+VI	ヴぃ
+VU	ヴ
+VE	ヴぇ
+VO	ヴぉ
+VYA	びゃ
+VYI	び
+VYU	びゅ
+VYE	びぇ
+VYO	びょ
+
+PA	ぱ
+PI	ぴ
+PU	ぷ
+PE	ぺ
+PO	ぽ
+PYA	ぴゃ
+PYI	ぴ
+PYU	ぴゅ
+PYE	ぴぇ
+PYO	ぴょ
+
+QA	くぁ
+QI	くぃ
+QU	くぅ
+QE	くぇ
+QO	くぉ
+
+N	ん
+NN	ん
+#MB	ん B
+#MM	ん M
+#MP	ん P
+
+KK	っ K
+SS	っ S
+TT	っ T
+HH	っ H
+MM	っ M
+YY	っ Y
+RR	っ R
+LL	っ L
+WW	っ W
+GG	っ G
+ZZ	っ Z
+DD	っ D
+BB	っ B
+PP	っ P
+CC	っ C
+FF	っ F
+JJ	っ J
+VV	っ V
+QQ	っ Q
+XX	っ X
+#TCH	っ CH
+
+XA	ぁ
+XI	ぃ
+XU	ぅ
+XE	ぇ
+XO	ぉ
+XYA	ゃ
+XYI	ぃ
+XYU	ゅ
+XYE	ぇ
+XYO	ょ
+XTU	っ
+XTSU	っ
+XWA	ゎ
+XKA	ヵ
+XKE	ヶ
+
+X,	゛
+X.	゜
+~	〜
+
+#-	ー
+#,	、
+#.	。
+#@	・
+#[	「
+#]	」
+#Z.	…
+#SONY	ソニー

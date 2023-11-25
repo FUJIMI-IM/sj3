@@ -1,0 +1,141 @@
+.\"
+.\"Copyright (c) 1991-1994  Sony Corporation
+.\"
+.\"Permission is hereby granted, free of charge, to any person obtaining
+.\"a copy of this software and associated documentation files (the
+.\""Software"), to deal in the Software without restriction, including
+.\"without limitation the rights to use, copy, modify, merge, publish,
+.\"distribute, sublicense, and/or sell copies of the Software, and to
+.\"permit persons to whom the Software is furnished to do so, subject to
+.\"the following conditions:
+.\"
+.\"The above copyright notice and this permission notice shall be
+.\"included in all copies or substantial portions of the Software.
+.\"
+.\"THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+.\"EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+.\"MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+.\"IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+.\"DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+.\"OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+.\"THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+.\"
+.\"Except as contained in this notice, the name of Sony Corporation
+.\"shall not be used in advertising or otherwise to promote the sale, use
+.\"or other dealings in this Software without prior written authorization
+.\"from Sony Corporation.
+.\"
+.\"Author: Noriyuki Hosoe, Sony Corporation
+.\"
+.\"$SonyRCSfile: sj3dic.1,v $
+.\"$SonyRevision: 1.1 $
+.\"$SonyDate: 1994/06/03 08:00:51 $
+.\"
+.TH SJ3DIC 1
+.SH 名称
+sj3dic \- sj3 ユーザ辞書メンテナンスツール
+.SH 形式
+\fBsj3dic\fP \fB\-text\fP [ \fB\-H\fP host_name ] [ output_file ]
+.br
+\fBsj3dic\fP \fB\-dict\fP [ \fB\-H\fP host_name ] [ input_file ]
+.SH 解説
+\fIsj3dic\fP は、仮名漢字変換サーバ \fIsj3serv(1)\fP とソケットを
+使用したプロセス間通信をすることにより、サーバの動作しているマシン上の
+ユーザ辞書をメンテナンスするツールです。
+.sp
+接続するホストは \fIhost_name\fP で指定します。このオプションが
+省略され、環境変数 \fBSJ3SERV\fP もしくは \fIsj3(1)\fP のセットアップ
+ファイルでもサーバの指定がないときには、localhost 上のサーバとの接続を
+試みます。
+.sp
+.in
+.B 1)ビジュアル辞書ファイルの作成
+.sp
+.in +0.2i
+	\fBsj3dic\fP \fB\-text\fP [ \fB\-H\fP host_name ] [ output_file ]
+.sp
+サーバマシン上のユーザ辞書の内容を編集可能なテキストに変換し
+\fIoutput_file\fP に出力します。\fIoutput_file\fP が指定されないときには
+標準出力に出力されます。
+.sp
+ビジュアルファイルは以下のようなものです。
+.sp
+	うぃんどう          ウィンドウ　　　　　　　名詞:
+.br
+	そにー              ソニー（株）　　　　　　名詞:
+.br
+	ゆーびん            〒　　　　　　　　　　　名詞:
+.br
+	わーく              ワークステーション　　　名詞:
+.sp
+各フィールドは以下のようになっています。
+.sp
+ 	第一フィールド　　読み（全角ひらがな）
+.br
+	第二フィールド　　目的の出力
+.br
+	第三フィールド　　品詞
+.sp
+ ここで、フィールド間は、１個以上の半角スペースまたはタブで区切られます。
+また各フィールドには、半角スペースおよびタブを記述することは許されません。
+品詞のフィールド（第三フィールド）には、以下の品詞を記述します。
+.sp
+　　名詞:　　　苗字:　　　地名:　　　代名詞:　　名前:
+.br
+　　県／区名:　数詞:　　　接頭語:　　接尾語:　　助数詞:
+.br
+　　副詞:　　　接続詞:　　連体詞:　　形容詞:　　形容動詞:
+.br
+　　動・サ変:　動・ザ変:　動・一段:　動・カ五:　動・ガ五:
+.br
+　　動・サ五:　動・タ五:　動・ナ五:　動・バ五:　動・マ五:
+.br
+　　動・ラ五:　動・ワ五:　単漢字:
+.sp
+.in
+.B 2)ユーザ辞書ファイルへの追加登録
+.in +0.2i
+.sp
+	\fBsj3dic\fP \fB\-dict\fP [ \fB\-H\fP host_name ] [ input_file ]
+.sp
+ビジュアル辞書ファイルである \fIinput_file\fP の内容をサーバマシン上の
+ユーザ辞書に追加登録します。\fIinput_file\fP が指定されないときには
+標準入力が読み込まれます。
+.in
+.SH 関連ファイル
+.PD 0
+.TP \w'\ \ \ \ user/\fIusername\fP/private.dic'u+2n
+/usr/bin/sj3serv
+かな漢字変換サーバ
+.TP
+/usr/lib/sj3/serverrc
+かな漢字変換サーバ セットアップファイル
+.TP
+/usr/bin/sj3
+日本語入力フロントエンドプロセッサ
+.TP
+/usr/dict/sj3/
+かな漢字変換サーバ デフォルト辞書ディレクトリ
+.TP
+    sj3main.dic
+かな漢字変換メイン辞書
+.TP
+    user/\fIusername\fP/private.dic
+かな漢字変換ユーザ辞書
+.TP
+    user/\fIusername\fP/study.dat
+かな漢字変換学習ファイル
+.TP
+/usr/include/sj3lib.h
+かな漢字変換ライブラリ用インクルードファイル
+.TP
+/usr/lib/libsj3lib.a
+かな漢字変換ライブラリ
+.\".TP
+.\"/usr/sony/demo/sj3/*
+.\"かな漢字変換ライブラリ 使用法サンプル
+
+.SH 関連事項
+sj3(1), sj3serv(1), sj3lib(3)
+
+.SH バグ

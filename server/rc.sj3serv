@@ -1,0 +1,117 @@
+##
+## Copyright (c) 1994  Sony Corporation
+## 
+## Permission is hereby granted, free of charge, to any person obtaining
+## a copy of this software and associated documentation files (the
+## "Software"), to deal in the Software without restriction, including
+## without limitation the rights to use, copy, modify, merge, publish,
+## distribute, sublicense, and/or sell copies of the Software, and to
+## permit persons to whom the Software is furnished to do so, subject to
+## the following conditions:
+## 
+## The above copyright notice and this permission notice shall be
+## included in all copies or substantial portions of the Software.
+## 
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+## EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+## MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+## IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+## DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+## OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+## THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## 
+## Except as contained in this notice, the name of Sony Corporation
+## shall not be used in advertising or otherwise to promote the sale, use
+## or other dealings in this Software without prior written authorization
+## from Sony Corporation.
+##
+
+##
+## $SonyRCSfile: rc.sj3serv,v $  
+## $SonyRevision: 1.1 $ 
+## $SonyDate: 1994/06/03 08:02:54 $
+##
+
+## sj3serv
+##
+## If you want to start sj3serv when system boots, please delete '#' at the
+## head of CMDNAME below.
+##
+
+CMDNAME=sj3serv
+
+PRINTNAME=$CMDNAME
+CMDDIR=/usr/bin
+BACKGROUND=
+PATH=/usr/bin:/bin
+CMDPATH=$CMDDIR/$CMDNAME
+
+RESTARTMESSAGE=
+STARTMESSAGE=
+DOWNMESSAGE=
+#RESTARTMESSAGE="Restarting $PRINTNAME"
+#STARTMESSAGE="Starting $PRINTNAME"
+#DOWNMESSAGE="Killed $PRINTNAME"
+USAGEMESSAGE="Usage: $0 [start|stop]"
+
+if [ "$CMDNAME" = "sj3serv" ]
+then
+	if [ ! -d /usr/bin ]
+	then                    # /usr not mounted
+	        exit
+	fi
+
+	pid=`/sbin/findproc $CMDNAME`
+	case "$1" in
+	'start')
+		if [ $pid ] 
+		then	
+			kill -TERM $pid
+			sleep 1
+			pid=`/sbin/findproc $CMDNAME`
+			if [ $pid ] 
+			then
+				kill -9 $pid
+			fi
+			if [ -f $CMDPATH ]
+			then
+				if [ "$RESTARTMESSAGE" ] 
+				then 
+					echo $RESTARTMESSAGE > /dev/console
+				fi
+				eval $CMDPATH $BACKGROUND
+			fi	
+		else
+			if [ -f $CMDPATH ]
+			then 
+				if [ "$STARTMESSAGE" ]
+				then
+					echo $STARTMESSAGE >/dev/console 
+				fi	
+                                eval $CMDPATH $BACKGROUND
+			fi
+		fi
+		;;
+	'stop')
+		if [ $pid ]
+		then
+			kill -TERM $pid
+			sleep 1
+			pid=`/sbin/findproc $CMDNAME`
+			if [ $pid ] 
+			then 
+				kill -9 $pid
+			fi
+			if [ "$DOWNMESSAGE" ]
+			then
+				echo $DOWNMESSAGE > /dev/console
+			fi
+		fi
+		;;
+	*)
+		echo $USAGEMESSAGE 
+		;;	
+	esac	
+fi
+
+

@@ -1,0 +1,152 @@
+##
+## Copyright (c) 1994  Sony Corporation
+## 
+## Permission is hereby granted, free of charge, to any person obtaining
+## a copy of this software and associated documentation files (the
+## "Software"), to deal in the Software without restriction, including
+## without limitation the rights to use, copy, modify, merge, publish,
+## distribute, sublicense, and/or sell copies of the Software, and to
+## permit persons to whom the Software is furnished to do so, subject to
+## the following conditions:
+## 
+## The above copyright notice and this permission notice shall be
+## included in all copies or substantial portions of the Software.
+## 
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+## EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+## MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+## IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+## DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+## OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+## THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## 
+## Except as contained in this notice, the name of Sony Corporation
+## shall not be used in advertising or otherwise to promote the sale, use
+## or other dealings in this Software without prior written authorization
+## from Sony Corporation.
+##
+
+##
+## $SonyRCSfile: Sjrc,v $  
+## $SonyRevision: 1.1 $ 
+## $SonyDate: 1994/06/03 08:03:06 $
+##
+
+#	ＳＪ３用セット・アップ・ファイル
+#	.sjrc file sample
+#	sj3 1.00, 1990 Sony Corp.
+
+#	シェルの指定
+#.ForkShell		/bin/csh
+
+#	文節長学習機能のｏｆｆ
+#.bstudy		off
+
+#	ＳＪ３コマンド・キーのコントロール・コードへのバインド
+#	control function key examples
+
+.key.right		^F
+.key.left		^B
+.key.kakuchou		^O
+.key.syukusyou		^I
+.key.wrap		^N
+.key.wrapback		^P
+.key.saihenkan		^Y
+.key.cancel		^K
+.key.top		^A
+.key.end		^E
+
+#.key.henkan		^T
+#.key.edit		^W
+#.key.buffer		^V
+#.key.flush		^M
+#.key.toggle		^G
+#.key.reconnect		^R
+#.delkey		^D
+
+#	文字種切り替えキーを押すと決定する
+#.FlushAfterConversion	on
+
+#	other control function key
+#.key.start
+#.key.muhenkan
+#.key.kettei
+#.key.hiragana
+#.key.halpha
+#.key.zalpha
+#.key.hkatakana
+#.key.zkatakana
+#.key.code
+#.key.etc
+
+#	その他キーが押されたときのコマンド・キーの指定
+#.etckey.toroku		hira
+#.etckey.syoukyo	zkatakana
+#.etckey.help		hkatakana
+#.etckey.sjrc		zalpha
+
+#	ＳＪ３コマンド・キーのエスケープ・シーケンスへのバインド
+#	escape sequence function key (for nwp511)
+nwp511.key.etc		^[OT
+nwp511.key.code		^[OU
+nwp511.key.halpha	F6
+nwp511.key.zalpha	F7
+nwp511.key.hkatakana	F8
+nwp511.key.zkatakana	F9
+nwp511.key.hiragana	F10
+nwp511.guide.function	半ア 全ア 半カ 全カ かな code \ \  変換 無変 etc\. 決定
+nwp511.guide.etc	その他　　　　　　　
+nwp511.guide.funcetc	　　 　　 　　 　　 　　 編集 \ \  登録 消去 help sjrc
+
+#       ＳＪ３コマンド・キーのエスケープ・シーケンスへのバインド
+#       escape sequence function key (for nwp517)
+nwp517.key.henkan       F1
+nwp517.key.muhenkan     F2
+nwp517.key.etc          F3
+nwp517.key.kettei       F4
+nwp517.key.code         F5
+nwp517.key.halpha       F6
+nwp517.key.zalpha       F7
+nwp517.key.hkatakana    F8
+nwp517.key.zkatakana    F9
+nwp517.key.hiragana     F10
+
+#	ｖｉでＥＳＣキーを押した場合の動作
+#	for vi
+.SetNormal		^[
+
+#	ｅｍａｃｓでコントロール−Ｘを押したときの動作
+#	for emacs
+#.ThroughNext		^X
+
+#	初期動作モード
+.InitialMode		unbuff.halpha.direct
+
+#	ガイドラインのヘルプレベル
+#.HelpMode		off
+
+#	code キーを押したときの最初のデフォルトコード
+#.DefaultCode		jis
+
+#	入力モード切り替えで、無変換キーを押したときのモード
+.MuhenkanMode		halpha
+
+#	入力モード切り替えで、無変換キーを押したときのトグル動作
+.MuhenkanToggle		on
+
+#	ガイドラインのメッセージの変更例
+#.guide.buffer		+　　
+#.guide.unbuffer	-
+#.guide.function	変換 無変 ETC\. 決定 CODE \ 半ア 全ア 半カ 全カ かな
+#.guide.hira		全かな
+#.guide.zkata		全カタ
+#.guide.hkata		半カナ
+#.guide.zalpha		全アル
+#.guide.halpha		半アル
+
+#	サーバの指定
+#.server              yourhost1 yourhost2 yourhost3
+
+#	ローマ字かな変換出来ないときベルを鳴らす
+#.rkerrbell		on
+

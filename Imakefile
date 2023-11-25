@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 1991-1994  Sony Corporation
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL SONY CORPORATION BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+ * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * Except as contained in this notice, the name of Sony Corporation
+ * shall not be used in advertising or otherwise to promote the sale, use
+ * or other dealings in this Software without prior written authorization
+ * from Sony Corporation.
+ */
+
+/*
+ * $SonyRCSfile: Imakefile,v $  
+ * $SonyRevision: 1.5 $ 
+ * $SonyDate: 1997/01/23 11:50:09 $
+ */
+
+#include "sj3.tmpl"
+
+#define IHaveSubdirs
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+
+/*
+ * Add make rules to install manpages and other documents.
+ * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
+ */
+
+SUBDIRS = dict doc kanakan server sj3lib sj3 sj3dic sj3stat demo
+
+AllTarget(includes)
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+includes::	sj3.tmpl
+	cp include/Paths.h.in include/Paths.h
+	chmod +w include/Paths.h
+	(echo "#define RunCmdFile	\"$(SJ3CONFDIR)/serverrc\""; \	@@\
+	echo "#define DictRootDir	\"$(SJ3DICTDIR)\""; \		@@\
+	echo ""; \	@@\
+	echo "#define DEFRKFILE	\"$(SJ3CONFDIR)/sjrk\""; \	@@\
+	echo "#define DEFRCFILE	\"$(SJ3CONFDIR)/sjrc\""; \	@@\
+	echo "#define DEFKEYFILE	\"$(SJ3CONFDIR)/cvtkey.\"") \	@@\
+	>> include/Paths.h
+
+clean::
+	rm -f include/Paths.h
+
