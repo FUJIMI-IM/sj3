@@ -134,3 +134,25 @@ target_include_directories(sj3dic
 target_link_libraries(sj3dic
     sj3lib
 )
+
+add_executable(sj3mkdic
+    sj3mkdic/char.c
+    sj3mkdic/cnvhinsi.c
+    sj3mkdic/file.c
+    sj3mkdic/global.c
+    sj3mkdic/hindo.c
+    sj3mkdic/knjcvt.c
+    sj3mkdic/makedict.c
+    sj3mkdic/makelist.c
+    sj3mkdic/makeseg.c
+    sj3mkdic/memory.c
+    sj3mkdic/offset.c
+    sj3mkdic/readline.c
+    sj3mkdic/string.c
+)
+target_include_directories(sj3mkdic
+    PRIVATE sj3mkdic include sj3lib
+)
+target_link_libraries(sj3mkdic
+    sj3lib
+)

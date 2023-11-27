@@ -38,7 +38,6 @@
 #include <sys/types.h>
 #include "dicttool.h"
 
-
 struct gram_code {
 	char	*name;
 	int	code;
