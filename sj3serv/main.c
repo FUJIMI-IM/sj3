@@ -78,28 +78,6 @@ erase_lockfile (void)
 }
 #endif
 
-
-
-
-#if !defined(__sony_news) || defined(SVR4)
-static int
-signal_handler (int sig)
-{
-	warning_out("signal %d catched.", sig);
-}
-
-static	int
-terminate_handler (int sig)
-{
-	close_socket();
-	sj_closeall();
-#ifdef	LOCK_FILE
-	erase_lockfile();
-#endif
-	exit(0);
-}
-
-#else	/* __sony_news && !SVR4 */
 static int
 signal_handler (sig, code, scp)
 int	sig;
@@ -121,8 +99,6 @@ struct sigcontext *scp;
 #endif
 	exit(0);
 }
-#endif	/* __sony_news && !SVR4 */
-
 
 void
 server_terminate (void)
@@ -185,14 +161,10 @@ leave_tty (void)
 	if (!tmp) fclose(stderr);
 
 	if (fork_flag) {
-#ifdef SVR4
-	        (void) setsid();
-#else
 		if ((tmp = open("/dev/tty", O_RDWR)) >= 0) {
 			ioctl(tmp, TIOCNOTTY, 0);
 			close(tmp);
 		}
-#endif
 	}
 }
 
@@ -201,9 +173,6 @@ leave_tty (void)
 int
 main (int argc, char **argv)
 {
-#ifdef __sony_news
-	(void) setlocale(LC_CTYPE, "ja_JP.EUC");
-#endif
 #ifndef __NetBSD__
 	if (setuid(geteuid())) {
 		fprintf(stderr, "error at setuid.\r\n"); exit(1);
