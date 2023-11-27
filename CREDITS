@@ -1,0 +1,62 @@
+This is an incomplete list of people who have contributed to SJ3.
+It is sorted by name and formatted to allow easy grepping and
+beautification by scripts. The fields are: name (N), web address (W),
+OpenPGP key ID and fingerprint (P), and description (D).
+
+Thanks,
+	Masanori, on behalf of a SJ3 community fork project
+------
+
+N: Ashida, Isao
+D: Linux port
+
+N: Baur, SL
+D: Linux port
+
+N: Fujiwara, Takashi
+D: Tests
+
+N: Hosoe, Noriyuki
+D: Original author
+
+N: Iwama, Yoshihiko
+D: BSD/OS port
+
+N: Iwata
+D: Project owner of the Google Code fork
+
+N: Kawabe, Haruyuki
+D: Bug fixes
+
+N: Kawabe, Y
+D: sj3stat author
+
+N: Kuroki, Hidekazu
+D: FreeBSD port
+
+N: Manabe, Takashi
+D: Linux port
+
+N: Matsumoto, Ryuichi
+D: Bug fixes
+
+N: Muranaka, Masaki
+D: Security fixes
+
+N: Ogino, Masanori
+D: Initiator of a community fork
+
+N: Tada, Tsuyoshi
+D: NetBSD port
+
+N: Tanaka, Nobuyuki
+D: Original author
+
+N: Toya
+D: Installation improvements
+
+N: Uo, Youjiro
+D: BSD/OS port
+
+N: Yano, Katsuhisa
+D: Tests
