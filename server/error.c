@@ -31,13 +31,19 @@
  * $SonyRCSfile: error.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:51 $
+ *
+ * $Id$
  */
 
 
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include "sj_typedef.h"
+#include "server.h"
 
 extern	char	program_name[];
 extern	int	debug_level;
@@ -49,8 +55,8 @@ static	FILE	*logfp = NULL;
 static	FILE	*dbgfp = NULL;
 
 
-
-open_error()
+int
+open_error(void)
 {
 	extern	char	*error_file;
 	int	flg = 0;
@@ -69,9 +75,9 @@ open_error()
 	return flg;
 }
 
-error_out(s, p1, p2, p3, p4, p5)
-char	*s;
-int	p1, p2, p3, p4, p5;
+
+void
+error_out(char* s, int p1, int p2, int p3, int p4, int p5)
 {
 	char	tmp[BUFSIZ];
 
@@ -83,9 +89,9 @@ int	p1, p2, p3, p4, p5;
 	exit(1);
 }
 
-warning_out(s, p1, p2, p3, p4, p5)
-char	*s;
-int	p1, p2, p3, p4, p5;
+
+void
+warning_out(char* s, int p1, int p2, int p3, int p4, int p5)
 {
 	char	tmp[BUFSIZ];
 
@@ -97,8 +103,8 @@ int	p1, p2, p3, p4, p5;
 }
 
 
-
-open_log()
+int
+open_log(void)
 {
 	extern	char	*log_file;
 	int	flg = 0;
@@ -111,7 +117,7 @@ open_log()
 		else
 			logfp = fopen(log_file, "a");
 		if (logfp) {
-			long	t;
+			time_t t;
 
 			time(&t);
 			fprintf(logfp, "%s: log started at %s\r",
@@ -127,9 +133,9 @@ open_log()
 	return flg;
 }
 
-logging_out(s, p1, p2, p3, p4, p5)
-char	*s;
-int	p1, p2, p3, p4, p5;
+
+void
+logging_out(char* s, int p1, int p2, int p3, int p4, int p5)
 {
 	char	tmp[BUFSIZ];
 
@@ -141,8 +147,8 @@ int	p1, p2, p3, p4, p5;
 }
 
 
-
-open_debug()
+int
+open_debug(void)
 {
 	extern	char	*debug_file;
 	int	flg = 0;
@@ -161,10 +167,9 @@ open_debug()
 	return flg;
 }
 
-debug_out(lvl, s, p1, p2, p3, p4, p5)
-int	lvl;
-char	*s;
-int	p1, p2, p3, p4, p5;
+
+void
+debug_out(int lvl, char* s, int p1, int p2, int p3, int p4, int p5)
 {
 	if (lvl <= debug_level && dbgfp) {
 		fprintf(dbgfp, s, p1, p2, p3, p4, p5);

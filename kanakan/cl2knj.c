@@ -31,47 +31,38 @@
  * $SonyRCSfile: cl2knj.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:31 $
+ *
+ * $Id$
  */
 
 
-
-
-
+#include <string.h>
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
 
-
-Int	sj2cd_chr(), hzstrlen(), sstrlen();
-Void	sstrncpy(), mkjiritu(), mkbunsetu(), wakachi();
-Void	mkkouho(), getrank(), cvtclknj(), freework();
-Void	memset();
+Int	sj2cd_chr();
+void	cvtclknj(), freework();
 
 
+static CLREC* nextrecblk(void);
+static CLREC* prevrecblk(void);
+static void initkbuf(u_char* kouho);
 
-Static  CLREC	*nextrecblk(), *prevrecblk();
-Static  Void	initkbuf();
 
-
-
-Int	cl2knj(yomi, len, kouho)
-Uchar	*yomi;			
-Reg4	Int	len;		
-Uchar	*kouho;			
+int
+cl2knj(u_char* yomi, int len, u_char* kouho)
 {
-	Reg1	Uchar	*ptr1;
-	Reg2	Uchar	*ptr2;
-	Reg3	Int	i;
+	u_char	*ptr1;
+	u_char	*ptr2;
+	int	i;
 
-	
 	khcount = nkhcount = 0;
 
-	
 	initkbuf(kouho);
 
-	
 	if (len > MaxClInputLen * 2) len = MaxClInputLen * 2;
 
-	
 	ptr1 = yomi; ptr2 = hyomi;
 	for (i = 0 ; i < len ; i++) {
 		if (isknj1(*ptr1)) {
@@ -81,79 +72,53 @@ Uchar	*kouho;
 	}
 	*ptr2 = 0;
 
-	
-	sstrncpy(yomi, orgyomi, (Int)(ptr1 - yomi));
+	strlcpy(yomi, orgyomi, (int)(ptr1 - yomi));
 
-	
 	if (!hyomi[0]) return 0;
 
-	
 	freework();
 
-	
 	inputyomi = orgyomi;
 	cnvstart = ystart = hyomi;
-	cnvlen = sstrlen(hyomi);
+	cnvlen = strlen(hyomi);
 
-	
 	mkjiritu(0);
-
-	
 	mkbunsetu();
-
-	
 	if (!maxclptr) wakachi();
 
-	
 	jrt1st = maxjptr;
 	clt1st = maxclptr;
 
-	
 	mkkouho();
-
-	
 	getrank();
 
-	
 	selectid = 1;
 
-	
 	cvtclknj();
 
-	
-	return hzstrlen(inputyomi, (Int)clt1st -> cllen);
+	return hzstrlen(inputyomi, (int)clt1st -> cllen);
 }
 
 
 
-Int	nextcl(kouho, mode)
-Uchar	*kouho;
-Int	mode;		
-			
+int
+nextcl(u_char* kouho, int mode)
 {
 	CLREC	*clptr;
 
-	
 	initkbuf(kouho);
 
-	
 	if (!khcount) return 0;
 
-	
-	
-	if (!mode && (selectid < khcount))
+	if (!mode && (selectid < khcount)) {
 		selectid++;	
-	
-	
+	}
 	else if((mode < 2) && (clptr = nextrecblk())) {
 		selectid = 1;		
 		clt1st = clptr;		
 		mkkouho();		
 		getrank();		
 	}
-
-	
-	
 	else {
 		cvtclknj();		
 		return 0;
@@ -161,62 +126,44 @@ Int	mode;
 
 	cvtclknj();			
 
-	
-	return hzstrlen(inputyomi, (Int)clt1st -> cllen);
+	return hzstrlen(inputyomi, (int)clt1st -> cllen);
 }
 
 
-
-
-Static	CLREC	*nextrecblk()
+static CLREC*
+nextrecblk(void)
 {
-	Reg1	CLREC	*clptr;
-	Reg2	Int	keeplen;
+	CLREC	*clptr;
+	int	keeplen;
 
-	
 	keeplen = clt1st -> cllen;
-
-	
 	clptr =  clt1st -> clsort;
 
-	
-	while (clptr && (Int)clptr -> cllen == keeplen)
+	while (clptr && (int)clptr -> cllen == keeplen)
 		clptr = clptr -> clsort;
 
-	
 	return clptr;
 }
 
 
-
-
-Int	prevcl(kouho, mode)
-Uchar	*kouho;
-Int	mode;		
-			
+int
+prevcl(u_char* kouho, int mode)
 {
 	CLREC	*clptr;
 
-	
 	initkbuf(kouho);
 
-	
 	if (!khcount) return 0;
 
-	 
-	if (!mode && (selectid > 1)) 
+	if (!mode && (selectid > 1)) {
 		selectid--;
-
-	
+	}
 	else if ((mode < 2) && (clptr = prevrecblk())) {
 		clt1st = clptr;
 		mkkouho();		
 		getrank();		
 		selectid = khcount; 	
 	}
-
-	
-	
 	else {
 		cvtclknj();		
 		return 0;
@@ -224,56 +171,45 @@ Int	mode;
 
 	cvtclknj();			
 
-	
-	return hzstrlen(inputyomi, (Int)clt1st -> cllen);
+	return hzstrlen(inputyomi, (int)clt1st -> cllen);
 }
 
 
-
-Static	CLREC	*prevrecblk()
+static CLREC*
+prevrecblk(void)
 {
-	Reg1	CLREC	*clptr;
+	CLREC	*clptr;
 	CLREC	*keepptr;
-	Reg2	Int	keeplen;
-	Int	cllen;
+	int	keeplen;
+	int	cllen;
 
-	
 	clptr = maxclptr;
 
-	
-	
 	if ((cllen = clt1st -> cllen) == clptr -> cllen)
 		return NULL;
 
-	
-	while ((Int)clptr -> cllen > cllen) {
-		
+	while ((int)clptr -> cllen > cllen) {
 		keeplen = clptr -> cllen;
-
-		
 		keepptr = clptr;
 
-		
-		while ((Int)clptr -> cllen == keeplen)
+		while ((int)clptr -> cllen == keeplen)
 			clptr = clptr -> clsort;
 	}
 
-	
 	return keepptr;
 }
 
 
-
-Static	Void	initkbuf(kouho)
-Uchar	*kouho;
+static void
+initkbuf(u_char* kouho)
 {
 	kanjitmp = kouho;
 	memset(kanjitmp, 0, sizeof(STDYOUT) + 1);
 }
 
 
-
-Int	selectnum()
+int
+selectnum(void)
 {
 	return selectid;
 }

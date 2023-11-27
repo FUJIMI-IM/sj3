@@ -31,31 +31,31 @@
  * $SonyRCSfile: sj3dic.c,v $  
  * $SonyRevision: 1.2 $ 
  * $SonyDate: 1996/02/15 02:22:58 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_sysvdef.h"
 #include <stdio.h>
-#ifdef SVR4
+#include <stdlib.h>
 #include <string.h>
-#else
-#include <strings.h>
-#endif
+#include <sys/types.h>
 #include <ctype.h>
 #include <pwd.h>
 #include <locale.h>
+#include <unistd.h>
 #include "sjtool.h"
 #include "sj3lib.h"
+#include "sj3dic.h"
 
-char	*getlogin(), *getenv();
-struct	passwd	*getpwnam(), *getpwuid();
 
-static	_open_error();
-static	_close_error();
-void make_dicname();
-void setsjserv();
+static void _open_error(int err);
+static void _close_error(int err);
+static void init_env(void);
+static void make_dicname(void);
+static int  parsearg(int argc, char* argv[]);
+static void usage(int ret);
 
 #ifdef __sony_news
 extern int _sys_code;
@@ -71,14 +71,14 @@ static	struct	option	{
 	char	*str;
 	int	code;
 } options[] = {
-	"text",		EXEC_TEXT,
-	"dict",		EXEC_DICT,
-	"init",		EXEC_INIT,
-	"verbose",	EXEC_VERBOSE,
-	"host",		EXEC_SERVER,
-	"server",	EXEC_SERVER,
-	"force",	EXEC_FORCE,
-	0,		0
+	{ "text",	EXEC_TEXT },
+	{ "dict",	EXEC_DICT },
+	{ "init",	EXEC_INIT },
+	{ "verbose",	EXEC_VERBOSE },
+	{ "host",	EXEC_SERVER },
+	{ "server",	EXEC_SERVER },
+	{ "force",	EXEC_FORCE },
+	{ 0,		0 }
 };
 
 char	prog_name[LONGLENGTH];
@@ -92,9 +92,9 @@ int	verbose_flag = 0;
 int	init_flag = 0;
 int	force_flag = 0;
 
-main(argc, argv)
-int	argc;
-char	**argv;
+
+int
+main(int argc, char** argv)
 {
 	int	err;
 	int	mode;
@@ -109,7 +109,10 @@ char	**argv;
 	getsjrc();
 	make_dicname();
 
-	if (err = sj3_open(serv_name, user_name, prog_name)) _open_error(err);
+	/* XXX: is this progname intentional? or old variable left? */
+	/* if (err = sj3_open(serv_name, user_name, prog_name)) */
+	if (err = sj3_open(serv_name, user_name))
+		_open_error(err);
 
 	switch (mode) {
 	case EXEC_TEXT:
@@ -126,7 +129,8 @@ char	**argv;
 	if (err = sj3_close()) _close_error(err);
 }
 
-init_env()
+static void
+init_env(void)
 {
 	char	*un, *hp, *tn;
 	struct	passwd	*pwd;
@@ -159,8 +163,8 @@ init_env()
 	strcpy(term_name, tn);
 }
 
-usage(ret)
-int	ret;
+static void
+usage(int ret)
 {
 	fprintf(stderr,
 		"Usage: %s -{text|dict} [-H host_name] [file_name]\n",
@@ -168,9 +172,8 @@ int	ret;
 	exit(ret);
 }
 
-parsearg(argc, argv)
-int	argc;
-char	*argv[];
+static int
+parsearg(int argc, char* argv[])
 {
 	int	errflg = 0;
 	int	i, j;
@@ -240,8 +243,8 @@ char	*argv[];
 	return mode;
 }
 
-void
-make_dicname()
+static void
+make_dicname(void)
 {
 	if (dict_name[0] != '\0') return;
 
@@ -251,8 +254,7 @@ make_dicname()
 }
 
 void
-setdicname(dictname)
-char	*dictname;
+setdicname(char* dictname)
 {
 	if (dict_name[0] != '\0') return;
 	if (dictname == NULL) return;
@@ -260,8 +262,7 @@ char	*dictname;
 }
 
 void
-setsjserv(hostname)
-char	*hostname;
+setsjserv(char* hostname)
 {
 	if (serv_name[0] != '\0') return;
 	if (hostname == NULL) return;
@@ -274,9 +275,8 @@ struct	errlist	{
 	int	flg;
 };
 
-static	_error_and(err, list)
-int	err;
-struct	errlist	*list;
+static void
+_error_and(int err, struct errlist* list)
 {
 	int	flag = 0;
 
@@ -291,41 +291,41 @@ struct	errlist	*list;
 	if (flag) exit(1);
 }
 
-static	_open_error(err)
-int	err;
+static void
+_open_error(int err)
 {
 	static	struct	errlist	err_msg[] = {
-	SJ3_SERVER_DEAD,	"\245\265\241\274\245\320\244\254\273\340\244\363\244\307\244\244\244\336\244\271",			1,
-	SJ3_CONNECT_ERROR,	"\245\265\241\274\245\320\244\310\300\334\302\263\244\307\244\255\244\336\244\273\244\363\244\307\244\267\244\277",		1,
-	SJ3_ALREADY_CONNECTED,	"\245\265\241\274\245\320\244\310\300\334\302\263\272\321\244\307\244\271",			1,
-	SJ3_CANNOT_OPEN_MDICT,	"\245\341\245\244\245\363\274\255\275\361\244\254\245\252\241\274\245\327\245\363\244\307\244\255\244\336\244\273\244\363",	0,
-	SJ3_CANNOT_OPEN_UDICT,	"\245\346\241\274\245\266\274\255\275\361\244\254\245\252\241\274\245\327\245\363\244\307\244\255\244\336\244\273\244\363",	1,
-	SJ3_CANNOT_OPEN_STUDY,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\254\245\252\241\274\245\327\245\363\244\307\244\255\244\336\244\273\244\363",	0,
-	SJ3_CANNOT_MAKE_UDIR,	"\245\346\241\274\245\266\241\274\245\307\245\243\245\354\245\257\245\310\245\352\244\254\272\356\300\256\244\307\244\255\244\336\244\273\244\363",	1,
-	SJ3_CANNOT_MAKE_UDICT,	"\245\346\241\274\245\266\274\255\275\361\244\254\272\356\300\256\244\307\244\255\244\336\244\273\244\363",		1,
-	SJ3_CANNOT_MAKE_STUDY,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\254\272\356\300\256\244\307\244\255\244\336\244\273\244\363",		0,
-	-1,			"\245\250\245\351\241\274",				1,
-	0, 0, 0
+	{ SJ3_SERVER_DEAD,	"\245\265\241\274\245\320\244\254\273\340\244\363\244\307\244\244\244\336\244\271",			1 },
+	{ SJ3_CONNECT_ERROR,	"\245\265\241\274\245\320\244\310\300\334\302\263\244\307\244\255\244\336\244\273\244\363\244\307\244\267\244\277",		1 },
+	{ SJ3_ALREADY_CONNECTED,	"\245\265\241\274\245\320\244\310\300\334\302\263\272\321\244\307\244\271",			1 },
+	{ SJ3_CANNOT_OPEN_MDICT,	"\245\341\245\244\245\363\274\255\275\361\244\254\245\252\241\274\245\327\245\363\244\307\244\255\244\336\244\273\244\363",	0 },
+	{ SJ3_CANNOT_OPEN_UDICT,	"\245\346\241\274\245\266\274\255\275\361\244\254\245\252\241\274\245\327\245\363\244\307\244\255\244\336\244\273\244\363",	1 },
+	{ SJ3_CANNOT_OPEN_STUDY,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\254\245\252\241\274\245\327\245\363\244\307\244\255\244\336\244\273\244\363",	0 },
+	{ SJ3_CANNOT_MAKE_UDIR,	"\245\346\241\274\245\266\241\274\245\307\245\243\245\354\245\257\245\310\245\352\244\254\272\356\300\256\244\307\244\255\244\336\244\273\244\363",	1 },
+	{ SJ3_CANNOT_MAKE_UDICT,	"\245\346\241\274\245\266\274\255\275\361\244\254\272\356\300\256\244\307\244\255\244\336\244\273\244\363",		1 },
+	{ SJ3_CANNOT_MAKE_STUDY,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\254\272\356\300\256\244\307\244\255\244\336\244\273\244\363",		0 },
+	{ -1,			"\245\250\245\351\241\274",				1 },
+	{ 0, 0, 0 }
 	};
 
 	_error_and(err, err_msg);
 }
 
-static	_close_error(err)
-int	err;
+static void
+_close_error(int err)
 {
 	static	struct	errlist	err_msg[] = {
-	SJ3_SERVER_DEAD,	"\245\265\241\274\245\320\241\274\244\254\273\340\244\363\244\307\244\244\244\336\244\271",		1,
-	SJ3_DISCONNECT_ERROR,	"\300\332\244\352\312\374\244\267\244\307\245\250\245\351\241\274\244\254\244\242\244\352\244\336\244\267\244\277",		1,
-	SJ3_NOT_CONNECTED,	"\245\265\241\274\245\320\244\310\300\334\302\263\244\265\244\354\244\306\244\244\244\336\244\273\244\363",		1,
-	SJ3_NOT_OPENED_MDICT,	"\245\341\245\244\245\363\274\255\275\361\244\317\245\252\241\274\245\327\245\363\244\265\244\354\244\306\244\244\244\336\244\273\244\363",	0,
-	SJ3_NOT_OPENED_UDICT,	"\245\346\241\274\245\266\274\255\275\361\244\317\245\252\241\274\245\327\245\363\244\265\244\354\244\306\244\244\244\336\244\273\244\363",	1,
-	SJ3_NOT_OPENED_STUDY,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\317\245\252\241\274\245\327\245\363\244\265\244\354\244\306\244\244\244\336\244\273\244\363",	0,
-	SJ3_CLOSE_MDICT_ERROR,	"\245\341\245\244\245\363\274\255\275\361\244\254\245\257\245\355\241\274\245\272\244\307\244\255\244\336\244\273\244\363",	0,
-	SJ3_CLOSE_UDICT_ERROR,	"\245\346\241\274\245\266\274\255\275\361\244\254\245\257\245\355\241\274\245\272\244\307\244\255\244\336\244\273\244\363",	1,
-	SJ3_CLOSE_STUDY_ERROR,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\254\245\257\245\355\241\274\245\272\244\307\244\255\244\336\244\273\244\363",	0,
-	-1,			"\245\250\245\351\241\274",				1,
-	0, 0, 0
+	{ SJ3_SERVER_DEAD,	"\245\265\241\274\245\320\241\274\244\254\273\340\244\363\244\307\244\244\244\336\244\271",		1 },
+	{ SJ3_DISCONNECT_ERROR,	"\300\332\244\352\312\374\244\267\244\307\245\250\245\351\241\274\244\254\244\242\244\352\244\336\244\267\244\277",		1 },
+	{ SJ3_NOT_CONNECTED,	"\245\265\241\274\245\320\244\310\300\334\302\263\244\265\244\354\244\306\244\244\244\336\244\273\244\363",		1 },
+	{ SJ3_NOT_OPENED_MDICT,	"\245\341\245\244\245\363\274\255\275\361\244\317\245\252\241\274\245\327\245\363\244\265\244\354\244\306\244\244\244\336\244\273\244\363",	0 },
+	{ SJ3_NOT_OPENED_UDICT,	"\245\346\241\274\245\266\274\255\275\361\244\317\245\252\241\274\245\327\245\363\244\265\244\354\244\306\244\244\244\336\244\273\244\363",	1 },
+	{ SJ3_NOT_OPENED_STUDY,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\317\245\252\241\274\245\327\245\363\244\265\244\354\244\306\244\244\244\336\244\273\244\363",	0 },
+	{ SJ3_CLOSE_MDICT_ERROR,	"\245\341\245\244\245\363\274\255\275\361\244\254\245\257\245\355\241\274\245\272\244\307\244\255\244\336\244\273\244\363",	0 },
+	{ SJ3_CLOSE_UDICT_ERROR,	"\245\346\241\274\245\266\274\255\275\361\244\254\245\257\245\355\241\274\245\272\244\307\244\255\244\336\244\273\244\363",	1 },
+	{ SJ3_CLOSE_STUDY_ERROR,	"\263\330\275\254\245\325\245\241\245\244\245\353\244\254\245\257\245\355\241\274\245\272\244\307\244\255\244\336\244\273\244\363",	0 },
+	{ -1,			"\245\250\245\351\241\274",				1 },
+	{ 0, 0, 0 }
 	};
 
 	_error_and(err, err_msg);

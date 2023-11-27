@@ -31,47 +31,51 @@
  * $SonyRCSfile: funckey.c,v $  
  * $SonyRevision: 1.3 $ 
  * $SonyDate: 1997/01/23 11:20:53 $
+ *
+ * $Id: funckey.c,v 1.3 2004/07/04 08:38:33 hiroo Exp $
  */
 
 
+#include <string.h>
 #include "wchar16.h"
 #include "sj2.h"
 #include "key.h"
 #include "Paths.h"
+#include "sj3.h"
 
 struct cvtkey {
 	char *key_word;
 	char key_seq[SEQLEN];
 } cvtkeytbl[] = {
-	"F1", "",
-	"F2", "",
-	"F3", "",
-	"F4", "",
-	"F5", "",
-	"F6", "",
-	"F7", "",
-	"F8", "",
-	"F9", "",
-	"F10", "",
-	"F11", "",
-	"F12", "",
-	"F13", "",
-	"F14", "",
-	"F15", "",
-	"F16", "",
-	"F17", "",
-	"F18", "",
-	"F19", "",
-	"F20", "",
-	"Select", "",
-	"Kanji", "",
-	"Cancel", "",
-	"Execute", "",
-	"Up", "",
-	"Down", "",
-	"Right", "",
-	"Left", "",
-	NULL, NULL
+	{ "F1", "" },
+	{ "F2", "" },
+	{ "F3", "" },
+	{ "F4", "" },
+	{ "F5", "" },
+	{ "F6", "" },
+	{ "F7", "" },
+	{ "F8", "" },
+	{ "F9", "" },
+	{ "F10", "" },
+	{ "F11", "" },
+	{ "F12", "" },
+	{ "F13", "" },
+	{ "F14", "" },
+	{ "F15", "" },
+	{ "F16", "" },
+	{ "F17", "" },
+	{ "F18", "" },
+	{ "F19", "" },
+	{ "F20", "" },
+	{ "Select", "" },
+	{ "Kanji", "" },
+	{ "Cancel", "" },
+	{ "Execute", "" },
+	{ "Up", "" },
+	{ "Down", "" },
+	{ "Right", "" },
+	{ "Left", "" },
+	{ NULL, "" }
 };
 
 extern struct wcvtkey wcvtkeytbl[]; 
@@ -108,13 +112,14 @@ int	comstrvalue[KEY_OTHER] = {
 		KEY_OTHER
 	};
 
-mk_cvtkey(term)
-char *term;
+
+void
+mk_cvtkey(char* term)
 {
-	register char *p;
-	char line[MAXLINE], rstr[16], *getkey2();
-	FILE *fd, *fopen();
-	char cvtkey_file[LONGLENGTH], *strchr();
+	char *p;
+	char line[MAXLINE], rstr[16];
+	FILE *fd;
+	char cvtkey_file[LONGLENGTH];
 	struct cvtkey *ckeyp;
 	struct wcvtkey *wckeyp;
 
@@ -153,11 +158,10 @@ char *term;
 }
 
 char *
-getkey2(istr, ostr)
-char *istr, *ostr;
+getkey2(char* istr, char* ostr)
 {
-	register char *p;
-	register int i;
+	char *p;
+	int i;
 
 	while (*istr == ' ' || *istr == '\t')
 		istr++;
@@ -178,16 +182,19 @@ char *istr, *ostr;
 	return(NULL);
 }
 
-clear_ukeys ()
+
+void
+clear_ukeys (void)
 {
 	Unumber = 0;
 }
 
-set_func (word)
-struct wordent	word[];
+
+void
+set_func (struct wordent word[])
 {
-	register int	i, num;
-	register wchar16_t *p, *s;
+	int	i, num;
+	wchar16_t *p, *s;
 	struct wcvtkey *ckeyp;
 
 	if (Unumber >= UKEYNUM)
@@ -222,10 +229,11 @@ struct wordent	word[];
 	}
 }
 
-eval_keys (s, p)
-wchar16_t	*s, *p;
+
+wchar16_t
+eval_keys (wchar16_t* s, wchar16_t* p)
 {
-	register wchar16_t	c, i;
+	wchar16_t	c, i;
 
 	if (wslen (s) > SEQLEN)	
 		return (-1);		
@@ -247,22 +255,26 @@ wchar16_t	*s, *p;
 	return (i);
 }
 
-clear_key ()
+
+void
+clear_key (void)
 {
 	clear_commkeys ();
 	clear_etckeys ();
 	clear_ukeys ();		
 }
 
-clear_commkeys ()
+
+void
+clear_commkeys (void)
 {
 	comnumber = 0;
 }
 
-eval_key (s)
-wchar16_t	*s;
+int
+eval_key (wchar16_t* s)
 {
-	register wchar16_t	c;
+	wchar16_t	c;
 
 	c = *s;
 
@@ -282,15 +294,18 @@ wchar16_t	*s;
 	return (-1);
 }
 
-clear_etckeys ()
+
+void
+clear_etckeys (void)
 {
 	u_etckeys = 0;
 }
 
-set_etckeys (word)
-struct wordent	word[];
+
+int
+set_etckeys (struct wordent word[])
 {
-	register int	i;
+	int	i;
 
 	if (u_etckeys >= ETCKEYS)
 		return (1);
@@ -315,15 +330,13 @@ struct wordent	word[];
 }
 
 
-
-parse_command (s, count)
-register wchar16_t	*s;
-register int	*count;
+wchar16_t
+parse_command (wchar16_t* s, int* count)
 {
 	extern wchar16_t	pars_seq[];
 	extern int	pars_n;
-	register int	i, j;
-	register wchar16_t c;
+	int	i, j;
+	wchar16_t c;
 
 	c = *s;
 	for (i = 0; i < comnumber ; i ++) {

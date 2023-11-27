@@ -31,15 +31,16 @@
  * $SonyRCSfile: hindo.c,v $  
  * $SonyRevision: 1.2 $ 
  * $SonyDate: 1994/08/17 01:50:26 $
+ *
+ * $Id$
  */
 
 
-
-
-
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include "sj_struct.h"
+#include "dicttool.h"
 
 extern	HindoRec *hindo[];		
 extern	int	hindo_num;		
@@ -48,13 +49,9 @@ extern	HindoRec *askknj[];
 extern	int	askknj_num;		
 extern	int	kanji_num;		
 
-OffsetRec *real_ofsrec();
 
-
-
-check_hindo(ptr, len)
-u_char	*ptr;
-int	len;		
+int
+check_hindo(u_char* ptr, int len)
 {
 	int	low, high, mid;
 	int	i;
@@ -80,8 +77,8 @@ int	len;
 
 
 
-static	AssyukuRec *makeassyuku(num)
-int	num;
+static AssyukuRec*
+makeassyuku (int num)
 {
 	AssyukuRec *arec;
 
@@ -101,9 +98,8 @@ int	num;
 }
 
 
-
-static	assyuku_len(hrec)
-HindoRec *hrec;
+static int
+assyuku_len(HindoRec* hrec)
 {
 	int	org;
 	int	old;
@@ -142,12 +138,12 @@ HindoRec *hrec;
 
 
 
-static void set_assyuku(hrec)
-HindoRec *hrec;
+static void
+set_assyuku(HindoRec* hrec)
 {
-	register AssyukuRec *arec;
-	register AssyukuRec *aprev;
-	register int	len;
+	AssyukuRec *arec;
+	AssyukuRec *aprev;
+	int	len;
 
 	
 	len = assyuku_len(hrec);
@@ -195,8 +191,8 @@ HindoRec *hrec;
 
 
 
-static void reset_assyuku(hrec)
-HindoRec *hrec;
+static void
+reset_assyuku(HindoRec* hrec)
 {
 	AssyukuRec *arec;
 	AssyukuRec *aptr;
@@ -265,10 +261,8 @@ HindoRec *hrec;
 
 
 
-static	HindoRec *makehindo(ptr, len, alen)
-u_char	*ptr;
-int	len;
-int	alen;
+static HindoRec*
+makehindo(u_char* ptr, int len, int alen)
 {
 	HindoRec *hrec;
 	u_char	*p;
@@ -306,10 +300,8 @@ int	alen;
 
 
 
-static void set_hindo(ptr, len, alen)
-u_char	*ptr;
-int	len;		
-int	alen;		
+static void
+set_hindo(u_char* ptr, int len, int alen)
 {
 	HindoRec *hrec;
 	int	low, high, mid;
@@ -383,9 +375,8 @@ int	alen;
 
 
 
-static void reset_hindo(p, l)
-u_char	*p;
-int	l;		
+static void
+reset_hindo(u_char* p, int l)
 {
 	HindoRec *hrec;
 	int	low, high, mid;
@@ -436,15 +427,13 @@ int	l;
 }
 
 
-
-knjhnd_set(p, l)
-u_char	*p;
-int	l;
+void
+knjhnd_set(u_char* p, int l)
 {
-	register u_char	*kp1;
-	register u_char	*kp2;
-	register int	i;
-	register int	kl1;
+	u_char	*kp1;
+	u_char	*kp2;
+	int	i;
+	int	kl1;
 	u_char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2 + 1];
 
 	for (kp1 = p, kl1 = l ; kl1 > 0 ; ) {
@@ -472,15 +461,13 @@ int	l;
 }
 
 
-
-knjhnd_reset(p, l)
-u_char	*p;
-int	l;
+void
+knjhnd_reset(u_char* p, int l)
 {
-	register u_char	*kp1;
-	register u_char	*kp2;
-	register int	i;
-	register int	kl1;
+	u_char	*kp1;
+	u_char	*kp2;
+	int	i;
+	int	kl1;
 	u_char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2 + 1];
 
 	for (kp1 = p, kl1 = l ; kl1 > 0 ; ) {
@@ -509,9 +496,8 @@ int	l;
 
 
 
-static	check_assyuku(p, q)
-register HindoRec *p;
-register HindoRec *q;
+static int
+check_assyuku(HindoRec* p, HindoRec* q)
 {
 	u_char	ptmp[128], qtmp[128];
 	int	plen;
@@ -536,8 +522,8 @@ register HindoRec *q;
 }
 
 
-
-decide_knjask()
+int
+decide_knjask(void)
 {
 	int	i, j;
 	AssyukuRec *p;
@@ -616,10 +602,10 @@ end:
 }
 
 
-
-clear_hindo()
+void
+clear_hindo(void)
 {
-	register int	i;
+	int	i;
 
 	for (i = 0 ; i < hindo_num ; i++) {
 		Free(hindo[i]->kptr);
@@ -630,10 +616,10 @@ clear_hindo()
 }
 
 
-
-clear_assyuku()
+void
+clear_assyuku(void)
 {
-	register AssyukuRec *p;
+	AssyukuRec *p;
 
 	while (assyuku) {
 		p = assyuku;

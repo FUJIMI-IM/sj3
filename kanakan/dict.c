@@ -31,38 +31,31 @@
  * $SonyRCSfile: dict.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:45 $
+ *
+ * $Id$
  */
 
 
-
-
+#include <sys/types.h>
 #include "sj_euc.h"
 #include "sj_kcnv.h"
-
-Int codesize();
-
+#include "kanakan.h"
 
 
-Void	get_askknj()
+void
+get_askknj(void)
 {
-	Reg1	Uchar	*p;
-	Reg3	Uchar	*q;
-	Reg2	Uchar	*r;
-	Int	i = 0, csize;
-	Int	flg;
+	u_char	*p;
+	u_char	*q;
+	u_char	*r;
+	int	i = 0, csize;
+	int	flg;
 
-	
 	p = q = dicbuf;
-
-	
 	q += *p++;
 
-	
 	while (p < q) {
-		
 		askknj[i] = p;
-
-		
 		r = NULL;
 		flg = TRUE;
 		do {
@@ -76,15 +69,13 @@ Void	get_askknj()
 		} while (flg);
 		
 		p++;
-		
 		askknj_k[i++] = r;
 	}
 }
 
 
-
-Int	seldict(id)
-TypeDicID	id;
+int
+seldict(TypeDicID id)
 {
 	DICTL	*dp;
 
@@ -98,9 +89,8 @@ TypeDicID	id;
 }
 
 
-
-Uchar	*get_idxptr(seg)
-TypeDicSeg	seg;
+u_char*
+get_idxptr(TypeDicSeg seg)
 {
 	(*curdict->getofs)(curdict);
 	(*curdict->getidx)(curdict);

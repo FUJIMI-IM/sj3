@@ -31,19 +31,18 @@
  * $SonyRCSfile: ph_khtbl.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:09 $
+ *
+ * $Id$
  */
 
 
-
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
-Uchar	*skipkstr();
-STDYIN	*srchstdy();
-Void	ph_setkouho();
-Int	seldict();
 
-Static	Void	ph_setsty(clrec)
-CLREC	*clrec;
+
+static	void
+ph_setsty (CLREC *clrec)
 {
 	JREC		*jrec;
 	TypeDicOfs	offset;
@@ -60,9 +59,7 @@ CLREC	*clrec;
 	ptr = dicbuf + jrec->jofsst + 1;
 
 	for ( ; *ptr != HinsiBlkTerm ; ptr = skipkstr(ptr)) {
-
 		offset = ptr - dicbuf;
-
 		sptr = srchstdy(jrec -> jseg, offset, jrec -> dicid);
 
 		if (!khcount){
@@ -75,7 +72,6 @@ CLREC	*clrec;
 		if (sptr -> styno < kouhotbl[0].styno) {
 			ph_setkouho(clrec, offset, sptr);
 		}
-
 		else if (sptr -> styno == kouhotbl -> styno) {
 			if (!(kouhotbl[0].ka_fg &&
 			   sptr -> ka_kj == kouhotbl[0].ka_kj)) {
@@ -87,8 +83,8 @@ CLREC	*clrec;
 
 
 
-Int	ph_khtbl(clrec)
-CLREC	*clrec;
+Int
+ph_khtbl (CLREC *clrec)
 {
 	JREC	*jrec;
 	Int	flg = FALSE;

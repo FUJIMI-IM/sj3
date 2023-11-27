@@ -31,27 +31,30 @@
  * $SonyRCSfile: mkbunset.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:02 $
+ *
+ * $Id$
  */
 
 
-
+#include <sys/types.h>
+#include <string.h>
 #include "sj_kcnv.h"
 #include "sj_hinsi.h"
+#include "kanakan.h"
 
-CLREC	*alloc_clrec();
-Uchar	TFar	*getstb();
-Int	terminate(), setconj();
-Void	setclrec(), srchfzk(), memset();
+Int	terminate();
+Void	setclrec(), srchfzk();
 
-Void	mkbunsetu()
+void
+mkbunsetu(void)
 {
-	Reg1	JREC	*jrec;
+	JREC	*jrec;
 	TypeGram	hinsi;
-	Uchar	TFar	*cnj;
+	u_char	*cnj;
 	CREC	crec[4];
-	Int	count;
+	int	count;
 	TypeCnct	right;
-	Uchar	*next;
+	u_char	*next;
 	int	i;
 
 	fzkcount = 0;
@@ -67,7 +70,7 @@ Void	mkbunsetu()
 		else
 			hinsi = jrec -> hinsi;
 
-		if (right = Connadr[hinsi]) {
+		if ((right = Connadr[hinsi]) != '\0') {
 			gobilen = 0;
 			next = cnvstart + jrec->jlen;
 
@@ -79,7 +82,7 @@ Void	mkbunsetu()
 			srchfzk(jrec, next, right, 0);
 		}
 
-		else if (count = setconj(hinsi, jrec, crec)) {
+		else if ((count = setconj(hinsi, jrec, crec)) != 0) {
 
 			for (i = count ; i-- > 0 ; ) {
 
@@ -101,26 +104,26 @@ Void	mkbunsetu()
 }
 
 
-CLREC	*argclrec(len)
-Int	len;
+CLREC*
+argclrec(int len)
 {
-	Reg1	CLREC	*ptr;
-	Reg2	CLREC	*rec;
-	Reg3	CLREC	*child;
+	CLREC	*ptr;
+	CLREC	*rec;
+	CLREC	*child;
 
 	rec = alloc_clrec();
 
 	if (!rec) {
-		if (!maxclptr) return NULL;
+		if (maxclptr == NULL) return NULL;
 
 		ptr = NULL;
 		rec = maxclptr;
-		while (child = rec -> clsort) {
+		while ((child = rec -> clsort) != NULL) {
 			ptr = rec;
 			rec = child;
 		}
 
-		if (len <= (Int) rec -> cllen) return NULL;
+		if (len <= (int) rec -> cllen) return NULL;
 
 		if (ptr)
 			ptr -> clsort = NULL;
@@ -129,8 +132,8 @@ Int	len;
 		if (rec -> jnode) (rec -> jnode)--;
 	}
 
-	memset((Uchar *)rec, 0, sizeof(*rec));
-	rec -> cllen = rec -> cl2len = (Uchar)len;
+	memset((u_char*)rec, 0, sizeof(*rec));
+	rec -> cllen = rec -> cl2len = (u_char)len;
 
 	if (!maxclptr) {
 		maxclptr = rec;
@@ -139,17 +142,17 @@ Int	len;
 
 	ptr = maxclptr;
 
-	if (((Int)ptr -> cllen < len) ||
-	    (((Int)ptr -> cllen == len) &&
+	if (((int)ptr -> cllen < len) ||
+	    (((int)ptr -> cllen == len) &&
 	     (ptr -> jnode -> hinsi == TANKANJI))) {
 		rec -> clsort = maxclptr;
 		maxclptr = rec;
 		return rec;
 	}
 
-	while (child = ptr -> clsort) {
-		if ((Int)child -> cllen < len ||
-		    ((Int)child -> cllen == len &&
+	while ((child = ptr -> clsort) != NULL) {
+		if ((int)child -> cllen < len ||
+		    ((int)child -> cllen == len &&
 		     child->jnode->hinsi == TANKANJI)){
 			ptr -> clsort = rec;
 			rec -> clsort = child;
@@ -158,7 +161,6 @@ Int	len;
 		else
 			ptr = child;
 	}
-
 
 	ptr -> clsort = rec;
 	return rec;

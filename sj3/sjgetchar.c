@@ -53,6 +53,10 @@
 #include <curses.h>
 #endif
 
+#if defined(__FreeBSD__)
+#include <sys/ioctl_compat.h>
+#endif
+
 #include <errno.h>
 #include <sys/file.h>
 #include "sj2.h"

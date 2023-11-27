@@ -31,13 +31,13 @@
  * $SonyRCSfile: sj_typedef.h,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:22 $
+ *
+ * $Id$
  */
 
 
-
 #ifndef	_SJ_TYPEDEF
-
-#define	_SJ_TYPEDEF
+#define	_SJ_TYPEDEF  1
 
 #define	RECURS
 
@@ -62,27 +62,23 @@
 #define	Long	long
 #define	Ulong	unsigned long
 
-typedef	Void	(*VFunc)();
-typedef	Uchar	*(*UCPFunc)();
-typedef	Int	(*IFunc)();
-
 
 #include <sys/types.h>
 
-typedef	Uchar	TypeGroup;
-typedef	Uchar	TypeGram;
-typedef	Ushort	TypeIdxOfs;
-typedef	Short	TypeDicSeg;
-typedef	Ushort	TypeDicOfs;
+typedef	u_char	TypeGroup;
+typedef	u_char	TypeGram;
+typedef	u_short	TypeIdxOfs;
+typedef	short	TypeDicSeg;
+typedef	u_short	TypeDicOfs;
 typedef	ino_t	TypeDicID;
-typedef	Uchar	TypeCnct;
-typedef	Ushort	TypeStyNum;
-typedef	Uchar	TypeClass;
-typedef	Uchar	TypeBunNum;
+typedef	u_char	TypeCnct;
+typedef	u_short	TypeStyNum;
+typedef	u_char	TypeClass;
+typedef	u_char	TypeBunNum;
 
 #ifndef	NULL
 #	define	NULL	0
 #endif
 
-#endif
+#endif /* _SJ_TYPEDEF */
 

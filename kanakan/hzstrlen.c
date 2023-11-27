@@ -31,9 +31,9 @@
  * $SonyRCSfile: hzstrlen.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:52 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_euc.h"
@@ -41,9 +41,10 @@
 #include "sj_typedef.h"
 #include "sj_const.h"
 #include "sj_dict.h"
+#include "kanakan.h"
 
-Int euc_codesize(c)
-Reg1 Uchar c;
+Int
+euc_codesize (Uchar c)
 {
 	if ((c & KanjiModeMask) == 0x90) {
 		return 1;
@@ -56,17 +57,12 @@ Reg1 Uchar c;
 	}
 }
 
-Int	hzstrlen(ptr, len)
-Reg1	Uchar	*ptr;	
-Reg2	Int	len;		
+Int
+hzstrlen (Uchar *ptr, Int len)
 {
 	Uchar	*head;
-
-	
 	head = ptr;
-
 	while (len-- > 0) ptr += euc_codesize(*ptr);
-
-	
 	return (ptr - head);
 }
+

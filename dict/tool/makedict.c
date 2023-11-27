@@ -31,42 +31,32 @@
  * $SonyRCSfile: makedict.c,v $  
  * $SonyRevision: 1.2 $ 
  * $SonyDate: 1994/12/09 11:27:05 $
+ *
+ * $Id$
  */
 
 
-#include "sj_sysvdef.h"
+/* #include "sj_sysvdef.h" */ /* XXX: no more need it? */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <locale.h>
-#ifdef SVR4
 #include <string.h>
-#else
-#include <strings.h>
-#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
 #include "sj_const.h"
+#include "dicttool.h"
 
 FILE	*infp = NULL;
 FILE	*outfp = NULL;
 
-char	*Zalloc();
-FILE	*Fopen();
-
 static	char	*idxtop = NULL;
 
 
-
-main(argc, argv)
-int	argc;
-char	**argv;
+int
+main(int argc, char** argv)
 {
-	int	makelist();
-
-
-
-	
 	parse(argc, argv);
 
 	while (readline()) setline(makelist);
@@ -77,9 +67,8 @@ char	**argv;
 }
 
 
-
-char	*make_idxlist(name)
-char	*name;
+char*
+make_idxlist(char* name)
 {
 	int	i;
 	char	*p;
@@ -89,8 +78,9 @@ char	*name;
 	strcpy(p, name);
 	return p;
 }
-char	*get_idxlist(name)
-char	*name;
+
+char*
+get_idxlist(char* name)
 {
 	FILE	*fp;
 	int	i;
@@ -120,7 +110,7 @@ char	*name;
 	
 	i = 0;
 	for (q = p ; *q ; ) {
-		if (fp = fopen(q, "r"))
+		if ((fp = fopen(q, "r"))!=NULL)
 			fclose(fp);
 		else {
 			fprintf(stderr, "Can't open %s mode \"r\"\n", q);
@@ -134,18 +124,14 @@ char	*name;
 }
 
 
-
-parse(argc, argv)
-int	argc;
-char	**argv;
+void
+parse(int argc, char** argv)
 {
-	int	i;
 	char	*progname = NULL;
         char    *p;
-	extern char *strrchr();
 
 	
-	if (progname = strrchr(argv[0], '/'))
+	if ((progname = strrchr(argv[0], '/'))!=NULL)
 		progname++;
 	else
 		progname = argv[0];
@@ -161,11 +147,10 @@ char	**argv;
 }
 
 
-
-get_number(ptr)
-register char	*ptr;
+int
+get_number(char* ptr)
 {
-	register int	i = 0;
+	int	i = 0;
 
 	while (*ptr >= '0' && *ptr <= '9') {
 		i = i * 10 + (*ptr++ - '0');
@@ -175,9 +160,8 @@ register char	*ptr;
 }
 
 
-
-usage(name)
-char	*name;
+void
+usage(char* name)
 {
 	fprintf(stderr, "Usage: %s text_file binary_file\n",
 		name ? name : "encode");
@@ -185,8 +169,8 @@ char	*name;
 }
 
 
-
-int	getch()
+int
+getch(void)
 {
 	if (infp) {
 		int	c;
@@ -212,9 +196,8 @@ int	getch()
 }
 
 
-
-mark_file(out)
-FILE	*out;
+void
+mark_file(FILE* out)
 {
 	static	char	pathname[MAXPATHLEN];
 	static	long	pos;

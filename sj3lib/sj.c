@@ -31,28 +31,28 @@
  * $SonyRCSfile: sj.c,v $  
  * $SonyRevision: 1.2 $ 
  * $SonyDate: 1994/12/09 11:27:09 $
+ *
+ * $Id$
  */
 
 
-
-
-#include <stdio.h>
+#include <ctype.h>
 #include <locale.h>
 #include <pwd.h>
 #include <setjmp.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/file.h>
-#include <ctype.h>
 #include <unistd.h>
 #include "sj_const.h"
 #include "Const.h"
 #include "sj3err.h"
 #include "sj3lib.h"
-#include "sj3lowlib.h"
 #include "sj_hinsi.h"
 
 extern	int	sj3_error_number;
-extern  int     sj3_str_sjistoeuc(), sj3_str_euctosjis(), sj3_sjistoeuclen();
 #ifdef __sony_news
 extern  int     _sys_code; 
 #else
@@ -79,12 +79,10 @@ static  u_char   buf1[YomiBufSize];
 static  u_char   buf2[YomiBufSize];
 static  u_char kbuf[KanjiBufSize];
 
-char	*getlogin(), *getenv();
-long	sj3_open_dictionary();
 
 #ifndef __sony_news
 static int 
-set_sys_code()
+set_sys_code(void)
 {
 	char *loc;
 
@@ -97,11 +95,11 @@ set_sys_code()
 #endif
 
 
-static	make_dirs(path)
-char	*path;
+static int
+make_dirs(char* path)
 {
 	char	tmp[PathNameLen];
-	register char	*p;
+	char	*p;
 	int	i;
 
 	for (p = path ; *p ; p++) {
@@ -118,10 +116,8 @@ char	*path;
 }
 
 
-
-sj3_open(host, user)
-char	*host;
-char	*user;
+int
+sj3_open(char* host, char* user)
 {
 	char	tmp[PathNameLen];
 	char	*p;
@@ -195,19 +191,17 @@ server_dead:
 	return SJ3_SERVER_DEAD;
 }
 
-sj3_open_with_list(host, user, dicts_num, dicts, error_num, error_index)
-char	*host;
-char	*user;
-int     dicts_num;
-char   **dicts;
-int     *error_num; 
-int    **error_index; 
+
+int
+sj3_open_with_list(
+	char* host, char* user, int dicts_num,
+	char** dicts, int* error_num, int** error_index)
 {
 	char	tmp[PathNameLen];
 	char	*p;
 	int	err = SJ3_NORMAL_END;
 	int     i, err_id_num = 0;
-	long    *dict_idx;
+	long    *dict_idx = NULL;
 
 	if (client.fd != -1) return SJ3_ALREADY_CONNECTED;
 
@@ -304,7 +298,10 @@ server_dead:
 	mdicid = udicid = 0;
 	return SJ3_SERVER_DEAD;
 }
-sj3_close()
+
+
+int
+sj3_close(void)
 {
 	int	err = SJ3_NORMAL_END;
 	int     i;
@@ -368,12 +365,8 @@ server_dead:
 }
 
 
-
-sj3_getkan(yomi, bun, knj, knjsiz)
-u_char	*yomi;
-SJ3_BUNSETU	*bun;
-u_char	*knj;
-int	knjsiz;
+int
+sj3_getkan(u_char* yomi, SJ3_BUNSETU* bun, u_char* knj, int knjsiz)
 {
 	u_char	*src;
 	int	buncnt = 0;
@@ -424,11 +417,10 @@ int	knjsiz;
 
 	return buncnt;
 }
-sj3_getkan_euc(yomi, bun, knj, knjsiz)
-u_char	*yomi;
-SJ3_BUNSETU	*bun;
-u_char	*knj;
-int	knjsiz;
+
+
+int
+sj3_getkan_euc(u_char* yomi, SJ3_BUNSETU* bun, u_char* knj, int knjsiz)
 {
 	u_char	*src, *yp, *kp, *khp;
 	int	buncnt = 0, i;
@@ -523,11 +515,9 @@ int	knjsiz;
 	return buncnt;
 }
 
-sj3_getkan_mb(yomi, bun, knj, knjsiz)
-u_char	*yomi;
-SJ3_BUNSETU	*bun;
-u_char	*knj;
-int	knjsiz;
+
+int
+sj3_getkan_mb(u_char* yomi, SJ3_BUNSETU* bun, u_char* knj, int knjsiz)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -540,9 +530,8 @@ int	knjsiz;
 }
 
 
-
-sj3_douoncnt(yomi)
-u_char	*yomi;
+int
+sj3_douoncnt(u_char* yomi)
 {
 	int	i;
 
@@ -560,8 +549,10 @@ u_char	*yomi;
 
 	return i;
 }
-sj3_douoncnt_euc(yomi)
-u_char	*yomi;
+
+
+int
+sj3_douoncnt_euc(u_char* yomi)
 {
 	int	i, l, flag;
 	u_char  *yp;
@@ -591,8 +582,9 @@ u_char	*yomi;
 	return i;
 }
 
-sj3_douoncnt_mb(yomi)
-u_char	*yomi;
+
+int
+sj3_douoncnt_mb(u_char* yomi)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -605,10 +597,8 @@ u_char	*yomi;
 }
 
 
-
-sj3_getdouon(yomi, dou)
-u_char	*yomi;
-SJ3_DOUON *dou;
+int
+sj3_getdouon(u_char* yomi, SJ3_DOUON* dou)
 {
 	int	i;
 
@@ -625,9 +615,10 @@ SJ3_DOUON *dou;
 
 	return i;
 }
-sj3_getdouon_euc(yomi, dou)
-u_char	*yomi;
-SJ3_DOUON *dou;
+
+
+int
+sj3_getdouon_euc(u_char* yomi, SJ3_DOUON* dou)
 {
 	int	i, j, l;
 
@@ -665,9 +656,10 @@ SJ3_DOUON *dou;
 	}
 	return i;
 }
-sj3_getdouon_mb(yomi, dou)
-u_char	*yomi;
-SJ3_DOUON *dou;
+
+
+int
+sj3_getdouon_mb(u_char* yomi, SJ3_DOUON* dou)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -679,8 +671,9 @@ SJ3_DOUON *dou;
 	  return sj3_getdouon(yomi, dou);
 }
 
-sj3_gakusyuu(dcid)
-SJ3_STUDYREC	*dcid;
+
+int
+sj3_gakusyuu(SJ3_STUDYREC* dcid)
 {
 	if (sj3_tango_gakusyuu(&client, dcid) == ERROR) {
 		if (client.fd < 0) {
@@ -692,10 +685,9 @@ SJ3_STUDYREC	*dcid;
 	return 0;
 }
 
-sj3_gakusyuu2(yomi1, yomi2, dcid)
-u_char	*yomi1;
-u_char	*yomi2;
-SJ3_STUDYREC	*dcid;
+
+int
+sj3_gakusyuu2(u_char* yomi1, u_char* yomi2, SJ3_STUDYREC* dcid)
 {
 	if (sj3_bunsetu_gakusyuu(&client, yomi1, yomi2, dcid, MBCODE_SJIS) == ERROR) {
 		if (client.fd < 0) {
@@ -706,10 +698,10 @@ SJ3_STUDYREC	*dcid;
 	}
 	return 0;
 }
-sj3_gakusyuu2_euc(yomi1, yomi2, dcid)
-u_char	*yomi1;
-u_char	*yomi2;
-SJ3_STUDYREC	*dcid;
+
+
+int
+sj3_gakusyuu2_euc(u_char* yomi1, u_char* yomi2, SJ3_STUDYREC* dcid)
 {
 	int l, flag;
 	u_char *y1p, *y2p;
@@ -738,10 +730,10 @@ SJ3_STUDYREC	*dcid;
 	}
 	return 0;
 }
-sj3_gakusyuu2_mb(yomi1, yomi2, dcid)
-u_char	*yomi1;
-u_char	*yomi2;
-SJ3_STUDYREC	*dcid;
+
+
+int
+sj3_gakusyuu2_mb(u_char* yomi1, u_char* yomi2, SJ3_STUDYREC* dcid)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -753,10 +745,9 @@ SJ3_STUDYREC	*dcid;
 	  return sj3_gakusyuu2(yomi1, yomi2, dcid);
 }
 
-sj3_touroku(yomi, kanji, code)
-u_char	*yomi;
-u_char	*kanji;
-int	code;
+
+int
+sj3_touroku(u_char* yomi, u_char* kanji, int code)
 {
 	if (sj3_tango_touroku(&client, udicid, yomi, kanji, code, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -780,10 +771,10 @@ int	code;
 
 	return 0;
 }
-sj3_touroku_euc(yomi, kanji, code)
-u_char	*yomi;
-u_char	*kanji;
-int	code;
+
+
+int
+sj3_touroku_euc(u_char* yomi, u_char* kanji, int code)
 {
 	int l, flag;
 	u_char *yp;
@@ -825,10 +816,10 @@ int	code;
 
 	return 0;
 }
-sj3_touroku_mb(yomi, kanji, code)
-u_char	*yomi;
-u_char	*kanji;
-int	code;
+
+
+int
+sj3_touroku_mb(u_char* yomi, u_char* kanji, int code)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -840,10 +831,9 @@ int	code;
 	  return sj3_touroku(yomi, kanji, code);
 }
 
-sj3_syoukyo(yomi, kanji, code)
-u_char	*yomi;
-u_char	*kanji;
-int	code;
+
+int
+sj3_syoukyo(u_char* yomi, u_char* kanji, int code)
 {
 	if (sj3_tango_sakujo(&client, udicid, yomi, kanji, code, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -863,10 +853,10 @@ int	code;
 	}
 	return 0;
 }
-sj3_syoukyo_euc(yomi, kanji, code)
-u_char	*yomi;
-u_char	*kanji;
-int	code;
+
+
+int
+sj3_syoukyo_euc(u_char* yomi, u_char* kanji, int code)
 {
 	int l, flag;
 	u_char *yp;
@@ -904,10 +894,10 @@ int	code;
 	}
 	return 0;
 }
-sj3_syoukyo_mb(yomi, kanji, code)
-u_char	*yomi;
-u_char	*kanji;
-int	code;
+
+
+int
+sj3_syoukyo_mb(u_char* yomi, u_char* kanji, int code)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -919,8 +909,9 @@ int	code;
 	  return sj3_syoukyo(yomi, kanji, code);
 }
 
-sj3_getdict(buf)
-u_char	*buf;
+
+int
+sj3_getdict(u_char* buf)
 {
 	if (sj3_tango_syutoku(&client, udicid, buf, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -931,8 +922,10 @@ u_char	*buf;
 	}
 	return 0;
 }
-sj3_getdict_euc(buf)
-u_char	*buf;
+
+
+int
+sj3_getdict_euc(u_char* buf)
 {
 	int l, ll, slen;
 
@@ -969,8 +962,10 @@ u_char	*buf;
 	}
 	return 0;
 }
-sj3_getdict_mb(buf)
-u_char	*buf;
+
+
+int
+sj3_getdict_mb(u_char* buf)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -982,8 +977,8 @@ u_char	*buf;
 	  return sj3_getdict(buf);
 }
 
-sj3_nextdict(buf)
-u_char	*buf;
+int
+sj3_nextdict(u_char* buf)
 {
 	if (sj3_tango_jikouho(&client, udicid, buf, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -994,8 +989,10 @@ u_char	*buf;
 	}
 	return 0;
 }
-sj3_nextdict_euc(buf)
-u_char	*buf;
+
+
+int
+sj3_nextdict_euc(u_char* buf)
 {
 	int l, ll, slen;
 
@@ -1032,8 +1029,10 @@ u_char	*buf;
 	}
 	return 0;
 }
-sj3_nextdict_mb(buf)
-u_char	*buf;
+
+
+int
+sj3_nextdict_mb(u_char* buf)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -1045,8 +1044,8 @@ u_char	*buf;
 	  return sj3_nextdict(buf);
 }
 
-sj3_prevdict(buf)
-u_char	*buf;
+int
+sj3_prevdict(u_char* buf)
 {
 	if (sj3_tango_maekouho(&client, udicid, buf, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -1057,8 +1056,10 @@ u_char	*buf;
 	}
 	return 0;
 }
-sj3_prevdict_euc(buf)
-u_char	*buf;
+
+
+int
+sj3_prevdict_euc(u_char* buf)
 {
 	int l, ll, slen;
 
@@ -1095,8 +1096,10 @@ u_char	*buf;
 	}
 	return 0;
 }
-sj3_prevdict_mb(buf)
-u_char	*buf;
+
+
+int
+sj3_prevdict_mb(u_char* buf)
 {
 #ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
@@ -1108,7 +1111,8 @@ u_char	*buf;
 	  return sj3_prevdict(buf);
 }
 
-sj3_lockserv()
+int
+sj3_lockserv(void)
 {
 	if (sj3_lock_server(&client) == ERROR) {
 		if (client.fd < 0) {
@@ -1119,7 +1123,10 @@ sj3_lockserv()
 	}
 	return 0;
 }
-sj3_unlockserv()
+
+
+int
+sj3_unlockserv(void)
 {
 	if (sj3_unlock_server(&client)) {
 		if (client.fd < 0) {

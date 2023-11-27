@@ -31,23 +31,25 @@
  * $SonyRCSfile: srchidx.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:29 $
+ *
+ * $Id$
  */
 
 
-
+#include <sys/types.h>
+#include <string.h>
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
-Uchar	*get_idxptr();
-Int	sstrlen(), istrcmp();
+Int	istrcmp();
 
-TypeDicSeg	srchidx(low, len)
-TypeDicSeg	low;
-Int		len;
+TypeDicSeg
+srchidx(TypeDicSeg low, int len)
 {
 	TypeDicSeg	high;
 	TypeDicSeg	mid;
-	Int		cmp;
-	Uchar		*target;
+	int		cmp;
+	u_char		*target;
 
 	if ((high = curdict->segunit - 1) < 1) return 0;
 
@@ -59,7 +61,7 @@ Int		len;
 
 		target = get_idxptr(mid);
 
-		cmp = istrcmp(cnvstart, target, len, sstrlen(target));
+		cmp = istrcmp(cnvstart, target, len, strlen(target));
 
 		if (cmp == OVER) {
 			high = mid - 1;

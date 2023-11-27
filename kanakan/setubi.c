@@ -31,19 +31,18 @@
  * $SonyRCSfile: setubi.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:22 $
+ *
+ * $Id$
  */
 
 
-
+#include <string.h>
 #include "sj_kcnv.h"
 #include "sj_hinsi.h"
+#include "kanakan.h"
 
-JREC	*argjrec();
-Void	memcpy();
-Int	sstrncmp();
-
-Uchar	TFar	*getstb(hinsi)
-TypeGram	hinsi;
+Uchar*
+getstb(TypeGram hinsi)
 {
 	if (hinsi < MEISI_1 || hinsi > TIMEI) return NULL;
 
@@ -51,13 +50,12 @@ TypeGram	hinsi;
 }
 
 
-Void	setubi(rec, stbtbl)
-JREC	*rec;
-Uchar	TFar	*stbtbl;
+void
+setubi(JREC *rec, Uchar *stbtbl)
 {
-	Uchar	TFar	*stb;
+	Uchar	*stb;
 	Uchar	*yptr;
-	Uchar	TFar	*sptr;
+	Uchar	*sptr;
 	Int	slen;
 	JREC	*new;
 	Int	cmp;
@@ -71,7 +69,7 @@ Uchar	TFar	*stbtbl;
 		slen = StbYomiLen(stb);
 		sptr = StbYomiTop(stb);
 
-		cmp = sstrncmp(yptr, sptr, slen);
+		cmp = strncmp(yptr, sptr, slen);
 
 		if (cmp == OVER || cmp == PARTLY) break;
 

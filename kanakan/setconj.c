@@ -31,19 +31,19 @@
  * $SonyRCSfile: setconj.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:16 $
+ *
+ * $Id$
  */
-
 
 
 #include "sj_kcnv.h"
 #include "sj_right.h"
 #include "sj_hinsi.h"
 #include "sj_yomi.h"
+#include "kanakan.h"
 
-Static	Int	cnjstrcmp(yptr, cnjp, saml)
-Uchar	*yptr;
-Uchar	TFar	*cnjp;
-Int	*saml;
+static	Int
+cnjstrcmp (Uchar *yptr, Uchar *cnjp, Int *saml)
 {
 	Int	asklen;
 	Int	nkrlen;
@@ -78,9 +78,8 @@ Int	*saml;
 	return MATCH;
 }
 
-Static	TypeCnct	cnvrow(rec, row)
-JREC		*rec;
-TypeCnct	row;
+static	TypeCnct
+cnvrow (JREC *rec, TypeCnct row)
 {
 	TypeGram	hinsi;
 	Int		stt;
@@ -112,10 +111,8 @@ TypeCnct	row;
 	return row;
 }
 
-Int	setconj(hinsi, jrec, crec)
-TypeGram	hinsi;
-JREC		*jrec;
-CREC		*crec;
+Int
+setconj (TypeGram hinsi, JREC *jrec, CREC *crec)
 {
 	Uchar	*yptr;
 	Int	cmp;
@@ -123,9 +120,9 @@ CREC		*crec;
 	Int	saml;
 	Int	ofslen;
 	int	count = 0;
-	Uchar	TFar	*cnj;
+	Uchar	*cnj;
 
-	if (cnj  = Conjadr(hinsi)) {
+	if ((cnj  = Conjadr(hinsi)) != NULL) {
 		saml = ofslen = 0;
 
 		yptr = cnvstart + jrec -> jlen;
@@ -148,7 +145,7 @@ CREC		*crec;
 
 			if (isdpnd(*(yptr + saml))) continue;
 
-			if (right = cnvrow(jrec, (TypeCnct)CnjRight(cnj))) {
+			if ((right = cnvrow(jrec, (TypeCnct)CnjRight(cnj))) != '\0') {
 				crec -> len   = (Uchar)(ofslen + saml);
 				crec -> right = right;
 				count++;

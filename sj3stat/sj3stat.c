@@ -31,6 +31,8 @@
  * $SonyRCSfile: sj3stat.c,v $
  * $SonyRevision: 1.2 $
  * $SonyDate: 1997/01/23 11:09:41 $
+ *
+ * $Id$
  */
 
 #include <stdio.h>
@@ -39,11 +41,9 @@
 #include "Const.h"
 #include "sj3err.h"
 #include "sj3lib.h"
-#include "sj3lowlib.h"
 
-int main (argc, argv) 
-	int		argc;
-	char		**argv;
+int
+main (int argc, char** argv) 
 {
 	SJ3_CLIENT_ENV  clnt;
 	SJ3_WHO_STRUCT  who[64];
@@ -87,7 +87,7 @@ int main (argc, argv)
 
 	for (p = ver; *p; p++) {
 		while (*p) putc(*p++, stdout);
-		fprintf (stdout, "%, ");
+		fprintf (stdout, "%%, ");
 	}
 	fprintf (stdout, "%d users.\n", n);
 

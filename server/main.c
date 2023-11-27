@@ -31,24 +31,28 @@
  * $SonyRCSfile: main.c,v $  
  * $SonyRevision: 1.3 $ 
  * $SonyDate: 1995/02/03 07:38:44 $
+ *
+ * $Id$
  */
-
-
 
 
 
 #include "sj_sysvdef.h"
 #include <locale.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
+#include <sys/wait.h>
+#include <unistd.h>
 #ifdef SVR4
 #include <sys/fcntl.h>
 #include <sys/termios.h>
 #endif
 #include "Const.h"
+#include "server.h"
 
 #ifndef lint
 static char rcsid_sony[] = "$Header: /export/work/contrib/sj3/server/RCS/main.c,v 1.12 1994/06/03 07:41:30 notanaka Exp $ SONY;";
@@ -58,14 +62,13 @@ static char rcsid_sony[] = "$Header: /export/work/contrib/sj3/server/RCS/main.c,
 #define signal sigset
 #endif
 
-void	_exit();
-
 extern	int	fork_flag;
 extern	char	*lock_file;
 
 
 
-static	void	opening()
+static	void
+opening (void)
 {
 	extern	char	*version_number;
 	extern	char	*time_stamp;
@@ -78,7 +81,8 @@ static	void	opening()
 #ifdef	LOCK_FILE
 
 
-int	make_lockfile()
+int
+make_lockfile (void)
 {
 	int	fd;
 
@@ -87,7 +91,10 @@ int	make_lockfile()
 	close(fd);
 	return 0;
 }
-int	erase_lockfile()
+
+
+int
+erase_lockfile (void)
 {
 	return unlink(lock_file);
 }
@@ -97,14 +104,14 @@ int	erase_lockfile()
 
 
 #if !defined(__sony_news) || defined(SVR4)
-static int signal_handler(sig)
-int	sig;
+static int
+signal_handler (int sig)
 {
 	warning_out("signal %d catched.", sig);
 }
 
-static	int	terminate_handler(sig)
-int	sig;
+static	int
+terminate_handler (int sig)
 {
 	close_socket();
 	sj_closeall();
@@ -113,8 +120,10 @@ int	sig;
 #endif
 	exit(0);
 }
-#else
-static int signal_handler(sig, code, scp)
+
+#else	/* __sony_news && !SVR4 */
+static int
+signal_handler (sig, code, scp)
 int	sig;
 int	code;
 struct sigcontext *scp;
@@ -134,8 +143,11 @@ struct sigcontext *scp;
 #endif
 	exit(0);
 }
-#endif
-server_terminate()
+#endif	/* __sony_news && !SVR4 */
+
+
+void
+server_terminate (void)
 {
 	close_socket();
 	sj_closeall();
@@ -147,7 +159,8 @@ server_terminate()
 
 
 
-static	void	exec_fork()
+static	void
+exec_fork (void)
 {
 	int	tmp;
 
@@ -180,8 +193,8 @@ static	void	exec_fork()
 
 
 
-
-static	void	leave_tty()
+static	void
+leave_tty (void)
 {
 	int	tmp;
 
@@ -207,9 +220,8 @@ static	void	leave_tty()
 
 
 
-int	main(argc, argv)
-int	argc;
-char	**argv;
+int
+main (int argc, char **argv)
 {
 #ifdef __sony_news
 	(void) setlocale(LC_CTYPE, "ja_JP.EUC");

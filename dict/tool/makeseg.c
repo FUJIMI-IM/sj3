@@ -31,13 +31,20 @@
  * $SonyRCSfile: makeseg.c,v $  
  * $SonyRevision: 1.2 $ 
  * $SonyDate: 1994/12/09 11:27:05 $
+ *
+ * $Id$
  */
 
 
+#include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
+#include <time.h>
 #include "sj_struct.h"
 #include "../../include/Dict.h"
+#include "dicttool.h"
 
 extern	HindoRec *askknj[];
 extern	int	askknj_num;
@@ -45,18 +52,13 @@ extern	DouonRec *douon_ptr;
 extern	FILE	*outfp;
 extern	int	douon_num;
 
-static	u_char	index[MainSegmentLength];	
+static	u_char	segindex[MainSegmentLength];	
 static	int	idxpos = 0;		
 static	int	idxnum = 0;		
 
-OffsetRec *real_ofsrec();
-u_char	*knjcvt();
 
-
-
-static	u_char *set_ofsask(src, dst)
-u_char	*src;
-u_char	*dst;
+static u_char*
+set_ofsask(u_char* src, u_char* dst)
 {
 	int	len;
 	u_char	*ptr;
@@ -106,11 +108,8 @@ u_char	*dst;
 }
 
 
-
-make_knjstr(src, len, dst)
-u_char	*src;
-int	len;
-u_char	*dst;
+size_t
+make_knjstr(u_char* src, int len, u_char* dst)
 {
 	u_char	*keep = dst;
 
@@ -157,9 +156,10 @@ u_char	*dst;
 
 
 
-static	make_knjask()
+static int
+make_knjask(void)
 {
-	int	i, j;
+	int	i;
 	u_char	*p;
 	u_char	buf[128];
 	int	len;
@@ -195,7 +195,7 @@ static	make_knjask()
 
 
 void
-makeseg()
+makeseg(void)
 {
 	u_char	buf[MainSegmentLength];
 	DouonRec *drec;
@@ -307,7 +307,7 @@ makeseg()
 	
 	for (p = douon_ptr -> yptr ; ; ) {
 		if (idxpos < MainIndexLength) {
-			index[idxpos++] = *p;
+			segindex[idxpos++] = *p;
 		}
 		else {
 			fprintf(stderr, "\245\244\245\363\245\307\245\303\245\257\245\271\244\254\244\242\244\325\244\354\244\336\244\267\244\277\n");
@@ -316,7 +316,7 @@ makeseg()
 		if (!*p++) break;
 	}
 	if (idxpos < MainIndexLength) {
-		index[idxpos] = 0;
+		segindex[idxpos] = 0;
 	}
 	else {
 		fprintf(stderr, "\245\244\245\363\245\307\245\303\245\257\245\271\244\254\244\242\244\325\244\354\244\336\244\267\244\277\n");
@@ -374,9 +374,8 @@ err:
 #undef	datset
 }
 
-static  void    put4byte(p, n)
-u_char  *p;
-long    n;
+static void
+put4byte(u_char* p, size_t n)
 {
         p += 3;
         *p-- = n; n >>= 8;
@@ -384,27 +383,28 @@ long    n;
         *p-- = n; n >>= 8;
         *p = n;
 }
-void    makehead(dict_name)
-u_char *dict_name;
+
+void
+makehead(u_char* dict_name)
 {
         u_char  header[HeaderLength + CommentLength];
         long    i;
         u_char  *p;
+	time_t	curtime;
 
 #define IndexPos        (HeaderLength + CommentLength)
 
         memset(header, '\0', sizeof(header));
         put4byte(header + VersionPos, DictVersion);
-        time(&i);
+	time(&curtime);
         p = header + CommentPos;
-    sprintf((char *)p, "%s : %s", dict_name, ctime(&i));
-    while (*p) {
-    if (*p == '\n') { *p = 0; break; }
-                p++;
-}
+	sprintf((char *)p, "%s : %s", dict_name, ctime(&curtime));
+	while (*p) {
+		if (*p == '\n') { *p = 0; break; }
+		p++;
+	}
  
         i = IndexPos;
-                        
         put4byte(header + DictIdxPos, i);
         put4byte(header + DictIdxLen, MainIndexLength);
         i += MainIndexLength;
@@ -413,7 +413,7 @@ u_char *dict_name;
         put4byte(header + DictSegLen, MainSegmentLength);
         put4byte(header + DictSegMax, 0);
         put4byte(header + DictSegNum, idxnum);
-        
+
         put4byte(header + DictAIdxPos, 0);
         put4byte(header + DictAIdxLen, 0);
 
@@ -423,7 +423,7 @@ u_char *dict_name;
         Fseek(outfp, (long)HeaderPos, 0);
         Fwrite(header, sizeof(header), 1, outfp);
         Fseek(outfp, (long)IndexPos, 0);
-        Fwrite(index, MainIndexLength, 1, outfp);
+        Fwrite(segindex, MainIndexLength, 1, outfp);
 
 #undef  IndexPos
 }

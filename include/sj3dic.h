@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1991-1994  Sony Corporation
+ * Copyright (c) 2004  Hiroo Ono <hiroo+sj3 at oikumene.gcd.org>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,34 +28,15 @@
  */
 
 /*
- * $SonyRCSfile: skipkstr.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:02:25 $
- *
- * $Id$
+ * $Id: sj3dic.h,v 1.1 2004/07/03 02:26:56 hiroo Exp $
  */
 
+#ifndef _SJ3DIC_H_
+#define _SJ3DIC_H_  1
 
-#include "sj_euc.h"
-#include "sj_rename.h"
-#include "sj_typedef.h"
-#include "sj_const.h"
-#include "sj_dict.h"
-#include "sj_table.h"
-#include "kanakan.h"
+/* sj3dic.c */
+void setdicname(char *dictname);
+void setsjserv(char *hostname);
 
+#endif /* _SJ3DIC_H_ */
 
-u_char*
-skipkstr(u_char* ptr)
-{
-	int	contf = TRUE, csize;
-
-	do {
-		csize = codesize(*ptr);
-		if (ptr[csize] == KanjiStrEnd) contf = FALSE;
-		ptr += csize;
-	} while (contf);
-        ptr++;
-
-	return ptr;
-}

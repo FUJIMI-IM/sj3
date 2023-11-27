@@ -31,35 +31,27 @@
  * $SonyRCSfile: setkouho.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:20 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_euc.h"
 #include "sj_kcnv.h"
 #include "sj_hinsi.h"
+#include "kanakan.h"
+
+static int hiraknj(u_char *p);
 
 
-
-Int	sel_sjmode(), codesize();
-
-
-
-Static  Int	hiraknj();
-
-
- 
-Void 	setkouho(clrec, offs, mode)
-CLREC	 	*clrec;		
-TypeDicOfs	offs;		
-Int		mode;		
+void
+setkouho(CLREC* clrec, TypeDicOfs offs, int mode)
 {
 	JREC	*jrec;
 	KHREC	*kptr;		
-	Uchar	TFar	*fptr;
-	Int	flg;
-	Int	i;
+	u_char	TFar	*fptr;
+	int	flg;
+	int	i;
 
 	
 	if (khcount >= MaxKouhoNumber) return;
@@ -76,7 +68,7 @@ Int		mode;
 	kptr -> offs   = offs;			
 	kptr -> rank   = 0;			
 	kptr -> styno  = 0;			
-	kptr -> mode   = (Uchar)mode;		
+	kptr -> mode   = (u_char)mode;		
 
 	
 	if (jrec -> flags & JFLAG_KA) {
@@ -130,7 +122,7 @@ Int		mode;
 	kptr -> offs   = offs;			
 	kptr -> rank   = 0;			
 	kptr -> styno  = 0;			
-	kptr -> mode   = (Uchar)mode;		
+	kptr -> mode   = (u_char)mode;		
 
 	kptr -> sttfg  = 1;
 	kptr -> sttkj  = 1;
@@ -144,14 +136,11 @@ Int		mode;
 }
 
 
-
-Void	ph_setkouho(clrec, offs, sptr)
-CLREC	 	*clrec;		
-TypeDicOfs	offs;		
-STDYIN		*sptr;		
+void
+ph_setkouho(CLREC* clrec, TypeDicOfs offs, STDYIN* sptr)
 {
 	JREC	*jrec;
-	Uchar	TFar	*p;
+	u_char	TFar	*p;
 
 	
 	if (sptr) {
@@ -174,7 +163,7 @@ STDYIN		*sptr;
 	kouhotbl[0].mode = sel_sjmode(jrec = clrec -> jnode);
 
 	
-	kouhotbl[0].sttfg = (Uchar)
+	kouhotbl[0].sttfg = (u_char)
 		((p = Settou_ptr(jrec->sttofs)) ? (SttHiraKnj(p)?1:0) : 0);
 
 	
@@ -197,13 +186,12 @@ STDYIN		*sptr;
 }
 
 
-
-Static	Int	hiraknj(p)
-Reg1	Uchar	*p;
+static int
+hiraknj(u_char *p)
 {
 	char	flg = TRUE;
-	Int	i;
-	Int	result;
+	int	i;
+	int	result;
 
 	do {
 		if (p[codesize(*p)] == KanjiStrEnd) flg = FALSE;
@@ -239,72 +227,58 @@ Reg1	Uchar	*p;
 }
 
 
-
-Int	hiraknj_atrb(p, len)
-Uchar	*p;
-Int	*len;
+int
+hiraknj_atrb(u_char* p, int* len)
 {
 	*len = 2;
 	return 0;
 }
 
 
-
-Int	hiraknj_ofs(p, len)
-Uchar	*p;
-Int	*len;
+int
+hiraknj_ofs(u_char* p, int* len)
 {
 	*len = 2;
         return hiraknj(dicbuf + ((*p & KanjiCodeMask) << 8) + *(p + 1));
 }
 
 
-
-Int	hiraknj_knj(p, len)
-Uchar	*p;
-Int	*len;
+int
+hiraknj_knj(u_char* p, int* len)
 {
 	*len = 1;
 	return hiraknj(askknj[*p & KnjAssyukuMask]);
 }
 
 
-
-Int	hiraknj_hask(p, len)
-Uchar	*p;
-Int	*len;
+int
+hiraknj_hask(u_char* p, int* len)
 {
 	*len = 1;
 	return 2;
 }
 
 
-
-Int	hiraknj_kask(p, len)
-Uchar	*p;
-Int	*len;
+int
+hiraknj_kask(u_char* p, int* len)
 {
 	*len = 1;
 	return 3;
 }
 
 
-
-Int	hiraknj_norm(p, len)
-Uchar	*p;
-Int	*len;
+int
+hiraknj_norm(u_char* p, int* len)
 {
 	*len = codesize(*p);
 	return 1;
 }
 
 
-
-Int	hiraknj_hira(p, len)
-Uchar	*p;
-Int	*len;
+int
+hiraknj_hira(u_char* p, int* len)
 {
-	Uchar	ch;
+	u_char	ch;
 
 	*len = codesize(*p);
 	ch = *(p + 1);

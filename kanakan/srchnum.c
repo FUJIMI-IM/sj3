@@ -31,26 +31,27 @@
  * $SonyRCSfile: srchnum.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:30 $
+ *
+ * $Id$
  */
 
 
-
+#include <sys/types.h>
+#include <string.h>
 #include "sj_kcnv.h"
 #include "sj_yomi.h"
 #include "sj_hinsi.h"
 #include "sj_suuji.h"
+#include "kanakan.h"
 
-JREC	*argjrec();
-Uchar	*srchdict();
-Void	setnumrec(), memcpy(), memset();
 
-Static Void	srch_kurai1(), srch_kurai2();
+static void srch_kurai1(u_char* ptr, u_char* cnct);
+static void srch_kurai2(u_char* ptr, u_char* cnct);
 
-Static	Void	srch_josuu_sub(jrec, gram)
-JREC		*jrec;
-TypeGram	gram;
+static void
+srch_josuu_sub(JREC *jrec, TypeGram gram)
 {
-	Uchar	*tagp;
+	u_char	*tagp;
 	DICTL	*dp;
 
 	for (dp = dictlist ; dp ; dp = dp -> next) {
@@ -58,16 +59,17 @@ TypeGram	gram;
 		dicinl  = 1;
 		dicsaml = 0;
 		prevseg = -1;
-		while (tagp = srchdict(tagp)) setnumrec(tagp, jrec, gram);
+		while ((tagp = srchdict(tagp)) != NULL)
+			setnumrec(tagp, jrec, gram);
 	}
 }
 
-Static	Void	srch_josuu(jrec)
-JREC	*jrec;
+static void
+srch_josuu(JREC *jrec)
 {
-	Uchar	*kp;
-	Int	klen;
-	Int	len;
+	u_char	*kp;
+	int	klen;
+	int	len;
 
 	if (headcode && headcode != SETTOU_DAI) return;
 
@@ -85,22 +87,20 @@ JREC	*jrec;
 	cnvlen   = klen;
 }
 
-Static	Void	setnrec_sub(p, flag, stb)
-Uchar	*p;
-Ushort	flag;
-Int	stb;
+static void
+setnrec_sub(u_char* p, u_short flag, int stb)
 {
 	JREC	*rec;
-	Int	len1;
-	Int	len2;
+	int	len1;
+	int	len2;
 
 	len1 = len2 = p - suuji_yptr;
 	if (headcode) len1 += headlen;
 	if (stb) len2--;
 
-	if ((Int)suuji_len == len2) {
+	if ((int)suuji_len == len2) {
 		if (suuji_wkeep) {
-			memcpy((Uchar *)suuji_wbuf, (Uchar *)suuji_wkeep,
+			memcpy((u_char*)suuji_wbuf, (u_char*)suuji_wkeep,
 				sizeof(suuji_wbuf[0]) * NumWordBuf);
 		}
 		if (suuji_ukeep) {
@@ -110,21 +110,20 @@ Int	stb;
 		return;
 	}
 
-	if (rec = argjrec(len1, (JREC *)NULL)) {
+	if ((rec = argjrec(len1, (JREC *)NULL)) != NULL) {
 		rec -> class  = suuji_class;
 		rec -> hinsi  = SUUSI;
 		rec -> sttofs = headcode;
-		rec -> stbofs = (Uchar)stb;
+		rec -> stbofs = (u_char)stb;
 		rec -> flags  = flag;
-		rec -> numlen = (Uchar)len2;
+		rec -> numlen = (u_char)len2;
 
 		if (!stb) srch_josuu(rec);
 	}
 }
 
-Static	Void	setnrec(p, flag)
-Uchar	*p;
-Ushort	flag;
+static void
+setnrec(u_char* p, u_short flag)
 {
 	setnrec_sub(p, flag, 0);
 
@@ -133,14 +132,11 @@ Ushort	flag;
 	}
 }
 
-Static	Uchar	TFar	*srchtbl(ch, tbl, rec, n)
-Uchar	ch;
-Uchar	TFar	*tbl;
-Int	rec;
-Int	n;
+static u_char*
+srchtbl(u_char ch, u_char* tbl, int rec, int n)
 {
-	Int	high, low, mid;
-	Uchar	TFar	*p;
+	int	high, low, mid;
+	u_char	*p;
 
 	if (!ch) return NULL;
 
@@ -168,19 +164,16 @@ Int	n;
 	return p;
 }
 
-Static	Int	isconnect(cnct, num)
-Uchar	TFar	*cnct;
-Int	num;
+static int
+isconnect(u_char* cnct, int num)
 {
 	return (cnct[num / 8] & (0x80 >> (num % 8)));
 }
 
-Static	Int	string_cmp(s, l, d)
-Reg3	Uchar	TFar	*s;
-Reg1	Int	l;
-Reg2	Uchar	*d;
+static int
+string_cmp(u_char* s, int l, u_char* d)
 {
-	Uchar	TFar	*p;
+	u_char	*p;
 
 	p = s;
 
@@ -193,27 +186,27 @@ Reg2	Uchar	*d;
 	return (s - p);
 }
 
-Static	Int	check_num(ptr)
-Uchar	*ptr;
+static int
+check_num(u_char* ptr)
 {
-	Int	i;
-	Int	j;
-	Int	k;
+	int	i;
+	int	j;
+	int	k;
 	int	tmp;
-	Int	hketa;
-	Int	lketa;
-	Int	flg = FALSE;
-	Int	cnt;
-	Ushort	flag;
+	int	hketa;
+	int	lketa;
+	int	flg = FALSE;
+	int	cnt;
+	u_short	flag;
 
-	memset((Uchar *)suuji_wbuf, 0, sizeof(Ushort) * NumWordBuf);
+	memset((u_char*)suuji_wbuf, 0, sizeof(u_short) * NumWordBuf);
 	flag = 0;
 
 	hketa = lketa = cnt = 0;
 	for (i = suuji_keta ; --i >= 0 ;) {
 		if (hketa >= 4) return FALSE;
 		tmp = suuji_ubuf[i];
-		if (j = ((tmp >> 6) & 3)) {
+		if ((j = ((tmp >> 6) & 3)) != 0) {
 			if (j < hketa) return FALSE;
 			if (j > hketa) {
 				flag |= JFLAG_N01;
@@ -282,16 +275,16 @@ Uchar	*ptr;
 	return TRUE;
 }
 
-Static	Void	srch_number1(ptr)
-Uchar	*ptr;
+static void
+srch_number1(u_char* ptr)
 {
-	Uchar		ch;
-	Uchar		mode;
-	Uchar		TFar	*p;
-	Int		l;
+	u_char		ch;
+	u_char		mode;
+	u_char		TFar	*p;
+	int		l;
 	TypeClass	cls;
-	Int		len;
-	Uchar		*tptr;
+	int		len;
+	u_char		*tptr;
 
 	if (suuji_keta >= NumKetaLength) return;
 
@@ -315,7 +308,7 @@ Uchar	*ptr;
 
 			check_num(tptr);
 			srch_number1(tptr);
-			srch_kurai2(tptr, (Uchar TFar *)NULL);
+			srch_kurai2(tptr, (u_char*)NULL);
 
 			break;
 
@@ -324,8 +317,8 @@ Uchar	*ptr;
 
 			check_num(tptr);
 			srch_number1(tptr);
-			srch_kurai1(tptr, (Uchar TFar *)NULL);
-			srch_kurai2(tptr, (Uchar TFar *)NULL);
+			srch_kurai1(tptr, (u_char*)NULL);
+			srch_kurai2(tptr, (u_char*)NULL);
 
 			break;
 
@@ -349,7 +342,7 @@ Uchar	*ptr;
 				suuji_class = C_N_ARABIA;
 				check_num(tptr);
 				srch_number1(tptr);
-				srch_kurai2(tptr, (Uchar TFar *)NULL);
+				srch_kurai2(tptr, (u_char*)NULL);
 
 				suuji_class = C_N_KAZU;
 			}
@@ -382,18 +375,17 @@ Uchar	*ptr;
 	}
 }
 
-Static	Void	srch_kurai1(ptr, cnct)
-Uchar	*ptr;
-Uchar	TFar	*cnct;
+static void
+srch_kurai1(u_char* ptr, u_char* cnct)
 {
-	Uchar		ch;
-	Uchar		TFar	*p;
-	Int		l;
-	Int		keta;
-	Int		mode;
+	u_char		ch;
+	u_char		*p;
+	int		l;
+	int		keta;
+	int		mode;
 	TypeClass	cls;
-	Int		len;
-	Uchar		*tptr;
+	int		len;
+	u_char		*tptr;
 
 	if (!(p = srchtbl((ch = *ptr), Kurai1_tbl, Kr1TblRecLen, Kr1TblRecNum)))
 		return;
@@ -421,7 +413,7 @@ Uchar	TFar	*cnct;
 		}
 
 		if (cnct) {
-			if (!isconnect(cnct, (Int)Kr1TblCnct(mode))) continue;
+			if (!isconnect(cnct, (int)Kr1TblCnct(mode))) continue;
 			suuji_ubuf[suuji_keta - 1] |= (keta << 4);
 		}
 		else {
@@ -433,7 +425,7 @@ Uchar	TFar	*cnct;
 		check_num(tptr);
 
 		srch_number1(tptr);
-		srch_kurai1(tptr, (Uchar TFar *)NULL);
+		srch_kurai1(tptr, (u_char*)NULL);
 		srch_kurai2(tptr, Kr1TblCnctP(p));
 
 		if (cnct)
@@ -443,18 +435,17 @@ Uchar	TFar	*cnct;
 	}
 }
 
-Static	Void	srch_kurai2(ptr, cnct)
-Uchar	*ptr;
-Uchar	TFar	*cnct;
+static void
+srch_kurai2(u_char* ptr, u_char* cnct)
 {
-	Uchar		ch;
-	Uchar		TFar	*p;
-	Int		l;
-	Int		keta;
-	Int		mode;
+	u_char		ch;
+	u_char		*p;
+	int		l;
+	int		keta;
+	int		mode;
 	TypeClass	cls;
-	Int		len;
-	Uchar		*tptr;
+	int		len;
+	u_char		*tptr;
 
 	if ((suuji_ubuf[0] & 0x0f) == _Num0) return;
 
@@ -484,7 +475,7 @@ Uchar	TFar	*cnct;
 		}
 
 		if (cnct) {
-			if (!isconnect(cnct, (Int)Kr2TblCnct(mode))) continue;
+			if (!isconnect(cnct, (int)Kr2TblCnct(mode))) continue;
 			suuji_ubuf[suuji_keta - 1] |= (keta << 6);
 		}
 		else {
@@ -495,7 +486,7 @@ Uchar	TFar	*cnct;
 		check_num(tptr);
 
 		srch_number1(tptr);
-		srch_kurai1(tptr, (Uchar TFar *)NULL);
+		srch_kurai1(tptr, (u_char*)NULL);
 
 		if (cnct)
 			suuji_ubuf[suuji_keta - 1] &= 0x3f;
@@ -504,11 +495,11 @@ Uchar	TFar	*cnct;
 	}
 }
 
-Static	Void	srch_number2(p)
-Uchar	*p;
+static void
+srch_number2(u_char* p)
 {
-	Uchar	ch;
-	Int	i;
+	u_char	ch;
+	int	i;
 
 	suuji_class = (*p == N_0) ? C_N_SUUJILONG : C_N_KAZULONG;
 
@@ -559,8 +550,8 @@ Uchar	*p;
 	}
 }
 
-Static	Void	srchnum_sub(p)
-Uchar	*p;
+static void
+srchnum_sub(u_char* p)
 {
 	suuji_yptr = p;
 
@@ -570,13 +561,14 @@ Uchar	*p;
 
 	suuji_keta = 0;
 	suuji_class = C_N_KAZU;
-	srch_kurai1(p, (Uchar TFar *)NULL);
+	srch_kurai1(p, (u_char*)NULL);
 	if (suuji_exit) return;
 
 	srch_number2(p);
 }
 
-Void	srchnum()
+void
+srchnum(void)
 {
 	suuji_len = suuji_exit = 0;
 
@@ -592,12 +584,10 @@ Void	srchnum()
 	}
 }
 
-Void	setwdnum(p, len, wd)
-Uchar	*p;
-Int	len;
-Ushort	*wd;
+void
+setwdnum(u_char* p, int len, u_short* wd)
 {
-	suuji_len   = (Uchar)len;
+	suuji_len   = (u_char)len;
 	suuji_wkeep = wd;
 	suuji_ukeep = NULL;
 	headcode = headlen = 0;
@@ -606,12 +596,10 @@ Ushort	*wd;
 	srchnum_sub(p);
 }
 
-Int	setucnum(p, len, ud)
-Uchar	*p;
-Int	len;
-Uchar	*ud;
+int
+setucnum(u_char* p, int len, u_char* ud)
 {
-	suuji_len   = (Uchar)len;
+	suuji_len   = (u_char)len;
 	suuji_wkeep = NULL;
 	suuji_ukeep = ud;
 	headcode = headlen = 0;
@@ -619,6 +607,6 @@ Uchar	*ud;
 
 	srchnum_sub(p);
 
-	return (Int)suuji_exit;
+	return (int)suuji_exit;
 }
 

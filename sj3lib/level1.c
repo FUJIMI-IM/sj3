@@ -31,17 +31,20 @@
  * $SonyRCSfile: level1.c,v $  
  * $SonyRevision: 1.4 $ 
  * $SonyDate: 1995/04/17 10:36:08 $
+ *
+ * $Id: level1.c,v 1.2 2004/07/20 15:55:43 hiroo Exp $
  */
-
 
 
 #include "sj_sysvdef.h" 
 #include <stdio.h>
 #include <netdb.h>
 #include <pwd.h>
+#include <string.h>
 #include <sys/un.h>
 #include <sys/types.h>
 #include <sys/param.h>
+#include <unistd.h>
 #include <netinet/in.h>
 #ifdef TLI              
 #include <fcntl.h>
@@ -58,16 +61,14 @@
 #include "sj3cmd.h"
 #include "sj3err.h"
 #include "sj3lib.h"
-#include "sj3lowlib.h"
 
 #ifdef SVR4
 #define signal sigset
 #endif
 
-char	*getlogin();
-
 #ifndef lint
 static	char	rcsid_sony[] = "$SonyId: level1.c,v 1.4 1995/04/17 10:36:08 notanaka Exp $ SONY;";
+static	char	rcsid_patch[] = "$Id: level1.c,v 1.2 2004/07/20 15:55:43 hiroo Exp $";
 #endif
 
 int	sj3_error_number;
@@ -103,10 +104,11 @@ static  int     ReadErrorFlag = FALSE;
 		} \
 	}
 
-static	put_flush()
+static int
+put_flush(void)
 {
-	register int	i, j;
-	register u_char	*p;
+	int	i, j;
+	u_char	*p;
 
 	for (i = putpos, p = putbuf ; i > 0 ; i -= j, p += j) {
 #ifdef TLI
@@ -127,27 +129,31 @@ static	put_flush()
 
 	return 0;
 }
-static	put_byte(c)
-register int	c;
+
+static void
+put_byte(int c)
 {
 	putbuf[putpos++] = c;
 }
-static	put_word(c)
-register int	c;
+
+static void
+put_word(int c)
 {
 	put_byte(c >> 8);
 	put_byte(c & 0xff);
 }
-static	put_int(c)
-register int	c;
+
+static void
+put_int(int c)
 {
 	put_byte(c >> (8 * 3));
 	put_byte(c >> (8 * 2));
 	put_byte(c >> (8 * 1));
 	put_byte(c);
 }
-static	put_cmd(cmd)
-register int	cmd;
+
+static void
+put_cmd(int cmd)
 {
         ReadErrorFlag = FALSE;
 	putpos = getlen = 0;
@@ -156,20 +162,21 @@ register int	cmd;
 
 #define put_string put_ndata
 
-static	u_char	*put_ndata(p, n)
-register u_char	*p;
-register int     n;
+static u_char*
+put_ndata(u_char* p, int n)
 {
 	while (n-- > 0) put_byte(p ? *p++ : 0);
 	return p;
 }
 
-static put_over(buflen, n, func1, str1, len1, func2, str2, len2, 
-		func3, str3, len3, func4, str4, len4)
-int buflen, n;
-u_char *(*func1)(), *(*func2)(), *(*func3)(), *(*func4)();
-u_char *str1, *str2, *str3, *str4;
-int len1, len2, len3, len4;
+static int
+put_over(
+	int	buflen,
+	int	n,
+	u_char* (*func1)(), u_char* str1, int len1,
+	u_char* (*func2)(), u_char* str2, int len2,
+	u_char* (*func3)(), u_char* str3, int len3,
+	u_char* (*func4)(), u_char* str4, int len4)
 {
 #define ARGNUM 4
   u_char *(*func[ARGNUM])();
@@ -201,7 +208,8 @@ int len1, len2, len3, len4;
   return  0;
 }
 
-static  get_buffer()
+static int
+get_buffer(void)
 {
         if (ReadErrorFlag) return ERROR;  
         getpos = getlen = 0;
@@ -221,7 +229,8 @@ static  get_buffer()
         return getlen;
 }
 
-static	get_byte()
+static u_char
+get_byte(void)
 {
         if ((getpos >= getlen) && (get_buffer() == ERROR)) {
 	  ReadErrorFlag = TRUE;
@@ -229,28 +238,33 @@ static	get_byte()
 	}
 	return(getbuf[getpos++] & 0xff);
 }
-static	get_word()
+
+static int
+get_word(void)
 {
-	register int	i;
+	int	i;
 
 	i = get_byte();
 	return ((i << 8) | get_byte());
 }
-static	get_int()
+
+static int
+get_int(void)
 {
-        register int    i0;
-        register int    i1;
-        register int    i2;
+        int    i0;
+        int    i1;
+        int    i2;
 
 	i0 = get_byte();
 	i1 = get_byte();
 	i2 = get_byte();
 	return ((i0 << (8*3)) | (i1 << (8*2)) | (i2 << (8*1)) | get_byte());
 }
-static	u_char	*get_string(p)
-register u_char	*p;
+
+static u_char*
+get_string(u_char* p)
 {
-	register int	c;
+	int	c;
 
 	do {
 		*p++ = c = get_byte();
@@ -258,11 +272,11 @@ register u_char	*p;
 
 	return p;
 }
-static	get_nstring(p, n)
-register u_char	*p;
-register int	n;
+
+static int
+get_nstring(u_char* p, int n)
 {
-	register int	c;
+	int	c;
 
 	c = get_byte();
 	while (c) {
@@ -272,24 +286,29 @@ register int	n;
 	if (n > 0) *p++ = 0;
 	return n;
 }
-static	u_char	*get_ndata(p, n)
-register u_char	*p;
-register int	n;
+
+static u_char*
+get_ndata(u_char* p, int n)
 {
 	while (n-- > 0) *p++ = get_byte();
 	return p;
 }
-static	skip_string()
+
+static void
+skip_string(void)
 {
 	while (get_byte()) ;
 }
-static	skip_ndata(n)
-register int	n;
+
+static void
+skip_ndata(int n)
 {
 	while (n-- > 0) get_byte();
 }
+
 #ifndef TLI
-static	open_unix()
+static int
+open_unix(void)
 {
 	int	fd, len;
 	struct	sockaddr_un	sunix;
@@ -316,19 +335,19 @@ static	open_unix()
 }
 #endif
 
-sj3_set_timeout(timeout)   
-int   timeout;
-    {
-        sj3_timeout = timeout;  
-    }
-static        void
-connect_timeout()
-	{
-	}
+void
+sj3_set_timeout(int timeout)
+{
+	sj3_timeout = timeout;  
+}
 
+static void
+connect_timeout(void)
+{
+}
 
-static	open_inet(host)
-char	*host;
+static int
+open_inet(char* host)
 {
 #ifdef TLI
 	int val;
@@ -339,7 +358,6 @@ char	*host;
         struct nd_addrlist *addrs;
         void *handlep;
 	char host_name[BUFSIZ], proto_name[BUFSIZ], *port_name, *tmp_addr;
-	extern char *strchr();
         extern void *setnetpath();
         extern struct netconfig *getnetpath();
 #else 
@@ -469,12 +487,12 @@ char	*host;
 }
 
 
-
-int	sj3_make_connection(client, serv, user, prog)
-SJ3_CLIENT_ENV	*client;
-char		*serv;		
-char		*user;		
-char		*prog;		
+int
+sj3_make_connection(
+	SJ3_CLIENT_ENV*	client,
+	char*	serv,
+	char*	user,
+	char*	prog)
 {
 	char	host[MAXHOSTNAMELEN];
 	int	tmp;
@@ -484,16 +502,18 @@ char		*prog;
 
 	client -> fd = -1;
 
-	if (!serv || *serv == '\0' || !strcmp(serv, af_unix_str)) {
+	if (!serv || *serv == '\0' || !strcmp(serv, af_unix_str))
 #ifdef TLI
-                serv = LocalHost;
-                strcpy(host, af_unix_str);
+	{
+		serv = LocalHost;
+		strcpy(host, af_unix_str);
 	} else {
-                gethostname(host, sizeof(host));
+		gethostname(host, sizeof(host));
 	}
-        if ((server_fd = open_inet(serv)) == ERROR) return ERROR;
+	if ((server_fd = open_inet(serv)) == ERROR) return ERROR;
 
 #else
+	{
 		if ((server_fd = open_unix()) == ERROR) return ERROR;
 		strcpy(host, af_unix_str);
 	}
@@ -568,8 +588,9 @@ char		*prog;
 
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_erase_connection(client)
-SJ3_CLIENT_ENV	*client;
+
+int
+sj3_erase_connection(SJ3_CLIENT_ENV* client)
 {
 	client_init(client);
 
@@ -588,11 +609,10 @@ SJ3_CLIENT_ENV	*client;
 }
 
 
-
-long	sj3_open_dictionary(client, dictname, password)
-SJ3_CLIENT_ENV	*client;
-char	*dictname;
-char	*password;
+long
+sj3_open_dictionary(
+	SJ3_CLIENT_ENV* client,
+	char* dictname, char* password)
 {
         int res;
         int dictlen, passlen;
@@ -619,9 +639,9 @@ char	*password;
         res = get_int();
         return ReadErrorFlag ? ERROR : res;
 }
-int	sj3_close_dictionary(client, dicid)
-SJ3_CLIENT_ENV	*client;
-long	dicid;
+
+int
+sj3_close_dictionary(SJ3_CLIENT_ENV* client, long dicid)
 {
 	client_init(client);
 
@@ -634,11 +654,10 @@ long	dicid;
 }
 
 
-
-int	sj3_open_study_file(client, stdyname, password)
-SJ3_CLIENT_ENV	*client;
-char	*stdyname;
-char	*password;
+int
+sj3_open_study_file(
+	SJ3_CLIENT_ENV* client,
+	char* stdyname, char* password)
 {
         int stdylen, passlen;
         int datalen, buflen;
@@ -663,8 +682,9 @@ char	*password;
 	if (sj3_error_number = get_int()) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_close_study_file(client)
-SJ3_CLIENT_ENV	*client;
+
+int
+sj3_close_study_file(SJ3_CLIENT_ENV* client)
 {
 	client_init(client);
 
@@ -676,9 +696,8 @@ SJ3_CLIENT_ENV	*client;
 }
 
 
-
-int	sj3_get_id_size(client)
-SJ3_CLIENT_ENV	*client;
+int
+sj3_get_id_size(SJ3_CLIENT_ENV* client)
 {
 	client_init(client);
 
@@ -691,9 +710,8 @@ SJ3_CLIENT_ENV	*client;
 }
 
 
-
-int	sj3_lock_server(client)
-SJ3_CLIENT_ENV	*client;
+int
+sj3_lock_server(SJ3_CLIENT_ENV* client)
 {
 	client_init(client);
 
@@ -703,8 +721,9 @@ SJ3_CLIENT_ENV	*client;
 	if (sj3_error_number = get_int()) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_unlock_server(client)
-SJ3_CLIENT_ENV	*client;
+
+int
+sj3_unlock_server(SJ3_CLIENT_ENV *client)
 {
 	client_init(client);
 
@@ -716,15 +735,15 @@ SJ3_CLIENT_ENV	*client;
 }
 
 
-
-int	sj3_ikkatu_henkan(client, src, dst, dstsiz, mb_flag)
-SJ3_CLIENT_ENV	*client;
-u_char	*src;
-register u_char	*dst;
-register int	dstsiz;
-int mb_flag;
+int
+sj3_ikkatu_henkan(
+	SJ3_CLIENT_ENV*	client,
+	u_char*	src,
+	u_char*	dst,
+	int	dstsiz,
+	int	mb_flag)
 {
-	register int	c;
+	int	c;
 	u_char	*top;
 	int	result;
 	int	len;
@@ -793,13 +812,13 @@ error2:
 }
 
 
-
-int	sj3_bunsetu_henkan(client, yomi, len, kanji, mb_flag)
-SJ3_CLIENT_ENV	*client;
-u_char	*yomi;
-int	len;
-u_char	*kanji;
-int mb_flag;
+int
+sj3_bunsetu_henkan(
+	SJ3_CLIENT_ENV*	client,
+	u_char*	yomi,
+	int	len,
+	u_char*	kanji,
+	int	mb_flag)
 {
 	int	result;
         int     buflen;
@@ -828,11 +847,13 @@ int mb_flag;
 	get_string( get_ndata(kanji, cliptr -> stdy_size) );
         return ReadErrorFlag ? ERROR : result;
 }
-int	sj3_bunsetu_jikouho(client, kanji, mode, mb_flag)
-SJ3_CLIENT_ENV	*client;
-u_char	*kanji;
-int	mode;
-int     mb_flag;
+
+int
+sj3_bunsetu_jikouho(
+	SJ3_CLIENT_ENV*	client,
+	u_char*	kanji,
+	int	mode,
+	int	mb_flag)
 {
 	int	result;
 
@@ -851,11 +872,11 @@ int     mb_flag;
 	get_string( get_ndata(kanji, cliptr -> stdy_size) );
         return ReadErrorFlag ? ERROR : result;
 }
-int	sj3_bunsetu_maekouho(client, kanji, mode, mb_flag)
-SJ3_CLIENT_ENV	*client;
-u_char	*kanji;
-int	mode;
-int     mb_flag;
+
+int
+sj3_bunsetu_maekouho(
+	SJ3_CLIENT_ENV* client,
+	u_char* kanji, int mode, int mb_flag)
 {
 	int	result;
 
@@ -876,12 +897,12 @@ int     mb_flag;
 }
 
 
-
-int	sj3_bunsetu_kouhosuu(client, yomi, len, mb_flag)
-SJ3_CLIENT_ENV	*client;
-u_char	*yomi;
-int	len;
-int     mb_flag;
+int
+sj3_bunsetu_kouhosuu(
+	SJ3_CLIENT_ENV*	client,
+	u_char*	yomi,
+	int	len,
+	int	mb_flag)
 {
         int result;
         int buflen;
@@ -909,12 +930,14 @@ int     mb_flag;
 	result = get_int();
         return ReadErrorFlag ? ERROR : result;
 }
-int	sj3_bunsetu_zenkouho(client, yomi, len, douon, mb_flag)
-SJ3_CLIENT_ENV	*client;
-u_char	*yomi;
-int	len;
-SJ3_DOUON	*douon;
-int     mb_flag;
+
+int
+sj3_bunsetu_zenkouho(
+	SJ3_CLIENT_ENV*	client,
+	u_char*	yomi,
+	int	len,
+	SJ3_DOUON*	douon,
+	int	mb_flag)
 {
 	int	cnt = 0;
         int buflen;
@@ -951,10 +974,8 @@ int     mb_flag;
 }
 
 
-
-int	sj3_tango_gakusyuu(client, stdy)
-SJ3_CLIENT_ENV	*client;
-SJ3_STUDYREC	*stdy;
+int
+sj3_tango_gakusyuu(SJ3_CLIENT_ENV* client, SJ3_STUDYREC* stdy)
 {
         int buflen;
 
@@ -975,12 +996,14 @@ SJ3_STUDYREC	*stdy;
 	if (sj3_error_number = get_int()) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_bunsetu_gakusyuu(client, yomi1, yomi2, stdy, mb_flag)
-SJ3_CLIENT_ENV	*client;
-u_char	*yomi1;
-u_char	*yomi2;
-SJ3_STUDYREC	*stdy;
-int     mb_flag;
+
+int
+sj3_bunsetu_gakusyuu(
+	SJ3_CLIENT_ENV*	client,
+	u_char*	yomi1,
+	u_char*	yomi2,
+	SJ3_STUDYREC*	stdy,
+	int	mb_flag)
 {
         int yomilen1, yomilen2;
         int datalen, buflen;
@@ -1012,14 +1035,14 @@ int     mb_flag;
 }
 
 
-
-int	sj3_tango_touroku(client, dicid, yomi, kanji, code, mb_flag)
-SJ3_CLIENT_ENV	*client;
-long	dicid;
-u_char	*yomi;
-u_char	*kanji;
-int	code;
-int     mb_flag;
+int
+sj3_tango_touroku(
+	SJ3_CLIENT_ENV* client,
+	long	dicid,
+	u_char*	yomi,
+	u_char*	kanji,
+	int	code,
+	int	mb_flag)
 {
         int yomilen, kanjilen;
         int datalen, buflen;
@@ -1049,13 +1072,15 @@ int     mb_flag;
 	if (sj3_error_number = get_int()) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_tango_sakujo(client, dicid, yomi, kanji, code, mb_flag)
-SJ3_CLIENT_ENV	*client;
-long	dicid;
-u_char	*yomi;
-u_char	*kanji;
-int	code;
-int     mb_flag;
+
+int
+sj3_tango_sakujo(
+	SJ3_CLIENT_ENV*	client,
+	long	dicid,
+	u_char*	yomi,
+	u_char*	kanji,
+	int	code,
+	int	mb_flag)
 {
         int yomilen, kanjilen;
         int datalen, buflen;
@@ -1087,14 +1112,14 @@ int     mb_flag;
 }
 
 
-
-int	sj3_tango_syutoku(client, dicid, buf, mb_flag)
-SJ3_CLIENT_ENV	*client;
-int	dicid;
-u_char	*buf;
-int     mb_flag;
+int
+sj3_tango_syutoku(
+	SJ3_CLIENT_ENV*	client,
+	int	dicid,
+	u_char*	buf,
+	int	mb_flag)
 {
-	register u_char	*p;
+	u_char	*p;
 
 	client_init(client);
 
@@ -1112,13 +1137,15 @@ int     mb_flag;
 	*p = get_int();
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_tango_jikouho(client, dicid, buf, mb_flag)
-SJ3_CLIENT_ENV	*client;
-int	dicid;
-u_char	*buf;
-int     mb_flag;
+
+int
+sj3_tango_jikouho(
+	SJ3_CLIENT_ENV*	client,
+	int	dicid,
+	u_char*	buf,
+	int	mb_flag)
 {
-	register u_char	*p;
+	u_char	*p;
 
 	client_init(client);
 
@@ -1136,13 +1163,15 @@ int     mb_flag;
 	*p = get_int();
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_tango_maekouho(client, dicid, buf, mb_flag)
-SJ3_CLIENT_ENV	*client;
-int	dicid;
-u_char	*buf;
-int     mb_flag;
+
+int
+sj3_tango_maekouho(
+	SJ3_CLIENT_ENV*	client,
+	int	dicid,
+	u_char*	buf,
+	int	mb_flag)
 {
-	register u_char	*p;
+	u_char	*p;
 
 	client_init(client);
 
@@ -1162,13 +1191,13 @@ int     mb_flag;
 }
 
 
-
-int	sj3_make_dict_file(client, path, idxlen, seglen, segnum)
-SJ3_CLIENT_ENV	*client;
-char	*path;
-int	idxlen;
-int	seglen;
-int	segnum;
+int
+sj3_make_dict_file(
+	SJ3_CLIENT_ENV*	client,
+	char*	path,
+	int	idxlen,
+	int	seglen,
+	int	segnum)
 {
         int pathlen;
         int buflen, datalen;
@@ -1197,13 +1226,13 @@ int	segnum;
 }
 
 
-
-int	sj3_make_study_file(client, path, stynum, clstep, cllen)
-SJ3_CLIENT_ENV	*client;
-char	*path;
-int	stynum;
-int	clstep;
-int	cllen;
+int
+sj3_make_study_file(
+	SJ3_CLIENT_ENV*	client,
+	char*	path,
+	int	stynum,
+	int	clstep,
+	int	cllen)
 {
         int pathlen;
         int buflen, datalen;
@@ -1232,10 +1261,8 @@ int	cllen;
 }
 
 
-
-int	sj3_make_directory(client, path)
-SJ3_CLIENT_ENV	*client;
-char	*path;
+int
+sj3_make_directory(SJ3_CLIENT_ENV* client, char* path)
 {
         int pathlen;
         int buflen;
@@ -1260,11 +1287,8 @@ char	*path;
 }
 
 
-
-int	sj3_access(client, path, mode)
-SJ3_CLIENT_ENV	*client;
-char	*path;
-int	mode;
+int
+sj3_access(SJ3_CLIENT_ENV* client, char* path, int mode)
 {
         int result;
         int pathlen;
@@ -1292,11 +1316,8 @@ int	mode;
 }
 
 
-
-int	sj3_who(client, ret, num)
-SJ3_CLIENT_ENV	*client;
-SJ3_WHO_STRUCT	*ret;
-int	num;
+int
+sj3_who(SJ3_CLIENT_ENV* client, SJ3_WHO_STRUCT* ret, int num)
 {
 	int	i, j;
 
@@ -1331,9 +1352,8 @@ int	num;
 }
 
 
-
-int	sj3_quit(client)
-SJ3_CLIENT_ENV	*client;
+int
+sj3_quit(SJ3_CLIENT_ENV* client)
 {
 	client_init(client);
 
@@ -1343,8 +1363,9 @@ SJ3_CLIENT_ENV	*client;
 	if (sj3_error_number = get_int()) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
-int	sj3_kill(client)
-SJ3_CLIENT_ENV	*client;
+
+int
+sj3_kill(SJ3_CLIENT_ENV* client)
 {
 	client_init(client);
 
@@ -1356,11 +1377,8 @@ SJ3_CLIENT_ENV	*client;
 }
 
 
-
-int	sj3_version(client, dst, dstsiz)
-SJ3_CLIENT_ENV	*client;
-char	*dst;
-int	dstsiz;
+int
+sj3_version(SJ3_CLIENT_ENV* client, char* dst, int dstsiz)
 {
 	int	c;
 

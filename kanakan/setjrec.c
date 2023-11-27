@@ -31,34 +31,28 @@
  * $SonyRCSfile: setjrec.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:17 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_euc.h"
 #include "sj_kcnv.h"
 #include "sj_hinsi.h"
+#include "kanakan.h"
 
 
-
-JREC	*argjrec();
-Int codesize();
-
-
-
-Int	setj_atrb(p)
-Uchar		*p;
+int
+setj_atrb(u_char* p)
 {
 	return 2;
 }
 
 
-
-Int	setj_ofs(p)
-Uchar	*p;
+int
+setj_ofs(u_char* p)
 {
-	Int	contf = TRUE;
+	int	contf = TRUE;
 
 	
         p = dicbuf + ((*p & KanjiCodeMask) << 8) + *(p + 1);
@@ -97,11 +91,10 @@ Uchar	*p;
 }
 
 
-
-Int	setj_knj(p)
-Uchar	*p;
+int
+setj_knj(u_char* p)
 {
-	Int	contf = TRUE;
+	int	contf = TRUE;
 
 	
 	p = askknj[*p & KnjAssyukuMask];
@@ -140,31 +133,29 @@ Uchar	*p;
 }
 
 
-
-Int	setj_norm1(p)
-Uchar	*p;
+int
+setj_norm1(u_char* p)
 {
 	return 1;
 }
 
 
-
-Int	setj_norm2(p)
-Uchar	*p;
+int
+setj_norm2(u_char* p)
 {
 	return 2;
 }
 
-Int	setj_norm3(p)
-Uchar	*p;
+
+int
+setj_norm3(u_char* p)
 {
 	return 3;
 }
 
 
-
-Static	Uchar	chkhead(gram)
-TypeGram	gram;		
+static int
+chkhead(TypeGram gram)
 {
 	
 	if (!headcode) return TRUE;
@@ -187,19 +178,17 @@ TypeGram	gram;
 }
 
 
-
-Void	setjrec(tagp, mode)
-Uchar	*tagp;
-Int	mode;
+void
+setjrec(u_char* tagp, int mode)
 {
 	TypeGram	gram;		
-	Uchar	*ptr;		
-	Uchar	*endp;		
-	Uchar	*tmp;		
+	u_char	*ptr;		
+	u_char	*endp;		
+	u_char	*tmp;		
 	JREC	*rec;		
-	Int	plen;
-	Int	nlen;
-	Int	len;
+	int	plen;
+	int	nlen;
+	int	len;
 
 	
 	plen = getplen(tagp);
@@ -270,16 +259,13 @@ Int	mode;
 }
 
 
-
-Void	setnumrec(tagp, rec, gram)
-Uchar		*tagp;		
-JREC		*rec;
-TypeGram	gram;
+void
+setnumrec(u_char* tagp, JREC* rec, TypeGram gram)
 {
-	Uchar		*ptr;		
-	Uchar		*endp;		
-	Uchar		*tmp;		
-	Int		plen, nlen, len;
+	u_char		*ptr;		
+	u_char		*endp;		
+	u_char		*tmp;		
+	int		plen, nlen, len;
 	JREC		*jrec;
 
 	
@@ -331,7 +317,7 @@ TypeGram	gram;
 		if (gram != *ptr) continue;
 
 		
-		if (!(jrec = argjrec((Int)(rec -> jlen + len), rec))) continue;
+		if (!(jrec = argjrec((int)(rec -> jlen + len), rec))) continue;
 
 		
 		jrec -> jseg   = prevseg;
@@ -342,9 +328,8 @@ TypeGram	gram;
 }
 
 
-
-Void	setcrec(tagp)
-Uchar	*tagp;			
+void
+setcrec(u_char* tagp)
 {
 	JREC	*rec;		
 

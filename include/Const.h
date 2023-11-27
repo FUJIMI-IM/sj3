@@ -31,12 +31,17 @@
  * $SonyRCSfile: Const.h,v $  
  * $SonyRevision: 1.4 $ 
  * $SonyDate: 1997/01/23 11:20:52 $
+ *
+ * $Id$
  */
 
 /*
  * Change some default values.
  * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
  */
+
+#ifndef _Const_H_
+#define _Const_H_  1
 
 #include "Paths.h"
 
@@ -100,3 +105,4 @@
 #	define	FALSE		(!TRUE)
 #endif
 
+#endif /* _Const_H_ */

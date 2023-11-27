@@ -31,112 +31,79 @@
  * $SonyRCSfile: getrank.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:50 $
+ *
+ * $Id$
  */
 
 
-
-
-
 #include "sj_kcnv.h"
+#include "kanakan.h"
+
+
+static	void	setstynum (void);
+static	void	setnspr (KHREC *kptr, STDYIN *sptr);
+static	void	regetrank (void);
 
 
 
-STDYIN	*srchstdy();
-
-
-
-Static  Void	setstynum(), setnspr(), regetrank();
-
-
-
-Void	getrank()
+void
+getrank (void)
 {
-	
 	trank = nrank = 1;
 
-	
 	setstynum();
-
-	
 	regetrank();
 }
 
 
 
-Static	Void	setstynum()
+static	void
+setstynum (void)
 {
 	KHREC	*kptr;
 	STDYIN	*sptr;
 	Int	count;
 
-	
 	for (kptr = kouhotbl, count = khcount ; count-- ; kptr++) { 
-		
 		sptr = srchstdy(kptr -> clrec -> jnode -> jseg, kptr -> offs,
 				kptr -> clrec -> jnode -> dicid);
-
-		
 		if (!sptr) continue;
-
-		
 		setnspr(kptr, sptr);	
 	}
 }
 
 
 
-Static	Void	setnspr(kptr, sptr)
-KHREC	*kptr;		
-STDYIN	*sptr;		
+static	void
+setnspr (KHREC *kptr, STDYIN *sptr)
 {
 	KHREC		*ptr;
 	Int		keepnm;
 	TypeStyNum	styno;
 
- 	
 	styno = kptr -> styno = sptr -> styno;
-
- 	
 	keepnm = trank;
 
-	
 	for (ptr = kouhotbl ; ptr < kptr ; ptr++) {
-
-		
 		if (styno < ptr -> styno) {
-			
 			ptr -> rank++;
-
-			
 			keepnm--;
 		}
-
-		
 		else if (styno == ptr -> styno) {
-
-			
 			if (kptr -> sttfg && kptr -> ka_fg) {
-				
-				
 				if ((sptr -> sttkj == kptr -> sttkj) &&
 				    (sptr -> ka_kj == kptr -> ka_kj)) {
 					ptr -> rank++;
 					keepnm--;
 				}
 			}
-			
 			else if (kptr -> sttfg) {
-				
-				
 				if (sptr -> sttkj == kptr -> sttkj) {
 					ptr -> rank++;
 					keepnm--;
 				}
 			}
-			
 			else if (kptr -> ka_fg) {
-				
-				
 				if (sptr -> ka_kj == kptr -> ka_kj) {
 					ptr -> rank++;
 					keepnm--;
@@ -145,41 +112,30 @@ STDYIN	*sptr;
 		}
 	}
 
-	
 	kptr -> rank = (Uchar)keepnm;
 	trank++;
-
-	
 	if (keepnm <= nrank) nrank++;
-
-	
 	if (sptr -> nmflg && (nrank > keepnm)) nrank = keepnm;
 }
 
 
 
-Static	Void	regetrank()
+static	void
+regetrank (void)
 {
 	KHREC	*kptr;		
 	Int	count;
 	Int	tmp;
 
-	
 	if (nrank < trank) {
-		
 		tmp = nrank;
-
-		
 		trank += nkhcount;
 	}
-	
 	else {
 		nkhcount = tmp = 0;
 	}
 
-	
 	for (count = khcount, kptr = kouhotbl ; count-- ; kptr++) {
-		
 		if (!(kptr -> rank)) {
 			if (tmp && kptr -> mode && !(kptr -> offs)) {
 				kptr -> rank = (Uchar)tmp++;
@@ -187,8 +143,6 @@ Static	Void	regetrank()
 			else
 				kptr -> rank = (Uchar)trank++;
 		}
-
-		
 		else if ((Short)kptr -> rank >= nrank)
 			kptr -> rank += (Uchar)nkhcount;
 	}

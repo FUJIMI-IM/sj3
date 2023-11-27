@@ -31,32 +31,24 @@
  * $SonyRCSfile: mknumber.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:05 $
+ *
+ * $Id$
  */
 
 
-
-
-
+#include <sys/types.h>
 #include "sj_kcnv.h"
 #include "sj_yomi.h"
 #include "sj_suuji.h"
+#include "kanakan.h"
 
 
-
-Void	setwdnum();
-Int	setucnum();
-
-
-
-Static	Int	word2char(wd, tbl, keta, flg)
-Ushort	wd;		
-Uchar	TFar	*tbl;	
-Int	keta;		
-Int	flg;
+static int
+word2char(u_short wd, u_char* tbl, int keta, int flg)
 {
-	Int	mask;
-	Int	num;
-	Uchar	TFar	*src;
+	int	mask;
+	int	num;
+	u_char*	src;
 
 	for (mask = 0x1000 ; mask ; mask >>= 4) {
 		
@@ -90,16 +82,13 @@ Int	flg;
 }
 
 
-
-Static	Void	words2num(wd, tbl, flgc)
-Ushort	*wd;		
-Uchar	TFar	*tbl;	
-Int	flgc;		
+static void
+words2num(u_short* wd, u_char* tbl, int flgc)
 {
-	Int	i;
-	Int	keta;
-	Int	flg;
-	Uchar	*kp = kanjitmp;
+	int	i;
+	int	keta;
+	int	flg;
+	u_char	*kp = kanjitmp;
 
 	if (flgc) {
 		keta = NumKetaLength - 1;
@@ -124,149 +113,122 @@ Int	flgc;
 }
 
 
-
-Void	num_type00(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type00(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num1tbl, FALSE);
 }
 
 
-
-Void	num_type01(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type01(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num1tbl, FALSE);
 }
 
 
-
-Void	num_type02(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type02(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num1tbl, TRUE);
 }
 
 
-
-Void	num_type03(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type03(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num2tbl, FALSE);
 }
 
 
-
-Void	num_type04(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type04(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num2tbl, FALSE);
 }
 
 
-
-Void	num_type05(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type05(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num2tbl, TRUE);
 }
 
 
-
-Void	num_type06(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type06(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num3tbl, FALSE);
 }
 
 
-
-Void	num_type07(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type07(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	words2num(num, Num3tbl, FALSE);
 }
 
 
-
-Static	Void	kan_num(wd, tbl1, tbl2)
-Ushort	*wd;			
-Uchar	TFar	*tbl1;		
-Uchar	TFar	*tbl2;		
+static void
+kan_num(u_short* wd, u_char* tbl1, u_char* tbl2)
 {
-	Int	ii;
-	Ushort	tmp;
-	Int	mask;
-	Int	num;
-	Int	flg;
-	Uchar	TFar	*kurai1;
-	Uchar	TFar	*kurai2;
-	Uchar	TFar	*src;
-	Uchar	*keep = kanjitmp;
+	int	ii;
+	u_short	tmp;
+	int	mask;
+	int	num;
+	int	flg;
+	u_char*	kurai1;
+	u_char*	kurai2;
+	u_char*	src;
+	u_char*	keep = kanjitmp;
 
 	
 	kurai2 = Num6tbl - 2;
@@ -325,45 +287,36 @@ Uchar	TFar	*tbl2;
 }
 
 
-
-Void	num_type08(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type08(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	kan_num(num, Num2tbl, Num4tbl);
 }
 
 
-
-Void	num_type09(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type09(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Ushort	num[NumWordBuf];
+	u_short	num[NumWordBuf];
 
 	
-	setwdnum(s1, (Int)jrec -> numlen, num);
+	setwdnum(s1, (int)jrec -> numlen, num);
 
 	
 	kan_num(num, Num3tbl, Num5tbl);
 }
 
 
-
-Void	num_type10(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type10(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Int	i;
+	int	i;
 
 	
 	for (i = jrec -> numlen ; i > 0 ; i--) {
@@ -379,14 +332,11 @@ JREC	*jrec;
 }
 
 
-
-Void	num_type11(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type11(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Int	i;
-	Int	j;
+	int	i;
+	int	j;
 
 	
 	i = j = jrec -> numlen;
@@ -412,14 +362,11 @@ JREC	*jrec;
 }
 
 
-
-Void	num_type12(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type12(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Int	i;
-	Int	j;
+	int	i;
+	int	j;
 
 	
 	for (i = jrec -> numlen ; i > 0 ; i--) {
@@ -433,26 +380,23 @@ JREC	*jrec;
 }
 
 
-
-Static	Void	num_kurai(p, len, tbl)
-Uchar	*p;			
-Int	len;			
-Uchar	TFar	*tbl;		
+static void
+num_kurai(u_char* p, int len, u_char* tbl)
 {
-	Int	i;
-	Int	j;
-	Uchar	tmp;
+	int	i;
+	int	j;
+	u_char	tmp;
 
 	for (i = 0 ; i < len ; i++) {
 		tmp = *p++;
 
 		*kanjitmp++ = tbl[j = ((tmp & 0x0f) - _Num0) * 2];
 		*kanjitmp++ = tbl[j + 1];
-		if (j = ((tmp >> 4) & 3)) {
+		if ((j = ((tmp >> 4) & 3)) != 0) {
 			*kanjitmp++ = Num4tbl[j = (3 - j) * 2];
 			*kanjitmp++ = Num4tbl[j + 1];
 		}
-		if (j = ((tmp >> 6) & 3)) {
+		if ((j = ((tmp >> 6) & 3)) != 0) {
 			*kanjitmp++ = Num6tbl[j = (3 - j) * 2];
 			*kanjitmp++ = Num6tbl[j + 1];
 		}
@@ -460,34 +404,28 @@ Uchar	TFar	*tbl;
 }
 
 
-
-Void	num_type13(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type13(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Uchar	num[NumKetaLength];
-	Int	len;
+	u_char	num[NumKetaLength];
+	int	len;
 
 	
-	len = setucnum(s1, (Int)jrec -> numlen, num);
+	len = setucnum(s1, (int)jrec -> numlen, num);
 
 	
 	num_kurai(num, len, Num1tbl);
 }
 
 
-
-Void	num_type14(s1, s2, jrec)
-Uchar	*s1;
-Uchar	*s2;
-JREC	*jrec;
+void
+num_type14(u_char* s1, u_char* s2, JREC* jrec)
 {
-	Uchar	num[NumKetaLength];
-	Int	len;
+	u_char	num[NumKetaLength];
+	int	len;
 
 	
-	len = setucnum(s1, (Int)jrec -> numlen, num);
+	len = setucnum(s1, (int)jrec -> numlen, num);
 
 	
 	num_kurai(num, len, Num2tbl);

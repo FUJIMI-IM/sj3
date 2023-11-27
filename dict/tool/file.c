@@ -35,10 +35,11 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-
-char	*Malloc();
+#include "dicttool.h"
 
 typedef	struct filelist {
 	FILE	*fp;
@@ -48,8 +49,8 @@ typedef	struct filelist {
 
 static	FileList *flist = NULL;
 
-static	char	*get_fname(fp)
-FILE	*fp;
+static char*
+get_fname(FILE* fp)
 {
 	FileList *p;
 
@@ -58,11 +59,10 @@ FILE	*fp;
 	return "some file";
 }
 
-FILE	*Fopen(filename, type)
-char	*filename, *type;
+FILE*
+Fopen(char* filename, char* type)
 {
 	FILE	*fp;
-	char	*p;
 	FileList *fl;
 
 	if (!(fp = fopen(filename, type))) {
@@ -79,8 +79,8 @@ char	*filename, *type;
 	return fp;
 }
 
-Fclose(fp)
-FILE	*fp;
+void
+Fclose(FILE* fp)
 {
 	FileList *p, *q;
 
@@ -102,10 +102,8 @@ FILE	*fp;
 	}
 }
 
-Fseek(fp, ofs, ptr)
-FILE	*fp;
-long	ofs;
-int	ptr;
+int
+Fseek(FILE* fp, long ofs, int ptr)
 {
 	if (fseek(fp, ofs, ptr) == 0) return 0;
 
@@ -113,14 +111,14 @@ int	ptr;
 	exit(1);
 }
 
-Ftell(fp)
-FILE	*fp;
+long
+Ftell(FILE* fp)
 {
 	return ftell(fp);
 }
 
-Fsize(filename)
-char	*filename;
+off_t /* XXX: just looked in FreeBSD's sys/stat.h, need to check SUS spec. */
+Fsize(char* filename)
 {
 	struct	stat	buf;
 
@@ -134,10 +132,8 @@ char	*filename;
 	exit(1);
 }
 
-Fread(p, s, n, fp)
-char	*p;
-int	s, n;
-FILE	*fp;
+int
+Fread(char* p, int s, int n, FILE* fp)
 {
 	if (fread(p, s, n, fp) == n) return n;
 
@@ -145,10 +141,8 @@ FILE	*fp;
 	exit(1);
 }
 
-Fwrite(p, s, n, fp)
-char	*p;
-int	s, n;
-FILE	*fp;
+int
+Fwrite(char* p, int s, int n, FILE* fp)
 {
 	if (fwrite(p, s, n, fp) == n) return n;
 
@@ -156,14 +150,14 @@ FILE	*fp;
 	exit(1);
 }
 
-Fgetc(fp)
-FILE	*fp;
+int
+Fgetc(FILE* fp)
 {
 	return fgetc(fp);
 }
 
-Fflush(fp)
-FILE    *fp;
+void
+Fflush(FILE* fp)
 {
         fflush(fp);
 }    

@@ -31,13 +31,15 @@
  * $SonyRCSfile: comuni.c,v $  
  * $SonyRevision: 1.4 $ 
  * $SonyDate: 1994/11/16 07:34:05 $
+ *
+ * $Id$
  */
 
 
-
-
-
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
+#include <unistd.h>
 #include "sj_sysvdef.h"
 #include "sj_kcnv.h"
 #include <sys/socket.h>
@@ -109,8 +111,8 @@ static	int	buflen = 0;
 static	int	getpos = 0;		
 
 
-
-socket_init()
+void
+socket_init(void)
 {
 #ifdef SVR4
 	int i;
@@ -129,8 +131,8 @@ socket_init()
 
 
 
-static	void	set_fd(fd)
-int	fd;
+static void
+set_fd(int fd)
 {
 #ifdef SVR4
         poll_fds[maxfds].fd = fd;
@@ -144,11 +146,11 @@ int	fd;
 
 
 
-static	void	clr_fd(fd)
-int	fd;
+static void
+clr_fd(int fd)
 {
 #ifdef SVR4
-	register int i, j;
+	int i, j;
 
 	for (i = 0; i < maxfds; i++) {
 		if (poll_fds[i].fd == fd) {
@@ -178,7 +180,8 @@ int	fd;
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 
-static	void	open_af_unix()
+static void
+open_af_unix(void)
 {
 	struct sockaddr_un	sunix;
 
@@ -223,7 +226,8 @@ struct netconfig *nconf;
 #endif
 
 
-static	void	open_af_inet()
+static void
+open_af_inet(void)
 {
 #ifdef TLI
         struct t_bind *req;
@@ -335,7 +339,7 @@ static	void	open_af_inet()
 	inet_callptr->udata.len = 0;
 	inet_callptr->udata.buf = (char *) NULL;
 #else
-	if (sp = getservbyname(port_name, "tcp"))
+	if ((sp = getservbyname(port_name, "tcp")) != NULL)
 		port = ntohs(sp -> s_port);
 	else
 		port = port_number;
@@ -379,7 +383,9 @@ static	void	open_af_inet()
 #endif
 	set_fd(fd_inet);
 }
-open_socket()
+
+void
+open_socket(void)
 {
 	open_af_inet();
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
@@ -390,7 +396,8 @@ open_socket()
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 
-static	int	connect_af_unix()
+static int
+connect_af_unix(void)
 {
 	struct sockaddr_un	sunix;
 	int	i = sizeof(sunix);
@@ -401,13 +408,10 @@ static	int	connect_af_unix()
 	return fd;
 }
 #endif
+
 #ifdef TLI
 int
-accept_func(fd, callptr, name, closeflg)
-int fd;
-struct t_call *callptr;
-char *name;
-int closeflg;
+accept_func(int fd, struct t_call* callptr, char* name, int closeflg)
 {
         int newfd;  
         int look;
@@ -441,7 +445,8 @@ int closeflg;
 
 
 
-static	int	connect_af_inet()
+static int
+connect_af_inet(void)
 {
 #ifndef TLI
 	struct sockaddr_in	sin;
@@ -466,7 +471,8 @@ static	int	connect_af_inet()
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 
-static	void	close_af_unix()
+static void
+close_af_unix(void)
 {
 	struct sockaddr_un	sunix;
 	int	true = 1;
@@ -486,7 +492,8 @@ static	void	close_af_unix()
 
 
 
-static	void	close_af_inet()
+static void
+close_af_inet(void)
 {
 #ifndef TLI
 	struct sockaddr_in	sin;
@@ -514,7 +521,9 @@ static	void	close_af_inet()
 	clr_fd(fd_inet);
 #endif
 }
-close_socket()
+
+void
+close_socket(void)
 {
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 	close_af_unix();
@@ -524,11 +533,11 @@ close_socket()
 
 
 
-static	void	connect_client(readfds)
+static void
 #ifdef SVR4
-struct pollfd *readfds;
+connect_client(struct pollfd *readfds)
 #else
-fd_set	*readfds;
+connect_client(fd_set *readfds)
 #endif
 {
 	int	fd;
@@ -591,7 +600,7 @@ fd_set	*readfds;
 		logging_out("connect to client on %d", fd);
 
 		
-		if (client_tmp = (Client *)malloc(sizeof(Client))) {
+		if ((client_tmp = (Client *)malloc(sizeof(Client))) != NULL) {
 			memset(client_tmp, 0, sizeof(Client));
 			client_tmp->fd = fd;
 #if (defined(TLI) && defined(SOCK_UNIX))
@@ -629,17 +638,16 @@ fd_set	*readfds;
 
 
 
-static	Client *disconnect_client(cp)
-Client *cp;
+static Client*
+disconnect_client(Client *cp)
 {
 	WorkArea *wp;
 	StdyFile *sp;
 	int	fd;
 	Client  *cl_tmp, *cl_before;
-	int i;
 
-	if (sp = cp->stdy) closestdy(sp);
-	if (wp = cp->work) free_workarea(wp);
+	if ((sp = cp->stdy) != NULL)  closestdy(sp);
+	if ((wp = cp->work) != NULL)  free_workarea(wp);
   
 	debug_out(1, "client dead(%d)\r\n", cp->fd);
 	logging_out("disconnect from client on %d", cp->fd);
@@ -692,7 +700,8 @@ Client *cp;
 #include <signal.h>
 #endif
 
-void	communicate()
+void
+communicate(void)
 {
 	
 	signal(SIGPIPE, SIG_IGN);
@@ -751,12 +760,12 @@ void	communicate()
 }
 
 
-
-void	put_flush()
+void
+put_flush(void)
 {
-	register int	len;
-	register int	i;
-	register char	*p;
+	int	len;
+	int	i;
+	char	*p;
 
 	for (len = putpos, p = putbuf ; len > 0 ; ) {
 		if ((i = write(client_fd, p, len)) == ERROR) {
@@ -767,28 +776,36 @@ void	put_flush()
 	}
 	putpos = 0;
 }
-void	put_byte(c)
-register int	c;
+
+
+void
+put_byte(int c)
 {
 	putbuf[putpos++] = c;
 	if (putpos >= sizeof(putbuf)) put_flush();
 }
-void	put_work(c)
-register int	c;
+
+
+void
+put_work(int c)
 {
 	put_byte(c >> 8);
 	put_byte(c & 0xff);
 }
-void	put_int(c)
-register int	c;
+
+
+void
+put_int(int c)
 {
 	put_byte(c >> (8 * 3));
 	put_byte(c >> (8 * 2));
 	put_byte(c >> (8 * 1));
 	put_byte(c);
 }
-Uchar	*put_string(p)
-register Uchar	*p;
+
+
+u_char*
+put_string(u_char* p)
 {
 	if (p) {
 		do {
@@ -799,19 +816,20 @@ register Uchar	*p;
 		put_byte(0);
 	return p;
 }
-Uchar	*put_ndata(p, n)
-register Uchar	*p;
-register int	n;
+
+
+u_char*
+put_ndata(u_char* p, int n)
 {
 	while (n-- > 0) put_byte(p ? *p++ : 0);
 	return p;
 }
 
 
-
-void	get_buf()
+void
+get_buf(void)
 {
-	register int	i;
+	int	i;
 
 	for (;;) {
 		if ((i = read(client_fd, getbuf, sizeof(getbuf))) > 0) break;
@@ -824,34 +842,44 @@ void	get_buf()
 	buflen = i;
 	getpos = 0;
 }
-int	get_byte()
+
+
+int
+get_byte(void)
 {
 	if (getpos >= buflen) get_buf();
 	return (getbuf[getpos++] & 0xff);
 }
-int	get_word()
+
+
+int
+get_word(void)
 {
-	register int	i;
+	int	i;
 
 	i = get_byte();
 	return ((i << 8) | get_byte());
 }
-int	get_int()
+
+
+int
+get_int(void)
 {
-	register int	i0;
-	register int	i1;
-	register int	i2;
+	int	i0;
+	int	i1;
+	int	i2;
 
 	i0 = get_byte();
 	i1 = get_byte();
 	i2 = get_byte();
 	return((i0 << (8*3)) | (i1 << (8*2)) | (i2 << (8*1)) | get_byte());
 }
-int	get_nstring(p, n)
-register Uchar	*p;
-register int	n;
+
+
+int
+get_nstring(u_char* p, int n)
 {
-	register int	c;
+	int	c;
 
 	do {
 		c = get_byte();
@@ -860,9 +888,10 @@ register int	n;
 
 	return (n < 0) ? ERROR : 0;
 }
-Uchar	*get_ndata(p, n)
-register Uchar	*p;
-register int	n;
+
+
+u_char*
+get_ndata(u_char* p, int n)
 {
 	while (n-- > 0) *p++ = get_byte();
 	return p;

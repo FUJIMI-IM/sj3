@@ -31,21 +31,24 @@
  * $SonyRCSfile: execute.c,v $  
  * $SonyRevision: 1.7 $ 
  * $SonyDate: 1998/04/13 11:20:12 $
+ *
+ * $Id$
  */
 
 
-
-
-
 #include "sj_kcnv.h"
+#include <stdlib.h>
+#include <string.h>
 #include <pwd.h>
 #include <setjmp.h>
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <unistd.h>
 #include "sj3cmd.h"
 #include "sj3err.h"
 #include "Dict.h"
+#include "server.h"
 
 
 #define rmemcpy(a, b, n) memcpy((b), (a), (n))
@@ -89,10 +92,9 @@ Uchar	*put_ndata(), *put_string();
 
 
 
-make_full_path(path)
-char	*path;
+int
+make_full_path (char *path)
 {
-	extern char	 *strtok();
 	char	tmp[PathNameLen];
 	char    *index;
 	int	i;
@@ -102,11 +104,11 @@ char	*path;
 	i = strlen(dict_dir) + 1 + strlen(path) + 1;
 	if (i > sizeof(tmp)) return ERROR;
 
-	strcpy(tmp, path);
+	strlcpy(tmp, path, sizeof(tmp));
 	index = strtok(tmp, "/");
 	do {
 		if (!strcmp(index, "..")) return ERROR;
-	} while (index = strtok(NULL, "/"));
+	} while ((index = strtok(NULL, "/")) != NULL);
 
 	if (*path == '/') {
 		if (strncmp(path, dict_dir, strlen(dict_dir)) == 0) {
@@ -115,16 +117,15 @@ char	*path;
 			return ERROR;
 		}
 	}
-	strcpy(tmp, dict_dir);
-	strcat(tmp, "/");
-	strcat(tmp, path);
+	snprintf(tmp, sizeof(tmp), "%s/%s", dict_dir, path);
 	strcpy(path, tmp);
 	return 0;
 }
 
 
 
-WorkArea *alloc_workarea()
+WorkArea*
+alloc_workarea (void)
 {
 	WorkArea *p;
 
@@ -144,8 +145,7 @@ WorkArea *alloc_workarea()
 }
 
 void
-free_workarea(p)
-WorkArea *p;
+free_workarea (WorkArea *p)
 {
 	if (!p) return;
 	if (--(p -> refcnt)) return;
@@ -153,7 +153,7 @@ WorkArea *p;
 	if (worklist == p)
 		worklist = p -> link;
 	else {
-		register WorkArea *q;
+		WorkArea *q;
 
 		for (q = worklist ; q ; q = q -> link) {
 			if (q -> link == p) {
@@ -171,7 +171,8 @@ WorkArea *p;
 
 
 
-exec_connect()
+void
+exec_connect (void)
 {
 	int	version;
 	char	hostname[HostNameLen];
@@ -226,7 +227,8 @@ exec_connect()
 
 
 
-exec_disconnect()
+void
+exec_disconnect (void)
 {
 	if (cur_cli -> stdy) {
 		closestdy(cur_cli -> stdy);
@@ -244,12 +246,13 @@ exec_disconnect()
 
 
 
-exec_opendict()
+void
+exec_opendict (void)
 {
 	char	filename[PathNameLen];
 	char	password[PassWordLen];
 	DICT	*dict;
-	DICTL   *dictl, *dltp, *tmp;
+	DICTL   *dictl, *dltp, *tmp, *tmp1;
 
 	get_nstring(filename, sizeof(filename));
 	get_nstring(password, sizeof(password));
@@ -267,8 +270,23 @@ exec_opendict()
 		while (dltp) {
 			dictl = (DICTL *)malloc(sizeof *dictl);
 			if (!dictl) {
-				for (tmp = dictlist; tmp; tmp->next)
-				  free(tmp);
+				/* XXX 2004.09.16 Hiroo Ono
+				 * Fixed list deletion when malloc() returns
+				 * NULL, but it will segfault anyway just after
+				 * getting out of this if block.
+				 * Maybe continue, break or return lack in
+				 * this block, but I don't know what was
+				 * intended to be done when malloc() caused
+				 * an error. So just fix the list deletion bug
+				 * in this block and leave the code causing
+				 * segfault when malloc() fails.
+				 */
+				tmp = dictlist;
+				while (tmp != NULL) {
+					tmp1 = tmp;
+					tmp = tmp->next;
+					free (tmp1);
+				}
 				dictlist = NULL;
 			}
 			if (!dictlist) dictlist = dictl;
@@ -301,7 +319,11 @@ exec_opendict()
 	put_int(SJ3_NormalEnd);
 	put_int((int)dict->dicid);
 }
-exec_closedict()
+
+
+
+void
+exec_closedict (void)
 {
 	TypeDicID	id;
 	DICTL	*dictl;
@@ -332,8 +354,11 @@ exec_closedict()
 	free((char *)dictl);
 	put_int(SJ3_NormalEnd);
 }
-close_dictlist(dictl)
-DICTL	*dictl;
+
+
+
+void
+close_dictlist(DICTL *dictl)
 {
 	DICTL	*p;
 
@@ -348,7 +373,8 @@ DICTL	*dictl;
 
 
 
-exec_openstdy()
+void
+exec_openstdy (void)
 {
 	char	filename[PathNameLen];
 	char	password[PassWordLen];
@@ -366,7 +392,11 @@ exec_openstdy()
 
 	put_int(SJ3_NormalEnd);
 }
-exec_closestdy()
+
+
+
+void
+exec_closestdy (void)
 {
 	if (!cur_cli -> stdy) longjmp(error_ret, SJ3_StdyFileNotOpened);
 
@@ -378,7 +408,8 @@ exec_closestdy()
 
 
 
-exec_stdysize()
+void
+exec_stdysize (void)
 {
 	put_int(SJ3_NormalEnd);
 	put_int(sizeof(STDYOUT));
@@ -386,7 +417,8 @@ exec_stdysize()
 
 
 
-static	void	exec_lock()
+static	void
+exec_lock (void)
 {
 	int	lock;
 	DICTL	*dl;
@@ -407,7 +439,11 @@ static	void	exec_lock()
 
 	put_int(SJ3_NormalEnd);
 }
-static	void	exec_unlock()
+
+
+
+static	void
+exec_unlock (void)
 {
 	int	lock;
 	DICTL	*dl;
@@ -428,7 +464,11 @@ static	void	exec_unlock()
 
 	put_int(SJ3_NormalEnd);
 }
-static	void	lock_check_for_read()
+
+
+
+static	void
+lock_check_for_read (void)
 {
 	int	lock;
 
@@ -445,8 +485,7 @@ static	void	lock_check_for_read()
 
 
 void
-exec_ph2knj(mb_flag)
-int mb_flag;
+exec_ph2knj (int mb_flag)
 {
 	int	i, j, l, stdy_size, buf_size, srchead = 0, srclen;
 	Uchar	*p,*q;
@@ -523,8 +562,7 @@ CCONVERR:
 
 
 void
-exec_cl2knj(mb_flag)
-int mb_flag;
+exec_cl2knj (int mb_flag)
 {
 	int	len, stdy_size, buf_size;
 	int	i, j, l;
@@ -589,8 +627,7 @@ CCONVERR:
 
 
 void
-exec_nextcl(mb_flag)
-int mb_flag;
+exec_nextcl (int mb_flag)
 {
 	int	mode, stdy_size, buf_size;
 	int	i, l;
@@ -643,8 +680,7 @@ CCONVERR:
 
 
 void
-exec_prevcl(mb_flag)
-int mb_flag;
+exec_prevcl (int mb_flag)
 {
 	int	mode, stdy_size, buf_size;
 	int	i, l;
@@ -698,8 +734,7 @@ CCONVERR:
 
 
 void
-exec_cl2knj_cnt(mb_flag)
-int mb_flag;
+exec_cl2knj_cnt(int mb_flag)
 {
 	int	len, buf_size, stdy_size;
 	int	i;
@@ -747,8 +782,7 @@ CCONVERR:
 
 
 void
-exec_cl2knj_all(mb_flag)
-int mb_flag;
+exec_cl2knj_all (int mb_flag)
 {
 	int	len, stdy_size, buf_size;
 	int	i, l;
@@ -847,9 +881,10 @@ CCONVERR:
 
 
 
-exec_study()
+void
+exec_study (void)
 {
-	register int	err;
+	int	err;
 	STDYOUT	stdy;
 
 	get_ndata(&stdy, sizeof(stdy));
@@ -875,10 +910,9 @@ exec_study()
 
 
 void
-exec_clstudy(mb_flag)
-int mb_flag;
+exec_clstudy (int mb_flag)
 {
-	register int	err;
+	int	err;
 	STDYOUT	stdy;
 
 	err  = get_nstring(buf1, sizeof(buf1));
@@ -921,12 +955,11 @@ CCONVERR:
 
 
 void
-exec_adddict(mb_flag)
-int mb_flag;
+exec_adddict (int mb_flag)
 {
 	TypeDicID	dicid;
 	TypeGram	gram;
-	register int	err;
+	int		err;
 	int		err1;
 	DICTL		*dl;
 
@@ -985,12 +1018,11 @@ CCONVERR:
 }
 
 void
-exec_deldict(mb_flag)
-int mb_flag;
+exec_deldict (int mb_flag)
 {
 	TypeDicID	dicid;
 	TypeGram	gram;
-	register int	err;
+	int		err;
 	int		err1;
 	DICTL		*dl;
 
@@ -1047,8 +1079,7 @@ CCONVERR:
 
 
 void
-exec_getdict(mb_flag)
-int mb_flag;
+exec_getdict (int mb_flag)
 {
 	TypeDicID	dicid;
 	int		err, buf_size, l;
@@ -1129,9 +1160,10 @@ CCONVERR:
         return;
 }
 
+
+
 void
-exec_nextdict(mb_flag)
-int mb_flag;
+exec_nextdict (int mb_flag)
 {
 	TypeDicID	dicid;
 	int		err, buf_size, l;
@@ -1212,9 +1244,10 @@ CCONVERR:
         return;
 }
 
+
+
 void
-exec_prevdict(mb_flag)
-int mb_flag;
+exec_prevdict (int mb_flag)
 {
 	TypeDicID	dicid;
 	int		err, buf_size, l;
@@ -1297,7 +1330,8 @@ CCONVERR:
 
 
 
-exec_makedict()
+void
+exec_makedict (void)
 {
 	struct stat    sbuf;
 	char	path[PathNameLen];
@@ -1326,7 +1360,8 @@ exec_makedict()
 
 
 
-exec_makestdy()
+void
+exec_makestdy (void)
 {
 	struct stat    sbuf;
 	char	path[PathNameLen];
@@ -1354,7 +1389,8 @@ exec_makestdy()
 
 
 
-exec_access()
+void
+exec_access (void)
 {
 	char	path[PathNameLen];
 	int	mode;
@@ -1370,7 +1406,8 @@ exec_access()
 
 
 
-exec_makedir()
+void
+exec_makedir (void)
 {
 	char	path[PathNameLen];
 	int	i;
@@ -1392,10 +1429,11 @@ exec_makedir()
 
 
 
-exec_who()
+void
+exec_who (void)
 {
-	register int	i;
-	register Client	*cli;
+	int	i;
+	Client	*cli;
 
 	i = 0;
 	cli = client;
@@ -1418,14 +1456,19 @@ exec_who()
 
 
 
-exec_kill()
+void
+exec_kill (void)
 {
 	put_int(SJ3_NormalEnd);
 	put_flush();
 
 	server_terminate();
 }
-exec_quit()
+
+
+
+void
+exec_quit (void)
 {
 	if (client_num > 1) longjmp(error_ret, SJ3_UserConnected);
 	exec_kill();
@@ -1433,7 +1476,8 @@ exec_quit()
 
 
 
-exec_version()
+void
+exec_version (void)
 {
 	extern	char	*version_number, *time_stamp;
 	static	char	*Version = "version : ";
@@ -1449,11 +1493,12 @@ exec_version()
 
 
 
-exec_dictpass()
+void
+exec_dictpass (void)
 {
 	TypeDicID	dicid;
 	char		buf[PasswdLen + 1];
-	register int	err;
+	int		err;
 	DICTL		*dl;
 
 	
@@ -1471,11 +1516,15 @@ exec_dictpass()
 	if (set_dictpass(dl -> dict, buf)) longjmp(error_ret, serv_errno);
 	put_int(SJ3_NormalEnd);
 }
-exec_dictcmnt()
+
+
+
+void
+exec_dictcmnt (void)
 {
 	TypeDicID	dicid;
 	char		buf[CommentLength + 1];
-	register int	err;
+	int		err;
 	DICTL		*dl;
 
 	
@@ -1493,10 +1542,14 @@ exec_dictcmnt()
 	if (set_dictcmnt(dl -> dict, buf)) longjmp(error_ret, serv_errno);
 	put_int(SJ3_NormalEnd);
 }
-exec_stdypass()
+
+
+
+void
+exec_stdypass (void)
 {
-	char		buf[PasswdLen + 1];
-	register int	err;
+	char	buf[PasswdLen + 1];
+	int	err;
 
 	
 	err  = get_nstring(buf, sizeof(buf));
@@ -1508,10 +1561,14 @@ exec_stdypass()
 	if (set_stdypass(buf)) longjmp(error_ret, serv_errno);
 	put_int(SJ3_NormalEnd);
 }
-exec_stdycmnt()
+
+
+
+void
+exec_stdycmnt (void)
 {
-	char		buf[CommentLength + 1];
-	register int	err;
+	char	buf[CommentLength + 1];
+	int	err;
 
 	
 	err  = get_nstring(buf, sizeof(buf));
@@ -1526,7 +1583,8 @@ exec_stdycmnt()
 
 
 
-exec_stdypara()
+void
+exec_stdypara (void)
 {
 	int	stynum, clstep, cllen;
 
@@ -1542,11 +1600,12 @@ exec_stdypara()
 
 
 
-void	execute_cmd()
+void
+execute_cmd (void)
 {
 	int	i;
 
-	if (i = setjmp(error_ret)) {
+	if ((i = setjmp(error_ret)) != 0) {
 		debug_out(1, "%d: error code = %d\r\n", client_fd, i);
 		put_int(i);
 	}

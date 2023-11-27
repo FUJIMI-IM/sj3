@@ -31,9 +31,9 @@
  * $SonyRCSfile: mkkouho.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:04 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_euc.h"
@@ -41,26 +41,21 @@
 #include "sj_hinsi.h"
 #include "sj_suuji.h"
 #include "sj_dict.h"
+#include "kanakan.h"
 
 
-
-Uchar	*skipkstr();
-Void	setkouho(), setwdnum(), get_askknj();
-Int	seldict(), codesize();
-
-
-
-Static  Void	getkhtbl(), cl_kanji();
-Static  Int	diffknj();
-Static  Void	cl_numcmn();
-Static  Uchar	*makekan();
+static void getkhtbl(CLREC* clrec);
+static void cl_kanji(JREC* jrec, CLREC* clrec);
+static u_char* makekan(u_char* s, u_char* d, int flg);
+static int  diffknj(JREC* jrec, u_char* ptr, int num);
+static void cl_numcmn(JREC* jrec, CLREC* clrec);
 
 
-
-Void	mkkouho()
+void
+mkkouho(void)
 {
 	CLREC	*clrec;		
-	Int	keeplen;	
+	int	keeplen;	
 
 	
 	khcount = nkhcount = 0;
@@ -79,19 +74,15 @@ Void	mkkouho()
 }
 
 
-
-Static	Void	getkhtbl(clrec)
-CLREC	*clrec;
+static void
+getkhtbl(CLREC* clrec)
 {
 	JREC	*jrec;		
-
 	
 	jrec = clrec -> jnode;
-
 	
 	switch (jrec -> class) {
 	case C_DICT:			
- 		 
 		cl_kanji(jrec, clrec);
 		break;
 
@@ -114,20 +105,17 @@ CLREC	*clrec;
 
 	case C_MINASI:			
 	case C_WAKACHI:			
-		
 		setkouho(clrec, (TypeDicOfs)0, 0);
 		break;
 	}
 }
 
 
-
-Static	Void 	cl_kanji(jrec, clrec)
-JREC  	*jrec;		
-CLREC 	*clrec;		
+static void
+cl_kanji(JREC* jrec, CLREC* clrec)
 {
-	Uchar	*ptr;		
-	Int	kcount = khcount;
+	u_char	*ptr;		
+	int	kcount = khcount;
 
 	
 	if (seldict(jrec -> dicid)) {
@@ -156,21 +144,15 @@ CLREC 	*clrec;
 }
 
 
-
-Uchar	*makekan_none(s, d, flg)
-Uchar	*s;
-Uchar	*d;
-Int	flg;
+u_char*
+makekan_none(u_char* s, u_char* d, int flg)
 {
 	return d;
 }
 
 
-
-Uchar	*makekan_1byte(s, d, flg)
-Uchar	*s;
-Uchar	*d;
-Int	flg;
+u_char*
+makekan_1byte(u_char* s, u_char* d, int flg)
 {
 	if ((*s & KanjiModeMask) == ZenHiraAssyuku)
 	  *d++ = 0x10 | (*s & KnjAssyukuMask); 
@@ -182,22 +164,16 @@ Int	flg;
 }
 
 
-
-Uchar	*makekan_knj(s, d, flg)
-Uchar	*s;
-Uchar	*d;
-Int	flg;
+u_char*
+makekan_knj(u_char* s, u_char* d, int flg)
 {
 	
 	return makekan(askknj[*s & KnjAssyukuMask], d, flg);
 }
 
 
-
-Uchar	*makekan_ofs(s, d, flg)
-Uchar	*s;
-Uchar	*d;
-Int	flg;
+u_char*
+makekan_ofs(u_char* s, u_char* d, int flg)
 {
 	
         return makekan(dicbuf + ((*s & KanjiCodeMask) << 8) + *(s + 1),
@@ -205,14 +181,10 @@ Int	flg;
 }
 
 
-
-Uchar	*makekan_norm(s, d, flg)
-Uchar	*s;
-Uchar	*d;
-Int	flg;
+u_char*
+makekan_norm(u_char* s, u_char* d, int flg)
 {
-	Reg1 Int  i, csize;
-	Reg1 Uchar c;
+	u_char c;
 
 	if (*s != 0) {
 		c = s[1];
@@ -229,13 +201,10 @@ Int	flg;
 }
 
 
-
-Uchar	*makekan_ascii(s, d, flg)
-Uchar	*s;
-Uchar	*d;
-Int	flg;
+u_char*
+makekan_ascii(u_char* s, u_char* d, int flg)
 {
-	Reg1 Uchar c;
+	u_char c;
 
 	c = s[1];
 	if (c & 0x80)
@@ -248,13 +217,10 @@ Int	flg;
 }
 
 
-
-Static	Uchar	*makekan(s, d, flg)
-Uchar	*s;
-Uchar	*d;
-Int	flg;
+static u_char*
+makekan(u_char* s, u_char* d, int flg)
 {
-	Reg1 Int csize;
+	int csize;
 
 	for ( ; ; ) {
 		csize = codesize(*s);
@@ -314,26 +280,19 @@ Int	flg;
 }
 
 
-
 #define	PEND	2
 #define	QEND	1
-Static	Int	sameknj(p, plen, q, qlen)
-Reg1	Uchar	*p;
-Uchar	plen;
-Reg2	Uchar	*q;
-Uchar	qlen;
+static int
+sameknj(u_char* p, int plen, u_char* q, int qlen)
 {
-	Int	i;
-	Int	j;
-	Int	endf = 0;
-	Int     brkf;
-	extern Int     euc_codesize();
+	int	i;
+	int	j;
+	int	endf = 0;
+	int     brkf;
 
 	do {
-		
 		if ((i = euc_codesize(*p)) != euc_codesize(*q)) return FALSE;
 
-		
 		brkf = 0;
 		for (j = 0; j < i; j++) {
 			if (p[j] != q[j] ) {
@@ -343,37 +302,30 @@ Uchar	qlen;
 		}
 		if (brkf) break;
 
-		
 		if (p[i] == KanjiStrEnd) endf += PEND;
 		if (q[i] == KanjiStrEnd) endf += QEND;
 
-		
 		p += i;
 		q += i;
 	} while (!endf);
 
 	switch (endf) {
-	
 	case (PEND | QEND):
-		
 		if (plen == qlen) return TRUE;
 		break;
 
-	
 	case PEND:
 		i = plen;
 		plen = qlen;
 		qlen = i;
 		p = q;
 
-	
 	case QEND:
 		if (p[euc_codesize(*p)] != KanjiStrEnd) break;
 		if ((*p & KanjiModeMask) != 0x10 ) break;
 		if (qlen != plen - (*p & KanjiCodeMask) - 1) break;
 		return TRUE;
 
-	
 	default:
 		if (q[euc_codesize(*q)] != KanjiStrEnd) break;
 		if (p[euc_codesize(*p)] != KanjiStrEnd) break;
@@ -390,72 +342,52 @@ Uchar	qlen;
 #undef	QEND
 
 
-
-Static	Int	diffknj(jrec, ptr, num)
-JREC	*jrec;			
-Uchar	*ptr;			
-Int	num;			
+static int
+diffknj(JREC* jrec, u_char* ptr, int num)
 {
 	KHREC	*kptr;
 	JREC	*jptr;
-	Int	i;
-	Uchar	kbuf1[MaxWdKanjiLen];
-	Uchar	kbuf2[MaxWdKanjiLen];
+	int	i;
+	u_char	kbuf1[MaxWdKanjiLen];
+	u_char	kbuf2[MaxWdKanjiLen];
 
-	
 	if (jrec -> hinsi == TANKANJI) return TRUE;
 
-	
 	makekan(ptr, kbuf1, TRUE);
 
-	
 	for (i = 0, kptr = kouhotbl ; i < num ; i++, kptr++) {
-		
 		if ((jptr = kptr -> clrec -> jnode) == jrec)
-			
 			return FALSE;
 
-		
 		if (jptr -> hinsi == TANKANJI) continue;
 
-		
 		if (jptr -> class != jrec -> class) continue;
 
-		
 		if (jptr -> dicid != jrec -> dicid) continue;
 
-		
 		if (jptr -> jseg != jrec -> jseg) continue;
 
-		
 		if (jptr -> sttofs != jrec -> sttofs) continue;
 
-		
 		if (jptr -> stbofs != jrec -> stbofs) continue;
 
-		
 		makekan(dicbuf + kptr -> offs, kbuf2, TRUE);
 
-		
 		if (sameknj(kbuf1, jrec -> jlen, kbuf2, jptr -> jlen))
 			return FALSE;
 	}
 
-	
 	return TRUE;
 }
 
 
-
-
-Static	Int	chrck_numtbl(flg, cond)
-Ushort	flg;
-Ushort	cond;
+static int
+chrck_numtbl(u_short flg, u_short cond)
 {
-	Ushort	must;
+	u_short	must;
 
-	if (cond = SelNumCond(cond)) {
-		if (must = (cond & SelNumMust)) {
+	if ((cond = SelNumCond(cond)) != 0) {
+		if ((must = (cond & SelNumMust)) != 0) {
 			if ((flg & must) != must) return FALSE;
 			cond &= ~must;
 		}
@@ -466,13 +398,12 @@ Ushort	cond;
 }
 
 
-
-Int	sel_sjmode(jrec)
-JREC	*jrec;
+int
+sel_sjmode(JREC* jrec)
 {
-	Ushort	i;
-	Ushort	TFar	*p;
-	Ushort	TFar	*q;
+	u_short	i;
+	u_short	*p;
+	u_short	*q;
 
 	switch (jrec -> class) {
 	case C_N_ARABIA:
@@ -504,15 +435,13 @@ JREC	*jrec;
 }
 
 
-
-Static	Void	cl_numcmn(jrec, clrec)
-JREC	*jrec;			
-CLREC	*clrec;			
+static void
+cl_numcmn(JREC* jrec, CLREC* clrec)
 {
-	Uchar	*p;
-	Int	i;
-	Ushort	j;
-	Ushort	TFar	*tbl;
+	u_char	*p;
+	int	i;
+	u_short	j;
+	u_short	*tbl;
 
 	
 	p = cnvstart;
@@ -556,7 +485,7 @@ CLREC	*clrec;
 			if (!chrck_numtbl(jrec -> flags, j)) continue;
 
 			
-			setkouho(clrec, (TypeDicOfs)0, (Int)SelNumFunc(j));
+			setkouho(clrec, (TypeDicOfs)0, (int)SelNumFunc(j));
 		}
 	}
 }

@@ -37,18 +37,19 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include "sj_struct.h"
+#include "dicttool.h"
 
 extern	OffsetRec *ofsrec[];		
 extern	int	ofsrec_num;		
 
 
 
-static	OffsetRec *makeoffset(ptr, len, ofs)
-u_char	*ptr;
-int	len;
-int	ofs;
+static OffsetRec*
+makeoffset(u_char* ptr, int len, int ofs)
 {
 	OffsetRec *orec;
 	u_char	*p;
@@ -73,10 +74,7 @@ int	ofs;
 
 
 void
-set_ofsrec(ptr, len, ofs)
-u_char	*ptr;		
-int	len;		
-int	ofs;		
+set_ofsrec(u_char* ptr, int len, int ofs)
 {
 	OffsetRec *orec;
 	int	low, high, mid;
@@ -122,10 +120,8 @@ int	ofs;
 }
 
 
-
-isknjexist(knj, len)
-u_char	*knj;
-int	len;
+int
+isknjexist(u_char* knj, int len)
 {
 	int	low, high, mid;
 	int	i;
@@ -150,8 +146,8 @@ int	len;
 }
 
 
-
-clear_ofsrec()
+void
+clear_ofsrec(void)
 {
 	int	i;
 
@@ -165,8 +161,8 @@ clear_ofsrec()
 
 
 
-OffsetRec *real_ofsrec(ptr)
-u_char	*ptr;
+OffsetRec*
+real_ofsrec(u_char* ptr)
 {
 	int	ofs;
 	int	i;

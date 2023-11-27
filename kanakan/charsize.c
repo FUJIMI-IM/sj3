@@ -31,19 +31,19 @@
  * $SonyRCSfile: charsize.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:29 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_euc.h"
 #include "sj_rename.h"
 #include "sj_typedef.h"
 #include "sj_dict.h"
+#include "kanakan.h"
 
-
-codesize(code)
-u_char  code;
+int
+codesize(u_char code)
 {
 	switch (code & KanjiModeMask) {
 	      case ZenHiraAssyuku:
