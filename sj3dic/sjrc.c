@@ -36,7 +36,7 @@
 
 
 
-
+#include <string.h>
 #include <stdio.h>
 #include <locale.h>
 #include <ctype.h>
@@ -108,9 +108,8 @@ sjset_code()
 
 getsjrc ()
 {
-	FILE *fd, *fopen();
+	FILE *fd;
 	register char *p;
-	char *getenv();
 
 	sjset_code();
 	RCfile[0] = '\0';

@@ -36,7 +36,7 @@
 
 
 #include "sj_sysvdef.h"
-#include <sys/errno.h>
+#include <errno.h>
 #include "common.h"
 #include "inkey.h"
 #include "select.h"
@@ -201,7 +201,6 @@ master_flush ()
 	SELECT_FD	ifds;
 	int		nc;
 	struct timeval	t;
-	extern int	errno;
 
 	do {
 cont:

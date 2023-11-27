@@ -98,7 +98,6 @@ extern  char    *proto_name;
 extern	int	port_number;
 #endif
 extern	int	max_client;
-extern	int	errno;
 
 static	int	fd_inet = -1;
 static	int	fd_unix = -1;

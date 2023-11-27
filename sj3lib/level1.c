@@ -303,7 +303,7 @@ static	open_unix()
 	}
 
 	len = strlen(sunix.sun_path)+sizeof(sunix.sun_family);
-#if defined(__NetBSD__) || defined(__FreeBSD__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
 	len += sizeof(sunix.sun_len);
 #endif
 	if (connect(fd, (struct sockaddr *)&sunix, len)

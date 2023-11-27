@@ -124,7 +124,7 @@ char	*filename;
 {
 	struct	stat	buf;
 
-#if defined(__NetBSD__) || defined(__FreeBSD__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
 	if (stat(filename, &buf) == 0) return (long)buf.st_size;
 #else
 	if (stat(filename, &buf) == 0) return buf.st_size;

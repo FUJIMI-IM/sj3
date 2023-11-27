@@ -56,7 +56,7 @@ JIS を使用します。
 .IP ・
 メイン辞書、ユーザ辞書、学習ファイルは、接続するサーバの動作しているマシン上のものが使用されます。
 .br
-これらのファイルは、デフォルトではディレクトリ \fB/usr/dict/sj3\fP の下におかれますが、サーバのセットアップファイルにより変更が可能です。
+これらのファイルは、デフォルトではディレクトリ \fB/usr/local/lib/sj3/dict\fP の下におかれますが、サーバのセットアップファイルにより変更が可能です。
 .IP ・
 ユーザ辞書と学習ファイルは、関数 sj3_open で指定されたユーザ名を USER と
 すれば、\fBuser/USER/private.dic\fP と \fBuser/USER/study.dat\fP です。
@@ -91,7 +91,7 @@ char	*uname;		/* ユーザ名へのポインタ */
 サーバと正常に接続できたときには 0 を、何かエラーのあったときには 0 以外の
 エラーステータスを返します。
 .sp
-エラーステータスはヘッダファイル \fB/usr/include/sj3lib.h\fP で
+エラーステータスはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
 定義されるビットアサインされた値で、詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_SERVER_DEAD\fP
@@ -138,7 +138,7 @@ sj3_close()
 サーバとの使用を正常に終了できたときには 0 を、
 何かエラーのあったときには 0 以外のエラーステータスを返します。
 .sp
-エラーステータスはヘッダファイル \fB/usr/include/sj3lib.h\fP で
+エラーステータスはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
 定義されるビットアサインされた値で、詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_SERVER_DEAD\fP
@@ -187,7 +187,7 @@ int		knjsiz;		/* 漢字文字列格納領域の大きさ */
 変換結果の漢字文字列を、配列 \fBstruct bunsetu bun[]\fP に
 各文節に関する情報をセットします。
 .br
-\fBstruct bunsetu\fP はヘッダファイル \fB/usr/include/sj3lib.h\fP で
+\fBstruct bunsetu\fP はヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
 宣言されている以下のような構造体です。
 .sp
 .RS
@@ -417,7 +417,7 @@ int	hinsi;			/* 品詞コード             */
 なりません。
 またその長さは、最大でも 32 文字を越えてはなりません。
 .sp
-品詞コードはヘッダファイル \fB/usr/include/sj3lib.h\fP で
+品詞コードはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
 定義される以下の品詞のうちの一つです。
 .sp
 .RS
@@ -445,7 +445,7 @@ SJ3_H_ADJECT    形容詞          SJ3_H_SINGLE    単漢字
 登録できたときには 0 が、登録できなかったときにはそれ以外の
 エラーステータスが返されます。
 .sp
-エラーステータスはヘッダファイル \fB/usr/include/sj3lib.h\fP で
+エラーステータスはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
 定義され、詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_DICT_ERROR\fP
@@ -519,7 +519,7 @@ int	hinsi;			/* 品詞コード */
 なりません。
 またその長さは、最大でも 32 文字を越えてはなりません。
 .sp
-品詞コードは \fB/usr/include/sj3lib.h\fP で定義される以下の品詞の
+品詞コードは \fB/usr/local/include/sj3lib.h\fP で定義される以下の品詞の
 うちの一つです。
 .sp
 .RS
@@ -547,7 +547,7 @@ SJ3_H_ADJECT    形容詞          SJ3_H_SINGLE    単漢字
 削除できたときには 0 が、削除できなかったときにはそれ以外の
 エラーステータスが返されます。
 .sp
-エラーステータスは \fB/usr/include/sj3lib.h\fP で定義され、
+エラーステータスは \fB/usr/local/include/sj3lib.h\fP で定義され、
 詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_DICT_ERROR\fP

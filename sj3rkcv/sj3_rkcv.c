@@ -33,7 +33,7 @@
  * $SonyDate: 1995/02/10 06:02:25 $
  */
 
-
+#include <string.h>
 
 #include "wchar16.h"
 #include "sj.h"

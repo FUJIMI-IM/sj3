@@ -48,14 +48,12 @@
 #include <sys/types.h>
 #include <sys/fcntl.h>
 #endif
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__)
-#if defined(__NetBSD__) || defined(__bsdi__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
 #define	USE_OLD_TTY
-#endif
 #include <curses.h>
 #endif
 
-#include <sys/errno.h>
+#include <errno.h>
 #include <sys/file.h>
 #include "sj2.h"
 #include "select.h"
@@ -72,7 +70,6 @@ static wchar16_t  backup = (wchar16_t) 0;
 
 static int    eucmode = 0;
 extern int	master;
-extern int	errno;
 
 wchar16_t SJ_getchar()
 {

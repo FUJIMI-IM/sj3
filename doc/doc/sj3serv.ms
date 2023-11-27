@@ -111,7 +111,7 @@ DictDir         \fIdirectory_name\fP
 そのファイル名を絶対パスとして辞書にアクセスしますが、\'/\'以外のときには、
 ここで指定されるディレクトリからの相対パスとして辞書にアクセスします。
 .br
-デフォルトは /usr/dict/sj3 です。
+デフォルトは /usr/local/lib/sj3/dict です。
 .RE
 .sp
 .NH 3
