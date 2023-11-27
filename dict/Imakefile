@@ -28,14 +28,40 @@
 
 /*
  * $SonyRCSfile: Imakefile,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:00:16 $
+ * $SonyRevision: 1.4 $ 
+ * $SonyDate: 1997/01/23 11:20:50 $
  */
 
-#define IHaveSubdirs
-#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+/*
+ * Change some make rules.
+ * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
+ */
 
-SUBDIRS = tool dict
+#include "../../sj3.tmpl"
 
-MakeSubdirs($(SUBDIRS))
-DependSubdirs($(SUBDIRS))
+TOOL_DIR      = ../tool
+TOOL_NAME     = sj3mkdic
+
+SRCS          = ./visual.dic
+OBJS          = sj3main.dic
+OUTPUT        = Moutput
+
+XCOMM INSTFLAGS	= -o $(SJ3OWNER) -g $(SJ3GROUP) -m 444
+
+all:		$(OBJS)
+
+$(OBJS):	$(SRCS)
+		$(TOOL_DIR)/$(TOOL_NAME) $(SRCS) $(OBJS) > $(OUTPUT)
+
+depend::
+
+clean::
+		$(RM) $(OBJS) $(OUTPUT)
+
+InstallNamedNonExec(sj3main.dic,sj3main.dic,$(SJ3DICTDIR))
+
+install::
+		if [ ! -d $(SJ3DICTDIR)/user ]; then \			@@\
+		(mkdir $(SJ3DICTDIR)/user; \				@@\
+		 chown $(SJ3OWNER) $(SJ3DICTDIR)/user; \		@@\
+		 chgrp $(SJ3GROUP) $(SJ3DICTDIR)/user); fi
