@@ -40,6 +40,7 @@
 
 #include <sys/types.h>
 #include <stdio.h>
+#include <sys/select.h>
 #include "sj_const.h"
 #include "sj_dict.h"
 #include "sj_struct.h"

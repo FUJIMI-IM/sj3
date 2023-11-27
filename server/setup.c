@@ -58,6 +58,7 @@
 #include "Struct.h"
 #include "sj_global.h"
 #include "kanakan.h"
+#define NO_GET_INT
 #include "server.h"
 
 typedef	struct	strlist {
