@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(sj3
-    VERSION 2.0.91
+    VERSION 2.0.92
     LANGUAGES C
 )
 
