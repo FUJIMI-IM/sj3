@@ -33,587 +33,587 @@
 .\"$SonyDate: 1994/06/03 08:00:48 $
 .\"
 .TL
-sj3lib �饤�֥��
+sj3lib ライブラリ
 .AB
 .LP
-\fBsj3lib\fP �ϡ����ˡ��ʳ��ˤǳ�ȯ���줿��̾�����Ѵ������� \fIsj3serv\fP ��
-�̿�����̾�����Ѵ���Ԥ������饤������ѥ饤�֥��Ǥ���
+\fBsj3lib\fP は、ソニー（株）で開発された仮名漢字変換サーバ \fIsj3serv\fP と
+通信し仮名漢字変換を行う、クライアント用ライブラリです。
 .sp
-���ץꥱ�������ץ������ϡ�\fBsj3lib\fP ����Ѥ��뤳�Ȥˤ��
-\&  \fIsj3serv\fP ����Ѥ�����̾�����Ѵ���Ԥ����Ȥ���ǽ�Ȥʤ�ޤ���
+アプリケーションプログラムは、\fBsj3lib\fP を使用することにより
+\&  \fIsj3serv\fP を使用した仮名漢字変換を行うことが可能となります。
 .AE
 .SH
-�Ϥ����
+はじめに
 .RS
-.IP ��
-\fBsj3lib\fP �Ǥϡ��ؿ����ѿ��� sj3_ �ǻϤޤ�̾������Ѥ��Ƥ��ޤ��Τǡ�
-sj3_ �ǻϤޤ�ؿ�̾���ѿ�̾�λ��ѤϤ��򤱤���������
-.IP ��
-\fBsj3lib\fP �ǰ���ʸ�������ɤϡ��ؿ�̾�κǸ�� "_euc" ���Ĥ��Ƥ���Ȥ��ϡ�
-EUC �Ǥ���"_mb" ���Ĥ��Ƥ�����ϡ�������ʸ�������ɤ��ץ������¹Ի���
-��������˰�¸���ޤ����ʤˤ��դ��Ƥʤ��Ȥ��ˤϡ�������ʸ�������ɤ˥��ե� 
-JIS ����Ѥ��ޤ���
-.IP ��
-�ᥤ�󼭽񡢥桼�����񡢳ؽ��ե�����ϡ���³���륵���Ф�ư��Ƥ���ޥ����Τ�Τ����Ѥ���ޤ���
+.IP ・
+\fBsj3lib\fP では、関数や変数に sj3_ で始まる名前を使用していますので、
+sj3_ で始まる関数名、変数名の使用はお避けください。
+.IP ・
+\fBsj3lib\fP で扱う文字コードは、関数名の最後に "_euc" がついているときは、
+EUC です。"_mb" がついている場合は、引数の文字コードがプログラム実行時の
+ロケールに依存します。なにも付いてないときには、引数の文字コードにシフト 
+JIS を使用します。
+.IP ・
+メイン辞書、ユーザ辞書、学習ファイルは、接続するサーバの動作しているマシン上のものが使用されます。
 .br
-�����Υե�����ϡ��ǥե���ȤǤϥǥ��쥯�ȥ� \fB/usr/local/lib/sj3/dict\fP �β��ˤ�����ޤ����������ФΥ��åȥ��åץե�����ˤ���ѹ�����ǽ�Ǥ���
-.IP ��
-�桼������ȳؽ��ե�����ϡ��ؿ� sj3_open �ǻ��ꤵ�줿�桼��̾�� USER ��
-����С�\fBuser/USER/private.dic\fP �� \fBuser/USER/study.dat\fP �Ǥ���
+これらのファイルは、デフォルトではディレクトリ \fB/usr/local/lib/sj3/dict\fP の下におかれますが、サーバのセットアップファイルにより変更が可能です。
+.IP ・
+ユーザ辞書と学習ファイルは、関数 sj3_open で指定されたユーザ名を USER と
+すれば、\fBuser/USER/private.dic\fP と \fBuser/USER/study.dat\fP です。
 .RE
 .NH
-�����Фλ��ѳ���
+サーバの使用開始
 .RS
 .LP
 .DS
 sj3_open(hname, uname)
-char	*hname;		/* �ۥ���̾�ؤΥݥ��� */
-char	*uname;		/* �桼��̾�ؤΥݥ��� */
+char	*hname;		/* ホスト名へのポインタ */
+char	*uname;		/* ユーザ名へのポインタ */
 .DE
 .sp
-ʸ����ؤΥݥ��� \fBhname\fP �ǻ��ꤵ�줿�ۥ��Ⱦ�Υ����� \fIsj3serv\fP ��
-�Ф����桼��̾�Ȥ��ƥݥ��� \fBuname\fP �ǻ��ꤵ���ʸ�������Ѥ���
-��³���ߤޤ���
+文字列へのポインタ \fBhname\fP で指定されたホスト上のサーバ \fIsj3serv\fP に
+対し、ユーザ名としてポインタ \fBuname\fP で指定される文字列を使用し、
+接続を試みます。
 .sp
-��³�ˤϡ��ۥ���̾�ؤΥݥ��� \fBhname\fP ���ʥ�ݥ��󥿡����뤤�ϡ�
-����ʸ����ޤ���ʸ���� unix �ؤΥݥ��󥿤λ��ˤ� AF_UNIX �����åȤ�
-����ʳ��ΤȤ��ˤ� AF_INET �����åȤ���Ѥ��ޤ���
+接続には、ホスト名へのポインタ \fBhname\fP がナルポインタ、あるいは、
+空の文字列または文字列 unix へのポインタの時には AF_UNIX ソケットを、
+それ以外のときには AF_INET ソケットを使用します。
 .sp
-��³�Ǥ����Ȥ��ˤϡ������Ф�Ω���夲���˻��ꤵ�줿����ǥ��쥯�ȥ���ˤ���
-�ᥤ�󼭽� sj3main.dic���桼������ user/\fBuname\fP/private.dic��
-�ؽ��ե����� user/\fBuname\fP/study.dat �򥪡��ץ󤷤ޤ���
+接続できたときには、サーバの立ち上げ時に指定された辞書ディレクトリ内にある
+メイン辞書 sj3main.dic、ユーザ辞書 user/\fBuname\fP/private.dic、
+学習ファイル user/\fBuname\fP/study.dat をオープンします。
 .br
-���ꤵ�줿�桼���ѤΥǥ��쥯�ȥꡢ�桼�����񡢳ؽ��ե����뤬
-¸�ߤ��ʤ��Ȥ��ˤϡ��������������ߤޤ���
+指定されたユーザ用のディレクトリ、ユーザ辞書、学習ファイルが
+存在しないときには、それらの生成を試みます。
 .sp
-���δؿ��ϡ����ʴ����Ѵ��롼�������Ѥ��������ɬ���ƤФʤ���Фʤ�ޤ���
+この関数は、かな漢字変換ルーチンを使用する以前に必ず呼ばなければなりません。
 .sp
-�����Ф��������³�Ǥ����Ȥ��ˤ� 0 �򡢲������顼�Τ��ä��Ȥ��ˤ� 0 �ʳ���
-���顼���ơ��������֤��ޤ���
+サーバと正常に接続できたときには 0 を、何かエラーのあったときには 0 以外の
+エラーステータスを返します。
 .sp
-���顼���ơ������ϥإå��ե����� \fB/usr/local/include/sj3lib.h\fP ��
-��������ӥåȥ������󤵤줿�ͤǡ��ܺ٤ϰʲ��ΤȤ���Ǥ���
+エラーステータスはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
+定義されるビットアサインされた値で、詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_SERVER_DEAD\fP
-��³������˥����Ф������󤷤ޤ�����
+接続処理中にサーバがダウンしました。
 .IP "\fBSJ3_CONNECT_ERROR\fP
-�����Ф��ʤ������뤤����³�Ǥ��ޤ���
+サーバがない、あるいは接続できません。
 .IP "\fBSJ3_ALREADY_CONNECTED\fP
-���Ǥ˥����Ф���³�ѤǤ���
+すでにサーバと接続済です。
 .IP "\fBSJ3_CANNOT_OPEN_MDICT\fP
-�ᥤ�󼭽񤬥����ץ�Ǥ��ޤ���
+メイン辞書がオープンできません。
 .IP "\fBSJ3_CANNOT_OPEN_UDICT\fP
-�桼�����񤬥����ץ�Ǥ��ޤ���
+ユーザ辞書がオープンできません。
 .IP "\fBSJ3_CANNOT_OPEN_STUDY\fP
-�ؽ��ե����뤬�����ץ�Ǥ��ޤ���
+学習ファイルがオープンでいません。
 .IP "\fBSJ3_CANNOT_MAKE_UDIR\fP
-�Ŀͥե�����Τ���Υǥ��쥯�ȥ꤬�����Ǥ��ޤ���
+個人ファイルのためのディレクトリが作成できません。
 .IP "\fBSJ3_CANNOT_MAKE_UDICT\fP
-�桼�����񤬺����Ǥ��ޤ���
+ユーザ辞書が作成できません。
 .IP "\fBSJ3_CANNOT_MAKE_STUDY\fP
-�ؽ��ե����뤬�����Ǥ��ޤ���
+学習ファイルが作成できません。
 .RE
 .sp
-���顼���ơ������ˤϡ������Τ������ʤ��Ȥ� 1 �ӥåȤ�Ω�äƤ��ޤ���
+エラーステータスには、これらのうち少なくとも 1 ビットが立っています。
 .br
-���顼���ơ������Τ��� \fBSJ3_SERVER_DEAD\fP ���뤤�� \fBSJ3_CONNECT_ERROR\fP ��
-�֤��줿�Ȥ��ʳ��ϡ������ФȤ���³����Ω����Ƥ��ޤ���
+エラーステータスのうち \fBSJ3_SERVER_DEAD\fP あるいは \fBSJ3_CONNECT_ERROR\fP が
+返されたとき以外は、サーバとの接続が確立されています。
 .RE
 
 .NH
-�����Фλ��ѽ�λ
+サーバの使用終了
 .RS
 .LP
 .DS
 sj3_close()
 .DE
 .sp
-\fIsj3_open\fP �ˤ�äƳ�Ω���줿�����ФȤ���³���ڤ������ޤ���
+\fIsj3_open\fP によって確立されたサーバとの接続を切り放します。
 .br
-�ᥤ�󼭽񡢥桼�����񡢳ؽ��ե�����Τ��٤Ƥ������ץ󤵤�Ƥ����ΤȤ��ơ�
-�����Υ����������ߤޤ���
+メイン辞書、ユーザ辞書、学習ファイルのすべてがオープンされているものとして、
+それらのクローズを試みます。
 .sp
-���δؿ��ϡ����ʴ����Ѵ��롼����λ��Ѥ򽪤���Ȥ��˸ƤФʤ���Фʤ�ޤ���
+この関数は、かな漢字変換ルーチンの使用を終えるときに呼ばなければなりません。
 .sp
-�����ФȤλ��Ѥ�����˽�λ�Ǥ����Ȥ��ˤ� 0 ��
-�������顼�Τ��ä��Ȥ��ˤ� 0 �ʳ��Υ��顼���ơ��������֤��ޤ���
+サーバとの使用を正常に終了できたときには 0 を、
+何かエラーのあったときには 0 以外のエラーステータスを返します。
 .sp
-���顼���ơ������ϥإå��ե����� \fB/usr/local/include/sj3lib.h\fP ��
-��������ӥåȥ������󤵤줿�ͤǡ��ܺ٤ϰʲ��ΤȤ���Ǥ���
+エラーステータスはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
+定義されるビットアサインされた値で、詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_SERVER_DEAD\fP
-�ڤ�����������˥����Ф������󤷤ޤ�����
+切り放し処理中にサーバがダウンしました。
 .IP "\fBSJ3_DISCONNECT_ERROR\fP
-�����Ф��������顼������ޤ�����
+サーバで内部エラーがありました。
 .IP "\fBSJ3_NOT_CONNECTED\fP
-�����Ф���³����Ƥ��ޤ���
+サーバと接続されていません。
 .IP "\fBSJ3_NOT_OPENED_MDICT\fP
-�ᥤ�󼭽񤬥����ץ󤵤�Ƥ��ޤ���
+メイン辞書がオープンされていません。
 .IP "\fBSJ3_NOT_OPENED_UDICT\fP
-�桼�����񤬥����ץ󤵤�Ƥ��ޤ���
+ユーザ辞書がオープンされていません。
 .IP "\fBSJ3_NOT_OPENED_STUDY\fP
-�ؽ��ե����뤬�����ץ󤵤�Ƥ��ޤ���
+学習ファイルがオープンされていません。
 .IP "\fBSJ3_CLOSE_MDICT_ERROR\fP
-�ᥤ�󼭽񤬥��������Ǥ��ޤ���
+メイン辞書がクローズできません。
 .IP "\fBSJ3_CLOSE_UDICT_ERROR\fP
-�桼�����񤬥��������Ǥ��ޤ���
+ユーザ辞書がクローズできません。
 .IP "\fBSJ3_CLOSE_STUDY_ERROR\fP
-�ؽ��ե����뤬���������Ǥ��ޤ���
+学習ファイルがクローズできません。
 .RE
 .sp
-���顼���ơ������ˤϡ������Τ������ʤ��Ȥ� 1 �ӥåȤ�Ω�äƤ��ޤ���
+エラーステータスには、これらのうち少なくとも 1 ビットが立っています。
 .br
-�ɤΥ��顼���ơ��������֤äƤ⡢�����ФȤ���³���ڤ�Ƥ��ޤ���
+どのエラーステータスが返っても、サーバとの接続は切れています。
 .RE
 
 .NH
-ʸ�ϰ���Ѵ�
+文章一括変換
 .RS
 .LP
 .DS
 sj3_getkan(yomi, bun, knjbuf, knjsiz)
 sj3_getkan_euc(yomi, bun, knjbuf, knjsiz)
 sj3_getkan_mb(yomi, bun, knjbuf, knjsiz)
-unsigned char	*yomi;		/* �ɤ�ʸ����ؤΥݥ��� */
-struct bunsetu	bun[];		/* ʸ�ṽ¤�ΤؤΥݥ��� */
-unsigned char	*knjbuf;	/* ����ʸ�����Ǽ�ΰ�ؤΥݥ��� */
-int		knjsiz;		/* ����ʸ�����Ǽ�ΰ���礭�� */
+unsigned char	*yomi;		/* 読み文字列へのポインタ */
+struct bunsetu	bun[];		/* 文節構造体へのポインタ */
+unsigned char	*knjbuf;	/* 漢字文字列格納領域へのポインタ */
+int		knjsiz;		/* 漢字文字列格納領域の大きさ */
 .DE
 .sp
-Ϳ����줿�ɤߤ�ʸ�ϰ���Ѵ��������η�̤��֤��ޤ���
+与えられた読みを文章一括変換し、その結果を返します。
 .br
-�ݥ��� \fByomi\fP �ǻ��ꤵ�줿�ɤ�ʸ����򤫤ʴ����Ѵ�����
-�ݥ��� \fBknjbuf\fP �Ǽ�������礭�� \fBknjsiz\fP ���ΰ��
-�Ѵ���̤δ���ʸ��������� \fBstruct bunsetu bun[]\fP ��
-��ʸ��˴ؤ������򥻥åȤ��ޤ���
+ポインタ \fByomi\fP で指定された読み文字列をかな漢字変換し、
+ポインタ \fBknjbuf\fP で示される大きさ \fBknjsiz\fP の領域に
+変換結果の漢字文字列を、配列 \fBstruct bunsetu bun[]\fP に
+各文節に関する情報をセットします。
 .br
-\fBstruct bunsetu\fP �ϥإå��ե����� \fB/usr/local/include/sj3lib.h\fP ��
-�������Ƥ���ʲ��Τ褦�ʹ�¤�ΤǤ���
+\fBstruct bunsetu\fP はヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
+宣言されている以下のような構造体です。
 .sp
 .RS
 .DS
 struct bunsetu {
-    int             srclen;         /* �ɤߤ�Ĺ��         */
-    int             destlen;        /* ������Ĺ��         */
-    unsigned char   *srcstr;        /* �ɤߤؤΥݥ���   */
-    unsigned char   *deststr;       /* �����ؤΥݥ���   */
-    struct studyrec dcid;           /* �ؽ��Τ���Υǡ��� */
+    int             srclen;         /* 読みの長さ         */
+    int             destlen;        /* 漢字の長さ         */
+    unsigned char   *srcstr;        /* 読みへのポインタ   */
+    unsigned char   *deststr;       /* 漢字へのポインタ   */
+    struct studyrec dcid;           /* 学習のためのデータ */
 };
 .DE
 .RE
 .sp
-�ɤߤ�����ʸ������Ѵ��Ǥ����Ȥ��ˤϡ����������ǤϤ���������ꤵ��ޤ�����
-�ݥ��� \fBknjbuf\fP �Ǽ�������ΰ���礭�� \fBbufsiz\fP ���������ʤɤ�
-�����Ǵ���ʸ������֤��ʤ�ʸ�᤬�������Ȥ��ˤϡ������ɤ�ʸ����ؤ�
-�ݥ��󥿤� \fBsrcstr\fP �ˡ��ޤ�����Ĺ���� \fBsrclen\fP �˻�����
-\fBdestlen\fP �� 0 �� \fBdeststr\fP ���ʥ�ݥ��󥿤ι�¤�Τ���������ޤ���
+読みが漢字文字列に変換できたときには、これらの要素はきちんと設定されますが、
+ポインタ \fBknjbuf\fP で示される領域の大きさ \fBbufsiz\fP が小さいなどの
+原因で漢字文字列を返せない文節が生じたときには、その読み文字列への
+ポインタを \fBsrcstr\fP に、またその長さを \fBsrclen\fP に持ち、
+\fBdestlen\fP が 0 で \fBdeststr\fP がナルポインタの構造体が生成されます。
 .sp
-�ɤߤȤ���Ϳ������ʸ����ϡ�
-���ե� JIS �ޤ��� EUC �� 2 �Х��ȥ����ɤǹ�������Ƥ��뤳�Ȥ���§�Ǥ�����
-1 �Х��ȥ����ɤ������äƤ��Ƥ⤫�ޤ��ޤ���
-���������κݤˤϡ�1 �Х��ȥ����ɤϴ������Ѵ�����뤳�ȤϤ���ޤ���
+読みとして与えられる文字列は、
+シフト JIS または EUC の 2 バイトコードで構成されていることが原則ですが、
+1 バイトコードが混じっていてもかまいません。
+ただしその際には、1 バイトコードは漢字に変換されることはありません。
 .br
-�ɤ�ʸ����ϥʥ�ǽ�λ���Ƥ��ʤ���Фʤ餺��
-����Ǥ� 256 ʸ����ۤ��ƤϤʤ�ޤ���
+読み文字列はナルで終了していなければならず、
+最大でも 256 文字を越えてはなりません。
 .br
-���� \fBstruct bunsetu bun[]\fP �μ��Τϡ��桼���ץ������¦��
-���ʤ���Фʤ�ޤ���
-�����礭���Ϻ�����ɤ�ʸ����ʬɬ�פȤʤ�ޤ���
+配列 \fBstruct bunsetu bun[]\fP の実体は、ユーザプログラム側で
+取らなければなりません。
+その大きさは最大で読み文字数分必要となります。
 .br
-�Ѵ�����ɬ�פȤ����ݥ��� \fBknjbuf\fP �Ǽ�������ΰ���礭���ϡ�
-�Ѵ�����ʸ��������Ͽ����Ƥ���ñ���Ĺ���ʤɤˤ�ä�
-�Ѳ����ޤ�������Ǥ� 1024 �Х������٤Ϥ��ä��ۤ����ɤ��Ǥ��礦��
+変換時に必要とされるポインタ \fBknjbuf\fP で示される領域の大きさは、
+変換する文字数や登録されている単語の長さなどによって
+変化します。最低でも 1024 バイト程度はあったほうが良いでしょう。
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-�ɤߤ��ʥ�ʸ������ä������뤤���ɤߤ�Ĺ�������Ȥ��ˤ� 0 ���֤���ޤ���
+読みがナル文字列だった、あるいは読みが長すぎたときには 0 が返されます。
 .br
-���ｪλ�����Ȥ��ˤϡ����� \fBstruct sj3bunsetu bun[]\fP �˥��åȤ��줿
-ʸ������֤���ޤ���
+正常終了したときには、配列 \fBstruct sj3bunsetu bun[]\fP にセットされた
+文節数が返されます。
 .RE
 
 .NH
-Ʊ���յ�����μ���
+同音意義語数の取得
 .RS
 .LP
 .DS
 sj3_douoncnt(yomi)
 sj3_douoncnt_euc(yomi)
 sj3_douoncnt_mb(yomi)
-unsigned char	*yomi;		/* �ɤ�ʸ����ؤΥݥ��� */
+unsigned char	*yomi;		/* 読み文字列へのポインタ */
 .DE
 .sp
-Ϳ����줿�ɤߤ�ʸ���Ѵ������꥿�����ͤȤ���Ʊ���յ�������֤��ޤ���
+与えられた読みを文節変換し、リターン値として同音意義語数を返します。
 .sp
-�ݥ��� \fByomi\fP �ˤ�ä��ɤߤȤ���Ϳ������ʸ����ϡ�
-���ե� JIS �ޤ��� EUC �� 2 �Х��ȥ����ɤǹ�������Ƥ��뤳�Ȥ���§�Ǥ�����
-1 �Х��ȥ����ɤ������äƤ��Ƥ⤫�ޤ��ޤ���
-���������κݤˤϡ�1 �Х��ȥ����ɤϴ������Ѵ�����뤳�ȤϤ���ޤ���
+ポインタ \fByomi\fP によって読みとして与えられる文字列は、
+シフト JIS または EUC の 2 バイトコードで構成されていることが原則ですが、
+1 バイトコードが混じっていてもかまいません。
+ただしその際には、1 バイトコードは漢字に変換されることはありません。
 .br
-�ɤ�ʸ����ϥʥ�ǽ�λ���Ƥ��ʤ���Фʤ餺��
-����Ǥ� 64 ʸ����ۤ��ƤϤʤ�ޤ���
+読み文字列はナルで終了していなければならず、
+最大でも 64 文字を越えてはなりません。
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-�ɤߤ��ʥ�ʸ������ä������뤤���ɤߤ�Ĺ���������ޤ���Ϳ����줿
-�ɤߤ� 1 ʸ�᤬��������ʤ��ä��Ȥ��ˤ� 0 ���֤���ޤ���
+読みがナル文字列だった、あるいは読みが長すぎた、または与えられた
+読みで 1 文節が構成されなかったときには 0 が返されます。
 .br
-���ｪλ�����Ȥ��ˤ�Ʊ��������֤���ޤ���
+正常終了したときには同音語数が返されます。
 .RE
 
 .NH
-Ʊ���յ���μ���
+同音意義語の取得
 .RS
 .LP
 .DS
 sj3_getdouon(yomi, dou)
 sj3_getdouon_euc(yomi, dou)
 sj3_getdouon_mb(yomi, dou)
-unsigned char	*yomi;		/* �ɤ�ʸ����ؤΥݥ��� */
-struct douon	*dou;		/* Ʊ���յ��칽¤�ΤؤΥݥ��� */
+unsigned char	*yomi;		/* 読み文字列へのポインタ */
+struct douon	*dou;		/* 同音意義語構造体へのポインタ */
 .DE
 .sp
-Ϳ����줿�ɤߤ�ʸ���Ѵ�����Ʊ���յ����Ϳ����줿��¤�Τ˥��åȤ�
-��ȤȤ�ˡ��꥿�����ͤȤ���Ʊ���յ�������֤��ޤ���
+与えられた読みを文節変換し、同音意義語を与えられた構造体にセットす
+るとともに、リターン値として同音意義語数を返します。
 .sp
-�ݥ��� \fByomi\fP �ˤ�ä��ɤߤȤ���Ϳ������ʸ����ϡ�
-���ե� JIS �ޤ��� EUC �� 2 �Х��ȥ����ɤǹ�������Ƥ��뤳�Ȥ���§�Ǥ�����
-1 �Х��ȥ����ɤ������äƤ��Ƥ⤫�ޤ��ޤ���
-���������κݤˤϡ�1 �Х��ȥ����ɤϴ������Ѵ�����뤳�ȤϤ���ޤ���
+ポインタ \fByomi\fP によって読みとして与えられる文字列は、
+シフト JIS または EUC の 2 バイトコードで構成されていることが原則ですが、
+1 バイトコードが混じっていてもかまいません。
+ただしその際には、1 バイトコードは漢字に変換されることはありません。
 .br
-�ɤ�ʸ����ϥʥ�ǽ�λ���Ƥ��ʤ���Фʤ餺��
-����Ǥ� 64 ʸ����ۤ��ƤϤʤ�ޤ���
+読み文字列はナルで終了していなければならず、
+最大でも 64 文字を越えてはなりません。
 .sp
-���� \fBstruct douon dou[]\fP �ˤ�Ʊ���յ���˴ؤ�����󤬥��åȤ���ޤ���
-��¤�� \fBstruct douon\fP �� \fBsj3lib.h\fP ���������Ƥ���
-�ʲ��Τ褦�ʹ�¤�ΤǤ���
+配列 \fBstruct douon dou[]\fP には同音意義語に関する情報がセットされます。
+構造体 \fBstruct douon\fP は \fBsj3lib.h\fP で宣言されている
+以下のような構造体です。
 .sp
 .RS
 .DS
 struct douon {
-    unsigned char   ddata[512];	/* Ʊ���յ���Υǡ��� */
-    int             dlen;		/* Ʊ���յ����Ĺ��   */
-    struct studyrec dcid;		/* �ؽ��Τ���Υǡ��� */
+    unsigned char   ddata[512];	/* 同音意義語のデータ */
+    int             dlen;		/* 同音意義語の長さ   */
+    struct studyrec dcid;		/* 学習のためのデータ */
 };
 .DE
 .RE
 .sp
-���� \fBstruct douon dou[]\fP �μ��Τϥ桼���ץ������¦��
-���ʤ���Фʤ�ޤ���
+配列 \fBstruct douon dou[]\fP の実体はユーザプログラム側で
+取らなければなりません。
 .sp
-��¤�� \fBstruct douon\fP �� \fBddata\fP �ϡ��ʥ�ǽ�λ����ʸ����Ǥ���
+構造体 \fBstruct douon\fP の \fBddata\fP は、ナルで終了する文字列です。
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-�ɤߤ��ʥ�ʸ������ä������뤤���ɤߤ�Ĺ���������ޤ���Ϳ����줿
-�ɤߤ� 1 ʸ�᤬��������ʤ��ä��Ȥ��ˤ� 0 ���֤���ޤ���
+読みがナル文字列だった、あるいは読みが長すぎた、または与えられた
+読みで 1 文節が構成されなかったときには 0 が返されます。
 .br
-���ｪλ�����Ȥ��ˤϡ����� \fBstruct douon dou[]\fP ��
-���åȤ��줿Ʊ��������֤���ޤ���
+正常終了したときには、配列 \fBstruct douon dou[]\fP に
+セットされた同音語数が返されます。
 .RE
 
 .NH
-ʸ��ؽ�
+文節学習
 .RS
 .LP
 .DS
 sj_gakusyuu(dcid)
-struct studyrec	*dcid;		/* �ؽ��ǡ����ؤΥݥ��� */
+struct studyrec	*dcid;		/* 学習データへのポインタ */
 .DE
 .sp
-�ؽ��ǡ����ؤΥݥ��� \fBdcid\fP �μ�����
-\fIsj3_getkan\fP �� \fIsj_getdouon\fP �ˤ������줿�ؽ��ǡ���
-����Ѥ��ơ�ʸ��ؽ���Ԥ��ޤ���
+学習データへのポインタ \fBdcid\fP の示す、
+\fIsj3_getkan\fP や \fIsj_getdouon\fP により得られた学習データ
+を使用して、文節学習を行います。
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-����˳ؽ��Ǥ����Ȥ��ˤ� 0 �����ؽ��Ǥ��ʤ��ä��Ȥ��ˤϤ���ʳ����ͤ�
-�֤���ޤ���
+正常に学習できたときには 0 が、学習できなかったときにはそれ以外の値が
+返されます。
 .RE
 
 .NH
-ʸ��Ĺ�ؽ�
+文節長学習
 .RS
 .LP
 .DS
 sj_gakusyuu2(yomi1, yomi2, dcid)
 sj_gakusyuu2_euc(yomi1, yomi2, dcid)
 sj_gakusyuu2_mb(yomi1, yomi2, dcid)
-unsigned char	*yomi1;		/* �裱ʸ����ɤ�ʸ����ؤΥݥ��� */
-unsigned char	*yomi2;		/* �裲ʸ����ɤ�ʸ����ؤΥݥ��� */
-struct studyrec	*dcid;		/* �裲ʸ��γؽ��ǡ����ؤΥݥ��� */
+unsigned char	*yomi1;		/* 第１文節の読み文字列へのポインタ */
+unsigned char	*yomi2;		/* 第２文節の読み文字列へのポインタ */
+struct studyrec	*dcid;		/* 第２文節の学習データへのポインタ */
 .DE
 .sp
-ʸ��Ĺ�ؽ���Ԥ��ޤ���
+文節長学習を行います。
 .sp
-��ʸ��Ȥ����Ѵ����줿ʸ���󤬣�ʸ���ʬ����줿�褦�ʾ�硢
-���뤤�ϣ�ʸ��δ֤Ǥ��ζ������ѹ����줿�褦�ʤȤ��ˤϡ�
-\fByomi1\fP �˿������裱ʸ����ɤߤؤΥݥ��󥿤�
-\fByomi2\fP �˿������裲ʸ����ɤߤؤΥݥ��󥿤�
-\fBdcid\fP �˿������裲ʸ��γؽ��ǡ�����Ϳ���뤳�Ȥˤ�ꡢ
-ʸ��Ĺ�ؽ���Ԥ��ޤ���
+１文節として変換された文字列が２文節に分けられたような場合、
+あるいは２文節の間でその境界が変更されたようなときには、
+\fByomi1\fP に新たな第１文節の読みへのポインタを、
+\fByomi2\fP に新たな第２文節の読みへのポインタを、
+\fBdcid\fP に新たな第２文節の学習データを与えることにより、
+文節長学習を行います。
 .sp
-��ʸ��Ȥ����Ѵ����줿ʸ���󤬣�ʸ��ˤʤä����ˤϡ�
-\fByomi1\fP �˿����ˤǤ�����ʸ����ɤߤؤΥݥ��󥿤�
-\fByomi2\fP �ˤϥʥ�ݥ��󥿤ޤ��ϥʥ�ʸ����ؤΥݥ��󥿤�Ϳ���뤳�Ȥˤ�ꡢ
-ʸ��Ĺ�ؽ���Ԥ��ޤ������ΤȤ���\fBdcid\fP �ˤ����ꤹ�٤��ǡ�����
-�äˤ���ޤ���
+２文節として変換された文字列が１文節になった場合には、
+\fByomi1\fP に新たにできた１文節の読みへのポインタを、
+\fByomi2\fP にはナルポインタまたはナル文字列へのポインタを与えることにより、
+文節長学習を行います。このとき、\fBdcid\fP には設定すべきデータは
+特にありません。
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-����˳ؽ��Ǥ����Ȥ��ˤ� 0 �����ؽ��Ǥ��ʤ��ä��Ȥ��ˤϤ���ʳ����ͤ�
-�֤���ޤ���
+正常に学習できたときには 0 が、学習できなかったときにはそれ以外の値が
+返されます。
 .RE
 
 .NH
-ñ����Ͽ
+単語登録
 .RS
 .LP
 .DS
 sj3_touroku(yomi, kanji, hinsi)
 sj3_touroku_euc(yomi, kanji, hinsi)
 sj3_touroku_mb(yomi, kanji, hinsi)
-unsigned char	*yomi;		/* �ɤ�ʸ����ؤΥݥ��� */
-unsigned char	*kanji;		/* ����ʸ����ؤΥݥ��� */
-int	hinsi;			/* �ʻ쥳����             */
+unsigned char	*yomi;		/* 読み文字列へのポインタ */
+unsigned char	*kanji;		/* 漢字文字列へのポインタ */
+int	hinsi;			/* 品詞コード             */
 .DE
 .sp
-�ɤ�ʸ����ؤΥݥ��� \fByomi\fP��
-����ʸ����ؤΥݥ��� \fBkanji\fP��
-�ʻ쥳���� \fBhinsi\fP �ǻ��ꤵ�줿���桼���������Ͽ���ޤ���
+読み文字列へのポインタ \fByomi\fP、
+漢字文字列へのポインタ \fBkanji\fP、
+品詞コード \fBhinsi\fP で指定された語をユーザ辞書に登録します。
 .sp
-�ɤߤϰʲ��Υ��ե� JIS �ޤ��� EUC �����ɤǹ������졢
-���ĥʥ�ǽ�λ���Ƥ��ʤ���Фʤ�ޤ���
-�ޤ�����Ĺ���ϡ�����Ǥ� 31 ʸ����ۤ��ƤϤʤ�ޤ���
+読みは以下のシフト JIS または EUC コードで構成され、
+かつナルで終了していなければなりません。
+またその長さは、最大でも 31 文字を越えてはなりません。
 .sp
 .RS
 .DS
-��������
-���������� ����������
-���£ãģ� �ƣǣȣɣ� �ˣ̣ͣΣ� �Уѣңӣ� �գ֣ףأ� ��
-������ ������ ������� ������ ���������� ��
-���������� ���������� ���������� �����ĤƤ� �ʤˤ̤ͤ�
-�ϤҤդؤ� �ޤߤ��� �䡡�桡�� ������ ��𡡤�� ��
-���������� ���������� ���¤ŤǤ� �ФӤ֤٤� �ѤԤפڤ�
-���������� �����á��� �㡡�塡�� ��
-������
+ー＃＠〒
+０１２３４ ５６７８９
+ＡＢＣＤＥ ＦＧＨＩＪ ＫＬＭＮＯ ＰＱＲＳＴ ＵＶＷＸＹ Ｚ
+ａｂｃｄｅ ｆｇｈｉｊ ｋｌｍｎｏ ｐｑｒｓｔ ｕｖｗｘｙ ｚ
+あいうえお かきくけこ さしすせそ たちつてと なにぬねの
+はひふへほ まみむめも や　ゆ　よ らりるれろ わゐ　ゑを ん
+がぎぐげご ざじずぜぞ だぢづでど ばびぶべぼ ぱぴぷぺぽ
+ぁぃぅぇぉ 　　っ　　 ゃ　ゅ　ょ ゎ
+ヴヵヶ
 .DE
 .RE
 .sp
-�������ʲ���ʸ�����ɤߤ���Ƭ�ˤʤ뤳�Ȥ�����ޤ���
+ただし以下の文字は読みの先頭になることが出来ません。
 .sp
 .RS
 .DS
-�� �� ���������� �� ���� �� ����
+ー を ぁぃぅぇぉ っ ゃゅょ ゎ ヵヶ
 .DE
 .RE
 .sp
-�����ϥ��ե� JIS �ޤ��� EUC �����ɤǹ������졢���ĥʥ�ǽ�λ���Ƥ��ʤ����
-�ʤ�ޤ���
-�ޤ�����Ĺ���ϡ�����Ǥ� 32 ʸ����ۤ��ƤϤʤ�ޤ���
+漢字はシフト JIS または EUC コードで構成され、かつナルで終了していなければ
+なりません。
+またその長さは、最大でも 32 文字を越えてはなりません。
 .sp
-�ʻ쥳���ɤϥإå��ե����� \fB/usr/local/include/sj3lib.h\fP ��
-��������ʲ����ʻ�Τ����ΰ�ĤǤ���
+品詞コードはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
+定義される以下の品詞のうちの一つです。
 .sp
 .RS
 .DS
-SJ3_H_NRMNOUN   ����̾��        SJ3_H_ADJVERB   ����ư��
-SJ3_H_PRONOUN   ��̾��          SJ3_H_SILVERB   ����ư��
-SJ3_H_LNAME     �Ļ�            SJ3_H_ZILVERB   ����ư��
-SJ3_H_FNAME     ̾��            SJ3_H_ONEVERB   ����ư��
-SJ3_H_LOCNAME   ��̾            SJ3_H_KAVERB    ���Ը���ư��
-SJ3_H_PREFIC    ������̾        SJ3_H_GAVERB    ���Ը���ư��
-SJ3_H_RENTAI    Ϣ�λ�          SJ3_H_SAVERB    ���Ը���ư��
-SJ3_H_CONJUNC   ��³��          SJ3_H_TAVERB    ���Ը���ư��
-SJ3_H_SUBNUM    ������          SJ3_H_NAVERB    �ʹԸ���ư��
-SJ3_H_NUMERAL   ����            SJ3_H_BAVERB    �йԸ���ư��
-SJ3_H_PREFIX    ��Ƭ��          SJ3_H_MAVERB    �޹Ը���ư��
-SJ3_H_POSTFIX   ������          SJ3_H_RAVERB    ��Ը���ư��
-SJ3_H_ADVERB    ����            SJ3_H_WAVERB    ��Ը���ư��
-SJ3_H_ADJECT    ���ƻ�          SJ3_H_SINGLE    ñ����
+SJ3_H_NRMNOUN   普通名詞        SJ3_H_ADJVERB   形容動詞
+SJ3_H_PRONOUN   代名詞          SJ3_H_SILVERB   サ変動詞
+SJ3_H_LNAME     苗字            SJ3_H_ZILVERB   ザ変動詞
+SJ3_H_FNAME     名前            SJ3_H_ONEVERB   一段動詞
+SJ3_H_LOCNAME   地名            SJ3_H_KAVERB    カ行五段動詞
+SJ3_H_PREFIC    県／区名        SJ3_H_GAVERB    ガ行五段動詞
+SJ3_H_RENTAI    連体詞          SJ3_H_SAVERB    サ行五段動詞
+SJ3_H_CONJUNC   接続詞          SJ3_H_TAVERB    タ行五段動詞
+SJ3_H_SUBNUM    助数詞          SJ3_H_NAVERB    ナ行五段動詞
+SJ3_H_NUMERAL   数詞            SJ3_H_BAVERB    バ行五段動詞
+SJ3_H_PREFIX    接頭語          SJ3_H_MAVERB    マ行五段動詞
+SJ3_H_POSTFIX   接尾語          SJ3_H_RAVERB    ラ行五段動詞
+SJ3_H_ADVERB    副詞            SJ3_H_WAVERB    ワ行五段動詞
+SJ3_H_ADJECT    形容詞          SJ3_H_SINGLE    単漢字
 .DE
 .RE
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-��Ͽ�Ǥ����Ȥ��ˤ� 0 ������Ͽ�Ǥ��ʤ��ä��Ȥ��ˤϤ���ʳ���
-���顼���ơ��������֤���ޤ���
+登録できたときには 0 が、登録できなかったときにはそれ以外の
+エラーステータスが返されます。
 .sp
-���顼���ơ������ϥإå��ե����� \fB/usr/local/include/sj3lib.h\fP ��
-������졢�ܺ٤ϰʲ��ΤȤ���Ǥ���
+エラーステータスはヘッダファイル \fB/usr/local/include/sj3lib.h\fP で
+定義され、詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_DICT_ERROR\fP
-����¸�ߤ��ʤ������뤤����Ͽ�Ǥ��ʤ�����Ǥ���
+辞書が存在しない、あるいは登録できない辞書です。
 .IP "\fBSJ3_DICT_LOCKED\fP
-�����ɤ߽Ф��Τ���˥��å�����Ƥ��ޤ���
+辞書が読み出しのためにロックされています。
 .IP "\fBSJ3_BAD_YOMI_STR\fP
-�ɤ�ʸ���������Ǥ���
+読み文字列が不正です。
 .IP "\fBSJ3_BAD_KANJI_STR\fP
-����ʸ���������Ǥ���
+漢字文字列が不正です。
 .IP "\fBSJ3_BAD_HINSI_CODE\fP
-�ʻ쥳���ɤ������Ǥ���
+品詞コードが不正です。
 .IP "\fBSJ3_WORD_EXIST\fP
-���Ǥ���Ͽ�ѤǤ���
+すでに登録済です。
 .IP "\fBSJ3_DOUON_FULL\fP
-����ʾ�Ʊ�������Ͽ�Ǥ��ޤ���
+これ以上同音語を登録できません。
 .IP "\fBSJ3_DICT_FULL\fP
-����ʾ弭�����Ͽ�Ǥ��ޤ���
+これ以上辞書に登録できません。
 .IP "\fBSJ3_INDEX_FULL\fP
-����ʾ奤��ǥå�������Ͽ�Ǥ��ޤ���
+これ以上インデックスに登録できません。
 .IP "\fBSJ3_TOUROKU_FAILED\fP
-¾�θ����Ǽ���ؤ���Ͽ���Ԥ��ޤ�����
+他の原因で辞書への登録を失敗しました。
 .RE
 .RE
 
 .NH
-ñ����
+単語削除
 .RS
 .LP
 .DS
 sj3_syoukyo(yomi, kanji, hinsi)
 sj3_syoukyo_euc(yomi, kanji, hinsi)
 sj3_syoukyo_mb(yomi, kanji, hinsi)
-unsigned char	*yomi;		/* �ɤ�ʸ����ؤΥݥ��� */
-unsigned char	*kanji;		/* ����ʸ����ؤΥݥ��� */
-int	hinsi;			/* �ʻ쥳���� */
+unsigned char	*yomi;		/* 読み文字列へのポインタ */
+unsigned char	*kanji;		/* 漢字文字列へのポインタ */
+int	hinsi;			/* 品詞コード */
 .DE
 .sp
-�桼���������Ͽ����Ƥ���
-�ɤ�ʸ����ؤΥݥ��� \fByomi\fP��
-����ʸ����ؤΥݥ��� \fBkanji\fP��
-�ʻ쥳���� \fBhinsi\fP �ǻ��ꤵ�줿���õ�ޤ���
+ユーザ辞書に登録されている
+読み文字列へのポインタ \fByomi\fP、
+漢字文字列へのポインタ \fBkanji\fP、
+品詞コード \fBhinsi\fP で指定された語を消去します。
 .sp
-�ɤߤϰʲ��Υ��ե� JIS �ޤ��� EUC �����ɤǹ������졢
-���ĥʥ�ǽ�λ���Ƥ��ʤ���Фʤ�ޤ���
-�ޤ�����Ĺ���ϡ�����Ǥ� 31 ʸ����ۤ��ƤϤʤ�ޤ���
+読みは以下のシフト JIS または EUC コードで構成され、
+かつナルで終了していなければなりません。
+またその長さは、最大でも 31 文字を越えてはなりません。
 .sp
 .RS
 .DS
-��������
-���������� ����������
-���£ãģ� �ƣǣȣɣ� �ˣ̣ͣΣ� �Уѣңӣ� �գ֣ףأ� ��
-������ ������ ������� ������ ���������� ��
-���������� ���������� ���������� �����ĤƤ� �ʤˤ̤ͤ�
-�ϤҤդؤ� �ޤߤ��� �䡡�桡�� ������ ��𡡤�� ��
-���������� ���������� ���¤ŤǤ� �ФӤ֤٤� �ѤԤפڤ�
-���������� �����á��� �㡡�塡�� ��
-������
+ー＃＠〒
+０１２３４ ５６７８９
+ＡＢＣＤＥ ＦＧＨＩＪ ＫＬＭＮＯ ＰＱＲＳＴ ＵＶＷＸＹ Ｚ
+ａｂｃｄｅ ｆｇｈｉｊ ｋｌｍｎｏ ｐｑｒｓｔ ｕｖｗｘｙ ｚ
+あいうえお かきくけこ さしすせそ たちつてと なにぬねの
+はひふへほ まみむめも や　ゆ　よ らりるれろ わゐ　ゑを ん
+がぎぐげご ざじずぜぞ だぢづでど ばびぶべぼ ぱぴぷぺぽ
+ぁぃぅぇぉ 　　っ　　 ゃ　ゅ　ょ ゎ
+ヴヵヶ
 .DE
 .RE
 .sp
-�������ʲ���ʸ�����ɤߤ���Ƭ�ˤʤ뤳�Ȥ�����ޤ���
+ただし以下の文字は読みの先頭になることが出来ません。
 .sp
 .RS
 .DS
-�� �� ���������� �� ���� �� ����
+ー を ぁぃぅぇぉ っ ゃゅょ ゎ ヵヶ
 .DE
 .RE
 .sp
-�����ϥ��ե� JIS �ޤ��� EUC �����ɤǹ������졢���ĥʥ�ǽ�λ���Ƥ��ʤ����
-�ʤ�ޤ���
-�ޤ�����Ĺ���ϡ�����Ǥ� 32 ʸ����ۤ��ƤϤʤ�ޤ���
+漢字はシフト JIS または EUC コードで構成され、かつナルで終了していなければ
+なりません。
+またその長さは、最大でも 32 文字を越えてはなりません。
 .sp
-�ʻ쥳���ɤ� \fB/usr/local/include/sj3lib.h\fP ����������ʲ����ʻ��
-�����ΰ�ĤǤ���
+品詞コードは \fB/usr/local/include/sj3lib.h\fP で定義される以下の品詞の
+うちの一つです。
 .sp
 .RS
 .DS
-SJ3_H_NRMNOUN   ����̾��        SJ3_H_ADJVERB   ����ư��
-SJ3_H_PRONOUN   ��̾��          SJ3_H_SILVERB   ����ư��
-SJ3_H_LNAME     �Ļ�            SJ3_H_ZILVERB   ����ư��
-SJ3_H_FNAME     ̾��            SJ3_H_ONEVERB   ����ư��
-SJ3_H_LOCNAME   ��̾            SJ3_H_KAVERB    ���Ը���ư��
-SJ3_H_PREFIC    ������̾        SJ3_H_GAVERB    ���Ը���ư��
-SJ3_H_RENTAI    Ϣ�λ�          SJ3_H_SAVERB    ���Ը���ư��
-SJ3_H_CONJUNC   ��³��          SJ3_H_TAVERB    ���Ը���ư��
-SJ3_H_SUBNUM    ������          SJ3_H_NAVERB    �ʹԸ���ư��
-SJ3_H_NUMERAL   ����            SJ3_H_BAVERB    �йԸ���ư��
-SJ3_H_PREFIX    ��Ƭ��          SJ3_H_MAVERB    �޹Ը���ư��
-SJ3_H_POSTFIX   ������          SJ3_H_RAVERB    ��Ը���ư��
-SJ3_H_ADVERB    ����            SJ3_H_WAVERB    ��Ը���ư��
-SJ3_H_ADJECT    ���ƻ�          SJ3_H_SINGLE    ñ����
+SJ3_H_NRMNOUN   普通名詞        SJ3_H_ADJVERB   形容動詞
+SJ3_H_PRONOUN   代名詞          SJ3_H_SILVERB   サ変動詞
+SJ3_H_LNAME     苗字            SJ3_H_ZILVERB   ザ変動詞
+SJ3_H_FNAME     名前            SJ3_H_ONEVERB   一段動詞
+SJ3_H_LOCNAME   地名            SJ3_H_KAVERB    カ行五段動詞
+SJ3_H_PREFIC    県／区名        SJ3_H_GAVERB    ガ行五段動詞
+SJ3_H_RENTAI    連体詞          SJ3_H_SAVERB    サ行五段動詞
+SJ3_H_CONJUNC   接続詞          SJ3_H_TAVERB    タ行五段動詞
+SJ3_H_SUBNUM    助数詞          SJ3_H_NAVERB    ナ行五段動詞
+SJ3_H_NUMERAL   数詞            SJ3_H_BAVERB    バ行五段動詞
+SJ3_H_PREFIX    接頭語          SJ3_H_MAVERB    マ行五段動詞
+SJ3_H_POSTFIX   接尾語          SJ3_H_RAVERB    ラ行五段動詞
+SJ3_H_ADVERB    副詞            SJ3_H_WAVERB    ワ行五段動詞
+SJ3_H_ADJECT    形容詞          SJ3_H_SINGLE    単漢字
 .DE
 .RE
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-����Ǥ����Ȥ��ˤ� 0 ��������Ǥ��ʤ��ä��Ȥ��ˤϤ���ʳ���
-���顼���ơ��������֤���ޤ���
+削除できたときには 0 が、削除できなかったときにはそれ以外の
+エラーステータスが返されます。
 .sp
-���顼���ơ������� \fB/usr/local/include/sj3lib.h\fP ��������졢
-�ܺ٤ϰʲ��ΤȤ���Ǥ���
+エラーステータスは \fB/usr/local/include/sj3lib.h\fP で定義され、
+詳細は以下のとおりです。
 .sp
 .IP "\fBSJ3_DICT_ERROR\fP
-����¸�ߤ��ʤ������뤤����Ͽ�Ǥ��ʤ�����Ǥ���
+辞書が存在しない、あるいは登録できない辞書です。
 .IP "\fBSJ3_DICT_LOCKED\fP
-�����ɤ߽Ф��Τ���˥��å�����Ƥ��ޤ���
+辞書が読み出しのためにロックされています。
 .IP "\fBSJ3_BAD_YOMI_STR\fP
-�ɤ�ʸ���������Ǥ���
+読み文字列が不正です。
 .IP "\fBSJ3_BAD_KANJI_STR\fP
-����ʸ���������Ǥ���
+漢字文字列が不正です。
 .IP "\fBSJ3_BAD_HINSI_CODE\fP
-�ʻ쥳���ɤ������Ǥ���
+品詞コードが不正です。
 .IP "\fBSJ3_WORD_NOT_EXIST\fP
-���ꤵ�줿�����Ͽ����Ƥ��ޤ���
+指定された語は登録されていません。
 .IP "\fBSJ3_SYOUKYO_FAILED\fP
-¾�θ����Ǽ��񤫤�ξõ���Ԥ��ޤ�����
+他の原因で辞書からの消去を失敗しました。
 .RE
 .RE
 
 .NH
-����Υ��å�
+辞書のロック
 .RS
 .LP
 .DS
 sj3_lockserv()
 .DE
 .sp
-���ߥ����ץ󤵤�Ƥ��뼭���ñ�����Ͽ������Ǥ��ʤ��褦�˥��å����ޤ���
+現在オープンされている辞書に単語を登録／削除できないようにロックします。
 .sp
-�ؽ��ɣĤ�ñ��μ�����Ǥΰ��֤򼨤��Ƥ��ޤ������Τ��ᡢ���饤����Ȥ�
-�ؽ��ɣĤ��ݻ����Ƥ���֤˼�����Ͽ��������Ԥ���ȡ����饤����Ȥ�
-�ݻ����Ƥ���ؽ��ɣĤȼ���δ֤�������򵯤�����ǽ��������ޤ���
-������򤱤뤿��ˡ����饤����Ȥ��ؽ��ɣĤ��ݻ����Ƥ���֤ϼ���ե������
-���å�����ɬ�פ�����ޤ���
+学習ＩＤは単語の辞書内での位置を示しています。このため、クライアントが
+学習ＩＤを保持している間に辞書登録／削除が行われると、クライアントの
+保持している学習ＩＤと辞書の間で不整合を起こす可能性があります。
+それを避けるために、クライアントが学習ＩＤを保持している間は辞書ファイルを
+ロックする必要があります。
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-���å��Ǥ����Ȥ��ˤ� 0 ����
-���å��Ǥ��ʤ��ä��Ȥ��ˤϤ���ʳ����ͤ��֤���ޤ���
+ロックできたときには 0 が、
+ロックできなかったときにはそれ以外の値が返されます。
 .RE
 
 .NH
-����Υ�����å�
+辞書のアンロック
 .RS
 .LP
 .DS
 sj3_unlockserv()
 .DE
 .sp
-sj3_lockserv �ؿ��ǥ��å�����Ƥ��뼭���ñ�����Ͽ������Ǥ���褦��
-������å����ޤ���
+sj3_lockserv 関数でロックされている辞書に単語を登録／削除できるように
+アンロックします。
 .sp
-�ؽ��ɣĤ�ñ��μ�����Ǥΰ��֤򼨤��Ƥ��ޤ������Τ��ᡢ���饤����Ȥ�
-�ؽ��ɣĤ��ݻ����Ƥ���֤˼�����Ͽ��������Ԥ���ȡ����饤����Ȥ�
-�ݻ����Ƥ���ؽ��ɣĤȼ���δ֤�������򵯤�����ǽ��������ޤ���
-������򤱤뤿��ˡ����饤����Ȥ��ؽ��ɣĤ��ݻ����Ƥ���֤ϼ���ե������
-���å�����ɬ�פ�����ޤ���
+学習ＩＤは単語の辞書内での位置を示しています。このため、クライアントが
+学習ＩＤを保持している間に辞書登録／削除が行われると、クライアントの
+保持している学習ＩＤと辞書の間で不整合を起こす可能性があります。
+それを避けるために、クライアントが学習ＩＤを保持している間は辞書ファイルを
+ロックする必要があります。
 .br
-���饤����Ȥ��������å����Ƥ���֤ϡ�������Ͽ��������뤳�Ȥ��Ǥ��ޤ���
-���饤����Ȥϳؽ��ɣĤ��ݻ�����ɬ�פ��ʤ��ʤä��Ȥ��ˤϡ��������˼����
-������å�����٤��Ǥ���
+クライアントが辞書をロックしている間は、辞書登録／削除することができません。
+クライアントは学習ＩＤを保持する必要がなくなったときには、ただちに辞書を
+アンロックするべきです。
 .sp
-�����Ф���³����Ƥ��ʤ��Ȥ������뤤�ϥ����Ф������󤷤��Ȥ��ˤ� \-1 ��
-�֤���ޤ���
+サーバと接続されていないとき、あるいはサーバがダウンしたときには \-1 が
+返されます。
 .br
-������å��Ǥ����Ȥ��ˤ� 0 ����
-������å��Ǥ��ʤ��ä��Ȥ��ˤϤ���ʳ����ͤ��֤���ޤ���
+アンロックできたときには 0 が、
+アンロックできなかったときにはそれ以外の値が返されます。
 .RE

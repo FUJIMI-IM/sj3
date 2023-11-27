@@ -33,46 +33,46 @@
 .\"
 .\" Server of Japanese input frontent processor
 .TH SJ3SERV 1 "October 1990"
-.SH ̾��
-sj3serv \- ��̾�����Ѵ�������
-.SH ����
+.SH 名称
+sj3serv \- 仮名漢字変換サーバ
+.SH 形式
 .B sj3serv
 [ \fB\-f\fP filename ]
-.SH ����
-\fIsj3serv\fP �ϡ������åȤ���Ѥ����ץ��������̿��ˤ�겾̾�����Ѵ���
-�Ԥʤ�����̾�����Ѵ������ФǤ���
-.SH ���ץ����
+.SH 解説
+\fIsj3serv\fP は、ソケットを使用したプロセス間通信により仮名漢字変換を
+行なう、仮名漢字変換サーバです。
+.SH オプション
 .TP
 .BI \-f " filename"
-���Υ��ץ����ϡ�\fIsj3serv\fP ���ɤ߹��ॻ�åȥ��åץե��������ꤷ�ޤ���
+このオプションは、\fIsj3serv\fP の読み込むセットアップファイルを指定します。
 .br
-\fIsj3serv\fP �ϥǥե���ȤǤϥ��åȥ��åץե�����
-��/usr/local/lib/sj3/serverrc�Ǥ��ɤ߹��ߤޤ�����
-���Υ��ץ���󤬻��ꤵ�줿�Ȥ��ˤϤ�����
-���ޥ�ɥ饤��ǻ��ꤵ�줿���åȥ��åץե�������ɤ߹��ߤޤ���
+\fIsj3serv\fP はデフォルトではセットアップファイル
+‘/usr/local/lib/sj3/serverrc’を読み込みますが、
+このオプションが指定されたときにはかわりに
+コマンドラインで指定されたセットアップファイルを読み込みます。
 .br
-.SH ��Ϣ�ե�����
+.SH 関連ファイル
 .PD 0
 .TP \w'\ \ \ \ user/\fIusername\fP/private.dic'u+2n
 /usr/local/lib/sj3/serverrc
-�ǥե���Ȳ�̾�Ѵ������� ���åȥ��åץե�����
+デフォルト仮名変換サーバ セットアップファイル
 .TP
 /usr/local/lib/sj3/dict/
-���ʴ����Ѵ������� �ǥե���ȼ���ǥ��쥯�ȥ�
+かな漢字変換サーバ デフォルト辞書ディレクトリ
 .TP
     sj3main.dic
-��̾�����Ѵ��ᥤ�󼭽�
+仮名漢字変換メイン辞書
 .TP
     user/\fIusername\fP/private.dic
-��̾�����Ѵ��桼������
+仮名漢字変換ユーザ辞書
 .TP
     user/\fIusername\fP/study.dat
-��̾�����Ѵ��ؽ��ե�����
+仮名漢字変換学習ファイル
 
-.SH ��Ϣ����
+.SH 関連事項
 sj3(1), sj3lib(3) 
 
-.SH �Х�
-�Ѵ��롼������Ǥμ���μ��̤ˤϡ�����ե������ inode �ֹ��
-���Ѥ��Ƥ��ޤ������ԡ��ʤɤˤ�꼭��ե������ inode �ֹ椬
-�ѹ������ȡ�ʸ��ؽ��ǡ����ϼ����ޤ���
+.SH バグ
+変換ルーチン内での辞書の識別には、辞書ファイルの inode 番号を
+使用しています。コピーなどにより辞書ファイルの inode 番号が
+変更されると、文節学習データは失われます。
