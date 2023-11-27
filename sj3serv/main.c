@@ -27,16 +27,6 @@
  *
  */
 
-/*
- * $SonyRCSfile: main.c,v $  
- * $SonyRevision: 1.3 $ 
- * $SonyDate: 1995/02/03 07:38:44 $
- *
- * $Id$
- */
-
-
-
 #include "sj_sysvdef.h"
 #include <locale.h>
 #include <stdio.h>
@@ -45,12 +35,15 @@
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
+#include <sys/types.h>
 #include <sys/wait.h>
+
+#include <locale.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#ifdef SVR4
-#include <sys/fcntl.h>
-#include <sys/termios.h>
-#endif
+
 #include "Const.h"
 #include "server.h"
 
