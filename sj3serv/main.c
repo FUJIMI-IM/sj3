@@ -47,10 +47,6 @@
 #include "Const.h"
 #include "server.h"
 
-#ifndef lint
-static char rcsid_sony[] = "$Header: /export/work/contrib/sj3/server/RCS/main.c,v 1.12 1994/06/03 07:41:30 notanaka Exp $ SONY;";
-#endif
-
 #ifdef SVR4
 #define signal sigset
 #endif
@@ -59,17 +55,6 @@ extern	int	fork_flag;
 extern	char	*lock_file;
 
 
-
-static	void
-opening (void)
-{
-	extern	char	*version_number;
-	extern	char	*time_stamp;
-
-	printf("Kana-Kanji Conversion Server Version %s\r\n", version_number);
-	printf("Copyright (c) 1990-1995 Sony Corporation\r\n");
-	printf("Created at %s\r\n", time_stamp);
-}
 
 #ifdef	LOCK_FILE
 
@@ -219,7 +204,6 @@ main (int argc, char **argv)
 #ifdef __sony_news
 	(void) setlocale(LC_CTYPE, "ja_JP.EUC");
 #endif
-	opening();
 #ifndef __NetBSD__
 	if (setuid(geteuid())) {
 		fprintf(stderr, "error at setuid.\r\n"); exit(1);
