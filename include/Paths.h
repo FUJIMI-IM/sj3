@@ -47,8 +47,8 @@
 #if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
 #define	ErrorOutFile		"/dev/console"
 #else
-/* #define	ErrorOutFile		"/dev/stderr" */ 	/* for test */
-#define	ErrorOutFile		"/dev/null"
+#define	ErrorOutFile		"/dev/stderr"
+/*#define	ErrorOutFile		"/dev/null"*/
 #endif
 
 #define SocketName              "/tmp/sj3sock"
@@ -58,7 +58,7 @@
 #define UserDictionary          "private.dic"
 #define StudyFile               "study.dat"
 #define RunCmdFile "/usr/local/lib/sj3/serverrc"
-#define DictRootDir "/usr/local/lib/sj3/dict"
+#define DictRootDir "/usr/local/share/sj3/dict"
 
 #define DEFRKFILE "/usr/local/lib/sj3/sjrk"
 #define DEFRCFILE "/usr/local/lib/sj3/sjrc"

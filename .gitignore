@@ -4,4 +4,8 @@
 build/
 patches/
 
+sj3main.dic
+private.dic
+study.dic
+
 *.orig
