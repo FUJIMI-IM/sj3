@@ -1,3 +1,4 @@
+## SPDX-License-Identifier: MIT-open-group
 ##
 ## Copyright (c) 1991-1994  Sony Corporation
 ## 
@@ -24,13 +25,7 @@
 ## shall not be used in advertising or otherwise to promote the sale, use
 ## or other dealings in this Software without prior written authorization
 ## from Sony Corporation.
-##
 
-##
-## $SonyRCSfile: visual.dic,v $  
-## $SonyRevision: 1.2 $ 
-## $SonyDate: 1995/07/18 02:30:34 $
-##
 あ			亜			接頭１:
 あ			開			カ五２:
 あ			空			カ五４:
