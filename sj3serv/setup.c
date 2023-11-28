@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 1991-1994  Sony Corporation
- * Copyright (c) 1996 Hidekazu Kuroki <hidekazu at cs.titech.ac.jp>
+ * Copyright (c) 1996 Hidekazu Kuroki
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -231,11 +231,6 @@ struct	optlist {
 	u_char	*(*optfunc)();
 	void	*optarg;
 } option[] = {
-/*
- * Add option flag.
- * Because They are lacked in here. See document.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	"DebugOut",	get_str,	&debug_file,
 	"debugout",	get_str,	&debug_file,
 	"DebugLevel",	get_int,	&debug_level,

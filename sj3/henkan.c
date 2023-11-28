@@ -340,10 +340,6 @@ wchar16_t	*in, *out;
 		out += i;
 	}
 	if (*in != '\0')
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 		(void)sj_hantozen(out, in, strlen((char *)in));
 }			
 

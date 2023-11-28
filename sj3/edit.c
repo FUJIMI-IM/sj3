@@ -302,10 +302,6 @@ register int	len;
 	cv = GetConversion ();
 	if (cv->Ppoint[n+1] == 0)
 		return;
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	mlen = strlen ((char *)cv->Ppoint[n+1]);
 	plen = cv->Ppoint[n] - cv->Ppoint[0];
 	p = cv->Ppoint[n];
@@ -732,10 +728,6 @@ int cur;
 
 	ylen = wslen(Zs);
 	limit = Elimit - ylen;
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	hlimit = Ehlimit - strlen((char *)Hs);
 	*ztmp = '\0';
 	*htmp = '\0';
@@ -757,10 +749,6 @@ int cur;
 		else
 			(void)exec_romaji2(inc, htmp, ztmp, otmp, len, rlen);
 	}
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	(void)exec_romaji2(0, htmp, ztmp, otmp, strlen((char *)ztmp), strlen((char *)htmp));
 	sj3_rkclear();
 	len = wslen (ztmp);

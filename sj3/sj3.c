@@ -199,10 +199,6 @@ init (char** argv)
 	(void) signal (SIGBUS, (void (*)())makecore);
 	(void) signal (SIGSEGV, (void (*)())makecore);
 	(void) signal (SIGFPE, (void (*)())makecore);
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 #ifdef SIGTYPE_VOID
 	sigpipe = (void(*)()) signal (SIGPIPE, SIG_IGN);
 #else
@@ -467,11 +463,6 @@ getmaster (void)
 
 	ioctl(master, I_PUSH, "pckt");		
 #else 
-/*
- * Change pseudo-devices.
- * Because FreeBSD's master pseudo-devices are pty[p-sP-S][0-9a-v].
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 #if defined(__FreeBSD__) || defined(__DragonFly__)
 	struct stat	stb;
 	int		h, i, j, k1, k2;
@@ -486,11 +477,6 @@ getmaster (void)
 	k1 = strlen("/dev/pty");
 	k2 = strlen ("/dev/ptyp");
 
-/*
- * Change pseudo-devices.
- * Because FreeBSD's master pseudo-devices are pty[p-sP-S][0-9a-v].
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 #if defined(__FreeBSD__) || defined(__DragonFly__)
 	for (h = 0; h < 8; h++) {
 		line[k1] = "pqrsPQRS"[h];
@@ -729,10 +715,6 @@ setdev (void)
 	}
 
 #ifndef SVR4
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	(void) signal (SIGCHLD, (void (*)())exitprocess);
 #endif 
 }
@@ -840,10 +822,6 @@ shellprocess (void)
 #else /* SYSV_TERMIOS */
 	struct utmp		Utmp;
 	char		*p;
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 #define SCPYN(a, b) strncpy(a, b, sizeof(a))
 
 	if ((p = ttyname (0)) == NULL)
@@ -893,10 +871,6 @@ shellprocess (void)
 		shellargs[1] = (char *) 0;
 	}
 
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	(void) signal (SIGPIPE, (void (*)())sigpipe);
 	if ( *shellprog == '/' ) {
 		if (shell_flag) {
@@ -1069,10 +1043,6 @@ exitprocess (void)
 #else
 	int		pid, status;
 
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	pid = wait3 (&status, (WNOHANG|WUNTRACED), 0);
 	if (WIFSTOPPED (status))
 #endif
@@ -1134,10 +1104,6 @@ cont:
 		SetRegion();
 	}
 
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 #ifdef SIGTYPE_VOID
 	old_sigtstp = (void(*)()) signal (SIGTSTP, SIG_DFL);
 #else
@@ -1148,10 +1114,6 @@ cont:
 
 	
 
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	(void) signal (SIGTSTP, (void (*)())old_sigtstp);
 	killpg (Pid_shell, SIGCONT);
 	fixtty ();

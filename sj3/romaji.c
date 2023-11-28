@@ -370,10 +370,6 @@ int len;
 		s2 += i;
 		roma[res + i] = '\0';
 		rlen = sj3_rkconv2(roma, kstr, i + res - 1);
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 		res = strlen((char *)roma);
 		if (rlen <= 0)
 			continue;

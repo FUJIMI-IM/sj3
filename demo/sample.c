@@ -44,10 +44,6 @@
 #include "wchar16.h"
 
 #define	RETURN(c)	((c == '\n') || (c == '\r'))
-/*
- * Change a default value.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 #define	RKFILE		"/usr/local/lib/sj3/sjrk"
 #define	LOCALHOST	"localhost"
 #define	HBUFSIZ		512

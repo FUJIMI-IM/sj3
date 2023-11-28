@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 1997  Sony Corporation
- * Copyright (c) 1996  Hidekazu Kuroki <hidekazu at cs.titech.ac.jp>
+ * Copyright (c) 1996  Hidekazu Kuroki
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -34,16 +34,7 @@
  * $SonyDate: 1997/01/23 11:20:55 $
  */
 
-/*
- * Change ErrotOutFile variable.
- * Because suppress a error when sj3serv start up, change to "/dev/stderr".
- * This error is "Cannot Open "/dev/console".". 
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- *
- * Change ErrotOutFile variable.
- * This default value is "/dev/null" in document.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/11
- */
+
 #if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
 #define	ErrorOutFile		"/dev/console"
 #else

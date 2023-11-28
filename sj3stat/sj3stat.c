@@ -91,11 +91,6 @@ main (int argc, char** argv)
 	}
 	fprintf (stdout, "%d users.\n", n);
 
-/*
- * Change hostname entry's length.
- * Because it's so short.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	fprintf(stdout, "%-16s %-32s %-8s %s\n", 
 		"(USER)", "(HOST)", "(FD)", "(CLIENT)");
 	for (i = 0; i < n; i++) {

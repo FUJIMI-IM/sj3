@@ -95,10 +95,6 @@
 
 
 
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 #if defined(TRUE) && defined(FALSE)
 #if (TRUE != 0) || (TRUE != -1)
 #undef TRUE

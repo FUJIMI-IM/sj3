@@ -35,10 +35,6 @@
  * $Id$
  */
 
-/*
- * Change some default values.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 
 #ifndef _Const_H_
 #define _Const_H_  1
@@ -75,10 +71,6 @@
 #define ProtoName               "tcp"
 #define	PortNumber		"3000"
 #else
-/*
- * Change the default Port number of sj3 for FreeBSD.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/20
- */
 #if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
 #define	PortNumber		3086
 #else /* ! __FreeBSD__ __NetBSD__ __OpenBSD__ */

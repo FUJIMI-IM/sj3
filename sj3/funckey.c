@@ -123,10 +123,6 @@ mk_cvtkey(char* term)
 	struct cvtkey *ckeyp;
 	struct wcvtkey *wckeyp;
 
-/*
- * Change a default value.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 	strcpy(cvtkey_file, DEFKEYFILE);
 	strcpy(line, term);
 	if((p = strchr(line, '-')) != NULL)

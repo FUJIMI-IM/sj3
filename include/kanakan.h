@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004  Hiroo Ono <hiroo+sj3 at oikumene.gcd.org>
+ * Copyright (c) 2004  Hiroo Ono
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the

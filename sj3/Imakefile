@@ -32,10 +32,6 @@
  * $SonyDate: 1997/01/23 11:20:53 $
  */
 
-/*
- * Change some make rules.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 
 #include "../sj3.tmpl"
 

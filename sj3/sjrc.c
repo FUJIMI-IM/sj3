@@ -441,10 +441,6 @@ set_forkshell (word)
 struct wordent	word[];
 {
 	if (word[1].word_str[0] != '\0' && shellprog[0] == '\0') {
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
 		strcpy (shellprog, (char *)word[1].word_str);
 		shell_flag++;
 	}
