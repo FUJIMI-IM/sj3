@@ -1,7 +1,7 @@
 /*-
  * SPDX-License-Identifier: MIT-open-group
  *
- * Copyright (C) 1995  Software Research Associates, Inc.
+ * Copyright (c) 1995  Software Research Associates, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
