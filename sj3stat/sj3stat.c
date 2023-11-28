@@ -1,6 +1,7 @@
-/*
- * Copyright (C) 1995 by Software Research Associates, Inc.
- *      Author: Y. Kawabe <kawabe@sra.co.jp>
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
+ * Copyright (C) 1995  Software Research Associates, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,14 +26,6 @@
  * Associates shall not be used in advertising or otherwise to 
  * promote the sale, use or other dealings in this Software without prior 
  * written authorization from Software Research Associates.
- */
-
-/*
- * $SonyRCSfile: sj3stat.c,v $
- * $SonyRevision: 1.2 $
- * $SonyDate: 1997/01/23 11:09:41 $
- *
- * $Id$
  */
 
 #include <stdio.h>
