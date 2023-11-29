@@ -24,7 +24,7 @@
 
 /**
  * @file sj3serv.c
- * @brief かな漢字変換サーバーのエントリーポイント。
+ * @brief かな漢字変換サーバーのメインプロセス。
  */
 
 #include <stdio.h>
