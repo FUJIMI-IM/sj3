@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ * 
  * Copyright (c) 1994  Sony Corporation
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -24,14 +26,8 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: sj3_rkcv.c,v $  
- * $SonyRevision: 1.3 $ 
- * $SonyDate: 1995/02/10 06:02:25 $
- */
 
 #include <string.h>
 
