@@ -23,7 +23,7 @@
 cmake_minimum_required(VERSION 3.9)
 
 project(sj3
-    VERSION 2.0.93
+    VERSION 2.0.94
     LANGUAGES C
 )
 
