@@ -45,15 +45,6 @@ target_include_directories(sj3lib
     PRIVATE include
 )
 
-add_library(sj3rkcv
-    sj3rkcv/rk_conv.c
-    sj3rkcv/sj3_rkcv.c
-    sj3rkcv/wc16_str.c
-)
-target_include_directories(sj3rkcv
-    PRIVATE include sj3h
-)
-
 add_library(kanakan
     kanakan/adddic.c
     kanakan/addelcmn.c
@@ -119,29 +110,23 @@ target_include_directories(kanakan
     PRIVATE include
 )
 
-add_executable(sj3stat
-    sj3stat/sj3stat.c
-)
-target_include_directories(sj3stat
-    PRIVATE include sj3lib
-)
-target_link_libraries(sj3stat
-    sj3lib
-)
-
 add_executable(sj3serv
     sj3serv/sj3serv.c
-#    sj3serv/comuni.c
-#    sj3serv/error.c
-#    sj3serv/execute.c
-#    sj3serv/main.c
-#    sj3serv/setup.c
 )
 target_include_directories(sj3serv
     PRIVATE include sj3lib
 )
 target_link_libraries(sj3serv
     sj3lib kanakan
+)
+
+add_library(sj3rkcv
+    sj3rkcv/rk_conv.c
+    sj3rkcv/sj3_rkcv.c
+    sj3rkcv/wc16_str.c
+)
+target_include_directories(sj3rkcv
+    PRIVATE include
 )
 
 add_executable(sj3dic
@@ -179,5 +164,15 @@ target_include_directories(sj3mkdic
     PRIVATE sj3mkdic include sj3lib
 )
 target_link_libraries(sj3mkdic
+    sj3lib
+)
+
+add_executable(sj3stat
+    sj3stat/sj3stat.c
+)
+target_include_directories(sj3stat
+    PRIVATE include sj3lib
+)
+target_link_libraries(sj3stat
     sj3lib
 )
