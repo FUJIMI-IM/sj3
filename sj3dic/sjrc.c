@@ -59,6 +59,7 @@ static char	*rcfile = ".sjrc";
 static int	user_euc = 0;
 static int	file_code = SYS_SJIS;	
 
+void	setrc();
 int	set_dict(), set_server();
 
 struct functbl {
@@ -73,6 +74,7 @@ struct functbl {
 
 #define TOLOWER(c) (isupper(c) ? tolower(c) : (c))	
 
+int
 sjset_code()
 {
 	char *loc;
@@ -106,6 +108,7 @@ sjset_code()
 }
 	
 
+int
 getsjrc ()
 {
 	FILE *fd;
@@ -140,6 +143,7 @@ getsjrc ()
 }
 
 
+void
 setrc (file, fd)
 char	*file;
 FILE	*fd;
@@ -166,6 +170,7 @@ FILE	*fd;
 }
 
 
+int
 much(s1, s2)
 char *s1, *s2;
 {
@@ -183,6 +188,7 @@ char *s1, *s2;
 }
 
 
+int
 getword (s, word)
 register char	*s;
 struct wordent	word[];
@@ -272,36 +278,42 @@ struct wordent	word[];
 	return wcount;
 }
 
+int
 IsTerminator (c)
 u_char	c;
 {
 	return (c == '\n') ? 1 : 0;
 }
 
+int
 isTerminator (c)
 u_char	c;
 {
 	return (c == '#') ? 1 : 0;
 }
 
+int
 IsEscape (c)
 u_char	c;
 {
 	return (c == '\\') ? 1 : 0;
 }
 
+int
 IsDelimitor (c)
 u_char	c;
 {
 	return (c == ' ' || c == '\t' || c == '.') ? 1 : 0;
 }
 
+int
 set_dict (word)
 struct wordent	word[];
 {
 	setdicname(word[1].word_str);
 }
 
+int
 set_server(word)
 struct wordent	word[];
 {

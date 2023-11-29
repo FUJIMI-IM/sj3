@@ -63,6 +63,8 @@
 unsigned short sjis2euc(), euc2sjis();
 #endif
 
+void sj_sjis2jis(), sj_jis2sjis();
+
 int
 sj3_str_sjistoeuc(out, outlen, in, sjis_default, useflag)
 unsigned char *out, *in, *sjis_default;
@@ -207,6 +209,7 @@ int slen, elen;
 	return sj3_str_euctosjis(s, slen, e, def_char, &dummy);
 }
 
+void
 sj_euc2sjis (s)
 unsigned char *s;
 {
@@ -215,6 +218,7 @@ unsigned char *s;
         sj_jis2sjis (s);
 }
 
+void
 sj_jis2sjis (s)
 unsigned char  *s;
 {
@@ -237,6 +241,7 @@ unsigned char  *s;
         s[1] = nl;
 }
 
+void
 sj_sjis2euc (s)
 unsigned char  *s;
 {
@@ -245,6 +250,7 @@ unsigned char  *s;
         s[1] |= MSB;
 }
 
+void
 sj_sjis2jis (s)
 unsigned char  *s;
 {

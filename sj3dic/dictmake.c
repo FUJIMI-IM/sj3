@@ -135,6 +135,7 @@ char	*y, *k, *h;
 	}
 }
 
+void
 dictmake(input)
 char	*input;
 {
