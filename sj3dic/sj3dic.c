@@ -110,8 +110,8 @@ main(int argc, char** argv)
 	make_dicname();
 
 	/* XXX: is this progname intentional? or old variable left? */
-	/* if (err = sj3_open(serv_name, user_name, prog_name)) */
-	if (err = sj3_open(serv_name, user_name))
+	/* if ((err = sj3_open(serv_name, user_name, prog_name))) */
+	if ((err = sj3_open(serv_name, user_name)))
 		_open_error(err);
 
 	switch (mode) {
@@ -126,7 +126,7 @@ main(int argc, char** argv)
 		break;
 	}
 
-	if (err = sj3_close()) _close_error(err);
+	if ((err = sj3_close())) _close_error(err);
 }
 
 static void

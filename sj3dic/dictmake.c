@@ -157,7 +157,7 @@ char	*input;
 		fp = stdin;
 
 	while (fgets((char *)buf, sizeof(buf), fp)) {
-		if (p = (unsigned char *)strchr((char *)buf, '\n'))
+		if ((p = (unsigned char *)strchr((char *)buf, '\n')))
 			*p = '\0';
 		else {
 			do {

@@ -81,7 +81,7 @@ unsigned char	*s;
 		unsigned short	i;
 		unsigned char	*d = s;
 
-		while (i = *s++) {
+		while ((i = *s++)) {
 			if (iseuckana(i)) {
 				if (*s) {
 					*d++ = *s++;
