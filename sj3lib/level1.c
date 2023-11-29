@@ -418,7 +418,7 @@ open_inet(char* host)
 		return ERROR;
 	}
 
-	if (sp = getservbyname(sj3_port_name, "tcp"))
+	if ((sp = getservbyname(sj3_port_name, "tcp")))
 		port = ntohs(sp -> s_port);
 	else
 		port = sj3_port_number;
@@ -551,7 +551,7 @@ sj3_make_connection(
 				     userlen, put_string, prog, proglen, NULL, NULL, 0) == ERROR)
 			    return ERROR;
 		}
-		if (tmp = get_int()) {
+		if ((tmp = get_int())) {
 			sj3_erase_connection(client);
 			sj3_error_number = tmp;
 			return ERROR;
@@ -571,7 +571,7 @@ sj3_make_connection(
 	put_cmd(SJ3_STDYSIZE);
         if (put_flush() == ERROR) return ERROR;
 
-	if (tmp = get_int()) {
+	if ((tmp = get_int())) {
 		sj3_erase_connection(client);
 		sj3_error_number = tmp;
 		return ERROR;
@@ -629,7 +629,7 @@ sj3_open_dictionary(
 	    return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return 0;
+	if ((sj3_error_number = get_int())) return 0;
         res = get_int();
         return ReadErrorFlag ? ERROR : res;
 }
@@ -643,7 +643,7 @@ sj3_close_dictionary(SJ3_CLIENT_ENV* client, long dicid)
 	put_int(dicid);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -673,7 +673,7 @@ sj3_open_study_file(
 	    return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -685,7 +685,7 @@ sj3_close_study_file(SJ3_CLIENT_ENV* client)
 	put_cmd(SJ3_CLOSESTDY);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -698,7 +698,7 @@ sj3_get_id_size(SJ3_CLIENT_ENV* client)
 	put_cmd(SJ3_STDYSIZE);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 	cliptr -> stdy_size = get_int();
         return ReadErrorFlag ? ERROR : cliptr -> stdy_size;
 }
@@ -712,7 +712,7 @@ sj3_lock_server(SJ3_CLIENT_ENV* client)
 	put_cmd(SJ3_LOCK);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -724,7 +724,7 @@ sj3_unlock_server(SJ3_CLIENT_ENV *client)
 	put_cmd(SJ3_UNLOCK);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -764,7 +764,7 @@ sj3_ikkatu_henkan(
 	    return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	result = get_int();
 
@@ -772,7 +772,7 @@ sj3_ikkatu_henkan(
 	result = 0;
 	stysiz = cliptr -> stdy_size;
 	len1 =  1 + stysiz + 1 + 1;	
-	while (c = get_byte()) {
+	while ((c = get_byte())) {
 
 		top = dst;		
 		if (dstsiz < len1) goto error1;
@@ -781,7 +781,7 @@ sj3_ikkatu_henkan(
 		dst = get_ndata(dst, stysiz);
 		dstsiz -= (stysiz + 1);
 
-		while (c = get_byte()) {
+		while ((c = get_byte())) {
 			if (dstsiz-- < 3) goto error2;
 			*dst++ = c;
 		}
@@ -835,7 +835,7 @@ sj3_bunsetu_henkan(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	result = get_int();
 	get_string( get_ndata(kanji, cliptr -> stdy_size) );
@@ -860,7 +860,7 @@ sj3_bunsetu_jikouho(
 	put_int(mode);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	result = get_int();
 	get_string( get_ndata(kanji, cliptr -> stdy_size) );
@@ -883,7 +883,7 @@ sj3_bunsetu_maekouho(
 	put_int(mode);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	result = get_int();
 	get_string( get_ndata(kanji, cliptr -> stdy_size) );
@@ -919,7 +919,7 @@ sj3_bunsetu_kouhosuu(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	result = get_int();
         return ReadErrorFlag ? ERROR : result;
@@ -954,7 +954,7 @@ sj3_bunsetu_zenkouho(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	while (get_int()) {
                 get_ndata(&(douon -> dcid), cliptr -> stdy_size);
@@ -987,7 +987,7 @@ sj3_tango_gakusyuu(SJ3_CLIENT_ENV* client, SJ3_STUDYREC* stdy)
 	}
 
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1024,7 +1024,7 @@ sj3_bunsetu_gakusyuu(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1063,7 +1063,7 @@ sj3_tango_touroku(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1101,7 +1101,7 @@ sj3_tango_sakujo(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1124,7 +1124,7 @@ sj3_tango_syutoku(
 	put_int(dicid);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	p = get_string(buf);
 	p = get_string(p);
@@ -1150,7 +1150,7 @@ sj3_tango_jikouho(
 	put_int(dicid);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	p = get_string(buf);
 	p = get_string(p);
@@ -1176,7 +1176,7 @@ sj3_tango_maekouho(
 	put_int(dicid);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
 
 	p = get_string(buf);
 	p = get_string(p);
@@ -1215,7 +1215,7 @@ sj3_make_dict_file(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1250,7 +1250,7 @@ sj3_make_study_file(
             return ERROR;
 	}
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1276,7 +1276,7 @@ sj3_make_directory(SJ3_CLIENT_ENV* client, char* path)
 	}
 	  
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1354,7 +1354,7 @@ sj3_quit(SJ3_CLIENT_ENV* client)
 	put_cmd(SJ3_QUIT);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
@@ -1366,7 +1366,7 @@ sj3_kill(SJ3_CLIENT_ENV* client)
 	put_cmd(SJ3_KILL);
         if (put_flush() == ERROR) return ERROR;
 
-	if (sj3_error_number = get_int()) return ERROR;
+	if ((sj3_error_number = get_int())) return ERROR;
         return ReadErrorFlag ? ERROR : 0;
 }
 
