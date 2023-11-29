@@ -35,6 +35,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
+void
 dictdisp(output)
 char	*output;
 {
