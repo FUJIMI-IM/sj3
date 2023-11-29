@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 1994  Sony Corporation
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -24,16 +26,8 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: funckey.c,v $  
- * $SonyRevision: 1.3 $ 
- * $SonyDate: 1997/01/23 11:20:53 $
- *
- * $Id: funckey.c,v 1.3 2004/07/04 08:38:33 hiroo Exp $
- */
 
 
 #include <string.h>

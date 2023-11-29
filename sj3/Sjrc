@@ -1,3 +1,4 @@
+## SPDX-License-Identifier: MIT-open-group
 ##
 ## Copyright (c) 1994  Sony Corporation
 ## 
@@ -24,13 +25,6 @@
 ## shall not be used in advertising or otherwise to promote the sale, use
 ## or other dealings in this Software without prior written authorization
 ## from Sony Corporation.
-##
-
-##
-## $SonyRCSfile: Sjrc,v $  
-## $SonyRevision: 1.1 $ 
-## $SonyDate: 1994/06/03 08:03:06 $
-##
 
 #	ＳＪ３用セット・アップ・ファイル
 #	.sjrc file sample
