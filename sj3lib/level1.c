@@ -31,6 +31,7 @@
 #include "sj_sysvdef.h"
 
 #include <sys/param.h>
+#include <sys/socket.h>
 #include <sys/un.h>
 
 #include <netinet/in.h>
@@ -41,16 +42,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-
-#ifdef TLI              
-#include <fcntl.h>
-#include <netconfig.h>
-#include <netdir.h>
-#include <stropts.h>
-#include <tiuser.h>
-#else
-#include <sys/socket.h>
-#endif
 
 #include "Const.h"
 #include "sj3cmd.h"
@@ -69,11 +60,7 @@ static	char	rcsid_patch[] = "$Id: level1.c,v 1.2 2004/07/20 15:55:43 hiroo Exp $
 int	sj3_error_number;
 char	*sj3_socket_name	= SocketName;
 char	*sj3_port_name	= PortName;
-#ifdef TLI
-extern  int t_errno;
-#else
 int	sj3_port_number	= PortNumber;
-#endif
 
 #define BUFFER_SIZE BUFSIZ  
 static	char	*af_unix_str = "unix";
@@ -106,15 +93,9 @@ put_flush(void)
 	u_char	*p;
 
 	for (i = putpos, p = putbuf ; i > 0 ; i -= j, p += j) {
-#ifdef TLI
-	  if ((j = write(server_fd, p, i)) <= 0) {
-	    t_sndrel(server_fd);
-            close(server_fd);  
-#else
 	  if ((j = write(server_fd, p, i)) <= 0) {
 	    shutdown(server_fd, 2);
 	    close(server_fd);
-#endif
 	    cliptr -> fd = server_fd = -1;
 	    sj3_error_number = SJ3_ServerDown;
 	    return(ERROR);
@@ -211,12 +192,8 @@ get_buffer(void)
 
         getlen = read(server_fd, getbuf, sizeof(getbuf));
         if (getlen <=0) {
-#ifdef TLI
-          t_close(server_fd);  
-#else
 	  shutdown(server_fd, 2);
 	  close(server_fd);
-#endif
 	  cliptr -> fd = server_fd = -1;
 	  sj3_error_number = SJ3_ServerDown;
 	  return ERROR;
@@ -301,7 +278,6 @@ skip_ndata(int n)
 	while (n-- > 0) get_byte();
 }
 
-#ifndef TLI
 static int
 open_unix(void)
 {
@@ -328,7 +304,6 @@ open_unix(void)
 
 	return fd;
 }
-#endif
 
 void
 sj3_set_timeout(int timeout)
@@ -344,76 +319,12 @@ connect_timeout(void)
 static int
 open_inet(char* host)
 {
-#ifdef TLI
-	int val;
-        char *t_alloc();
-        struct t_call *callptr;
-        struct netconfig *nconf;
-        struct nd_hostserv hserv;
-        struct nd_addrlist *addrs;
-        void *handlep;
-	char host_name[BUFSIZ], proto_name[BUFSIZ], *port_name, *tmp_addr;
-        extern void *setnetpath();
-        extern struct netconfig *getnetpath();
-#else 
 	struct	hostent	*hp;
 	struct	servent	*sp;
 	int	port;
 	struct	sockaddr_in	sin;
-#endif
 	int	fd, ret;
 
-#ifdef TLI
-        if ((tmp_addr = strchr(host, '/')) != NULL) {
-		strncpy(proto_name, host, (unsigned int) (tmp_addr - host));
-		proto_name[(unsigned int) (tmp_addr - host)] = '\0';
-                tmp_addr++;
-        } else {
-		strncpy(proto_name, ProtoName, strlen(ProtoName));
-		proto_name[strlen(ProtoName)] = '\0';
-		tmp_addr = host;
-	}
-        if ((port_name = strchr(tmp_addr, ':')) != NULL) {
-		strncpy(host_name, tmp_addr, (unsigned int)(port_name - tmp_addr));
-		host_name[(unsigned int)(port_name - tmp_addr)] = '\0';
-                port_name++;
-        } else {
-		strcpy(host_name, tmp_addr);
-		port_name = PortName;
-	}
-        hserv.h_host = host_name;
-        hserv.h_serv = port_name;
-
-	if ((handlep = setnetpath()) == NULL) {
-                sj3_error_number = SJ3_GetHostByName;
-                return ERROR;
-	}
-	while ((nconf = getnetpath(handlep)) != NULL) {
-                if (((nconf->nc_semantics == NC_TPI_COTS_ORD) || 
-		    (nconf->nc_semantics == NC_TPI_COTS)) &&
-                    (strncmp(nconf->nc_proto, proto_name, strlen(proto_name)) == 0))
-                  break;
-	}
-	if (nconf == NULL) {
-                sj3_error_number = SJ3_GetHostByName;
-                return ERROR;
-	}
-	if (netdir_getbyname(nconf, &hserv, &addrs) != 0) {
-                hserv.h_serv = PortNumber;
-		if (netdir_getbyname(nconf, &hserv, &addrs) != 0) {
-                        sj3_error_number = SJ3_GetHostByName;
-                        return ERROR;
-		}
-	}
-	if (( fd = t_open(nconf->nc_device, O_RDWR, (struct t_info *)0)) < 0) {
-                sj3_error_number = SJ3_OpenSocket;
-                return ERROR;
-	}
-	if (t_bind(fd, (struct t_bind *)0, (struct t_bind *) 0) < 0) {
-                sj3_error_number = SJ3_OpenSocket;
-                return ERROR;
-	}
-#else
 	if (!(hp = gethostbyname(host))) {
 		sj3_error_number = SJ3_GetHostByName;
 		return ERROR;
@@ -433,29 +344,12 @@ open_inet(char* host)
 		sj3_error_number = SJ3_OpenSocket;
 		return ERROR;
 	}
-#endif
         
         if (sj3_timeout > 0) {
                 signal(SIGALRM, (void (*)())connect_timeout);
                 alarm(sj3_timeout);
         }
-#ifdef TLI
-	if((callptr = (struct t_call *) t_alloc(fd, T_CALL, T_ALL)) == NULL) {
-		sj3_error_number = SJ3_NotEnoughMemory;
-		return ERROR;
-	}
-        callptr->addr = *(addrs->n_addrs);
-        callptr->opt.len = 0;
-        callptr->opt.maxlen = 0;
-        callptr->opt.buf = (char *)NULL;
-        callptr->udata.len = 0;
-        callptr->udata.maxlen = 0;
-        callptr->udata.buf = (char *)NULL;
-
-        ret = t_connect(fd, callptr, (struct t_call *) 0);
-#else
         ret = connect(fd, (struct sockaddr *)&sin, sizeof(sin));
-#endif
         if (sj3_timeout > 0) {
                 alarm(0);
                 signal(SIGALRM, SIG_IGN);
@@ -464,19 +358,6 @@ open_inet(char* host)
 		sj3_error_number = SJ3_ConnectSocket;
 		return ERROR;
 	}
-#ifdef TLI
-	if (ioctl(fd, I_POP, (char *) 0) < 0) {
-                sj3_error_number = SJ3_NotOpened;
-                return ERROR;
-	}
-	if (ioctl(fd, I_PUSH, "tirdwr") < 0) {
-                sj3_error_number = SJ3_NotOpened;
-                return ERROR;
-	}
-        val = 0;
-        (void) ioctl(fd, I_SETCLTIME, &val);
-        endnetpath(handlep);
-#endif
 
 	return fd;
 }
@@ -498,16 +379,6 @@ sj3_make_connection(
 	client -> fd = -1;
 
 	if (!serv || *serv == '\0' || !strcmp(serv, af_unix_str))
-#ifdef TLI
-	{
-		serv = LocalHost;
-		strcpy(host, af_unix_str);
-	} else {
-		gethostname(host, sizeof(host));
-	}
-	if ((server_fd = open_inet(serv)) == ERROR) return ERROR;
-
-#else
 	{
 		if ((server_fd = open_unix()) == ERROR) return ERROR;
 		strcpy(host, af_unix_str);
@@ -516,7 +387,6 @@ sj3_make_connection(
 		if ((server_fd = open_inet(serv)) == ERROR) return ERROR;
 		gethostname(host, sizeof(host));
 	}
-#endif
 	client -> fd = server_fd;
 	client_init(client);
 
@@ -593,11 +463,7 @@ sj3_erase_connection(SJ3_CLIENT_ENV* client)
         if (put_flush() == ERROR) return ERROR;
 
 	sj3_error_number = get_int();
-#ifdef TLI
-        t_close(server_fd);
-#else
 	close(server_fd);
-#endif
 	cliptr -> fd = -1;
         if (ReadErrorFlag) return ERROR;
 	return sj3_error_number ? ERROR : 0;

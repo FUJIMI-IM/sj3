@@ -172,9 +172,6 @@ typedef	struct client {
 	StdyFile	*stdy;			
 	short           version;                
 	u_char		def_char[2];            
-#if (defined(TLI) && defined(SOCK_UNIX))
-	int             unix_flag;
-#endif
 	uid_t           uid;
 	struct client   *next;
 } Client;
