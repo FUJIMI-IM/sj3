@@ -28,19 +28,18 @@
  * from Sony Corporation.
  */
 
-
-
-
-
 #include "sj_sysvdef.h"
+
+#include <ctype.h>
+#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
-#include "sj_euc.h"
+
 #if defined(__sony_news) && defined(SVR4)
 #include <sonyils.h>
 #endif
-#include <ctype.h>
+
+#include "sj_euc.h"
 
 #ifndef TRUE
 #define TRUE (1)

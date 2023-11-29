@@ -28,28 +28,29 @@
  * from Sony Corporation.
  */
 
+#include "sj_sysvdef.h"
 
+#include <sys/param.h>
+#include <sys/un.h>
 
-#include "sj_sysvdef.h" 
-#include <stdio.h>
+#include <netinet/in.h>
+
 #include <netdb.h>
 #include <pwd.h>
+#include <signal.h>
+#include <stdio.h>
 #include <string.h>
-#include <sys/un.h>
-#include <sys/types.h>
-#include <sys/param.h>
 #include <unistd.h>
-#include <netinet/in.h>
+
 #ifdef TLI              
 #include <fcntl.h>
-#include <tiuser.h>
-#include <stropts.h>
-#include <netdir.h>
 #include <netconfig.h>
+#include <netdir.h>
+#include <stropts.h>
+#include <tiuser.h>
 #else
 #include <sys/socket.h>
 #endif
-#include <signal.h>
 
 #include "Const.h"
 #include "sj3cmd.h"
