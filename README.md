@@ -31,8 +31,8 @@ SJ3 is a kana-kanji conversion system for Japanese text input.
 
 Unless otherwise noted, SJ3 is released under the MIT License.
 
-The `sj3serv/log.c` and `sj3serv/log.h` are released under the ISC License as
-part of the OpenBSD operating system.
+`sj3serv/log.c` and `sj3serv/log.h` are released under the ISC License as part
+of the OpenBSD operating system.
 
 Except as contained in this notice, the name of Sony Corporation and/or Software
 Research Associates shall not be used in advertising or otherwise to promote the
