@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 2004  Hiroo Ono
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -24,12 +26,8 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $Id: kanakan.h,v 1.2 2004/07/04 08:11:10 hiroo Exp $
- */
 
 #ifndef _KANAKAN_H_
 #define _KANAKAN_H_  1

@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 2004  Hiroo Ono
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -24,12 +26,8 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $Id: server.h,v 1.1 2004/07/02 16:49:29 hiroo Exp $
- */
 
 #ifndef _SERVER_H_
 #define _SERVER_H_  1

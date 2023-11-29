@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 1997  Sony Corporation
  * Copyright (c) 1996  Hidekazu Kuroki
  * 
@@ -25,14 +27,8 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: Paths.h.in,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1997/01/23 11:20:55 $
- */
 
 #if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
 #define	ErrorOutFile		"/dev/console"
