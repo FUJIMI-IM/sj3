@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 1991-1994  Sony Corporation
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -24,14 +26,8 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: sjtool.h,v $  
- * $SonyRevision: 1.2 $ 
- * $SonyDate: 1996/02/15 02:22:59 $
- */
 
 #if defined(__NetBSD__)
 #define LACKOF_SETLOCALE
