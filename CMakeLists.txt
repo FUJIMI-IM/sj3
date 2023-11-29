@@ -22,6 +22,15 @@
 
 cmake_minimum_required(VERSION 3.9)
 
+include(GNUInstallDirs)
+
+configure_file(
+    "${CMAKE_SOURCE_DIR}/pathnames.h.in"
+    "${CMAKE_BINARY_DIR}/pathnames.h"
+)
+
+include_directories("${CMAKE_BINARY_DIR}")
+
 project(sj3
     VERSION 2.0.94
     LANGUAGES C

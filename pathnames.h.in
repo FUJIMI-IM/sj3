@@ -22,15 +22,11 @@
  * SOFTWARE.
  */
 
-/**
- * @file sj3serv.c
- * @brief かな漢字変換サーバーのエントリーポイント。
- */
+#ifndef SJ3_PATHNAMES_H_
+#define SJ3_PATHNAMES_H_
 
-#include "pathnames.h"
+#define _PATH_SJ3_CONF_FILE	"@CMAKE_INSTALL_FULL_SYSCONFDIR@/sj3.conf"
+#define _PATH_SJ3_LOCK_FILE	"@CMAKE_INSTALL_FULL_RUNSTATEDIR@/sj3.lock"
+#define _PATH_SJ3_SOCK_FILE	"@CMAKE_INSTALL_FULL_RUNSTATEDIR@/sj3.sock"
 
-int
-main(int argc, char *argv[])
-{
-	return 0;
-}
+#endif
