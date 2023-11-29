@@ -48,6 +48,9 @@
 #define signal sigset
 #endif
 
+char	*version_number = "2.08C";
+char	*time_stamp = "Mon Mar 23 16:42:59 JST 1998";
+
 extern int	 fork_flag;
 extern char	*lock_file;
 

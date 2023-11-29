@@ -126,8 +126,6 @@ add_executable(sj3serv
     sj3serv/execute.c
     sj3serv/main.c
     sj3serv/setup.c
-    sj3serv/time_stamp.c
-    sj3serv/version.c
 )
 target_include_directories(sj3serv
     PRIVATE include sj3lib
