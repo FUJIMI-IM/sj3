@@ -45,6 +45,7 @@
 #include "sj3lib.h"
 #include "sj_const.h"
 #include "sj_hinsi.h"
+#include "sj_string.h"
 
 extern	int	sj3_error_number;
 #define SYS_SJIS 0
