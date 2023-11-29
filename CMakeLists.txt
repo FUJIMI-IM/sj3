@@ -111,13 +111,16 @@ target_include_directories(kanakan
 )
 
 add_executable(sj3serv
+    sj3serv/level1.c
+    sj3serv/sj.c
+    sj3serv/string.c
     sj3serv/sj3serv.c
 )
 target_include_directories(sj3serv
-    PRIVATE include sj3lib
+    PRIVATE sj3serv include
 )
 target_link_libraries(sj3serv
-    sj3lib kanakan
+    kanakan
 )
 
 add_executable(sj3dic
