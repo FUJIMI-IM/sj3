@@ -128,20 +128,21 @@ put_cmd(int cmd)
 #define put_string put_ndata
 
 static u_char *
-put_ndata(u_char *p, int n)
+put_ndata(void *p, int n)
 {
+	u_char *pp = (u_char *)p;
+
 	while (n-- > 0)
-		put_byte(p ? *p++ : 0);
-	return p;
+		put_byte(pp ? *pp++ : 0);
+	return pp;
 }
 
 static int
-put_over(int buflen,
-    int n,
-    u_char *(*func1)(), u_char *str1, int len1,
-    u_char *(*func2)(), u_char *str2, int len2,
-    u_char *(*func3)(), u_char *str3, int len3,
-    u_char *(*func4)(), u_char *str4, int len4)
+put_over(int buflen, int n,
+    u_char *(*func1)(), void *str1, int len1,
+    u_char *(*func2)(), void *str2, int len2,
+    u_char *(*func3)(), void *str3, int len3,
+    u_char *(*func4)(), void *str4, int len4)
 {
 #define ARGNUM 4
 	u_char	*(*func[ARGNUM])();
@@ -150,16 +151,16 @@ put_over(int buflen,
 	int	 i;
 
 	func[0] = func1;
-	data[0] = str1;
+	data[0] = (u_char *)str1;
 	len[0] = len1;
 	func[1] = func2;
-	data[1] = str2;
+	data[1] = (u_char *)str2;
 	len[1] = len2;
 	func[2] = func3;
-	data[2] = str3;
+	data[2] = (u_char *)str3;
 	len[2] = len3;
 	func[3] = func4;
-	data[3] = str4;
+	data[3] = (u_char *)str4;
 	len[3] = len4;
 
 	for (i = 0; i < n; i++) {
@@ -264,11 +265,12 @@ get_nstring(u_char *p, int n)
 }
 
 static u_char *
-get_ndata(u_char *p, int n)
+get_ndata(void *p, int n)
 {
+	u_char *pp = (u_char *)p;
 	while (n-- > 0)
-		*p++ = get_byte();
-	return p;
+		*pp++ = get_byte();
+	return pp;
 }
 
 static void
