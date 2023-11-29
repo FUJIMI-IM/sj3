@@ -112,9 +112,10 @@ target_include_directories(kanakan
 
 add_executable(sj3serv
     sj3serv/level1.c
+    sj3serv/log.c
     sj3serv/sj.c
-    sj3serv/string.c
     sj3serv/sj3serv.c
+    sj3serv/string.c
 )
 target_include_directories(sj3serv
     PRIVATE sj3serv include
