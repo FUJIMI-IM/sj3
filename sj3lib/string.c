@@ -40,7 +40,6 @@
 #define FALSE (0)
 #endif
 
-#ifndef __sony_news 
 #define sjis2euc        sj3_sjis2euc
 #define euc2sjis        sj3_euc2sjis
 
@@ -50,7 +49,6 @@
 #define iskana(c)   ((0xa1 <= (c)) && ((c) <= 0xdf))
 
 unsigned short sjis2euc(), euc2sjis();
-#endif
 
 void sj_sjis2jis(), sj_jis2sjis();
 
@@ -175,7 +173,6 @@ int max;
 #define MASK    0x7f
 #define MSB     0x80
 
-#if !defined(__sony_news) || defined(__sony_news)
 static  unsigned char def_char[] = {0x81, 0x40};
 
 int 
@@ -349,28 +346,3 @@ unsigned short code;
 
         return(code);
 }       
-#else
-static  unsigned char def_char[] = {0x81, 0x40};
-
-int 
-sj3_sjistoeuc(e, elen, s, slen)
-unsigned char *s, *e;
-int slen, elen;
-{
-	int dummy;
-
-	return sj3_str_sjistoeuc(e, elen, s, def_char, &dummy);
-}
-
-int 
-sj3_euctosjis(s, slen, e, elen)
-unsigned char *s, *e;
-int slen, elen;
-{
-	int dummy;
-
-	return sj3_str_euctosjis(s, slen, e, def_char, &dummy);
-}
-#endif
-
-

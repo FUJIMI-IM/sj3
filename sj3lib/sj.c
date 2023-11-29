@@ -47,14 +47,10 @@
 #include "sj_hinsi.h"
 
 extern	int	sj3_error_number;
-#ifdef __sony_news
-extern  int     _sys_code; 
-#else
 #define SYS_SJIS 0
 #define SYS_EUC 1
 #define SYS_NOTDEF -1
 static  int     _sys_code = SYS_NOTDEF;
-#endif /* __sony_news */
 
 char	*sj3_user_dir = "user";
 static	char	*path_delimiter = "/";
@@ -69,8 +65,6 @@ static  u_char   buf1[YomiBufSize];
 static  u_char   buf2[YomiBufSize];
 static  u_char kbuf[KanjiBufSize];
 
-
-#ifndef __sony_news
 static int 
 set_sys_code(void)
 {
@@ -82,8 +76,6 @@ set_sys_code(void)
 
 	return SYS_EUC;
 }
-#endif
-
 
 static int
 make_dirs(char* path)
@@ -509,10 +501,8 @@ sj3_getkan_euc(u_char* yomi, SJ3_BUNSETU* bun, u_char* knj, int knjsiz)
 int
 sj3_getkan_mb(u_char* yomi, SJ3_BUNSETU* bun, u_char* knj, int knjsiz)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_getkan_euc(yomi, bun, knj, knjsiz);
 	else
@@ -576,10 +566,8 @@ sj3_douoncnt_euc(u_char* yomi)
 int
 sj3_douoncnt_mb(u_char* yomi)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC) 
 	  return sj3_douoncnt_euc(yomi);
 	else
@@ -651,10 +639,8 @@ sj3_getdouon_euc(u_char* yomi, SJ3_DOUON* dou)
 int
 sj3_getdouon_mb(u_char* yomi, SJ3_DOUON* dou)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_getdouon_euc(yomi, dou);
 	else
@@ -725,10 +711,8 @@ sj3_gakusyuu2_euc(u_char* yomi1, u_char* yomi2, SJ3_STUDYREC* dcid)
 int
 sj3_gakusyuu2_mb(u_char* yomi1, u_char* yomi2, SJ3_STUDYREC* dcid)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_gakusyuu2_euc(yomi1, yomi2, dcid);
 	else
@@ -811,10 +795,8 @@ sj3_touroku_euc(u_char* yomi, u_char* kanji, int code)
 int
 sj3_touroku_mb(u_char* yomi, u_char* kanji, int code)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_touroku_euc(yomi, kanji, code);
 	else
@@ -889,10 +871,8 @@ sj3_syoukyo_euc(u_char* yomi, u_char* kanji, int code)
 int
 sj3_syoukyo_mb(u_char* yomi, u_char* kanji, int code)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_syoukyo_euc(yomi, kanji, code);
 	else
@@ -957,10 +937,8 @@ sj3_getdict_euc(u_char* buf)
 int
 sj3_getdict_mb(u_char* buf)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_getdict_euc(buf);
 	else
@@ -1024,10 +1002,8 @@ sj3_nextdict_euc(u_char* buf)
 int
 sj3_nextdict_mb(u_char* buf)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_nextdict_euc(buf);
 	else
@@ -1091,10 +1067,8 @@ sj3_prevdict_euc(u_char* buf)
 int
 sj3_prevdict_mb(u_char* buf)
 {
-#ifndef __sony_news
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
-#endif
 	if (_sys_code == SYS_EUC)
 	  return sj3_prevdict_euc(buf);
 	else
