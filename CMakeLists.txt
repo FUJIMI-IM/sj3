@@ -110,17 +110,17 @@ target_include_directories(kanakan
     PRIVATE include
 )
 
-#add_executable(sj3serv
-#    sj3serv/comuni.c
-#    sj3serv/error.c
-#    sj3serv/execute.c
-#    sj3serv/main.c
-#    sj3serv/setup.c
-#)
 add_executable(sj3serv
-    sj3serv/log.c
-    sj3serv/sj3serv.c
+    sj3serv/comuni.c
+    sj3serv/error.c
+    sj3serv/execute.c
+    sj3serv/main.c
+    sj3serv/setup.c
 )
+#add_executable(sj3serv
+#    sj3serv/log.c
+#    sj3serv/sj3serv.c
+#)
 target_include_directories(sj3serv
     PRIVATE include sj3lib
 )
