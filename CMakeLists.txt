@@ -71,9 +71,7 @@ add_library(kanakan
     kanakan/hzstrlen.c
     kanakan/init.c
     kanakan/istrcmp.c
-    kanakan/memcpy.c
     kanakan/memory.c
-    kanakan/memset.c
     kanakan/mk2claus.c
     kanakan/mkbunset.c
     kanakan/mkjiritu.c
@@ -100,9 +98,6 @@ add_library(kanakan
     kanakan/srchhead.c
     kanakan/srchidx.c
     kanakan/srchnum.c
-    kanakan/sstrcmp.c
-    kanakan/sstrlen.c
-    kanakan/sstrncmp.c
     kanakan/stbtbl.c
     kanakan/stttbl.c
     kanakan/study.c
