@@ -27,10 +27,35 @@
  * @brief かな漢字変換サーバーのエントリーポイント。
  */
 
-#include "pathnames.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+__dead void
+usage(void)
+{
+	extern char *__progname;
+
+	fprintf(stderr, "usage: %s [-v]\n", __progname);
+	exit(EXIT_FAILURE);
+}
 
 int
 main(int argc, char *argv[])
 {
+	int verbose = 0;
+	int c;
+
+	while ((c = getopt(argc, argv, "v")) != -1) {
+		switch (c) {
+		case 'v':
+			verbose++;
+			break;
+		default:
+			usage();
+			/* NOTREACHED */
+		}
+	}
+
 	return 0;
 }
