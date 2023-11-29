@@ -77,12 +77,7 @@ int	client_fd;
 
 extern char	*socket_name;
 extern char	*port_name;
-#ifdef TLI
-extern char    *port_number;
-extern char    *proto_name;
-#else
 extern int	port_number;
-#endif
 extern int	max_client;
 
 static int	fd_inet = -1;
@@ -158,7 +153,6 @@ clr_fd(int fd)
 #endif
 }
 
-#if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 static void
 open_af_unix(void)
@@ -200,130 +194,16 @@ open_af_unix(void)
 	}
 	set_fd(fd_unix);
 }
-#endif
 
-#ifdef TLI
-struct t_call *inet_callptr;
-struct netconfig *nconf;
-#endif
 
 static void
 open_af_inet(void)
 {
-#ifdef TLI
-	struct t_bind *req;
-	struct nd_hostserv hserv;
-	struct nd_addrlist *addrs;
-	struct t_optmgmt *opt;
-	struct opthdr *hdr;
-	void *handlep;
-	extern int t_errno;
-	extern void *setnetpath();
-	extern struct netconfig *getnetpath();
-#else
 	struct sockaddr_in	 sin;
 	struct servent		*sp;
 	u_short			 port;
-#endif
 	int	true = 1;
 
-#ifdef TLI
-	if ((handlep = setnetpath()) == NULL) {
-		fprintf(stderr, "Setnetpath fail\n");
-		exit(1);
-	}
-
-	while ((nconf = getnetpath(handlep)) != NULL) {
-		if ((nconf->nc_semantics == NC_TPI_COTS_ORD) &&
-		    (strncmp(nconf->nc_proto, proto_name, strlen(proto_name)) ==
-		     0))
-			break;
-	}
-	if (nconf == NULL) {
-		fprintf(stderr, "No connection mode transport\n");
-		exit(1);
-	}
-	hserv.h_host = HOST_SELF;
-	hserv.h_serv = port_number;
-	if (netdir_getbyname(nconf, &hserv, &addrs) != 0) {
-		hserv.h_serv = port_name;
-		if (netdir_getbyname(nconf, &hserv, &addrs) != 0) {
-			fprintf(stderr, "Can't get address\n");
-			exit(1);
-		}
-	}
-	if ((fd_inet = t_open(nconf->nc_device, O_RDWR,
-	    (struct t_info *)NULL)) < 0) {
-		fprintf(stderr, "Can't t_open\n");
-		exit(1);
-	}
-
-	if ((opt = (struct t_optmgmt *)t_alloc(fd_inet, T_OPTMGMT, T_ALL)) ==
-	    NULL) {
-		fprintf(stderr, "Can't t_alloc error for T_OPTMGT\n");
-		exit(1);
-	}
-	if ((hdr = (struct opthdr *)malloc(sizeof(*hdr) + sizeof(true))) ==
-	    NULL) {
-		fprintf(stderr, "server: not malloc\n");
-		exit(1);
-	}
-	hdr->level = SOL_SOCKET;
-	hdr->name = SO_REUSEADDR;
-	hdr->len = sizeof(true);
-
-	(void)memcpy(&true, (char *)hdr + sizeof(*hdr), sizeof(true));
-
-	opt->opt.len = opt->opt.maxlen = sizeof(*hdr) + sizeof(true);
-	opt->flags = T_CHECK;
-	opt->opt.buf = (char *)hdr;
-
-	if ((t_optmgmt(fd_inet, opt, opt) < 0) || !(opt->flags & T_SUCCESS)) {
-		fprintf(stderr, "Warning: Can't reuse address %s(%s)\n",
-		    port_name, port_number);
-	} else {
-		opt->flags = T_NEGOTIATE;
-
-		(void)memcpy(&true, (char *)hdr + sizeof(*hdr), sizeof(true));
-		(void)t_optmgmt(fd_inet, opt, opt);
-	}
-
-	if ((req = (struct t_bind *)t_alloc(fd_inet, T_BIND, T_ALL)) == NULL) {
-		t_close(fd_inet);
-		fprintf(stderr, "Can't alloc bind data\n");
-		exit(1);
-	}
-	req->addr.maxlen = addrs->n_addrs->maxlen;
-	req->addr.len = addrs->n_addrs->len;
-
-	(void)memcpy(addrs->n_addrs->buf, req->addr.buf, addrs->n_addrs->len);
-	req->qlen = 5;
-
-	if (t_bind(fd_inet, req, req) < 0) {
-		fprintf(stderr, "Can't t_bind\n");
-		t_close(fd_inet);
-		exit(1);
-	}
-	if (memcmp(req->addr.buf, addrs->n_addrs->buf, addrs->n_addrs->len) !=
-	    0) {
-		fprintf(stderr, "Port '%s(%s)' is already in use\n",
-		    port_name, port_number);
-		t_close(fd_inet);
-		exit(1);
-	}
-	if ((inet_callptr = (struct t_call *)t_alloc(fd_inet, T_CALL, T_ALL)) ==
-	    NULL) {
-		fprintf(stderr, "t_alloc error for T_CALL\n");
-		t_close(fd_inet);
-		exit(1);
-	}
-
-	inet_callptr->addr = *(addrs->n_addrs);
-
-	inet_callptr->udata.maxlen = 0;
-	inet_callptr->udata.len = 0;
-	inet_callptr->udata.buf = (char *)NULL;
-#else
 	if ((sp = getservbyname(port_name, "tcp")) != NULL)
 		port = ntohs(sp->s_port);
 	else
@@ -366,7 +246,6 @@ open_af_inet(void)
 		fprintf(stderr, "Can't listen AF_INET socket\n");
 		exit(1);
 	}
-#endif
 	set_fd(fd_inet);
 }
 
@@ -374,12 +253,8 @@ void
 open_socket(void)
 {
 	open_af_inet();
-#if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 	open_af_unix();
-#endif
 }
-
-#if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 static int
 connect_af_unix(void)
@@ -392,69 +267,18 @@ connect_af_unix(void)
 		warning_out("Can't accept AF_UNIX socket");
 	return fd;
 }
-#endif
-
-#ifdef TLI
-int
-accept_func(int fd, struct t_call *callptr, char *name, int closeflg)
-{
-	int look, newfd;
-	extern int t_errno;
-
-	if ((newfd = t_open(name, O_RDWR, (struct t_info *)0)) < 0) {
-		if (!closeflg)
-			warning_out("Can't t_open");
-		return ERROR;
-	}
-	if (t_bind(newfd, (struct t_bind *)0, (struct t_bind *)0) < 0) {
-		if (!closeflg)
-			warning_out("t_bind error");
-		return ERROR;
-	}
-	t_errno = 0;
-	if (t_accept(fd, newfd, callptr) < 0) {
-		t_close(newfd);
-		if (!closeflg)
-			warning_out("t_accept error");
-		return ERROR;
-	}
-	if (ioctl(newfd, I_POP, (char *)0) < 0) {
-		if (!closeflg)
-			warning_out("I_POP timod failed");
-		return ERROR;
-	}
-	if (ioctl(newfd, I_PUSH, "tirdwr") < 0) {
-		if (!closeflg)
-			warning_out("I_PUSH tirdwr failed");
-		return ERROR;
-	}
-	return (newfd);
-}
-#endif
 
 static int
 connect_af_inet(void)
 {
-#ifndef TLI
 	struct sockaddr_in	sin;
 	int			i = sizeof(sin);
-#endif
 	int	fd;
 
-#ifdef TLI
-	if (t_listen(fd_inet, inet_callptr) < 0)
-		warning_out("t_listen error");
-
-	if ((fd = accept_func(fd_inet, inet_callptr, nconf->nc_device,
-	    FALSE)) == ERROR)
-#else
 	if ((fd = accept(fd_inet, (struct sockaddr *)&sin, &i)) == ERROR)
-#endif
 		warning_out("Can't accept AF_INET socket");
 	return fd;
 }
-
-#if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 static void
 close_af_unix(void)
@@ -474,46 +298,29 @@ close_af_unix(void)
 	unlink(socket_name);
 	clr_fd(fd_unix);
 }
-#endif
 
 static void
 close_af_inet(void)
 {
-#ifndef TLI
 	struct sockaddr_in	sin;
-#endif
 	int	true = 1;
 	int	i;
 
 	ioctl(fd_inet, FIONBIO, &true);
 	for (; ;) {
-#ifdef TLI
-		if (accept_func(fd_inet, inet_callptr, nconf->nc_device, TRUE) <
-		    0)
-			break;
-#else
 		i = sizeof(sin);
 		if (accept(fd_inet, (struct sockaddr *)&sin, &i) < 0)
 			break;
-#endif
 	}
-#ifdef TLI
-	t_sndrel(fd_inet);
-	t_close(fd_inet);
-	clr_fd(fd_inet);
-#else
 	shutdown(fd_inet, 2);
 	close(fd_inet);
 	clr_fd(fd_inet);
-#endif
 }
 
 void
 close_socket(void)
 {
-#if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 	close_af_unix();
-#endif
 	close_af_inet();
 }
 
@@ -525,9 +332,6 @@ connect_client(fd_set *readfds)
 #endif
 {
 	int	fd;
-#if (defined(TLI) && defined(SOCK_UNIX))
-	int     unix_flag = 0;
-#endif
 	Client   *client_tmp;
 
 #ifdef SVR4
@@ -540,34 +344,20 @@ connect_client(fd_set *readfds)
 			readfds[i].revents = 0;
 			break;
 		}
-#if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 		if ((readfds[i].fd == fd_unix) &&
 		    (readfds[i].revents == POLLIN)) {
 			fd = connect_af_unix();
 			readfds[i].revents = 0;
-#if (defined(TLI) && defined(SOCK_UNIX))
-			unix_flag = 1;
-#endif
 			break;
 		}
-#endif
 	}
 	if (i == maxfds)
 		return;
 #else /* SVR4 */
 	if (FD_ISSET(fd_inet, readfds))
 		fd = connect_af_inet();
-#if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 	else if (FD_ISSET(fd_unix, readfds))
-#if (defined(TLI) && defined(SOCK_UNIX))
-	    {
 		fd = connect_af_unix();
-		unix_flag = 1;
-	}
-#else
-		fd = connect_af_unix();
-#endif
-#endif
 	else
 		return;
 #endif /* SVR4 */
@@ -583,9 +373,6 @@ connect_client(fd_set *readfds)
 		if ((client_tmp = (Client *)malloc(sizeof(Client))) != NULL) {
 			memset(client_tmp, 0, sizeof(Client));
 			client_tmp->fd = fd;
-#if (defined(TLI) && defined(SOCK_UNIX))
-			client_tmp->unix_flag = unix_flag;
-#endif
 			client_tmp->next = client;
 			client = client_tmp;
 			client_num++;
@@ -596,24 +383,6 @@ connect_client(fd_set *readfds)
 		}
 		warning_out("No more client(Can't alloc)");
 	}
-#ifdef TLI
-#ifdef SOCK_UNIX
-	if (unix_flag) {
-		shutdown(fd, 2);
-		close(fd);
-	} else {
-		t_sndrel(fd);
-		t_close(fd);
-	}
-#else
-	t_sndrel(fd);
-	t_close(fd);
-#endif
-#else
-	shutdown(fd, 2);
-	close(fd);
-#endif
-
 }
 
 static Client *
@@ -631,29 +400,6 @@ disconnect_client(Client *cp)
 
 	debug_out(1, "client dead(%d)\r\n", cp->fd);
 	logging_out("disconnect from client on %d", cp->fd);
-#ifdef TLI
-#ifdef SOCK_UNIX
-	if (cp->unix_flag) {
-		shutdown(fd = cp->fd, 2);
-		close(fd);
-		clr_fd(fd);
-	} else {
-		fd = cp->fd;
-		t_sndrel(fd);
-		t_close(fd);
-		clr_fd(fd);
-	}
-#else
-	fd = cp->fd;
-	t_sndrel(fd);
-	t_close(fd);
-	clr_fd(fd);
-#endif
-#else 
-	shutdown(fd = cp->fd, 2);
-	close(fd);
-	clr_fd(fd);
-#endif
 	if (cp == client) {
 		client = cp->next;
 		free(cp);

@@ -73,11 +73,7 @@ StrList	*open_dict	= NULL;
 char	*error_file	= NULL;			
 char	*log_file	= NULL;
 char	*port_name	= NULL;
-#ifdef TLI
-char	*port_number	= NULL;
-#else
 int	port_number	= -1;
-#endif
 char	*socket_name	= NULL;
 #ifdef	LOCK_FILE
 char	*lock_file	= NULL;
@@ -85,9 +81,6 @@ char	*lock_file	= NULL;
 int	dir_mode	= -1;			
 int	file_mode	= S_IRUSR|S_IWUSR;
 StrList	*allow_user	= NULL;
-#ifdef TLI
-char    *proto_name     = NULL;
-#endif
 
 static	int	line_number;			
 
@@ -232,15 +225,8 @@ struct	optlist {
 
 	"PortName",	get_str,	&port_name,
 	"portname",	get_str,	&port_name,
-#ifdef TLI
-	"PortNumber",	get_str,	&port_number,
-	"portnumber",	get_str,	&port_number,
-	"ProtoName",    get_str,        &proto_name,
-	"protoname",    get_str,        &proto_name,
-#else
 	"PortNumber",	get_int,	&port_number,
 	"portnumber",	get_int,	&port_number,
-#endif
 	"SocketName",	get_str,	&socket_name,
 	"socketname",	get_str,	&socket_name,
 #ifdef	LOCK_FILE
@@ -422,18 +408,10 @@ set_default(void)
 #ifdef	LOCK_FILE
 	set_defstr(&lock_file,		LockFile);
 #endif
-#ifdef TLI
-        set_defstr(&proto_name,         ProtoName);
-#endif
-
 	set_defint(&debug_level,	DebugLevel);
 	set_defint(&fork_flag,		ForkFlag);
 	set_defint(&max_client,		MaxClientNum);
-#ifdef TLI
-	set_defstr(&port_number,	PortNumber);
-#else
 	set_defint(&port_number,	PortNumber);
-#endif
 	set_defint(&dir_mode,		DirectryMode);
 	set_defint(&file_mode,		DictFileMode);
 }
