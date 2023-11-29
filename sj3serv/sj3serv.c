@@ -31,12 +31,17 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "pathnames.h"
+
+const char	 default_conffile[] = _PATH_SJ3_CONF_FILE;
+const char	*conffile = default_conffile;
+
 __dead void
 usage(void)
 {
 	extern char *__progname;
 
-	fprintf(stderr, "usage: %s [-v]\n", __progname);
+	fprintf(stderr, "usage: %s [-v] [-f file]\n", __progname);
 	exit(EXIT_FAILURE);
 }
 
@@ -46,8 +51,11 @@ main(int argc, char *argv[])
 	int verbose = 0;
 	int c;
 
-	while ((c = getopt(argc, argv, "v")) != -1) {
+	while ((c = getopt(argc, argv, "f:v")) != -1) {
 		switch (c) {
+		case 'f':
+			conffile = optarg;
+			break;
 		case 'v':
 			verbose++;
 			break;
