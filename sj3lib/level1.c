@@ -52,11 +52,6 @@
 #define signal sigset
 #endif
 
-#ifndef lint
-static	char	rcsid_sony[] = "$SonyId: level1.c,v 1.4 1995/04/17 10:36:08 notanaka Exp $ SONY;";
-static	char	rcsid_patch[] = "$Id: level1.c,v 1.2 2004/07/20 15:55:43 hiroo Exp $";
-#endif
-
 int	sj3_error_number;
 char	*sj3_socket_name	= SocketName;
 char	*sj3_port_name	= PortName;

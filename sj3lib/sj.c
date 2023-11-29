@@ -56,10 +56,6 @@ extern  int     _sys_code;
 static  int     _sys_code = SYS_NOTDEF;
 #endif /* __sony_news */
 
-#ifndef	lint
-static	char	rcsid_sony[] = "$Header: /export/work/contrib/sj3/sj3lib/RCS/sj.c,v 1.14 1994/06/03 07:42:13 notanaka Exp $ SONY;";
-#endif
-
 char	*sj3_user_dir = "user";
 static	char	*path_delimiter = "/";
 static	SJ3_CLIENT_ENV  client = { -1, 0 };

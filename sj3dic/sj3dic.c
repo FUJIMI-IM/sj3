@@ -57,10 +57,6 @@ extern int _sys_code;
 int _sys_code = SYS_EUC;
 #endif
 
-#ifndef	lint
-static	char	rcsid_sony[] = "$Header: /export/work/contrib/sj3/sj3dic/RCS/sj3dic.c,v 1.11 1994/06/03 07:41:59 notanaka Exp $ SONY;";
-#endif
-
 static	struct	option	{
 	char	*str;
 	int	code;
