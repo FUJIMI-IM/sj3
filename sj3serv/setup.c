@@ -29,19 +29,17 @@
  * from Sony Corporation.
  */
 
-
-
-
-
 #include "sj_sysvdef.h"
+
+#include <sys/param.h>
+#include <sys/stat.h>
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/param.h>
 #include <unistd.h>
+
 #include "sj_typedef.h"
 #include "sj_const.h"
 #include "sj_var.h"
@@ -291,7 +289,7 @@ FILE	*fp;
 	while (c != '\n' && c != EOF) c = getc(fp);
 	return c;
 }
-static	readln(fp, p, len)
+static	int readln(fp, p, len)
 FILE	*fp;
 char	*p;
 int	len;		
