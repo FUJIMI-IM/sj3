@@ -120,15 +120,6 @@ target_link_libraries(sj3serv
     sj3lib kanakan
 )
 
-add_library(sj3rkcv
-    sj3rkcv/rk_conv.c
-    sj3rkcv/sj3_rkcv.c
-    sj3rkcv/wc16_str.c
-)
-target_include_directories(sj3rkcv
-    PRIVATE include
-)
-
 add_executable(sj3dic
     sj3dic/codecnv.c
     sj3dic/dictdisp.c
