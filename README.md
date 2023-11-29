@@ -34,10 +34,9 @@ Unless otherwise noted, SJ3 is released under the MIT License.
 `sj3serv/log.c` and `sj3serv/log.h` are released under the ISC License as part
 of the OpenBSD operating system.
 
-Except as contained in this notice, the name of Sony Corporation and/or Software
-Research Associates shall not be used in advertising or otherwise to promote the
-sale, use or other dealings in this software without prior written authorization
-from the organizations.
+Except as contained in this notice, the name of Sony Corporation shall not be
+used in advertising or otherwise to promote the sale, use or other dealings in
+this Software without prior written authorization from Sony Corporation.
 
 ## Acknowledgments
 

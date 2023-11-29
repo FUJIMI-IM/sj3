@@ -158,13 +158,3 @@ target_include_directories(sj3mkdic
 target_link_libraries(sj3mkdic
     sj3lib
 )
-
-add_executable(sj3stat
-    sj3stat/sj3stat.c
-)
-target_include_directories(sj3stat
-    PRIVATE include sj3lib
-)
-target_link_libraries(sj3stat
-    sj3lib
-)
