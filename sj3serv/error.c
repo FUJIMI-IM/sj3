@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: MIT-open-group
  *
  * Copyright (c) 1991-1994  Sony Corporation
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -21,57 +21,52 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
  * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * Except as contained in this notice, the name of Sony Corporation
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
  */
 
-
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "sj_typedef.h"
+
 #include "server.h"
+#include "sj_typedef.h"
 
-extern	char	program_name[];
-extern	int	debug_level;
-extern	int	client_fd;
+extern char	program_name[];
+extern int	debug_level;
+extern int	client_fd;
 
-static	char	*tty_name = "/dev/tty";
-static	FILE	*errfp = NULL;
-static	FILE	*logfp = NULL;
-static	FILE	*dbgfp = NULL;
-
+static char	*tty_name = "/dev/tty";
+static FILE	*errfp = NULL;
+static FILE	*logfp = NULL;
+static FILE	*dbgfp = NULL;
 
 int
 open_error(void)
 {
-	extern	char	*error_file;
-	int	flg = 0;
+	extern char	*error_file;
+	int		 flg = 0;
 
 	if (error_file && *error_file) {
 		if (!strcmp(error_file, tty_name)) {
 			errfp = stderr;
 			flg = -1;
-		}
-		else if (!(errfp = fopen(error_file, "a")))
+		} else if (!(errfp = fopen(error_file, "a"))) {
 			fprintf(stderr, "Can't open \"%s\"\r\n", error_file);
-	}
-	else
+		}
+	} else {
 		errfp = NULL;
+	}
 
 	return flg;
 }
 
-
 void
-error_out(char* s, int p1, int p2, int p3, int p4, int p5)
+error_out(char *s, int p1, int p2, int p3, int p4, int p5)
 {
 	char	tmp[BUFSIZ];
 
@@ -83,9 +78,8 @@ error_out(char* s, int p1, int p2, int p3, int p4, int p5)
 	exit(1);
 }
 
-
 void
-warning_out(char* s, int p1, int p2, int p3, int p4, int p5)
+warning_out(char *s, int p1, int p2, int p3, int p4, int p5)
 {
 	char	tmp[BUFSIZ];
 
@@ -96,40 +90,38 @@ warning_out(char* s, int p1, int p2, int p3, int p4, int p5)
 	}
 }
 
-
 int
 open_log(void)
 {
-	extern	char	*log_file;
-	int	flg = 0;
+	extern char	*log_file;
+	int		 flg = 0;
 
 	if (log_file && *log_file) {
 		if (!strcmp(log_file, tty_name)) {
 			logfp = stderr;
 			flg = -1;
-		}
-		else
+		} else {
 			logfp = fopen(log_file, "a");
+		}
 		if (logfp) {
 			time_t t;
 
 			time(&t);
 			fprintf(logfp, "%s: log started at %s\r",
-				program_name, ctime(&t));
+			    program_name, ctime(&t));
 			fflush(logfp);
-		}
-		else
+		} else {
 			fprintf(stderr, "Can't open \"%s\"\r\n", log_file);
-	}
-	else
+		}
+	} else {
 		logfp = NULL;
+	}
 
 	return flg;
 }
 
-
 void
-logging_out(char* s, int p1, int p2, int p3, int p4, int p5)
+logging_out(char *s, int p1, int p2, int p3, int p4, int p5)
 {
 	char	tmp[BUFSIZ];
 
@@ -140,30 +132,28 @@ logging_out(char* s, int p1, int p2, int p3, int p4, int p5)
 	}
 }
 
-
 int
 open_debug(void)
 {
-	extern	char	*debug_file;
-	int	flg = 0;
+	extern char	*debug_file;
+	int		 flg = 0;
 
 	if (debug_file && *debug_file) {
 		if (!strcmp(debug_file, tty_name)) {
 			dbgfp = stderr;
 			flg = -1;
-		}
-		else  if (!(dbgfp = fopen(debug_file, "a")))
+		} else if (!(dbgfp = fopen(debug_file, "a"))) {
 			fprintf(stderr, "Can't open \"%s\"\r\n", debug_file);
-	}
-	else
+		}
+	} else {
 		dbgfp = NULL;
+	}
 
 	return flg;
 }
 
-
 void
-debug_out(int lvl, char* s, int p1, int p2, int p3, int p4, int p5)
+debug_out(int lvl, char *s, int p1, int p2, int p3, int p4, int p5)
 {
 	if (lvl <= debug_level && dbgfp) {
 		fprintf(dbgfp, s, p1, p2, p3, p4, p5);

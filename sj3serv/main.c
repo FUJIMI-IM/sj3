@@ -1,8 +1,8 @@
 /*-
  * SPDX-License-Identifier: MIT-open-group
- * 
+ *
  * Copyright (c) 1991-1994  Sony Corporation
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -21,7 +21,7 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
  * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * Except as contained in this notice, the name of Sony Corporation
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
@@ -29,11 +29,7 @@
  */
 
 #include "sj_sysvdef.h"
-#include <locale.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <sys/types.h>
+
 #include <sys/file.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
@@ -52,46 +48,37 @@
 #define signal sigset
 #endif
 
-extern	int	fork_flag;
-extern	char	*lock_file;
-
-
+extern int	 fork_flag;
+extern char	*lock_file;
 
 #ifdef	LOCK_FILE
-
-
 int
-make_lockfile (void)
+make_lockfile(void)
 {
 	int	fd;
 
 	fd = open(lock_file, O_CREAT | O_EXCL, 0600);
-	if (fd < 0) return ERROR;
+	if (fd < 0)
+		return ERROR;
 	close(fd);
 	return 0;
 }
 
-
 int
-erase_lockfile (void)
+erase_lockfile(void)
 {
 	return unlink(lock_file);
 }
 #endif
 
 static int
-signal_handler (sig, code, scp)
-int	sig;
-int	code;
-struct sigcontext *scp;
+signal_handler(int sig, int code, struct sigcontext *scp)
 {
 	warning_out("signal %d, code %d catched.", sig, code);
 }
 
-static	int	terminate_handler(sig, code, scp)
-int	sig;
-int	code;
-struct sigcontext *scp;
+static int
+terminate_handler(int sig, int code, struct sigcontext *scp)
 {
 	close_socket();
 	sj_closeall();
@@ -102,7 +89,7 @@ struct sigcontext *scp;
 }
 
 void
-server_terminate (void)
+server_terminate(void)
 {
 	close_socket();
 	sj_closeall();
@@ -112,10 +99,8 @@ server_terminate (void)
 	exit(0);
 }
 
-
-
-static	void
-exec_fork (void)
+static void
+exec_fork(void)
 {
 	int	tmp;
 
@@ -123,11 +108,10 @@ exec_fork (void)
 		if (tmp < 0) {
 			fprintf(stderr, "Can't fork child process\r\n");
 			fflush(stderr);
-		}
-		else {
+		} else {
 			signal(SIGCHLD, _exit);
-			signal(SIGHUP , SIG_IGN);
-			signal(SIGINT , SIG_IGN);
+			signal(SIGHUP, SIG_IGN);
+			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
 			signal(SIGTSTP, SIG_IGN);
 			signal(SIGTERM, _exit);
@@ -136,30 +120,28 @@ exec_fork (void)
 		}
 	}
 
-	signal(SIGHUP,  (void (*)())signal_handler);
+	signal(SIGHUP, (void (*)())signal_handler);
 
-
-	signal(SIGINT,  (void (*)())terminate_handler);
+	signal(SIGINT, (void (*)())terminate_handler);
 	signal(SIGQUIT, (void (*)())signal_handler);
 	signal(SIGTERM, (void (*)())terminate_handler);
 	if (fork_flag)
 		signal(SIGTSTP, SIG_IGN);
 }
 
-
-
-static	void
-leave_tty (void)
+static void
+leave_tty(void)
 {
 	int	tmp;
 
-	tmp  = open_error();
+	tmp = open_error();
 	tmp |= open_log();
 	tmp |= open_debug();
 	kill(getppid(), SIGTERM);
 	fclose(stdin);
 	fclose(stdout);
-	if (!tmp) fclose(stderr);
+	if (!tmp)
+		fclose(stderr);
 
 	if (fork_flag) {
 		if ((tmp = open("/dev/tty", O_RDWR)) >= 0) {
@@ -169,33 +151,33 @@ leave_tty (void)
 	}
 }
 
-
-
 int
-main (int argc, char **argv)
+main(int argc, char **argv)
 {
 #ifndef __NetBSD__
 	if (setuid(geteuid())) {
-		fprintf(stderr, "error at setuid.\r\n"); exit(1);
+		fprintf(stderr, "error at setuid.\r\n");
+		exit(1);
 	}
 #endif
 
-	parse_arg(argc, argv);		
-	read_runcmd();			
-	set_default();			
+	parse_arg(argc, argv);
+	read_runcmd();
+	set_default();
 
 #ifdef	LOCK_FILE
 	if (make_lockfile() == ERROR) {
-		fprintf(stderr, "Already running...\r\n"); exit(1);
+		fprintf(stderr, "Already running...\r\n");
+		exit(1);
 	}
 #endif
 
-	exec_fork();  
+	exec_fork();
 
 	socket_init();
 	open_socket();
 
-        leave_tty(); 
+	leave_tty();
 
 	preload_dict();
 	preopen_dict();

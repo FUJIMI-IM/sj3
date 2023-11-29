@@ -28,34 +28,24 @@
  * from Sony Corporation.
  */
 
-
-
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include "sj_sysvdef.h"
-#include "sj_kcnv.h"
-#include <sys/socket.h>
-#include <sys/un.h>
+
 #include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <sys/un.h>
+
 #include <netinet/in.h>
+
+#include <errno.h>
 #include <netdb.h>
 #include <setjmp.h>
-#include <errno.h>
-#ifdef SVR4
-#include <sys/filio.h>
-#include <sys/signal.h>
-#include <poll.h>
-#endif
-#ifdef TLI
-#include <fcntl.h>
-#include <tiuser.h>
-#include <stropts.h>   
-#include <sys/types.h>
-#include <netdir.h>
-#include <netconfig.h>
-#endif
+#include <signal.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#include "sj_kcnv.h"
 
 #ifdef SVR4
 #define signal sigset
@@ -72,45 +62,44 @@
 # define SOMAXCONN 5
 #endif
 
-int	client_num = 0;		
+int	 client_num = 0;
 Client	*client = NULL;
-Client  *cur_client;
+Client	*cur_client;
 
-int	maxfds = 0;		
+int	maxfds = 0;
 #ifdef SVR4
 struct pollfd poll_fds[_NFILE];
 #else
-fd_set	fds_org = { 0 };	
+fd_set	fds_org = { 0 };
 #endif
 jmp_buf	client_dead;
 int	client_fd;
 
-extern	char	*socket_name;
-extern	char	*port_name;
+extern char	*socket_name;
+extern char	*port_name;
 #ifdef TLI
-extern  char    *port_number;
-extern  char    *proto_name;
+extern char    *port_number;
+extern char    *proto_name;
 #else
-extern	int	port_number;
+extern int	port_number;
 #endif
-extern	int	max_client;
+extern int	max_client;
 
-static	int	fd_inet = -1;
-static	int	fd_unix = -1;
+static int	fd_inet = -1;
+static int	fd_unix = -1;
 
-static	char	putbuf[BUFSIZ];		
-static	char	getbuf[BUFSIZ];		
-static	int	putpos = 0;		
-static	int	buflen = 0;		
-static	int	getpos = 0;		
-
+static char	putbuf[BUFSIZ];
+static char	getbuf[BUFSIZ];
+static int	putpos = 0;
+static int	buflen = 0;
+static int	getpos = 0;
 
 void
 socket_init(void)
 {
 #ifdef SVR4
 	int i;
-	
+
 	for (i = 0; i < _NFILE; i++) {
 		poll_fds[i].fd = -1;
 		poll_fds[i].events = 0;
@@ -123,22 +112,19 @@ socket_init(void)
 	maxfds = 0;
 }
 
-
-
 static void
 set_fd(int fd)
 {
 #ifdef SVR4
-        poll_fds[maxfds].fd = fd;
-        poll_fds[maxfds].events = POLLIN;
+	poll_fds[maxfds].fd = fd;
+	poll_fds[maxfds].events = POLLIN;
 	maxfds++;
 #else
 	FD_SET(fd, &fds_org);
-	if (fd >= maxfds) maxfds = fd + 1;
+	if (fd >= maxfds)
+		maxfds = fd + 1;
 #endif
 }
-
-
 
 static void
 clr_fd(int fd)
@@ -150,9 +136,9 @@ clr_fd(int fd)
 		if (poll_fds[i].fd == fd) {
 			maxfds--;
 			for (j = i; j < maxfds; j++) {
-				poll_fds[j].fd = poll_fds[j+1].fd;
-				poll_fds[j].events = poll_fds[j+1].events;
-				poll_fds[j].revents = poll_fds[j+1].revents; 
+				poll_fds[j].fd = poll_fds[j + 1].fd;
+				poll_fds[j].events = poll_fds[j + 1].events;
+				poll_fds[j].revents = poll_fds[j + 1].revents;
 			}
 			poll_fds[j].fd = -1;
 			poll_fds[j].events = 0;
@@ -164,7 +150,8 @@ clr_fd(int fd)
 	FD_CLR(fd, &fds_org);
 	if (maxfds == fd + 1) {
 		while (--fd >= 0) {
-			if (FD_ISSET(fd, &fds_org)) break;
+			if (FD_ISSET(fd, &fds_org))
+				break;
 		}
 		maxfds = fd + 1;
 	}
@@ -172,7 +159,6 @@ clr_fd(int fd)
 }
 
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
-
 
 static void
 open_af_unix(void)
@@ -191,12 +177,14 @@ open_af_unix(void)
 		exit(1);
 	}
 
-	if (bind(fd_unix, (struct sockaddr *)&sunix, strlen(sunix.sun_path) + 2) == ERROR) {
-		if (errno == EADDRINUSE)
+	if (bind(fd_unix, (struct sockaddr *)&sunix,
+	    strlen(sunix.sun_path) + 2) == ERROR) {
+		if (errno == EADDRINUSE) {
 			fprintf(stderr, "Port '%s' is already in use\n",
-				socket_name);
-		else
+			    socket_name);
+		} else {
 			fprintf(stderr, "Can't bind AF_UNIX socket\n");
+		}
 		shutdown(fd_unix, 2);
 		close(fd_unix);
 		unlink(socket_name);
@@ -219,128 +207,131 @@ struct t_call *inet_callptr;
 struct netconfig *nconf;
 #endif
 
-
 static void
 open_af_inet(void)
 {
 #ifdef TLI
-        struct t_bind *req;
-        struct nd_hostserv hserv;
-        struct nd_addrlist *addrs;  
+	struct t_bind *req;
+	struct nd_hostserv hserv;
+	struct nd_addrlist *addrs;
 	struct t_optmgmt *opt;
 	struct opthdr *hdr;
-        void *handlep;
-        extern int t_errno;
-        extern void *setnetpath();
-        extern struct netconfig *getnetpath();
+	void *handlep;
+	extern int t_errno;
+	extern void *setnetpath();
+	extern struct netconfig *getnetpath();
 #else
-	struct sockaddr_in	sin;
-	struct servent	*sp;
-	u_short	port;
+	struct sockaddr_in	 sin;
+	struct servent		*sp;
+	u_short			 port;
 #endif
 	int	true = 1;
 
-	
 #ifdef TLI
-	  if (( handlep = setnetpath()) == NULL) {
-                fprintf(stderr, "Setnetpath fail\n");
-                exit(1);
-	  }
+	if ((handlep = setnetpath()) == NULL) {
+		fprintf(stderr, "Setnetpath fail\n");
+		exit(1);
+	}
 
-	while((nconf = getnetpath(handlep)) != NULL) {
-                if ((nconf->nc_semantics == NC_TPI_COTS_ORD) &&
-                    (strncmp(nconf->nc_proto, proto_name, strlen(proto_name)) == 0))
-                  break;
+	while ((nconf = getnetpath(handlep)) != NULL) {
+		if ((nconf->nc_semantics == NC_TPI_COTS_ORD) &&
+		    (strncmp(nconf->nc_proto, proto_name, strlen(proto_name)) ==
+		     0))
+			break;
 	}
 	if (nconf == NULL) {
-                fprintf(stderr, "No connection mode transport\n");
-                exit(1); 
+		fprintf(stderr, "No connection mode transport\n");
+		exit(1);
 	}
-        hserv.h_host = HOST_SELF;
-        hserv.h_serv = port_number;
+	hserv.h_host = HOST_SELF;
+	hserv.h_serv = port_number;
 	if (netdir_getbyname(nconf, &hserv, &addrs) != 0) {
-                hserv.h_serv = port_name;
+		hserv.h_serv = port_name;
 		if (netdir_getbyname(nconf, &hserv, &addrs) != 0) {
-                      fprintf(stderr, "Can't get address\n");
-                      exit(1);
+			fprintf(stderr, "Can't get address\n");
+			exit(1);
 		}
 	}
-	if ((fd_inet = t_open(nconf->nc_device, O_RDWR, (struct t_info *) NULL)) < 0) {
-                fprintf(stderr,"Can't t_open\n");
-                exit(1);
+	if ((fd_inet = t_open(nconf->nc_device, O_RDWR,
+	    (struct t_info *)NULL)) < 0) {
+		fprintf(stderr, "Can't t_open\n");
+		exit(1);
 	}
 
-	if ((opt = (struct t_optmgmt *) t_alloc(fd_inet, T_OPTMGMT, T_ALL)) == NULL) {
+	if ((opt = (struct t_optmgmt *)t_alloc(fd_inet, T_OPTMGMT, T_ALL)) ==
+	    NULL) {
 		fprintf(stderr, "Can't t_alloc error for T_OPTMGT\n");
 		exit(1);
 	}
-	if ((hdr = (struct opthdr *) malloc(sizeof(*hdr) + sizeof(true))) == NULL) {
+	if ((hdr = (struct opthdr *)malloc(sizeof(*hdr) + sizeof(true))) ==
+	    NULL) {
 		fprintf(stderr, "server: not malloc\n");
 		exit(1);
 	}
-        hdr->level = SOL_SOCKET;
-        hdr->name  = SO_REUSEADDR;
-        hdr->len   = sizeof(true);
-      
-        (void) memcpy(&true, (char *)hdr + sizeof(*hdr), sizeof(true));
+	hdr->level = SOL_SOCKET;
+	hdr->name = SO_REUSEADDR;
+	hdr->len = sizeof(true);
 
-	opt->opt.len  = opt->opt.maxlen = sizeof(*hdr) + sizeof(true);
-        opt->flags    = T_CHECK;
-        opt->opt.buf  = (char *)hdr;
+	(void)memcpy(&true, (char *)hdr + sizeof(*hdr), sizeof(true));
 
-	if ((t_optmgmt(fd_inet, opt, opt) < 0) || !(opt->flags & T_SUCCESS)){
+	opt->opt.len = opt->opt.maxlen = sizeof(*hdr) + sizeof(true);
+	opt->flags = T_CHECK;
+	opt->opt.buf = (char *)hdr;
+
+	if ((t_optmgmt(fd_inet, opt, opt) < 0) || !(opt->flags & T_SUCCESS)) {
 		fprintf(stderr, "Warning: Can't reuse address %s(%s)\n",
-			port_name, port_number);
+		    port_name, port_number);
 	} else {
-		opt->flags    = T_NEGOTIATE;		
-	      
-		(void) memcpy(&true, (char *)hdr + sizeof(*hdr), sizeof(true));
-		(void) t_optmgmt(fd_inet, opt, opt);
+		opt->flags = T_NEGOTIATE;
+
+		(void)memcpy(&true, (char *)hdr + sizeof(*hdr), sizeof(true));
+		(void)t_optmgmt(fd_inet, opt, opt);
 	}
 
-        if ((req = (struct t_bind *) t_alloc(fd_inet, T_BIND, T_ALL)) == NULL) {
-                t_close(fd_inet);
-                fprintf(stderr, "Can't alloc bind data\n");
-                exit(1);
+	if ((req = (struct t_bind *)t_alloc(fd_inet, T_BIND, T_ALL)) == NULL) {
+		t_close(fd_inet);
+		fprintf(stderr, "Can't alloc bind data\n");
+		exit(1);
 	}
-        req->addr.maxlen = addrs->n_addrs->maxlen;
-        req->addr.len = addrs->n_addrs->len;
-      
-        (void) memcpy(addrs->n_addrs->buf, req->addr.buf, addrs->n_addrs->len);
-	req->qlen = 5;   
-	
-	if (t_bind(fd_inet, req, req) < 0 ) {
+	req->addr.maxlen = addrs->n_addrs->maxlen;
+	req->addr.len = addrs->n_addrs->len;
+
+	(void)memcpy(addrs->n_addrs->buf, req->addr.buf, addrs->n_addrs->len);
+	req->qlen = 5;
+
+	if (t_bind(fd_inet, req, req) < 0) {
 		fprintf(stderr, "Can't t_bind\n");
 		t_close(fd_inet);
 		exit(1);
 	}
-	if (memcmp(req->addr.buf, addrs->n_addrs->buf, addrs->n_addrs->len) != 0) {
-                fprintf(stderr, "Port '%s(%s)' is already in use\n",
-                        port_name, port_number);
-                t_close(fd_inet);
-                exit(1);
+	if (memcmp(req->addr.buf, addrs->n_addrs->buf, addrs->n_addrs->len) !=
+	    0) {
+		fprintf(stderr, "Port '%s(%s)' is already in use\n",
+		    port_name, port_number);
+		t_close(fd_inet);
+		exit(1);
 	}
-	if ((inet_callptr = (struct t_call *) t_alloc(fd_inet, T_CALL, T_ALL)) == NULL) {
-                fprintf(stderr,"t_alloc error for T_CALL\n");
-                t_close(fd_inet);
-                exit(1);
+	if ((inet_callptr = (struct t_call *)t_alloc(fd_inet, T_CALL, T_ALL)) ==
+	    NULL) {
+		fprintf(stderr, "t_alloc error for T_CALL\n");
+		t_close(fd_inet);
+		exit(1);
 	}
 
 	inet_callptr->addr = *(addrs->n_addrs);
 
-
 	inet_callptr->udata.maxlen = 0;
 	inet_callptr->udata.len = 0;
-	inet_callptr->udata.buf = (char *) NULL;
+	inet_callptr->udata.buf = (char *)NULL;
 #else
 	if ((sp = getservbyname(port_name, "tcp")) != NULL)
-		port = ntohs(sp -> s_port);
+		port = ntohs(sp->s_port);
 	else
 		port = port_number;
 
 	memset((char *)&sin, '\0', sizeof(sin));
-	sin.sin_family      = AF_INET;
-	sin.sin_port        = htons(port);
+	sin.sin_family = AF_INET;
+	sin.sin_port = htons(port);
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if ((fd_inet = socket(AF_INET, SOCK_STREAM, 0)) == ERROR) {
@@ -352,17 +343,18 @@ open_af_inet(void)
 
 	if (bind(fd_inet, (struct sockaddr *)&sin, sizeof(sin)) == ERROR) {
 		if (errno == EADDRINUSE) {
-			if (sp)
+			if (sp) {
 				fprintf(stderr,
-					"Port '%s(%d)' is already in use\n",
-					port_name, port);
-			else
+				    "Port '%s(%d)' is already in use\n",
+				    port_name, port);
+			} else {
 				fprintf(stderr,
-					"Port %d is already in use\n",
-					port);
-		}
-		else
+				    "Port %d is already in use\n",
+				    port);
+			}
+		} else {
 			fprintf(stderr, "Can't bind AF_INET socket\n");
+		}
 		shutdown(fd_inet, 2);
 		close(fd_inet);
 		exit(1);
@@ -389,13 +381,12 @@ open_socket(void)
 
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
-
 static int
 connect_af_unix(void)
 {
 	struct sockaddr_un	sunix;
-	int	i = sizeof(sunix);
-	int	fd;
+	int			i = sizeof(sunix);
+	int			fd;
 
 	if ((fd = accept(fd_unix, (struct sockaddr *)&sunix, &i)) == ERROR)
 		warning_out("Can't accept AF_UNIX socket");
@@ -405,56 +396,57 @@ connect_af_unix(void)
 
 #ifdef TLI
 int
-accept_func(int fd, struct t_call* callptr, char* name, int closeflg)
+accept_func(int fd, struct t_call *callptr, char *name, int closeflg)
 {
-        int newfd;  
-        int look;
-        extern int t_errno;
-                
+	int look, newfd;
+	extern int t_errno;
+
 	if ((newfd = t_open(name, O_RDWR, (struct t_info *)0)) < 0) {
-                if (!closeflg) warning_out("Can't t_open");
-                return ERROR;
+		if (!closeflg)
+			warning_out("Can't t_open");
+		return ERROR;
 	}
 	if (t_bind(newfd, (struct t_bind *)0, (struct t_bind *)0) < 0) {
-                if (!closeflg) warning_out("t_bind error");
-                return ERROR;
+		if (!closeflg)
+			warning_out("t_bind error");
+		return ERROR;
 	}
-        t_errno = 0;
-	if (t_accept(fd, newfd, callptr) <0 ){
-                t_close(newfd);
-                if (!closeflg) warning_out("t_accept error");
-                return ERROR;
+	t_errno = 0;
+	if (t_accept(fd, newfd, callptr) < 0) {
+		t_close(newfd);
+		if (!closeflg)
+			warning_out("t_accept error");
+		return ERROR;
 	}
-	if (ioctl(newfd, I_POP, (char *) 0) < 0) {
-                if (!closeflg) warning_out("I_POP timod failed");
-                return ERROR;
+	if (ioctl(newfd, I_POP, (char *)0) < 0) {
+		if (!closeflg)
+			warning_out("I_POP timod failed");
+		return ERROR;
 	}
 	if (ioctl(newfd, I_PUSH, "tirdwr") < 0) {
-                if (!closeflg) warning_out("I_PUSH tirdwr failed");
-                return ERROR;
+		if (!closeflg)
+			warning_out("I_PUSH tirdwr failed");
+		return ERROR;
 	}
-        return(newfd);
+	return (newfd);
 }
 #endif
-
-
 
 static int
 connect_af_inet(void)
 {
 #ifndef TLI
 	struct sockaddr_in	sin;
-	int	i = sizeof(sin);
+	int			i = sizeof(sin);
 #endif
 	int	fd;
 
 #ifdef TLI
-	  if (t_listen(fd_inet, inet_callptr) < 0) {
-                warning_out("t_listen error");
+	if (t_listen(fd_inet, inet_callptr) < 0)
+		warning_out("t_listen error");
 
-	  }
-        
-        if ((fd = accept_func(fd_inet, inet_callptr, nconf->nc_device, FALSE)) == ERROR)
+	if ((fd = accept_func(fd_inet, inet_callptr, nconf->nc_device,
+	    FALSE)) == ERROR)
 #else
 	if ((fd = accept(fd_inet, (struct sockaddr *)&sin, &i)) == ERROR)
 #endif
@@ -464,18 +456,18 @@ connect_af_inet(void)
 
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
-
 static void
 close_af_unix(void)
 {
 	struct sockaddr_un	sunix;
-	int	true = 1;
-	int	i;
+	int			true = 1;
+	int			i;
 
 	ioctl(fd_unix, FIONBIO, &true);
-	for ( ; ; ) {
+	for (; ;) {
 		i = sizeof(sunix);
-		if (accept(fd_unix, (struct sockaddr *)&sunix, &i) < 0) break;
+		if (accept(fd_unix, (struct sockaddr *)&sunix, &i) < 0)
+			break;
 	}
 	shutdown(fd_unix, 2);
 	close(fd_unix);
@@ -483,8 +475,6 @@ close_af_unix(void)
 	clr_fd(fd_unix);
 }
 #endif
-
-
 
 static void
 close_af_inet(void)
@@ -496,19 +486,21 @@ close_af_inet(void)
 	int	i;
 
 	ioctl(fd_inet, FIONBIO, &true);
-	for ( ; ; ) {
+	for (; ;) {
 #ifdef TLI
-                if (accept_func(fd_inet, inet_callptr, nconf->nc_device, TRUE) < 0) 
+		if (accept_func(fd_inet, inet_callptr, nconf->nc_device, TRUE) <
+		    0)
 			break;
 #else
 		i = sizeof(sin);
-		if (accept(fd_inet, (struct sockaddr *)&sin, &i) < 0) break;
+		if (accept(fd_inet, (struct sockaddr *)&sin, &i) < 0)
+			break;
 #endif
 	}
 #ifdef TLI
 	t_sndrel(fd_inet);
-        t_close(fd_inet);
-        clr_fd(fd_inet);
+	t_close(fd_inet);
+	clr_fd(fd_inet);
 #else
 	shutdown(fd_inet, 2);
 	close(fd_inet);
@@ -525,8 +517,6 @@ close_socket(void)
 	close_af_inet();
 }
 
-
-
 static void
 #ifdef SVR4
 connect_client(struct pollfd *readfds)
@@ -536,7 +526,7 @@ connect_client(fd_set *readfds)
 {
 	int	fd;
 #if (defined(TLI) && defined(SOCK_UNIX))
-	int     unix_flag=0;
+	int     unix_flag = 0;
 #endif
 	Client   *client_tmp;
 
@@ -544,7 +534,7 @@ connect_client(fd_set *readfds)
 	int     i;
 
 	for (i = 0; i < maxfds; i++) {
-		if ((readfds[i].fd == fd_inet) && 
+		if ((readfds[i].fd == fd_inet) &&
 		    (readfds[i].revents == POLLIN)) {
 			fd = connect_af_inet();
 			readfds[i].revents = 0;
@@ -562,14 +552,15 @@ connect_client(fd_set *readfds)
 		}
 #endif
 	}
-	if (i == maxfds) return;
+	if (i == maxfds)
+		return;
 #else /* SVR4 */
 	if (FD_ISSET(fd_inet, readfds))
 		fd = connect_af_inet();
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 	else if (FD_ISSET(fd_unix, readfds))
 #if (defined(TLI) && defined(SOCK_UNIX))
-        {
+	    {
 		fd = connect_af_unix();
 		unix_flag = 1;
 	}
@@ -580,20 +571,15 @@ connect_client(fd_set *readfds)
 	else
 		return;
 #endif /* SVR4 */
-	if (fd == ERROR) return;
+	if (fd == ERROR)
+		return;
 
-	
-
-	
 	if (client_num >= MaxClientNum || client_num >= max_client) {
 		warning_out("No more client");
-	}
-
-	else {
+	} else {
 		debug_out(1, "client create(%d)\r\n", fd);
 		logging_out("connect to client on %d", fd);
 
-		
 		if ((client_tmp = (Client *)malloc(sizeof(Client))) != NULL) {
 			memset(client_tmp, 0, sizeof(Client));
 			client_tmp->fd = fd;
@@ -603,9 +589,9 @@ connect_client(fd_set *readfds)
 			client_tmp->next = client;
 			client = client_tmp;
 			client_num++;
-			
+
 			set_fd(fd);
-			
+
 			return;
 		}
 		warning_out("No more client(Can't alloc)");
@@ -630,38 +616,38 @@ connect_client(fd_set *readfds)
 
 }
 
-
-
-static Client*
+static Client *
 disconnect_client(Client *cp)
 {
-	WorkArea *wp;
-	StdyFile *sp;
-	int	fd;
-	Client  *cl_tmp, *cl_before;
+	WorkArea	*wp;
+	StdyFile	*sp;
+	int		 fd;
+	Client		*cl_before, *cl_tmp;
 
-	if ((sp = cp->stdy) != NULL)  closestdy(sp);
-	if ((wp = cp->work) != NULL)  free_workarea(wp);
-  
+	if ((sp = cp->stdy) != NULL)
+		closestdy(sp);
+	if ((wp = cp->work) != NULL)
+		free_workarea(wp);
+
 	debug_out(1, "client dead(%d)\r\n", cp->fd);
 	logging_out("disconnect from client on %d", cp->fd);
 #ifdef TLI
 #ifdef SOCK_UNIX
-        if (cp->unix_flag) {
+	if (cp->unix_flag) {
 		shutdown(fd = cp->fd, 2);
 		close(fd);
 		clr_fd(fd);
-	} else	{	
+	} else {
 		fd = cp->fd;
 		t_sndrel(fd);
 		t_close(fd);
 		clr_fd(fd);
 	}
 #else
-        fd = cp->fd;
+	fd = cp->fd;
 	t_sndrel(fd);
-        t_close(fd);
-        clr_fd(fd);
+	t_close(fd);
+	clr_fd(fd);
 #endif
 #else 
 	shutdown(fd = cp->fd, 2);
@@ -686,56 +672,52 @@ disconnect_client(Client *cp)
 		}
 		cp = cl_before->next;
 	}
-  	client_num--;
+	client_num--;
 	return cp;
 }
-
-#ifndef SIGPIPE
-#include <signal.h>
-#endif
 
 void
 communicate(void)
 {
-	
+
 	signal(SIGPIPE, SIG_IGN);
-        
-	for ( ; ; ) {
+
+	for (; ;) {
 #ifdef SVR4
 		int i;
 
-		while(poll(poll_fds, maxfds, -1) == ERROR) { 
-			if (errno != EINTR) error_out("poll");
+		while (poll(poll_fds, maxfds, -1) == ERROR) {
+			if (errno != EINTR)
+				error_out("poll");
 			errno = 0;
 		}
 #else
 
 		fd_set	readfds;
 
-		
 		readfds = fds_org;
-		while (select(maxfds,&readfds,NULL,NULL,NULL) == ERROR) {
-			if (errno != EINTR) error_out("select");
+		while (select(maxfds, &readfds, NULL, NULL, NULL) == ERROR) {
+			if (errno != EINTR)
+				error_out("select");
 			errno = 0;
 		}
 #endif
 		
-		for (cur_client = client ; cur_client; ) {
-
+		for (cur_client = client; cur_client;) {
 			if (setjmp(client_dead)) {
 				cur_client = disconnect_client(cur_client);
 				continue;
 			}
 #ifdef SVR4
-			for ( i = 0; i < maxfds; i++) {
+			for (i = 0; i < maxfds; i++) {
 				if ((poll_fds[i].fd == cur_client->fd) &&
 				    (poll_fds[i].revents == POLLIN)) {
-				          poll_fds[i].revents = 0;
-					  client_fd = cur_client->fd;
-					  putpos = buflen = getpos = 0;
-					  execute_cmd();
-					  break;
-				 }
+					poll_fds[i].revents = 0;
+					client_fd = cur_client->fd;
+					putpos = buflen = getpos = 0;
+					execute_cmd();
+					break;
+				}
 			}
 			cur_client = cur_client->next;
 		}
@@ -753,32 +735,28 @@ communicate(void)
 	}
 }
 
-
 void
 put_flush(void)
 {
-	int	len;
-	int	i;
+	int	 i, len;
 	char	*p;
 
-	for (len = putpos, p = putbuf ; len > 0 ; ) {
-		if ((i = write(client_fd, p, len)) == ERROR) {
+	for (len = putpos, p = putbuf; len > 0;) {
+		if ((i = write(client_fd, p, len)) == ERROR)
 			longjmp(client_dead, -1);
-		}
 		len -= i;
 		p += i;
 	}
 	putpos = 0;
 }
 
-
 void
 put_byte(int c)
 {
 	putbuf[putpos++] = c;
-	if (putpos >= sizeof(putbuf)) put_flush();
+	if (putpos >= sizeof(putbuf))
+		put_flush();
 }
-
 
 void
 put_work(int c)
@@ -786,7 +764,6 @@ put_work(int c)
 	put_byte(c >> 8);
 	put_byte(c & 0xff);
 }
-
 
 void
 put_int(int c)
@@ -797,28 +774,26 @@ put_int(int c)
 	put_byte(c);
 }
 
-
-u_char*
-put_string(u_char* p)
+u_char *
+put_string(u_char *p)
 {
 	if (p) {
 		do {
 			put_byte(*p);
 		} while (*p++);
-	}
-	else
+	} else {
 		put_byte(0);
+	}
 	return p;
 }
 
-
-u_char*
-put_ndata(u_char* p, int n)
+u_char *
+put_ndata(u_char *p, int n)
 {
-	while (n-- > 0) put_byte(p ? *p++ : 0);
+	while (n-- > 0)
+		put_byte(p ? *p++ : 0);
 	return p;
 }
-
 
 void
 get_buf(void)
@@ -826,10 +801,13 @@ get_buf(void)
 	int	i;
 
 	for (;;) {
-		if ((i = read(client_fd, getbuf, sizeof(getbuf))) > 0) break;
+		if ((i = read(client_fd, getbuf, sizeof(getbuf))) > 0)
+			break;
 		if (i == ERROR) {
-			if (errno == EINTR) continue;
-			if (errno == EWOULDBLOCK) continue;
+			if (errno == EINTR)
+				continue;
+			if (errno == EWOULDBLOCK)
+				continue;
 		}
 		longjmp(client_dead, -1);
 	}
@@ -837,14 +815,13 @@ get_buf(void)
 	getpos = 0;
 }
 
-
 int
 get_byte(void)
 {
-	if (getpos >= buflen) get_buf();
-	return (getbuf[getpos++] & 0xff);
+	if (getpos >= buflen)
+		get_buf();
+	return getbuf[getpos++] & 0xff;
 }
-
 
 int
 get_word(void)
@@ -852,41 +829,38 @@ get_word(void)
 	int	i;
 
 	i = get_byte();
-	return ((i << 8) | get_byte());
+	return (i << 8) | get_byte();
 }
-
 
 int
 get_int(void)
 {
-	int	i0;
-	int	i1;
-	int	i2;
+	int	i0, i1, i2;
 
 	i0 = get_byte();
 	i1 = get_byte();
 	i2 = get_byte();
-	return((i0 << (8*3)) | (i1 << (8*2)) | (i2 << (8*1)) | get_byte());
+	return (i0 << (8*3)) | (i1 << (8*2)) | (i2 << (8*1)) | get_byte();
 }
 
-
 int
-get_nstring(u_char* p, int n)
+get_nstring(u_char *p, int n)
 {
 	int	c;
 
 	do {
 		c = get_byte();
-		if (n-- > 0) *p++ = c;
+		if (n-- > 0)
+			*p++ = c;
 	} while (c);
 
 	return (n < 0) ? ERROR : 0;
 }
 
-
-u_char*
-get_ndata(u_char* p, int n)
+u_char *
+get_ndata(u_char *p, int n)
 {
-	while (n-- > 0) *p++ = get_byte();
+	while (n-- > 0)
+		*p++ = get_byte();
 	return p;
 }
