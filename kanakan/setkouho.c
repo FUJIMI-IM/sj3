@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 1991-1994  Sony Corporation
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -24,16 +26,8 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: setkouho.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:02:20 $
- *
- * $Id$
- */
 
 
 #include "sj_euc.h"

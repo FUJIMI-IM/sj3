@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 1991-1994  Sony Corporation
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -27,11 +29,6 @@
  *
  */
 
-/*
- * $SonyRCSfile: stbtbl.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:02:34 $
- */
 
 
 
