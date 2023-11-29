@@ -28,16 +28,10 @@
  * from Sony Corporation.
  */
 
-#include "sj_sysvdef.h"
-
 #include <ctype.h>
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#if defined(__sony_news) && defined(SVR4)
-#include <sonyils.h>
-#endif
 
 #include "sj_euc.h"
 
@@ -181,7 +175,7 @@ int max;
 #define MASK    0x7f
 #define MSB     0x80
 
-#if !defined(__sony_news) || (defined(__sony_news) && !defined(SVR4))
+#if !defined(__sony_news) || defined(__sony_news)
 static  unsigned char def_char[] = {0x81, 0x40};
 
 int 
@@ -356,7 +350,6 @@ unsigned short code;
         return(code);
 }       
 #else
-#ifndef SVR4
 static  unsigned char def_char[] = {0x81, 0x40};
 
 int 
@@ -378,7 +371,6 @@ int slen, elen;
 
 	return sj3_str_euctosjis(s, slen, e, def_char, &dummy);
 }
-#endif
 #endif
 
 

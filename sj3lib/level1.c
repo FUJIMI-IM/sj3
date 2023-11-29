@@ -28,8 +28,6 @@
  * from Sony Corporation.
  */
 
-#include "sj_sysvdef.h"
-
 #include <sys/param.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -47,10 +45,6 @@
 #include "sj3cmd.h"
 #include "sj3err.h"
 #include "sj3lib.h"
-
-#ifdef SVR4
-#define signal sigset
-#endif
 
 int	sj3_error_number;
 char	*sj3_socket_name	= SocketName;
