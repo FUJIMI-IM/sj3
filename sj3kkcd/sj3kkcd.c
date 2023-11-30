@@ -23,7 +23,7 @@
  */
 
 /**
- * @file sj3serv.c
+ * @file sj3kkcd.c
  * @brief かな漢字変換サーバーのメインプロセス。
  */
 

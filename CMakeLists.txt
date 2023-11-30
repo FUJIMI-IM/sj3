@@ -117,14 +117,21 @@ add_executable(sj3serv
     sj3serv/main.c
     sj3serv/setup.c
 )
-#add_executable(sj3serv
-#    sj3serv/log.c
-#    sj3serv/sj3serv.c
-#)
 target_include_directories(sj3serv
     PRIVATE include lib/sj3lib
 )
 target_link_libraries(sj3serv
+    sj3lib kanakan
+)
+
+add_executable(sj3kkcd
+    sj3kkcd/log.c
+    sj3kkcd/sj3kkcd.c
+)
+target_include_directories(sj3kkcd
+    PRIVATE include lib/sj3lib
+)
+target_link_libraries(sj3kkcd
     sj3lib kanakan
 )
 
