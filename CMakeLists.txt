@@ -124,16 +124,16 @@ target_link_libraries(sj3serv
     sj3lib kanakan
 )
 
-#add_executable(sj3kkcd
-#    sj3kkcd/log.c
-#    sj3kkcd/sj3kkcd.c
-#)
-#target_include_directories(sj3kkcd
-#    PRIVATE include lib/sj3lib
-#)
-#target_link_libraries(sj3kkcd
-#    sj3lib kanakan
-#)
+add_executable(sj3kkcd
+    sj3kkcd/log.c
+    sj3kkcd/sj3kkcd.c
+)
+target_include_directories(sj3kkcd
+    PRIVATE include lib/sj3lib
+)
+target_link_libraries(sj3kkcd
+    sj3lib kanakan
+)
 
 add_executable(sj3dic
     sj3dic/codecnv.c
