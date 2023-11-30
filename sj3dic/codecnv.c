@@ -40,6 +40,7 @@
 
 static	int	euc_mode;
 
+int
 init_code()
 {
 	char *loc;
@@ -70,6 +71,7 @@ init_code()
 	return 1;
 }
 
+void
 cnvcode(s)
 unsigned char	*s;
 {
@@ -106,6 +108,7 @@ unsigned char	*s;
 	}
 }
 
+void
 printout_mb(fp, s)
 FILE    *fp;
 unsigned char   *s;
@@ -114,6 +117,7 @@ unsigned char   *s;
 	fflush(fp);
 }
 
+void
 printout(fp, s) 
 FILE	*fp;
 unsigned char	*s;
@@ -128,6 +132,7 @@ unsigned char	*s;
 	fflush(fp);
 }
 
+void
 normal_out(fmt, p1, p2, p3, p4, p5)
 char	*fmt;
 int	p1, p2, p3, p4, p5;
@@ -138,6 +143,7 @@ int	p1, p2, p3, p4, p5;
 	printout(stdout, buf);
 }
 
+void
 error_out(fmt, p1, p2, p3, p4, p5)
 char	*fmt;
 int	p1, p2, p3, p4, p5;
