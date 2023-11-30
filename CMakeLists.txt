@@ -37,74 +37,74 @@ configure_file(
 include_directories("${CMAKE_BINARY_DIR}")
 
 add_library(sj3lib
-    sj3lib/level1.c
-    sj3lib/sj.c
-    sj3lib/string.c
+    lib/sj3lib/level1.c
+    lib/sj3lib/sj.c
+    lib/sj3lib/string.c
 )
 target_include_directories(sj3lib
     PRIVATE include
 )
 
 add_library(kanakan
-    kanakan/adddic.c
-    kanakan/addelcmn.c
-    kanakan/alloc.c
-    kanakan/charsize.c
-    kanakan/chrtbl.c
-    kanakan/cl2knj.c
-    kanakan/clstudy.c
-    kanakan/cmpstr.c
-    kanakan/conjunc.c
-    kanakan/connect.c
-    kanakan/cvtclknj.c
-    kanakan/cvtdict.c
-    kanakan/cvtkanji.c
-    kanakan/deldic.c
-    kanakan/depend.c
-    kanakan/dict.c
-    kanakan/functbl.c
-    kanakan/fuzoku.c
-    kanakan/fzkyomi.c
-    kanakan/getkanji.c
-    kanakan/getrank.c
-    kanakan/global.c
-    kanakan/hzstrlen.c
-    kanakan/init.c
-    kanakan/istrcmp.c
-    kanakan/memory.c
-    kanakan/mk2claus.c
-    kanakan/mkbunset.c
-    kanakan/mkjiritu.c
-    kanakan/mkkouho.c
-    kanakan/mknumber.c
-    kanakan/mvmemd.c
-    kanakan/mvmemi.c
-    kanakan/peepdic.c
-    kanakan/ph2knj.c
-    kanakan/ph_khtbl.c
-    kanakan/priority.c
-    kanakan/prtytbl.c
-    kanakan/s2ctbl.c
-    kanakan/selclrec.c
-    kanakan/selsuuji.c
-    kanakan/setconj.c
-    kanakan/setjrec.c
-    kanakan/setkouho.c
-    kanakan/setubi.c
-    kanakan/sj2code.c
-    kanakan/skiphblk.c
-    kanakan/skipkstr.c
-    kanakan/srchdict.c
-    kanakan/srchhead.c
-    kanakan/srchidx.c
-    kanakan/srchnum.c
-    kanakan/stbtbl.c
-    kanakan/stttbl.c
-    kanakan/study.c
-    kanakan/suujitbl.c
-    kanakan/terminat.c
-    kanakan/termtbl.c
-    kanakan/wakachi.c
+    lib/kanakan/adddic.c
+    lib/kanakan/addelcmn.c
+    lib/kanakan/alloc.c
+    lib/kanakan/charsize.c
+    lib/kanakan/chrtbl.c
+    lib/kanakan/cl2knj.c
+    lib/kanakan/clstudy.c
+    lib/kanakan/cmpstr.c
+    lib/kanakan/conjunc.c
+    lib/kanakan/connect.c
+    lib/kanakan/cvtclknj.c
+    lib/kanakan/cvtdict.c
+    lib/kanakan/cvtkanji.c
+    lib/kanakan/deldic.c
+    lib/kanakan/depend.c
+    lib/kanakan/dict.c
+    lib/kanakan/functbl.c
+    lib/kanakan/fuzoku.c
+    lib/kanakan/fzkyomi.c
+    lib/kanakan/getkanji.c
+    lib/kanakan/getrank.c
+    lib/kanakan/global.c
+    lib/kanakan/hzstrlen.c
+    lib/kanakan/init.c
+    lib/kanakan/istrcmp.c
+    lib/kanakan/memory.c
+    lib/kanakan/mk2claus.c
+    lib/kanakan/mkbunset.c
+    lib/kanakan/mkjiritu.c
+    lib/kanakan/mkkouho.c
+    lib/kanakan/mknumber.c
+    lib/kanakan/mvmemd.c
+    lib/kanakan/mvmemi.c
+    lib/kanakan/peepdic.c
+    lib/kanakan/ph2knj.c
+    lib/kanakan/ph_khtbl.c
+    lib/kanakan/priority.c
+    lib/kanakan/prtytbl.c
+    lib/kanakan/s2ctbl.c
+    lib/kanakan/selclrec.c
+    lib/kanakan/selsuuji.c
+    lib/kanakan/setconj.c
+    lib/kanakan/setjrec.c
+    lib/kanakan/setkouho.c
+    lib/kanakan/setubi.c
+    lib/kanakan/sj2code.c
+    lib/kanakan/skiphblk.c
+    lib/kanakan/skipkstr.c
+    lib/kanakan/srchdict.c
+    lib/kanakan/srchhead.c
+    lib/kanakan/srchidx.c
+    lib/kanakan/srchnum.c
+    lib/kanakan/stbtbl.c
+    lib/kanakan/stttbl.c
+    lib/kanakan/study.c
+    lib/kanakan/suujitbl.c
+    lib/kanakan/terminat.c
+    lib/kanakan/termtbl.c
+    lib/kanakan/wakachi.c
 )
 target_include_directories(kanakan
     PRIVATE include
@@ -122,7 +122,7 @@ add_executable(sj3serv
 #    sj3serv/sj3serv.c
 #)
 target_include_directories(sj3serv
-    PRIVATE include sj3lib
+    PRIVATE include lib/sj3lib
 )
 target_link_libraries(sj3serv
     sj3lib kanakan
@@ -138,7 +138,7 @@ add_executable(sj3dic
     sj3dic/sjrc.c
 )
 target_include_directories(sj3dic
-    PRIVATE include sj3lib
+    PRIVATE include lib/sj3lib
 )
 target_link_libraries(sj3dic
     sj3lib
@@ -160,7 +160,7 @@ add_executable(sj3mkdic
     sj3mkdic/string.c
 )
 target_include_directories(sj3mkdic
-    PRIVATE sj3mkdic include sj3lib
+    PRIVATE sj3mkdic include lib/sj3lib
 )
 target_link_libraries(sj3mkdic
     sj3lib
