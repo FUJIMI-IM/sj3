@@ -42,10 +42,10 @@
 
 #include "Const.h"
 #include "sj3err.h"
-#include "sj3lib.h"
 #include "sj_const.h"
 #include "sj_hinsi.h"
-#include "sj_string.h"
+
+#include "sj3lib.h"
 
 extern int	sj3_error_number;
 

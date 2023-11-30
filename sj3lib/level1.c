@@ -44,6 +44,7 @@
 #include "Const.h"
 #include "sj3cmd.h"
 #include "sj3err.h"
+
 #include "sj3lib.h"
 
 int	 sj3_error_number;

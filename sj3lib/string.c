@@ -35,7 +35,7 @@
 
 #include "sj_euc.h"
 
-#include "sj_string.h"
+#include "sj3lib.h"
 
 #ifndef TRUE
 #define TRUE (1)
