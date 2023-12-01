@@ -29,24 +29,29 @@
  * from Sony Corporation.
  */
 
+#ifndef SJ3_PATHS_H_
+#define SJ3_PATHS_H_
 
+#include "paths.h"
 
-#if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
-#define	ErrorOutFile		"/dev/console"
+#ifdef NDEBUG
+#define ErrorOutFile	_PATH_DEVNULL
 #else
-#define	ErrorOutFile		"/dev/stderr"
-/*#define	ErrorOutFile		"/dev/null"*/
+#define ErrorOutFile	_PATH_CONSOLE
 #endif
 
-#define SocketName              "/tmp/sj3sock"
-#define LockFile                "/tmp/SJ3SERV.EXIST"
+#define SocketName	_PATH_VARRUN "sj3serv.sock"
+#define LockFile	_PATH_VARRUN "sj3serv.lock"
 
-#define MainDictionary          "sj3main.dic"
-#define UserDictionary          "private.dic"
-#define StudyFile               "study.dat"
-#define RunCmdFile "/usr/local/lib/sj3/serverrc"
-#define DictRootDir "/usr/local/share/sj3/dict"
+#define MainDictionary	"sj3main.dic"
+#define UserDictionary	"private.dic"
+#define StudyFile	"study.dat"
 
-#define DEFRKFILE "/usr/local/lib/sj3/sjrk"
-#define DEFRCFILE "/usr/local/lib/sj3/sjrc"
-#define DEFKEYFILE "/usr/local/lib/sj3/cvtkey."
+#define RunCmdFile	"@CMAKE_INSTALL_FULL_SYSCONFDIR@/sj3serv.conf"
+#define DictRootDir	"@CMAKE_INSTALL_FULL_DATADIR@/sj3/dict"
+
+#define DEFRKFILE	"@CMAKE_INSTALL_FULL_DATADIR@/sj3/sjrk"
+#define DEFRCFILE	"@CMAKE_INSTALL_FULL_DATADIR@/sj3/sjrc"
+#define DEFKEYFILE	"@CMAKE_INSTALL_FULL_DATADIR@/sj3/cvtkey."
+
+#endif /* SJ3_PATHS_H_ */
