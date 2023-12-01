@@ -30,10 +30,6 @@ project(sj3
 include(GNUInstallDirs)
 
 configure_file(
-    "${CMAKE_SOURCE_DIR}/pathnames.h.in"
-    "${CMAKE_BINARY_DIR}/pathnames.h"
-)
-configure_file(
     "${CMAKE_SOURCE_DIR}/Paths.h.in"
     "${CMAKE_BINARY_DIR}/Paths.h"
 )
