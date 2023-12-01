@@ -54,11 +54,11 @@
 #define	MinClLen		512
 #define	MaxClLen		0x7fff
 
-#define	DebugOutFile		NULL	
-#define	DebugLevel		0
+#define	DebugOutFile		ErrorOutFile
+#define	DebugLevel		2
 #define	ForkFlag		1
 #define	MaxClientNum		512
-#define	LogOutFile		NULL	
+#define	LogOutFile		ErrorOutFile
 #define	PortName		"sj3"
 #if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
 #define	PortNumber		3086
