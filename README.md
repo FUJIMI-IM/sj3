@@ -27,6 +27,10 @@
 
 SJ3 is a kana-kanji conversion system for Japanese text input.
 
+## Contributing
+
+See [our guide for contribution](CONTRIBUTING.md) for details.
+
 ## License
 
 Unless otherwise noted, SJ3 is distributed under the terms of the MIT License.
