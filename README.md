@@ -29,7 +29,7 @@ SJ3 is a kana-kanji conversion system for Japanese text input.
 
 ## Contributing
 
-See [our guide for contribution](CONTRIBUTING.md) for details.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## License
 
