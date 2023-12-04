@@ -1,0 +1,103 @@
+SPDX-License-Identifier: MIT
+
+Copyright (c) 2023  Masanori Ogino
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+This is an incomplete list of people who have contributed to SJ3.
+It is sorted by name and formatted to allow easy grepping and
+beautification by scripts. The fields are: name (N), web address (W),
+OpenPGP key ID and fingerprint (P), and description (D).
+
+Thanks,
+	Masanori, on behalf of the FUJIMI SJ3 project
+------
+
+N: Ashida, Isao
+D: Linux port
+
+N: Baur, SL
+D: Linux port
+
+N: Fujiwara, Takashi
+D: Tests
+
+N: Hosoe, Noriyuki
+D: Original author
+
+N: Iwama, Yoshihiko
+D: BSD/OS port
+
+N: Iwata
+D: Project owner of the Google Code fork
+
+N: Kawabe, Haruyuki
+D: Bug fixes
+
+N: Kawabe, Y
+D: sj3stat author
+
+N: Kuroki, Hidekazu
+D: FreeBSD port
+
+N: Manabe, Takashi
+D: Linux port
+
+N: Matsumoto, Ryuichi
+D: Bug fixes
+
+N: McMahill, Dan
+D: LP64 patch
+
+N: Muranaka, Masaki
+D: Security fixes
+
+N: Ogino, Masanori
+D: Initiator of the FUJIMI SJ3 project
+
+N: Ono, Hiroo
+D: FreeBSD patches
+
+N: Sakamoto, Kazuki
+D: NetBSD port
+
+N: Sasano, Takayoshi
+D: Tidying legacy code
+
+N: Soda, Noriyuki
+D: Various suggestions
+
+N: Sonnenberger, Jörg
+D: DragonFly port
+D: Portability patches
+
+N: Tada, Tsuyoshi
+D: NetBSD port
+
+N: Tanaka, Nobuyuki
+D: Original author
+
+N: Toya
+D: Installation improvements
+
+N: Uo, Youjiro
+D: BSD/OS port
+
+N: Yano, Katsuhisa
+D: Tests
