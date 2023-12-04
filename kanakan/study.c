@@ -31,18 +31,19 @@
  * $SonyRCSfile: study.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:38 $
+ *
+ * $Id$
  */
 
 
-
+#include <string.h>
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
-Void	mvmemi(), mvmemd(), memcpy();
+Void	mvmemi(), mvmemd();
 
-STDYIN	*srchstdy();
-
-Int	study(stdy)
-STDYOUT	*stdy;
+Int
+study(STDYOUT *stdy)
 {
 	STDYOUT		outp;
 	STDYIN		*p1;
@@ -138,10 +139,10 @@ STDYOUT	*stdy;
 	return ret;
 }
 
-STDYIN		*srchstdy(seg, ofs, dicid)
-TypeDicSeg	seg;
-TypeDicOfs	ofs;
-TypeDicID	dicid;
+STDYIN* srchstdy(
+	TypeDicSeg seg,
+	TypeDicOfs ofs,
+	TypeDicID  dicid)
 {
 	Int	high;
 	Int	mid;

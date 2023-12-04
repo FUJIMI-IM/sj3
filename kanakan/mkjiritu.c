@@ -31,28 +31,28 @@
  * $SonyRCSfile: mkjiritu.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:03 $
+ *
+ * $Id$
  */
 
 
-
+#include <sys/types.h>
+#include <string.h>
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
-Uchar	*srchdict();
-Uchar	TFar	*getstb();
-Int	srchhead(), sstrncmp();
-JREC	*alloc_jrec();
-Void	srchnum(), setubi(), setjrec();
-Void	setcrec(), memcpy(), memset();
+Int	srchhead();
 
-Static Void	dic_mu(), dic_cl();
+static void dic_mu(int mode);
+static void dic_cl(void);
 
-Void	mkjiritu(mode)
-Int	mode;
+void
+mkjiritu(int mode)
 {
-	Uchar	chkind1;
-	Uchar	chkind2;
+	u_char	chkind1;
+	u_char	chkind2;
 	JREC	*jrec;
-	Uchar	TFar	*stb;
+	u_char	*stb;
 
 	headcode = headlen = 0;
 
@@ -87,15 +87,15 @@ Int	mode;
 	}
 
 	for (jrec = maxjptr ; jrec ; jrec = jrec -> jsort) {
-		if (stb = getstb(jrec -> hinsi))
+		if ((stb = getstb(jrec -> hinsi)) != NULL)
 			setubi(jrec, stb);
 	}
 }
 
-Static	Void	dic_mu(mode)
-Int	mode;
+static void
+dic_mu(int mode)
 {
-	Uchar	*tagp;
+	u_char	*tagp;
 	DICTL	*dp;
 
 	for (dp = dictlist ; dp ; dp = dp -> next) {
@@ -104,17 +104,16 @@ Int	mode;
 		dicsaml = 0;
 		prevseg = -1;
 
-		while (tagp = srchdict(tagp)) setjrec(tagp, mode);
+		while ((tagp = srchdict(tagp)) != NULL) setjrec(tagp, mode);
 	}
 }
 
-JREC	*argjrec(len, rec)
-Int	len;
-JREC	*rec;
+JREC*
+argjrec(int len, JREC* rec)
 {
-	Reg1	JREC	*ptr;
-	Reg2	JREC	*jrec;
-	Reg3	JREC	*child;
+	JREC	*ptr;
+	JREC	*jrec;
+	JREC	*child;
 
 	jrec = alloc_jrec();
 
@@ -123,12 +122,12 @@ JREC	*rec;
 
 		ptr = NULL;
 		jrec = maxjptr;
-		while (child = jrec -> jsort) {
+		while ((child = jrec -> jsort) != NULL) {
 			ptr  = jrec;
 			jrec = child;
 		}
 
-		if (len <= (Int) jrec -> jlen) return NULL;
+		if (len <= (int) jrec -> jlen) return NULL;
 
 		if (ptr)
 			ptr -> jsort = NULL;
@@ -137,10 +136,10 @@ JREC	*rec;
 	}
 
 	if (rec)
-		memcpy((Uchar *)rec, (Uchar *)jrec, sizeof(JREC));
+		memcpy((u_char*)rec, (u_char*)jrec, sizeof(JREC));
 	else
-		memset((Uchar *)jrec, 0, sizeof(*jrec));
-	jrec -> jlen = (Uchar)len;
+		memset((u_char*)jrec, 0, sizeof(*jrec));
+	jrec -> jlen = (u_char)len;
 
 	if (!maxjptr) {
 		maxjptr = jrec;
@@ -150,14 +149,14 @@ JREC	*rec;
 
 	ptr = maxjptr;
 
-	if ((Int)ptr -> jlen < len) {
+	if ((int)ptr -> jlen < len) {
 		jrec -> jsort = maxjptr;
 		maxjptr = jrec;
 		return jrec;
 	}
 
-	while (child = ptr -> jsort) {
-		if ((Int)child -> jlen < len) break;
+	while ((child = ptr -> jsort) != NULL) {
+		if ((int)child -> jlen < len) break;
 
 		ptr = child;
 	}
@@ -167,19 +166,20 @@ JREC	*rec;
 	return jrec;
 }
 
-Static	Void	dic_cl()
+static void
+dic_cl(void)
 {
-	Uchar	*p;
-	Ushort	pos;
-	Int	len;
-	Int	cmp;
+	u_char	*p;
+	u_short	pos;
+	int	len;
+	int	cmp;
 
 	if (!StudyExist()) return;
 
-	if ((pos = ClStudyIdx[(Short) *cnvstart / ClStudyStep]) != (Ushort)-1) {
+	if ((pos = ClStudyIdx[(Short) *cnvstart / ClStudyStep]) != (u_short)-1) {
 
 		for (p = ClStudyDict + pos ; !iseocl(p) ; p = ClNextTag(p)) {
-			cmp = sstrncmp(cnvstart, (Uchar TFar *)ClYomiPos(p),
+			cmp = strncmp(cnvstart, (u_char*)ClYomiPos(p),
 					len = ClYomiLen(p));
 
 			if (cmp == MATCH) {

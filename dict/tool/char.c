@@ -31,6 +31,8 @@
  * $SonyRCSfile: char.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:00:32 $
+ *
+ * $Id$
  */
 
 
@@ -40,13 +42,12 @@
 #include "sj_const.h"
 
 
-
-cnvyomi(code)
-int	code;
+int
+cnvyomi(int code)
 {
-	register u_short hh;
-	register u_char	high;
-	register u_char low;
+	u_short hh;
+	u_char	high;
+	u_char low;
 
 	hh = ((code >> 16) & 0xffff);
 	high = ((code >> 8) & 0xff);
@@ -98,13 +99,12 @@ int	code;
 }
 
 
-
-h2kcode(code)
-int	code;
+int
+h2kcode(int code)
 {
-	register u_short hh;
-	register u_char	high;
-	register u_char	low;
+	u_short hh;
+	u_char	high;
+	u_char	low;
 
 	hh = ((code >> 16) & 0xffff);
 	high = ((code >> 8) & 0xff);
@@ -116,12 +116,15 @@ int	code;
 		else 
 		  return (code + 0x0100);
 	}
+	/* XXX: what should we do if we reach here?
+	 * XXX: I do not know if it is correct, but return 0 for now.
+	 * XXX: Hiroo Ono (2004/07/01) */
+	return (0);
 }
 
 
-
-codesize(code)
-u_char	code;
+int
+codesize(u_char code)
 {
 	switch (code&KanjiModeMask) {
 	      case ZenHiraAssyuku: 
@@ -139,11 +142,8 @@ u_char	code;
 }
 
 
-
-output_knj(fp, p, l)
-FILE	*fp;
-register u_char	*p;
-register int	l;
+void
+output_knj(FILE* fp, u_char* p, int l)
 {
 	while (l > 0) {
 		switch (*p & KanjiModeMask) {
@@ -192,19 +192,15 @@ register int	l;
 }
 
 
-
-output_str(fp, p)
-FILE	*fp;
-char	*p;
+void
+output_str(FILE* fp, char* p)
 {
 	while (*p) { fputc(*p, fp); p++; }
 }
 
 
-
-output_int(fp, p)
-FILE	*fp;
-int	*p;
+void
+output_int(FILE* fp, int* p)
 {
 	while (*p) {
 		if (*p < 0x100) {
@@ -229,9 +225,8 @@ int	*p;
 }
 
 
-
-yomi2zen(code)
-int	code;
+static int
+yomi2zen(int code)
 {
 	static	char	num[] = {
 		'0', '1', '2', '3', '4', '5', '6', '7',
@@ -268,10 +263,8 @@ int	code;
 }
 
 
-
-output_yomi(fp, p)
-FILE	*fp;
-u_char	*p;
+void
+output_yomi(FILE* fp, u_char* p)
 {
 	int	i;
 

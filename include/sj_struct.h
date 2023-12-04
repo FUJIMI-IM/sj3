@@ -31,32 +31,31 @@
  * $SonyRCSfile: sj_struct.h,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:16 $
+ *
+ * $Id$
  */
 
 
-
-
-
 #ifndef	_SJ_STRUCT
+#define	_SJ_STRUCT  1
 
-#define	_SJ_STRUCT
-
-
+#include <sys/types.h>
+#include "sj_typedef.h"
 
 typedef	struct	jiritu {
 	struct jiritu	*jsort;		
 	TypeDicSeg	jseg;		
 	TypeDicOfs	jofsst;		
 	TypeDicOfs	jofsed;		
-	Ushort		flags;		
+	u_short		flags;		
 	TypeClass	class;		
 	TypeDicID	dicid;		
-	Uchar		jlen;		
+	u_char		jlen;		
 	TypeGram	hinsi;		
-	Uchar		sttofs;		
-	Uchar		stbofs;		
-	Uchar		count;		
-	Uchar		numlen;		
+	u_char		sttofs;		
+	u_char		stbofs;		
+	u_char		count;		
+	u_char		numlen;		
 } JREC;
 
 
@@ -65,16 +64,16 @@ typedef	struct	jiritu {
 typedef struct bunsetu {
 	JREC	*jnode;			
 	struct	bunsetu	*clsort;	
-	Uchar		gobiln;		
-	Uchar		cllen;		
+	u_char		gobiln;		
+	u_char		cllen;		
 
 	TypeCnct	right;		
-	Uchar		cl2len;		
-	Uchar		kubun;		
+	u_char		cl2len;		
+	u_char		kubun;		
 #if __STDC__
-	unsigned	fzk_ka : 1;	
+	u_int		fzk_ka : 1;	
 #else
-	Uchar		fzk_ka : 1;	
+	u_char		fzk_ka : 1;	
 #endif
 } CLREC;
 
@@ -85,19 +84,19 @@ typedef	struct	kouho {
 	CLREC		*clrec;		
 	TypeDicOfs	offs;		
 	TypeStyNum	styno;		
-	Uchar		rank;		
+	u_char		rank;		
 #if __STDC__
-	unsigned	sttfg  :  1;	
-	unsigned	sttkj  :  1;	
-	unsigned	ka_fg  :  1;	
-	unsigned	ka_kj  :  1;	
-	unsigned	mode   :  4;	
+	u_int		sttfg  :  1;	
+	u_int		sttkj  :  1;	
+	u_int		ka_fg  :  1;	
+	u_int		ka_kj  :  1;	
+	u_int		mode   :  4;	
 #else
-	Uchar		sttfg  :  1;	
-	Uchar		sttkj  :  1;	
-	Uchar		ka_fg  :  1;	
-	Uchar		ka_kj  :  1;	
-	Uchar		mode   :  4;	
+	u_char		sttfg  :  1;	
+	u_char		sttkj  :  1;	
+	u_char		ka_fg  :  1;	
+	u_char		ka_kj  :  1;	
+	u_char		mode   :  4;	
 #endif
 } KHREC;
 
@@ -105,7 +104,7 @@ typedef	struct	kouho {
 
 
 typedef	struct	conj {
-	Uchar		len;		
+	u_char		len;		
 	TypeCnct	right;		
 } CREC;
 
@@ -113,8 +112,8 @@ typedef	struct	conj {
 
 
 typedef	struct	fuzoku {
-	Uchar		*yomip;		
-	Uchar	TFar	*fzkp;		
+	u_char		*yomip;		
+	u_char		*fzkp;		
 
 } FREC;
 
@@ -126,13 +125,13 @@ typedef struct study_in {
 	TypeStyNum	styno;		
 	TypeDicID	dicid;		
 #if __STDC__
-	unsigned	sttkj  :  1;	
-	unsigned	ka_kj  :  1;	
-	unsigned	nmflg  :  1;	
+	u_int		sttkj  :  1;	
+	u_int		ka_kj  :  1;	
+	u_int		nmflg  :  1;	
 #else
-	Uchar		sttkj  :  1;	
-	Uchar		ka_kj  :  1;	
-	Uchar		nmflg  :  1;	
+	u_char		sttkj  :  1;	
+	u_char		ka_kj  :  1;	
+	u_char		nmflg  :  1;	
 #endif
 } STDYIN;
 
@@ -142,20 +141,22 @@ typedef struct study_in {
 typedef struct study_out {
 	STDYIN		stdy1;		
 	TypeGram	hinshi;		
-	Uchar		len;		
+	u_char		len;		
 #if __STDC__
-	unsigned	sttlen :  2;	
-	unsigned	sttfg  :  1;	
-	unsigned	ka_fg  :  1;	
+	u_int		sttlen :  2;	
+	u_int		sttfg  :  1;	
+	u_int		ka_fg  :  1;	
 #else
-	Uchar		sttlen :  2;	
-	Uchar		sttfg  :  1;	
-	Uchar		ka_fg  :  1;	
+	u_char		sttlen :  2;	
+	u_char		sttfg  :  1;	
+	u_char		ka_fg  :  1;	
 #endif
 } STDYOUT;
 
 
-
+struct dictfile; /* defined later in Struct.h refering DICT */
+typedef int	(*IFuncDF)(struct dictfile*);
+typedef int	(*IFuncDFTD)(struct dictfile*, TypeDicSeg);
 
 typedef	struct	dict {
 	TypeDicID	dicid;		
@@ -166,12 +167,12 @@ typedef	struct	dict {
 	TypeDicSeg	segunit;	
 	TypeDicSeg	maxunit;	
 
-	IFunc		getofs;		
-	IFunc		getidx;		
-	IFunc		getdic;		
-	IFunc		putidx;		
-	IFunc		putdic;		
-        IFunc           rszdic;
+	IFuncDF		getofs;		
+	IFuncDF		getidx;		
+	IFuncDFTD	getdic;		
+	IFuncDFTD	putidx;		
+	IFuncDFTD	putdic;		
+	IFuncDFTD	rszdic;
 } DICT;
 
 
@@ -186,15 +187,15 @@ typedef	struct	dictl {
 
 
 typedef struct	stdy {
-	Short	stdycnt;	
-	Short	stdymax;	
+	short	stdycnt;	
+	short	stdymax;	
 	STDYIN	*stdydic;	
 
-	Short	clstdystep;	
-	Ushort	*clstdyidx;	
+	short	clstdystep;	
+	u_short	*clstdyidx;	
 
-	Short	clstdylen;	
-	Uchar	*clstdydic;	
+	short	clstdylen;	
+	u_char	*clstdydic;	
 } STDY;
 
 #endif

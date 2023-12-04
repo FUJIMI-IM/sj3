@@ -31,16 +31,20 @@
  * $SonyRCSfile: alloc.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:28 $
+ *
+ * $Id$
  */
 
 
 
+#include <stdlib.h>
 #include <sys/types.h>
 #include "sj_rename.h"
 #include "sj_typedef.h"
 #include "sj_const.h"
 #include "sj_var.h"
 #include "sj_struct.h"
+#include "kanakan.h"
 
 #define	JREC_NUM	128
 #define	CLREC_NUM	128
@@ -48,10 +52,11 @@
 static	JREC	*jrec = NULL;
 static	CLREC	*clrec = NULL;
 
-JREC	*alloc_jrec()
+JREC*
+alloc_jrec(void)
 {
-	register JREC	*p;
-	register int	i;
+	JREC	*p;
+	int	i;
 
 	if (jrec == NULL) {
 		jrec = (JREC *)malloc(sizeof(JREC) * JREC_NUM);
@@ -66,8 +71,8 @@ JREC	*alloc_jrec()
 	return p;
 }
 
-Void	free_jrec(p)
-JREC	*p;
+void
+free_jrec(JREC *p)
 {
 	if (p != NULL) {
 		p -> jsort = jrec;
@@ -75,10 +80,11 @@ JREC	*p;
 	}
 }
 
-CLREC	*alloc_clrec()
+CLREC*
+alloc_clrec(void)
 {
-	register CLREC	*p;
-	register int	i;
+	CLREC	*p;
+	int	i;
 
 	if (clrec == NULL) {
 		clrec = (CLREC *)malloc(sizeof(CLREC) * CLREC_NUM);
@@ -93,8 +99,8 @@ CLREC	*alloc_clrec()
 	return p;
 }
 
-Void	free_clrec(p)
-CLREC	*p;
+void
+free_clrec(CLREC* p)
 {
 	if (p != NULL) {
 		p -> clsort = clrec;

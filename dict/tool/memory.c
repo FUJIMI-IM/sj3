@@ -31,16 +31,21 @@
  * $SonyRCSfile: memory.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:00:42 $
+ *
+ * $Id$
  */
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include "dicttool.h"
 
-char    *Malloc(size)
-unsigned        size;
+void*
+Malloc(size_t size)
 {
-        char    *p;
-        char    *malloc();
+        void* p;
 
         p = malloc(size);
         if (p == NULL) {
@@ -50,18 +55,18 @@ unsigned        size;
         return p;
 }
 
-char    *Zalloc(size)
-int     size;
+void*
+Zalloc (size_t size)
 {
-        char    *p;
+        void* p;
 
         p = Malloc(size);
         memset(p, '\0', size);
         return p;
 }
 
-void    Free(p)
-char    *p;
+void
+Free(void *p)
 {
         free(p);
 }

@@ -31,80 +31,66 @@
  * $SonyRCSfile: sj_table.h,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:21 $
+ *
+ * $Id$
  */
 
 
-
-
-
 #ifndef	_SJ_TABLE
+#define	_SJ_TABLE  1
 
-#define	_SJ_TABLE
-
+#include "sj_typedef.h"
+#include "sj_func.h"
 
 #define	isdpnd(c)	(Chrtbl[c] & DEPEND)
 
-
 #define	CnjAskLen(p)	(((unsigned int) *(p) & 0x70) >> 4)
-
 
 #define	CnjNkrLen(p)	(*(p) & 0x0f)
 
-
 #define	CnjRight(p)	*(p + CnjNkrLen(p) + 1)
-
 
 #define	CnjRecLen(p)	(CnjNkrLen(p) + 2)
 
-
 #define	FzkAskLen(p)	((unsigned int) *(p) >> 5)
-
 
 #define	FzkNkrLen(p)	(*(p) & 0x07)
 
-
 #define	FzkStrKa(p)	(((unsigned int) *(p) >> 3) & 1)
-
 
 #define	FzkHasCode(p)	(*(p) & 0x10)
 
-
 #define	FzkLeft(p)	(*((p) + nlen + 1))
-
 
 #define	FzkRight(p)	(*((p) + nlen + 2))
 
-
 #define	SttYomiLen(p)	(*(p) & 0x0f)
-
 
 #define	SttHiraKnj(p)	(*(p) & 0x80)
 
-
 #define	StbKnjLen(p)	(*(p) & 0x07)
-
 
 #define	StbYomiLen(p)	(*(p) >> 4)
 
-
 #define	StbYomiTop(p)	((p) + 2)
-
 
 #define	StbBakeru(p)	(*(p) & 0x08)
 
-
 #define	StbHinsi(p)	(*((p) + 1))
 
-extern	Uchar	charsize[], chrtbl[], *conjadr[], connadr[];
-extern  Uchar   *fzkadr[], kigou[], kurai1_tbl[], kurai2_tbl[];
-extern	Uchar	num1tbl[], num2tbl[], num3tbl[], num4tbl[];
-extern	Uchar	num5tbl[], num6tbl[], *rigtadr[], scncttbl[2][24];
-extern	Uchar	*settou_ptr[], *stbadr[], sttpri[5][31];
-extern  Uchar   suuji_tbl[], taipri[7][45], termtbl[];
-extern	Ushort	*selsjadrs[];
-extern	UCPFunc	getkan_func[], makekan_func[];
-extern	VFunc	cvtnum_func[];
-extern  IFunc	hiraknj_func[], setjrec_func[], srchg_func[];
+extern	u_char	charsize[], chrtbl[], *conjadr[], connadr[];
+extern  u_char   *fzkadr[], kigou[], kurai1_tbl[], kurai2_tbl[];
+extern	u_char	num1tbl[], num2tbl[], num3tbl[], num4tbl[];
+extern	u_char	num5tbl[], num6tbl[], *rigtadr[], scncttbl[2][24];
+extern	u_char	*settou_ptr[], *stbadr[], sttpri[5][31];
+extern  u_char   suuji_tbl[], taipri[7][45], termtbl[];
+extern	u_short	*selsjadrs[];
+extern	UCPFuncGK	getkan_func[];
+extern	UCPFuncMK	makekan_func[];
+extern	VFuncNT	cvtnum_func[];
+extern	IFuncSetj	setjrec_func[];
+/* extern	IFunc	srchg_func[]; */ /* does it exist? */
+extern  IFuncHira	hiraknj_func[];
 #define	Charsize	charsize
 #define	Chrtbl		chrtbl
 #define	Conjadr(i)	conjadr[i]
@@ -135,4 +121,4 @@ extern  IFunc	hiraknj_func[], setjrec_func[], srchg_func[];
 #define	Taipri(i, j)	taipri[i][j]
 #define	Termtbl		termtbl
 
-#endif
+#endif /* _SJ_TABLE */

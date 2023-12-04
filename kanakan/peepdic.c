@@ -31,122 +31,100 @@
  * $SonyRCSfile: peepdic.c,v $  
  * $SonyRevision: 1.2 $ 
  * $SonyDate: 1995/07/21 05:22:51 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_kcnv.h"
 #include "sj_yomi.h"
+#include "kanakan.h"
+
+
+Uchar	*skiphblk();
+
+static	void	add_yomi (void);
+static	void	cd2sjh_chr (Uchar ch, Uchar *dst);
+static	Int	next_douon (void);
+static	Int	next_hinsi (void);
+static	Int	next_kanji (void);
+static	Int	prev_douon (void);
+static	Int	prev_hinsi (void);
+static	Int	prev_kanji (void);
+static	void	set_buf (Uchar *buf);
+static	void	set_idxyomi (void);
+static	void	set_kanji (void);
 
 
 
-Uchar	*skipkstr(), *skiphblk(), *get_idxptr();
-Int	getkanji(), codesize();
-
-
-
-Static  Int	prev_kanji(), prev_hinsi(), prev_douon();
-Static  Int	next_kanji(), next_hinsi(), next_douon();
-Static  Void	set_kanji(), set_buf(), add_yomi(), cd2sjh_chr();
-Static  Void	set_idxyomi();
-
-
-
-Int	getusr(buf)
-Uchar	*buf;
+Int
+getusr (Uchar *buf)
 {
 	Int nlen;
 
-	
 	peepyomi[0] = peepknj[0] = peepgrm = 0;
 
-	
 	(*curdict->getdic)(curdict, peepidx = DicSegBase);
 	get_askknj();
 
-	
 	peepdptr = segtop();
 
-	
 	if (segend(peepdptr)) return 0;
 
-	
 	add_yomi();
 
-	
 	nlen = getnlen(peepdptr);
         peephptr = peepdptr + DouonBlkSizeNumber + nlen;
 
-	
 	peepgrm = *peephptr;
 
-	
 	peepkptr = peephptr + 1;
 
-	
 	set_kanji();
 
-	
 	set_buf(buf);
 
-	
 	return -1;
 }
 
 
 
-Int	nextusr(buf)
-Uchar	*buf;
+Int
+nextusr (Uchar *buf)
 {
-	
 	(*curdict->getdic)(curdict, peepidx);
 	get_askknj();
 
-	
 	if (next_kanji()) {
-		
 		set_kanji();
-
-		
 		set_buf(buf);
-
-		
 		return -1;
 	}
 
-	
 	return 0;
 }
 
 
 
-Int	prevusr(buf)
-Uchar	*buf;
+Int
+prevusr (Uchar *buf)
 {
-	
 	(*curdict->getdic)(curdict, peepidx);
 	get_askknj();
 
-	
 	if (prev_kanji()) {
-		
 		set_kanji();
-
-		
 		set_buf(buf);
-
-		
 		return -1;
 	}
 
-	
 	return 0;
 }
 
 
 
-Static	Void	set_kanji()
+static	void
+set_kanji (void)
 {
 	Int	len;
 
@@ -157,40 +135,36 @@ Static	Void	set_kanji()
 
 
 
-Static	Void	set_buf(buf)
-Reg2	Uchar	*buf;
+static	void
+set_buf (Uchar *buf)
 {
-	Reg1	Uchar	*p;
-	Reg2    Int      i, csize;
+	Uchar	*p;
+	Int      i, csize;
 
-	
 	for (p = peepyomi ; *p ; ) *buf++ = *p++;
 	*buf++ = 0;
 
-	
 	for (p = peepknj ; *p ; ) {
 		csize = euc_codesize(*p);
 		for (i = 0; i < csize; i++ ) *buf++ = *p++;
 	}
 	*buf++ = 0;
 
-	
 	*buf++ = peepgrm;
 	*buf++ = 0;
 }
 
 
 
-Static	Int	prev_kanji()
+static	Int
+prev_kanji (void)
 {
 	Uchar	*p1;
 	Uchar	*p2;
 
-	
 	p1 = peephptr + 1;
 	if (peepkptr <= p1) return prev_hinsi();
 
-	
 	p2 = peepkptr;
 	while (p1 < p2) {
 		peepkptr = p1;
@@ -202,35 +176,29 @@ Static	Int	prev_kanji()
 
 
 
-Static	Int	prev_hinsi()
+static	Int
+prev_hinsi (void)
 {
 	Uchar	*p1;
 	Uchar	*p2;
 	Int     nlen;
 
-	
 	nlen = getnlen(peepdptr);
         p1 = peepdptr + DouonBlkSizeNumber + nlen;
 
 	if (peephptr <= p1) return prev_douon();
 
-	
 	p2 = peephptr;
 	while (p1 < p2) {
 		peephptr = p1;
 		p1 = skiphblk(p1);
 	}
 
-	
 	peepgrm = *peephptr;
 
-	
 	p1 = peephptr + 1;
 	while (*p1 != HinsiBlkTerm) {
-		
 		peepkptr = p1;
-
-		
 		p1 = skipkstr(p1);
 	}
 
@@ -239,184 +207,133 @@ Static	Int	prev_hinsi()
 
 
 
-Static	Int	prev_douon()
+static	Int
+prev_douon (void)
 {
 	Uchar	*p1;
 	Uchar	*p2;
 	Int     nlen;
 
-	
 	if (peepdptr <= segtop()) {
-		
 		if (peepidx <= DicSegBase) return 0;
 
-		
 		(*curdict->getdic)(curdict, --peepidx);
 		get_askknj();
 
-		
 		set_idxyomi();
 
-		
 		p1 = segtop();
 		do {
-			
 			peepdptr = p1;
-
-			
 			add_yomi();
-
-			
 			p1 = getntag(p1);
 		} while (!segend(p1));
 	}
-	
 	else {
-		
 		set_idxyomi();
 
-		
 		p1 = segtop();
 		p2 = peepdptr;
 		do {
-			
 			peepdptr = p1;
-
-			
 			add_yomi();
-
-			
 			p1 = getntag(p1);
 		} while (p1 < p2);
 	}
 
-	
 	nlen = getnlen(peepdptr);
         p1 = peepdptr + DouonBlkSizeNumber + nlen;
 
-	
 	p2 = getntag(peepdptr);
 	do {
 		peephptr = p1;
 		p1 = skiphblk(p1);
 	} while (p1 < p2);
 
-	
 	peepgrm = *peephptr;
 
-	
 	p1 = peephptr + 1;
 	do {
-		
 		peepkptr = p1;
-
-		
 		p1 = skipkstr(p1);
 	} while (*p1 != HinsiBlkTerm);
 
-	
 	return -1;
 }
 
 
 
-Static	Int	next_kanji()
+static	Int
+next_kanji (void)
 {
 	Uchar	*p1;
 
-	
 	p1 = skipkstr(peepkptr);
-
-	
 	if (*p1 == HinsiBlkTerm) return next_hinsi();
-
-	
 	peepkptr = p1;
-
-	
 	return -1;
 }
 
 
 
-Static	Int	next_hinsi()
+static	Int
+next_hinsi (void)
 {
 	Uchar	*p1;
 
-	
 	p1 = skiphblk(peephptr);
-
-	
 	if (p1 >= getntag(peepdptr)) return next_douon();
-
-	
 	peephptr = p1;
-
-	
 	peepgrm = *p1;
-
-	
 	peepkptr = p1 + 1;
-
-	
 	return -1;
 }
 
 
 
-Static	Int	next_douon()
+static	Int
+next_douon (void)
 {
 	Uchar	*p1;
         Int      nlen;
 
-	
 	p1 = getntag(peepdptr);
 
-	
 	if (segend(p1)) {
-		
 		if (peepidx + 1 < curdict->segunit) {
 			(*curdict->getdic)(curdict, ++peepidx);
 			get_askknj();
 			peepdptr = segtop();
 
-			
 			set_idxyomi();
 		}
-		
 		else
 	                return 0;
 	}
-	
 	else {
 		peepdptr = p1;
 	}
 
-	
 	add_yomi();
 
-	
         nlen = getnlen(peepdptr);
         peephptr = peepdptr + DouonBlkSizeNumber + nlen;
 
-
-	
 	peepgrm = *peephptr;
 
-	
 	peepkptr = peephptr + 1;
-	
 	
 	return -1;
 }
 
 
 
-Static	Void	set_idxyomi()
+static	void
+set_idxyomi (void)
 {
 	Uchar	*p1, *p2;
 
-	if (p2 = get_idxptr(peepidx)) {
+	if ((p2 = get_idxptr(peepidx)) != NULL) {
 		p1 = peepyomi;
 		while (*p2) {
 			cd2sjh_chr(*p2++, p1);
@@ -428,35 +345,28 @@ Static	Void	set_idxyomi()
 
 
 
-Static	Void	add_yomi()
+static	void
+add_yomi (void)
 {
 	Int	nlen;
 	Uchar	*p1, *p2;
 
-	
 	nlen = getnlen(peepdptr);
-
-	
 	p1 = peepyomi + getplen(peepdptr) * 2;
-
-	
 	p2 = peepdptr + DouonBlkSizeNumber;
 
-	
 	while (nlen--) {
 		cd2sjh_chr(*p2++, p1);
 		p1 += 2;
 	}
 
-	
 	*p1 = 0;
 }
 
 
 
-Static	Void	cd2sjh_chr(ch, dst)
-Uchar	ch;
-Reg1	Uchar	*dst;
+static	void
+cd2sjh_chr (Uchar ch, Uchar *dst)
 {
 	if (ch == _TYOUON) {			
 		*dst++ = 0xa1;
@@ -499,3 +409,4 @@ Reg1	Uchar	*dst;
 	else {					
 	}
 }
+

@@ -31,24 +31,23 @@
  * $SonyRCSfile: string.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:00:45 $
+ *
+ * $id$
  */
 
 
 #include <stdio.h>
 #include <sys/types.h>
 #include "sj_const.h"
+#include "dicttool.h"
 
 
-
-bubun_str(p1, l1, p2, l2)
-u_char	*p1;
-int	l1;
-u_char	*p2;
-int	l2;
+int
+bubun_str(u_char* p1, int l1, u_char* p2, int l2)
 {
-	register u_char	*p;
-	register int	l;
-	register int	i;
+	u_char	*p;
+	int	l;
+	int	i;
 
 	for (p = p1, l = l1 ; l > 0 ; ) {
 		
@@ -83,16 +82,13 @@ int	l2;
 
 
 
-overlap_str(p1, l1, p2, l2)
-u_char	*p1;
-u_char	*p2;
-int	l1;
-int	l2;
+int
+overlap_str(u_char *p1, int l1, u_char* p2, int l2)
 {
-	register u_char	*p;
-	register int	l;
-	register int	i;
-	register int	j;
+	u_char	*p;
+	int	l;
+	int	i;
+	int	j;
 	u_char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2];
 
 	for (p = p1, l = l1 ; l > 0 ; ) {
@@ -150,11 +146,10 @@ int	l2;
 }
 
 
-
-istrlen(s)
-int	*s;
+size_t
+istrlen(int* s)
 {
-	register int *p;
+	int *p;
 
 	for (p = s ; *p ; p++) ;
 
@@ -162,10 +157,8 @@ int	*s;
 }
 
 
-
-istrcmp(s, d)
-register int	*s;
-register int	*d;
+int
+istrcmp(int* s, int* d)
 {
 	for ( ; *s && (*s == *d) ; s++, d++) ;
 
@@ -173,12 +166,10 @@ register int	*d;
 }
 
 
-
-top_strcmp(src, dst)
-register int	*src;
-register int	*dst;
+int
+top_strcmp(int* src, int* dst)
 {
-	register int	i = 0;
+	int	i = 0;
 
 	
 	for (i = 0 ; *src && (*src == *dst) ; src++, dst++)
@@ -189,10 +180,8 @@ register int	*dst;
 }
 
 
-
-last_strcmp(src, dst)
-int	*src;		
-int	*dst;		
+int
+last_strcmp(int* src, int* dst)
 {
 	int	slen, dlen;
 
@@ -213,12 +202,8 @@ int	*dst;
 }
 
 
-
-string_cmp(p1, l1, p2, l2)
-register u_char	*p1;
-register u_char	*p2;
-register int	l1;
-register int	l2;
+int
+string_cmp(u_char* p1, int l1, u_char* p2, int l2)
 {
 	while (l1 > 0 && l2 > 0) {
 		if (*p1 != *p2) return (*p1 - *p2);

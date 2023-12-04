@@ -31,15 +31,22 @@
  * $SonyRCSfile: Struct.h,v $  
  * $SonyRevision: 1.3 $ 
  * $SonyDate: 1994/10/21 05:13:34 $
+ *
+ * $Id$
  */
 
+#ifndef _Struct_H_
+#define _Struct_H_  1
 
-
+#include <sys/types.h>
+#include <stdio.h>
+#include "sj_const.h"
+#include "sj_dict.h"
+#include "sj_struct.h"
+#include "sj_var.h"
+#include "Const.h"
 
 typedef struct global {
-
-	
-
 	JREC	*Jmaxjptr;	
 	CLREC	*Jmaxclptr;	
 	JREC	*Jjrt1st;	
@@ -48,109 +55,74 @@ typedef struct global {
 	CLREC	*Jclt2nd;	
 	CLREC	*Jselcl;	
 
-	
+	short	Jselectid;
+	short	Jtrank;
+	short	Jnrank;		
 
-	Short	Jselectid;
-	Short	Jtrank;
-	Short	Jnrank;		
+	u_char	*Jinputyomi;		
+	u_char	*Jcnvstart;		
+	short	Jcnvlen;		
+	u_char	*Jystart;		
+	u_char	Jhyomi[MaxPhInputLen+1];	
+	u_char	Jorgyomi[MaxClInputLen*2+1];	
 
-	
+	u_char	Jkanjibuf[MinPhOutputLen];	
+	u_char	*Jkanjipos;		
+	u_char	*Jkanjitmp;		
+	short	Jkanjilen;		
 
-	Uchar	*Jinputyomi;		
-	Uchar	*Jcnvstart;		
-	Short	Jcnvlen;		
-	Uchar	*Jystart;		
-	Uchar	Jhyomi[MaxPhInputLen+1];	
-	Uchar	Jorgyomi[MaxClInputLen*2+1];	
-
-
-	
-
-	Uchar	Jkanjibuf[MinPhOutputLen];	
-	Uchar	*Jkanjipos;		
-	Uchar	*Jkanjitmp;		
-	Short	Jkanjilen;		
-
-
-	
-
-	Uchar		Jdicinl;	
-	Uchar		Jdicsaml;	
+	u_char		Jdicinl;	
+	u_char		Jdicsaml;	
 	TypeDicSeg	Jprevseg;	
 
-
-	
-
-	Uchar	Jfzkcount;		
-	Uchar	Jfzk_ka_flg;		
+	u_char	Jfzkcount;		
+	u_char	Jfzk_ka_flg;		
 	FREC	Jfzktbl[MAXFREC];	
 
+	u_char	Jheadcode;		
+	u_char	Jheadlen;		
 
-	
-
-	Uchar	Jheadcode;		
-	Uchar	Jheadlen;		
-
-
-	
-
-	Uchar	Jgobilen;		
-
-
-	
+	u_char	Jgobilen;		
 
 	TypeGram	Jprevclgrm;		
 	TypeCnct	Jprevclrow;		
-	Uchar		Jnextcllen;		
+	u_char		Jnextcllen;		
 
-
-	
-
-	Short	Jkhcount;			
-	Short	Jnkhcount;			
+	short	Jkhcount;			
+	short	Jnkhcount;			
 	KHREC	Jkouhotbl[MaxKouhoNumber];	
 	STDYIN	*Jstdytop;
 
-
-	
-
 	DICT		*Jcurdict;		
 	DICTL		*Jdictlist;		
-	Uchar		*Jdicbuf;
-	Uchar		*Jidxbuf;
+	u_char		*Jdicbuf;
+	u_char		*Jidxbuf;
 	TypeIdxOfs	*Jidxofs;
-	Uchar	*Jaskknj[MaxKnjAskNumber];	
-	Uchar	*Jaskknj_k[MaxKnjAskNumber];	
+	u_char	*Jaskknj[MaxKnjAskNumber];	
+	u_char	*Jaskknj_k[MaxKnjAskNumber];	
 
 	STDY	*Jcurstdy;
 
-	
-
-	Ushort		Jsuuji_wbuf[NumWordBuf];
-	Uchar		Jsuuji_ubuf[NumKetaLength];
+	u_short		Jsuuji_wbuf[NumWordBuf];
+	u_char		Jsuuji_ubuf[NumKetaLength];
 	TypeClass	Jsuuji_class;
-	Uchar		Jsuuji_comma;
-	Uchar		Jsuuji_keta;
-	Uchar		*Jsuuji_yptr;
-	Uchar		Jsuuji_len;
-	Uchar		Jsuuji_exit;
-	Ushort		*Jsuuji_wkeep;
-	Uchar		*Jsuuji_ukeep;
+	u_char		Jsuuji_comma;
+	u_char		Jsuuji_keta;
+	u_char		*Jsuuji_yptr;
+	u_char		Jsuuji_len;
+	u_char		Jsuuji_exit;
+	u_short		*Jsuuji_wkeep;
+	u_char		*Jsuuji_ukeep;
 
-
-	
-
-	Uchar		Jpeepyomi[MaxWdYomiLen * 2 + 1];
-	Uchar		Jpeepknj[MaxWdKanjiLen + 1];
+	u_char		Jpeepyomi[MaxWdYomiLen * 2 + 1];
+	u_char		Jpeepknj[MaxWdKanjiLen + 1];
 	TypeGram	Jpeepgrm;
-	Uchar		*Jpeepdptr;
-	Uchar		*Jpeephptr;
-	Uchar		*Jpeepkptr;
+	u_char		*Jpeepdptr;
+	u_char		*Jpeephptr;
+	u_char		*Jpeepkptr;
 	TypeDicSeg	Jpeepidx;
 
 } Global;
-
-
 
 
 typedef	struct	dictfile {
@@ -160,7 +132,7 @@ typedef	struct	dictfile {
 	FILE		*fp;		
 	int		fd;		
 
-	Uchar		*buffer;	
+	u_char		*buffer;	
 	long		bufsiz;		
 
 	long		idxstrt;	
@@ -172,8 +144,6 @@ typedef	struct	dictfile {
 } DictFile;
 
 
-
-
 typedef struct	stdyfile {
 	STDY		stdy;		
 	int		refcnt;		
@@ -181,12 +151,10 @@ typedef struct	stdyfile {
 	FILE		*fp;		
 	int		fd;		
 
-	Uchar		*header;	
+	u_char		*header;	
 
 	struct stdyfile	*link;		
 } StdyFile;
-
-
 
 
 typedef	struct workarea {
@@ -199,8 +167,6 @@ typedef	struct workarea {
 } WorkArea;
 
 
-
-
 typedef	struct client {
 	int		fd;			
 	char		host[HostNameLen];	
@@ -210,10 +176,13 @@ typedef	struct client {
 	WorkArea	*work;			
 	StdyFile	*stdy;			
 	short           version;                
-	unsigned char   def_char[2];            
+	u_char		def_char[2];            
 #if (defined(TLI) && defined(SOCK_UNIX))
 	int             unix_flag;
 #endif
 	uid_t           uid;
 	struct client   *next;
 } Client;
+
+#endif /* _Struct_H_ */
+

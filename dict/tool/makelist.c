@@ -31,12 +31,17 @@
  * $SonyRCSfile: makelist.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:00:39 $
+ *
+ * $Id$
  */
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include "sj_struct.h"
+#include "dicttool.h"
 
 #ifndef SS2
 #define SS2 0x8e
@@ -57,10 +62,10 @@ static	DouonRec *drectmp = NULL;
 
 
 
-static	clearklist(krec)
-register KanjiRec *krec;
+static void
+clearklist(KanjiRec* krec)
 {
-	register KanjiRec *p;
+	KanjiRec *p;
 
 	
 	while (krec) {
@@ -79,10 +84,10 @@ register KanjiRec *krec;
 
 
 
-static	clearhlist(hrec)
-register HinsiRec *hrec;
+static void
+clearhlist(HinsiRec* hrec)
 {
-	register HinsiRec *p;
+	HinsiRec *p;
 
 	
 	while (hrec) {
@@ -99,11 +104,11 @@ register HinsiRec *hrec;
 }
 
 
-
-clear_list()
+void
+clear_list(void)
 {
-	register DouonRec *p;
-	register DouonRec *drec = douon_ptr;
+	DouonRec *p;
+	DouonRec *drec = douon_ptr;
 
 	
 	while (drec) {
@@ -126,16 +131,13 @@ clear_list()
 
 
 
-static	u_char	*makekanji(yomi, kanji, atr, len)
-int	*yomi;		
-int	*kanji;		
-int	*atr;		
-int	*len;		
+static u_char*
+makekanji(int *yomi, int* kanji, int* atr, int* len)
 {
 	int	kana[MaxYomiLength + 1];
 	u_char	ktmp[MaxKanjiLength * 3 + MaxAtrNumber * 2 + 1];
-	register int	i;
-	register int	pos = 0;
+	int	i;
+	int	pos = 0;
 	int	*p;
 	u_char	*q;
 
@@ -154,12 +156,12 @@ int	*len;
 	}
 
 	
-	if (i = top_strcmp(yomi, kanji)) {
+	if ((i = top_strcmp(yomi, kanji))!=0) {
 		kanji += i;
 		ktmp[pos++] = (ZenHiraAssyuku | (i - 1));
 	}
 	
-	else if (i = top_strcmp(kana, kanji)) {
+	else if ((i = top_strcmp(kana, kanji))!=0) {
 		kanji += i;
 		ktmp[pos++] = (ZenKataAssyuku | (i - 1));
 	}
@@ -167,12 +169,12 @@ int	*len;
 	
 	while (*kanji) {
 		
-		if (i = last_strcmp(yomi, kanji)) {
+		if ((i = last_strcmp(yomi, kanji))!=0) {
 			kanji += i;
 			ktmp[pos++] = (ZenHiraAssyuku | (i - 1));
 		}
 		
-		else if (i = last_strcmp(kana, kanji)) {
+		else if ((i = last_strcmp(kana, kanji))!=0) {
 			kanji += i;
 			ktmp[pos++] = (ZenKataAssyuku | (i - 1));
 		}
@@ -216,14 +218,14 @@ int	*len;
 
 
 
-static	u_char	*makeyomi(yomi)
-int	*yomi;
+static u_char*
+makeyomi(int* yomi)
 {
 	u_char	tmp[MaxYomiLength + 1];
-	register int	i;
-	register int	j;
-	register int	*y = yomi;
-	register u_char	*p;
+	int	i;
+	int	j;
+	int	*y = yomi;
+	u_char	*p;
 
 	
 	for (i = 0 ; *y ; ) {
@@ -250,11 +252,10 @@ int	*yomi;
 
 
 
-static	KanjiRec *make_krec(kcode, klen)
-u_char	*kcode;
-int	klen;
+static KanjiRec*
+make_krec(u_char* kcode, int klen)
 {
-	register KanjiRec *krec;
+	KanjiRec *krec;
 
 	
 	krec = (KanjiRec *)Malloc(sizeof(KanjiRec));
@@ -275,10 +276,10 @@ int	klen;
 
 
 
-static	HinsiRec *make_hrec(hinsi)
-int	hinsi;
+static HinsiRec*
+make_hrec(int hinsi)
 {
-	register HinsiRec *hrec;
+	HinsiRec *hrec;
 
 	
 	hrec = (HinsiRec *)Malloc(sizeof(HinsiRec));
@@ -297,10 +298,10 @@ int	hinsi;
 
 
 
-static	DouonRec *make_drec(ycode)
-u_char	*ycode;
+static DouonRec*
+make_drec(u_char* ycode)
 {
-	register DouonRec *drec;
+	DouonRec *drec;
 
 	
 	drec = (DouonRec *)Malloc(sizeof(DouonRec));
@@ -320,14 +321,14 @@ u_char	*ycode;
 
 
 
-static	diff_ylen(drec)
-DouonRec *drec;
+static int
+diff_ylen(DouonRec *drec)
 {
-	register DouonRec *dptr;
-	register DouonRec *dprev;
-	register u_char	*p1;
-	register u_char	*p2;
-	register int	ylen = 0;
+	DouonRec *dptr;
+	DouonRec *dprev;
+	u_char	*p1;
+	u_char	*p2;
+	int	ylen = 0;
 
 	
 	dptr = douon_ptr; dprev = NULL;
@@ -364,8 +365,8 @@ DouonRec *drec;
 
 
 
-static	douon_knj(drec)
-DouonRec *drec;
+static int
+douon_knj(DouonRec* drec)
 {
 	int	i;
 	int	len = 0;
@@ -402,8 +403,8 @@ DouonRec *drec;
 
 
 
-static void make_d_list(drec)
-DouonRec *drec;
+static void
+make_d_list(DouonRec* drec)
 {
 	DouonRec *dptr, *dprev;
 	HinsiRec *hptr;
@@ -528,8 +529,8 @@ start:
 }
 
 
-
-flush_douon()
+void
+flush_douon(void)
 {
 	if (drectmp) {
 		
@@ -561,11 +562,7 @@ flush_douon()
 
 
 void
-makelist(yomi, kanji, hinsi, atr)
-int	*yomi;
-int	*kanji;
-int	hinsi;
-int	*atr;
+makelist(int* yomi, int* kanji, int hinsi, int*  atr)
 {
 	u_char	*ycode;
 	u_char	*kcode;

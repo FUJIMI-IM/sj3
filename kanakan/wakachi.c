@@ -31,20 +31,21 @@
  * $SonyRCSfile: wakachi.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:43 $
+ *
+ * $Id$
  */
-
 
 
 #include "sj_kcnv.h"
 #include "sj_right.h"
 #include "sj_hinsi.h"
+#include "kanakan.h"
 
-JREC	*argjrec();
-CLREC	*argclrec();
-Int	terminate(), setconj();
+Int	terminate();
 Void	setclrec(), srchfzk();
 
-Void	wakachi()
+void
+wakachi (void)
 {
 	JREC		*jrec;
 	CLREC		*clrec;
@@ -123,7 +124,7 @@ Void	wakachi()
 		return;
 
 	if (jrec -> jlen) {
-		if (clrec = argclrec((Int)jrec -> jlen)) {
+		if ((clrec = argclrec((Int)jrec -> jlen)) != NULL) {
 			clrec -> jnode   = jrec;
 			clrec -> right   = R_MEISI;
 			clrec -> kubun   = K_TAIGEN;

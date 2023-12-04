@@ -31,33 +31,26 @@
  * $SonyRCSfile: cvtdict.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:40 $
+ *
+ * $Id$
  */
-
-
 
 
 #include "sj_euc.h"
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
 
 
-Int	getkanji(), seldict();
-Uchar	TFar	*getstb();
-Void	get_askknj();
-
-
-
-Void	cvtdict(krec, clrec, flg)
-KHREC	*krec;
-CLREC	*clrec;
-Int	flg;		
+void
+cvtdict(KHREC *krec, CLREC *clrec, int flg)
 {
 	TypeDicOfs	ofs;		
 	Uchar		*yptr;		
 	Int		jlen;		
 	Int		stblen;		
 	Int		sttlen;		
-	Uchar		TFar	*fptr;
+	Uchar		*fptr;
 	Int		cllen;
 	JREC		*jrec;
 	Int		i, j;
@@ -73,7 +66,7 @@ Int	flg;
 	jlen = jrec -> jlen;
 
 	
-	if (i = jrec -> sttofs) {
+	if ((i = jrec -> sttofs) != 0) {
 		
 		if (i == SETTOU_KIGOU) {
 			sttlen = 1;
@@ -166,8 +159,8 @@ Int	flg;
 
 
 
-Void	cvtminasi(len)
-Int	len;		
+void
+cvtminasi(Int len)
 {
 	Uchar	*ptr;		
 
@@ -193,8 +186,8 @@ Int	len;
 
 
 
-Void	cvtwakachi(clrec)
-CLREC	*clrec;		
+void
+cvtwakachi(CLREC *clrec)
 {
 	Int	jlen;	
 	Uchar	*ym;

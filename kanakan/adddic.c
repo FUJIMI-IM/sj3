@@ -31,49 +31,34 @@
  * $SonyRCSfile: adddic.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:26 $
+ *
+ * $Id$
  */
 
 
-
-
-
+#include <sys/types.h>
+#include <string.h>
 #include "sj_euc.h"
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
 
-
-Uchar	*srchdict(), *skipkstr(), *get_idxptr();
-Int	sstrncmp(), study(), cmpstr();
-Int	cvtknj();
-Int	srchkana(), srchgram(), getkanji();
-Int	sstrlen(), srchkanji();
-Uint	addel_arg();
-Void	memset(), mvmemi(), mkclidx(), mkidxtbl();
-Void	mvmemd(), set_size(), delclsub();
-TypeDicSeg	srchidx();
-TypeIdxOfs	count_uidx();
+static u_int checkdict(u_char* kanji, TypeGram grm);
+static int cal_nextym(u_char* ptr);
+static int usr_freelen(void);
+static void sprt_seg(TypeDicSeg seg, TypeDicOfs ofs);
+static void apnd_uidx(TypeDicSeg seg, u_char* yomi, int len);
 
 
-
-Void    chg_uidx();
-Static  Void	sprt_seg(), apnd_uidx();
-
-Static  Int	cal_nextym(), usr_freelen();
-Static  Uint	checkdict();
-
-
-
-Uint	adddic(yomi, kanji, hinsi)
-Uchar		*yomi;
-Uchar		*kanji;
-TypeGram	hinsi;
+u_int
+adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 {
-	Uint		err;			
-	Uchar		yptr[MaxWdYomiLen+1];	
-	Uchar		kptr[MaxWdKanjiLen+1];	
-	Int		klen;			
+	u_int		err;			
+	u_char		yptr[MaxWdYomiLen+1];	
+	u_char		kptr[MaxWdKanjiLen+1];	
+	int		klen;			
 	TypeDicSeg	segnum;			
-	Int		saml;			
+	int		saml;			
 	TypeDicOfs	dstofs;			
 	TypeDicOfs	douofs;			
 	TypeDicOfs	hnsofs;			
@@ -83,56 +68,46 @@ TypeGram	hinsi;
 	TypeDicOfs	oldsiz;			
 	TypeDicOfs	fresiz;			
 	TypeIdxOfs	freidx;			
-	Uchar		*douptr;
-	Uchar		*dstptr;
+	u_char		*douptr;
+	u_char		*dstptr;
 	TypeDicOfs	pos;
-	Uchar		*p1;			
-	Int		i;
-	Int		nlen, plen;
-	Int		size;
+	u_char		*p1;			
+	int		i;
+	int		nlen, plen;
+	int		size;
 	STDYIN	*stdy;
 	STDYOUT	stdydat;
 
-	
-	if (err = addel_arg(yomi, kanji, hinsi, yptr, sizeof(yptr)))
+	if ((err = addel_arg(yomi, kanji, hinsi, yptr, sizeof(yptr))) != 0)
 		return err;
 
-	
 	inputyomi = yomi;
 	cnvstart = ystart = yptr;
-	cnvlen = sstrlen(yptr);
+	cnvlen = strlen(yptr);
 
-	
-	if (err = checkdict(kanji, hinsi)) return err;
+	if ((err = checkdict(kanji, hinsi)) != 0)
+		return err;
 
-	
 	if (!curdict -> maxunit) return AD_NotUserDict;
 
-	
 	klen = cvtknj(yomi, kanji, kptr);
 
-	
         newsiz = DouonBlkSizeNumber + cnvlen + (klen !=0 ? klen+1 : 0) + 2; 
 
-	
 	if (newsiz > MaxDouonBlk) return AD_OvflwDouBlk;
 	if (newsiz > curdict->seglen) return AD_OvflwDouBlk;
 
-	
 	segnum = srchidx((TypeDicSeg)DicSegBase, cnvlen);
 
 	for ( ; ; ) {
-		
 		(*curdict->getdic)(curdict, segnum);
 		i = srchkana(&p1, &saml);
 		dstofs = douofs = p1 - dicbuf;
 		hnsofs = knjofs = 0;
 		if (i) {
-			
 			i = srchgram(p1, &p1, hinsi);
 			dstofs = hnsofs = p1 - dicbuf;
 			if (i) {
-				
 				srchkanji(&p1, kptr, klen);
 				if (*p1 != HinsiBlkTerm) return AD_ArExist;
 				dstofs = knjofs = p1 - dicbuf;
@@ -141,13 +116,11 @@ TypeGram	hinsi;
 
 		p1 = dicbuf + douofs;
 
-		
 		if (!hnsofs) {
 			oldsiz = 0;
 			nlen = cnvlen - saml;         
 		        newsiz = DouonBlkSizeNumber + nlen;
 
-			
 			nxtask = cal_nextym(p1);
 		}
 		else {
@@ -155,64 +128,48 @@ TypeGram	hinsi;
 			nxtask = 0;
 		}
 		if (!knjofs) newsiz += 2;
-		          
+
 	        newsiz += (klen != 0 ? klen+1 : 0); 
 
-		
 		fresiz = usr_freelen();
 
-		
 		if ((unsigned int) (newsiz - oldsiz - nxtask) <= 
 		    (unsigned int) fresiz) break;
 
-		
 		if (segend(p1) && (segnum + 1 < curdict->segunit)) {
-			
 			segnum++;
 			continue;
 		}
 
-		
 		if (curdict->segunit >= curdict->maxunit)
 			return AD_OvflwUsrDic;
 
-		
 		freidx = count_uidx();
 
-		
 		if ((unsigned int) (douofs + newsiz) <= curdict->seglen) {
-			
 			if (hnsofs) p1 = getntag(p1);
 			pos = p1 - dicbuf;
 
-			
 			nlen = getnlen(p1);              
 		        if ((unsigned int) freidx < getplen(p1) + nlen + 1)
 				return AD_OvflwIndex;
 
-			
 			if ((*curdict->putdic)(curdict, curdict->segunit))
 				return AD_OvflwUsrDic;
 
-			
 			sprt_seg(segnum, pos);
 
-			
 			nxtask = 0;
 			break;
 		}
 
-		
 		if (segend(p1)) {
-			
 			if ((unsigned int) freidx < cnvlen + 1) return AD_OvflwIndex;
 
-			
 			if ((*curdict->putdic)(curdict, curdict->segunit))
 				return AD_OvflwUsrDic;
 			curdict->segunit++;
 
-			
 			(*curdict->getdic)(curdict, curdict->segunit - 1);
 			memset(dicbuf, DicSegTerm, (Int)curdict->seglen);
 			dicbuf[0] = 0;
@@ -220,13 +177,10 @@ TypeGram	hinsi;
 			(*curdict->rszdic)(curdict, curdict->segunit);
 			mkidxtbl(curdict);
 
-			
 			segnum++;
 		}
 
-		
 		else {
-			
 			nlen = getnlen(p1);         
 			if ((unsigned int) freidx < getplen(p1) + nlen + 1)
 				return AD_OvflwIndex;
@@ -234,21 +188,17 @@ TypeGram	hinsi;
 			if ((*curdict->putdic)(curdict, curdict->segunit))
 				return AD_OvflwUsrDic;
 
-			
 			sprt_seg(segnum, douofs);
 
-			
 			segnum++;
 		}
 	}
 
 	douptr = dicbuf + douofs;
 
-	
 	if (nxtask) {
-		Uchar	*tp;
+		u_char	*tp;
 
-		
 		size = getsize(douptr) - nxtask;
 		plen = getplen(douptr) + nxtask;
 		nlen = getnlen(douptr) - nxtask;
@@ -258,27 +208,21 @@ TypeGram	hinsi;
 		*(douptr + 1) = size;
 		*(douptr + 2) = ((nlen & 0x0f) | ((plen & 0x0f) << 4));
 
-		
 		p1 = douptr + DouonBlkSizeNumber;
 		tp = p1 + nxtask;
 		mvmemi(tp, p1, dicbuf + curdict->seglen - tp);
 	}
 
-	
 	dstptr = dicbuf + dstofs;
 	size = newsiz - oldsiz;
 	p1 = dicbuf + curdict->seglen;
 	mvmemd(p1 - size, p1, p1 - dstptr - size);
 
-	
 	if (!hnsofs) {
-		
 		if (douofs == segtop() - dicbuf) {
-			
 			chg_uidx(segnum, yptr, cnvlen);
 		}
 
-		
 		*dstptr   = 0;
 		nlen = cnvlen - saml;
 		if (nlen & 0x10) *dstptr |= NokoriYomiTop;
@@ -287,7 +231,6 @@ TypeGram	hinsi;
 		*dstptr++  = size;
 		*dstptr++  = ((nlen&0x0f)|((saml&0x0f)<<4));
 
-		
 		while (saml < cnvlen) *dstptr++ = yptr[saml++];
 	}
 	
@@ -301,22 +244,17 @@ TypeGram	hinsi;
 		*(douptr + 2) = ((nlen & 0x0f) | ((plen & 0x0f) << 4));
 	}
 
-	
 	if (!knjofs) *dstptr++ = hinsi;
 
-	
 	stdydat.stdy1.offset = dstptr - dicbuf;
 	for (saml = 0 ; saml < klen ; ) *dstptr++ = kptr[saml++];
         if (klen > 0) *dstptr++ = KanjiStrEnd;
 
-	
 	if (!knjofs) *dstptr++ = HinsiBlkTerm;
 
-	
 	(*curdict->putdic)(curdict, segnum);
 
 	if (StudyExist()) {
-		
 		size -= nxtask;
 		for (i = StudyCount, stdy = StudyDict ; i-- ; stdy++) {
 			if (stdy -> dicid != curdict->dicid) continue;
@@ -324,9 +262,8 @@ TypeGram	hinsi;
 			if (stdy -> offset >= dstofs) stdy -> offset += size;
 		}
 
-		
 		for (p1 = ClStudyDict ; !iseocl(p1) ; p1 = ClNextTag(p1)) {
-			err = sstrncmp(yptr, (Uchar TFar *)ClYomiPos(p1),
+			err = strncmp(yptr, (u_char*)ClYomiPos(p1),
 					(Int)ClYomiLen(p1));
 			if (err == MATCH) {
 				delclsub(p1);		
@@ -339,7 +276,6 @@ TypeGram	hinsi;
 		}
 	}
 
-	
 	stdydat.stdy1.seg    = segnum;
 	stdydat.stdy1.dicid  = curdict->dicid;
 	stdydat.stdy1.styno  = 0;
@@ -357,19 +293,16 @@ TypeGram	hinsi;
 }
 
 
-
-Static	Int	checksub(kanji, grm)
-Uchar		*kanji;			
-TypeGram	grm;			
+static int
+checksub(u_char* kanji, TypeGram grm)
 {
-	Reg1	Uchar	*tagp;		
-	Reg2	Uchar	*ptr;
-	Reg3	Uchar	*endp;
-	Int	flg, nlen;
-	Int	dounum;
-	Uchar	buf[MaxWdKanjiLen + 1];
+	u_char	*tagp;		
+	u_char	*ptr;
+	u_char	*endp;
+	int	flg, nlen;
+	int	dounum;
+	u_char	buf[MaxWdKanjiLen + 1];
 
-	
 	dicinl = cnvlen;
 	dicsaml = 0;
 	prevseg = (TypeDicSeg)-1;
@@ -378,64 +311,42 @@ TypeGram	grm;
 		if (cnvlen == getnlen(tagp) + getplen(tagp))
 			break;
 	}
-	
 
 	dounum = 0;
-
-	
 	nlen = getnlen(tagp);              
         ptr = tagp + DouonBlkSizeNumber + nlen;
-
-	
 	endp = tagp + getsize(tagp);
 
-	
 	while (ptr < endp) {
-
-		
 		flg = (grm == *ptr++);
 		while (*ptr != HinsiBlkTerm) {
-
-			
 			if (flg) {
-
-				
 				buf[getkanji(inputyomi, cnvlen, ptr, buf)] = 0;
-
-				
 				if (cmpstr(kanji, buf)) return -1;
 			}
 
-			
 			dounum++;
 			ptr = skipkstr(ptr);
 		}
 
-		
 		ptr++;
 	}
 
-	
 	return dounum;
 }
 
 
-
-Static	Uint	checkdict(kanji, grm)
-Uchar		*kanji;			
-TypeGram	grm;			
+static u_int
+checkdict(u_char* kanji, TypeGram grm)
 {
-	Reg1	DICTL	*dp;
-	Reg2	Int	dounum = 0;
-	Reg3	Int	tmp;
+	DICTL	*dp;
+	int	dounum = 0;
+	int	tmp;
 	DICT	*tmpdict;
 
 	tmpdict = curdict;
 	for (dp = dictlist ; dp ; dp = dp -> next) {
-
 		curdict = dp -> dict;
-
-		
 		if ((tmp = checksub(kanji, grm)) < 0) {
 			curdict = tmpdict;
 			return AD_ArExist;
@@ -445,32 +356,24 @@ TypeGram	grm;
 	}
 	curdict = tmpdict;
 
-	
 	if (MaxKouhoNumber <= dounum) return AD_OvflwDouNum;
 
 	return 0;
 }
 
 
-
-Static	Int	cal_nextym(ptr)
-Reg1	Uchar	*ptr;			
+static int
+cal_nextym(u_char* ptr)
 {
-	Reg2	Int	count = 0;
-	Reg3	Uchar	*src;
-	Reg4	Int	len;
-	
+	int	count = 0;
+	u_char	*src;
+	int	len;
 	
 	if (!segend(ptr)) {
-
-		
 		src = cnvstart + getplen(ptr);
-
-		
 		len = getnlen(ptr);
 		ptr += DouonBlkSizeNumber;
 
-		
 		while (len--) {
 			if (*ptr++ == *src++)
 				count++;
@@ -479,39 +382,34 @@ Reg1	Uchar	*ptr;
 		}
 	}
 
-	
 	return count;
 }
 
 
-
-Static	Int	usr_freelen()
+static int
+usr_freelen(void)
 {
-	Reg1	Uchar	*ptr;
+	u_char* ptr;
 
-	
 	ptr = segtop();
 	while (!segend(ptr)) ptr += getsize(ptr);
 
-	
 	return(curdict->seglen - (ptr - dicbuf));
 }
 
 
-
-Static	Void	sprt_seg(seg, ofs)
-TypeDicSeg	seg;
-TypeDicOfs	ofs;
+static void
+sprt_seg(TypeDicSeg seg, TypeDicOfs ofs)
 {
-	Reg3	TypeDicSeg	s;
-	Uchar		*pos;
-	Reg1	Uchar	*p;
-	Reg2	Uchar	*q;
-	Int		i;
-	Int		j;
-	Int		ylen, nlen;
+	TypeDicSeg	s;
+	u_char	*pos;
+	u_char	*p;
+	u_char	*q;
+	int		i;
+	int		j;
+	int		ylen, nlen;
 	TypeDicID	dicid;
-	Uchar		yomi[MaxWdYomiLen];
+	u_char		yomi[MaxWdYomiLen];
 	STDYIN		*stdy;
 
 	for (s = curdict->segunit - 1 ; s >= seg ; s--) {
@@ -521,13 +419,10 @@ TypeDicOfs	ofs;
 	curdict->segunit++;
 	(*curdict->rszdic)(curdict, curdict->segunit);
 
-	
 	(*curdict->getdic)(curdict, seg + 1);
 
-	
 	pos = dicbuf + ofs;
 
-	
 	for (p = segtop() ; (p <= pos) && !segend(p) ; p = q) {
 		q = getntag(p);
 		i = getplen(p);
@@ -537,34 +432,26 @@ TypeDicOfs	ofs;
 		while (j-- > 0) yomi[i++] = *p++;
 	}
 
-	
 	nlen = getnlen(pos);
         ylen = (i = getplen(pos)) + (j = nlen);
 
-	
 	apnd_uidx(seg, yomi, ylen);
 
-	
         set_size(segtop(), getsize(pos) + i, 0, ylen);
 
-	
 	mvmemi(yomi, (p = segtop() + DouonBlkSizeNumber), ylen);
 
-	
 	q = pos + DouonBlkSizeNumber + j;	
 	i = dicbuf + curdict->seglen - q;	
 	mvmemi(q, p += ylen, i);
 	j = q - p;				
 
-	
 	p += i;
 	memset(p, DicSegTerm, (dicbuf + curdict->seglen - p));
 
-	
 	(*curdict->putdic)(curdict, seg + 1);
 
 	if (StudyExist()) {
-		
 		dicid = curdict -> dicid;
 		for (i = StudyCount, stdy = StudyDict ; i-- > 0 ; stdy++) {
 			if (stdy -> dicid != dicid)
@@ -580,37 +467,28 @@ TypeDicOfs	ofs;
 		}
 	}
 
-	
 	(*curdict->getdic)(curdict, seg);
 	memset(dicbuf + ofs, DicSegTerm, (Int)(curdict->seglen - ofs));
 	(*curdict->putdic)(curdict, seg);
 }
 
 
-
-Static	Void	apnd_uidx(seg, yomi, len)
-TypeDicSeg	seg;
-Uchar		*yomi;
-Int		len;
+static void
+apnd_uidx(TypeDicSeg seg, u_char* yomi, int len)
 {
-	Reg1	Uchar	*p;
-	Reg1	Uchar	*q;
+	u_char	*p;
+	u_char	*q;
 
-	
 	p = get_idxptr(seg);
 	while (*p++) ;
 
-	
 	q = idxbuf + curdict->idxlen;
 	mvmemd(q - (len + 1), q, (Int)(q - (len + 1) - p));
 
-	
 	while (len--) *p++ = *yomi++;
 	*p = 0;
 
-	
 	(*curdict->putidx)(curdict, 0);
 
-	
 	mkidxtbl(curdict);
 }

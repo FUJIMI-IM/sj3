@@ -31,15 +31,19 @@
  * $SonyRCSfile: knjcvt.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:00:37 $
+ *
+ * $Id$
  */
 
 
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include "sj_const.h"
 #include "sj_struct.h"
+#include "dicttool.h"
 
 typedef struct div_list {
 	int	len;		
@@ -52,10 +56,10 @@ extern	int	askknj_num;
 
 
 
-static	free_divlist(p)
-register DivList *p;
+static void
+free_divlist(DivList* p)
 {
-	register DivList *q;
+	DivList *q;
 
 	while (p) {
 		q = p -> child;
@@ -66,9 +70,10 @@ register DivList *p;
 
 
 
-static	DivList	*make_divrec()
+static DivList*
+make_divrec(void)
 {
-	register DivList *p;
+	DivList *p;
 
 	p = (DivList *)Malloc(sizeof(DivList));
 	if (!p) {
@@ -82,10 +87,8 @@ static	DivList	*make_divrec()
 
 
 
-static	make_divlist(parent, knj, len)
-DivList	*parent;	
-u_char	*knj;		
-int	len;		
+static int
+make_divlist(DivList* parent, u_char *knj, int len)
 {
 	int	i, j;
 	int	num;
@@ -192,10 +195,8 @@ int	len;
 
 
 
-u_char	*knjofscvt(ptr, len, ret)
-u_char	*ptr;
-int	len;
-int	*ret;
+u_char*
+knjofscvt(u_char* ptr, int len, int* ret)
 {
 	int	i;
 	u_char	*p, *q;
@@ -233,10 +234,8 @@ int	*ret;
 
 
 
-u_char	*knjcvt(ptr, len, ret)
-u_char	*ptr;
-int	len;
-int	*ret;
+u_char*
+knjcvt(u_char* ptr, int len, int* ret)
 {
 	int	i;
 	u_char	*p, *q;
@@ -272,5 +271,4 @@ if (i != q - p) {
 	
 	return p;
 }
-
 

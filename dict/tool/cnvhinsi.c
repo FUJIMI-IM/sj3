@@ -36,7 +36,7 @@
 
 #include <stdio.h>
 #include <sys/types.h>
-
+#include "dicttool.h"
 
 
 struct gram_code {
@@ -44,15 +44,14 @@ struct gram_code {
 	int	code;
 } gramtbl[] = {
 
-
 #include "GramTable"
 
 };
 
 #define	GramMax	(sizeof(gramtbl)/sizeof(struct gram_code) - 1)
 
-int u_strcmp(a, b)
-u_char *a, *b;
+int
+u_strcmp(u_char* a, u_char* b)
 {
 	if (!a || !b) return 0;
 
@@ -68,13 +67,13 @@ u_char *a, *b;
 }
 
 
-int	cnvhinsi(buf)
-u_char	*buf;
+int
+cnvhinsi(u_char *buf)
 {
-	register int	min;
-	register int	max;
-	register int	mid;
-	register int	i;
+	int	min;
+	int	max;
+	int	mid;
+	int	i;
 
 	min = 0;
 	max = GramMax;
@@ -105,8 +104,8 @@ u_char	*buf;
 
 
 
-char	*hinsi_str(code)
-int	code;
+char*
+hinsi_str(int code)
 {
 	int	i;
 

@@ -31,28 +31,24 @@
  * $SonyRCSfile: cvtkanji.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:41 $
+ *
+ * $Id$
  */
 
 
-
-
-
+#include <string.h>
 #include "sj_kcnv.h"
+#include "kanakan.h"
+
+
+Void	mkknjmax();
+Void	mvmemi(), free_clall();
+Void	free_jall();
 
 
 
-Int	hzstrlen(), ph_khtbl();
-Void	cvtdict(), cvtminasi();
-Void	cvtwakachi(), setstyrec(), cvtkouho(), mkknjmax();
-Void	ph_setkouho(), mvmemi(), free_clall();
-Void	free_jall(), memcpy(), cvtphknj();
-Uchar	TFar	*getstb();
-STDYIN	*srchstdy();
-
-
-
-Void	cvtphknj(num)
-Int	num;
+void
+cvtphknj (void)
 {
 	Int	i, j;
 	CLREC	*clrec;
@@ -119,8 +115,8 @@ not_enough_memory:
 
 
 
-Void	cvtkouho(krec)
-KHREC	*krec;			
+void
+cvtkouho (KHREC *krec)
 {
 	CLREC	*clrec;		
 
@@ -161,13 +157,13 @@ KHREC	*krec;
 
 
 
-Void	setstyrec(krec)
-KHREC	*krec;
+void
+setstyrec (KHREC *krec)
 {
 	JREC	*jrec;
 	KHREC	*kptr;
 	Int	ii;
-	Uchar	TFar	*fptr;
+	Uchar	*fptr;
 	STDYOUT	stdy;
 
 	jrec  = krec -> clrec -> jnode;
@@ -201,11 +197,11 @@ KHREC	*krec;
 	stdy.ka_fg        = krec -> ka_fg;
 
 	
-	if (jrec -> stbofs && (fptr = getstb(jrec -> hinsi)))
+	if (jrec -> stbofs && (fptr = getstb(jrec -> hinsi)) != NULL)
 		stdy.len -= StbYomiLen(fptr + jrec -> stbofs - 1);
 
 	
-	if (fptr = Settou_ptr(jrec -> sttofs))
+	if ((fptr = Settou_ptr(jrec -> sttofs)) != NULL)
 		stdy.sttlen = SttYomiLen(fptr);
 	else
 		stdy.sttlen = 0;
@@ -214,3 +210,4 @@ KHREC	*krec;
 	memcpy((Uchar *)&stdy, kanjitmp, sizeof(STDYOUT));
 	kanjitmp += sizeof(STDYOUT);
 }
+

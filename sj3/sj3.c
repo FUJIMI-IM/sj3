@@ -44,6 +44,9 @@
 #if defined(__NetBSD__)
 #define LACKOF_SETLOCALE
 #endif
+#if defined(__FreeBSD__)
+#include <sys/ioctl_compat.h>
+#endif
 #include <curses.h>
 #endif
 
@@ -55,12 +58,11 @@
 #include <netdb.h>
 #endif
 #include <locale.h>
+#include "sj3.h"
 
 #ifndef _PATH_UTMP
 #define _PATH_UTMP "/etc/utmp"
 #endif
-
-int	fail ();
 
 
 #ifdef SVR4
@@ -125,8 +127,6 @@ struct	ttysize	Ttysize;
 #endif
 int	master;
 int	slave;
-int	exitprocess ();
-int	onwinch ();
 
 #ifdef SYSV_TERMIOS
 struct	termios	b;
@@ -153,11 +153,9 @@ int Pid_shell;
 
 
 int current_locale; 
-int done();
 
-main (argc, argv)
-int	argc;
-char	**argv;
+int
+main (int argc, char** argv)
 {
 	init (argv);		
 	get_ttymode ();         
@@ -174,7 +172,8 @@ char	**argv;
 	done ();		
 }
 
-makecore ()
+void
+makecore (void)
 {
 	chdir ("/tmp");
 	setgid (getgid ());
@@ -183,11 +182,10 @@ makecore ()
 }
 
 
-
-init (argv)
-char	**argv;
+void
+init (char** argv)
 {
-	char		*cp, *strrchr ();
+	char		*cp;
 
 	(void) signal (SIGTERM, (void (*)())done);
 	(void) signal (SIGWINCH, SIG_IGN);
@@ -216,11 +214,11 @@ char	**argv;
 }
 
 
-
-init_env()
+void
+init_env(void)
 {
-	register char *uname, *hp, *tname;
-        register int  i;
+	char *uname, *hp, *tname;
+        int  i;
 	struct passwd  *pwd, *getpwnam(), *getpwuid();
 	char	*getlogin(), *getenv();
 
@@ -263,16 +261,13 @@ init_env()
 }
 
 
-
-parsearg (argc, argv)
-register int	argc;
-register char	**argv;
+void
+parsearg (int argc, char** argv)
 {
-	register int	ap;
-	register char	c;
-	register int	sp;
-	register char	**shella;
-	char *getenv();
+	int	ap;
+	char	c;
+	int	sp;
+	char	**shella;
 
 	shella = shellargs;
 	ap = 1;
@@ -346,8 +341,8 @@ register char	**argv;
 }
 
 
-
-usage()
+void
+usage(void)
 {
 	aprintf ("Usage: %s [-option ...]\n\r", progname);
 	aprintf ("\t-option\n\r");
@@ -367,8 +362,8 @@ usage()
 }
 
 
-
-sjinit ()
+void
+sjinit (void)
 {
 	getfixtty ();		
 	setshellname ();	
@@ -380,11 +375,11 @@ sjinit ()
 }
 
 
-
-setshellname ()
+void
+setshellname (void)
 {
-	register char	*s;
-	char	*namep, *strrchr (), *getenv();
+	char	*s;
+	char	*namep;
 
 	if (shellprog[0] == '\0') {
 		s = getenv ("SHELL");
@@ -412,8 +407,8 @@ setshellname ()
 }
 
 
-
-getfixtty ()
+void
+getfixtty (void)
 {
 	getmaster ();		
 	fixtty ();		
@@ -421,8 +416,8 @@ getfixtty ()
 }
 
 
-
-get_ttymode ()
+void
+get_ttymode (void)
 {
 #ifdef SYSV_TERMIOS
 	ioctl (0, TCGETS, (char *)&b);
@@ -453,8 +448,8 @@ get_ttymode ()
 }
 
 
-
-getmaster ()
+void
+getmaster (void)
 {
 #ifdef SVR4
 	struct stat	stb;
@@ -520,11 +515,16 @@ getmaster ()
 #endif 
 }
 
-set_jmode (mode)
-register int	mode;
+
+void
+#ifdef __sony_news
+set_jmode (int mode)
+#else
+set_jmode (void)
+#endif
 {
 #ifdef __sony_news
-	register int	term_mode;
+	int	term_mode;
 
 	term_mode = mode & KM_KANJI;
 	if (term_mode == KM_JIS) {
@@ -583,8 +583,8 @@ register int	mode;
 }
 
 
-
-fixtty ()
+void
+fixtty (void)
 {
 #ifdef SYSV_TERMIOS
 	struct termios sbuf;
@@ -640,17 +640,19 @@ fixtty ()
 #include <grp.h>
 #endif
 
-setdev ()
+
+void
+setdev (void)
 {
-	char	*cp, *ttyname ();
+	char	*cp;
 #ifdef BSD43	
 	struct group	*ttygrp;
 #endif
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = current_conversion;
 
-	if (cp = ttyname (2))
+	if ((cp = ttyname (2)) != NULL)
 		strcpy (tty_name, cp);
 	else
 		*tty_name = '\0';
@@ -659,7 +661,7 @@ setdev ()
 	slave_name[strlen ("/dev/")] = 't';
 #endif 
 #ifdef BSD43	
-	if (ttygrp = getgrnam ("tty"))
+	if ((ttygrp = getgrnam ("tty")) != NULL)
 		chown(slave_name, getuid(), ttygrp->gr_gid);
 	else
 		chown(slave_name, getuid(), getgid());
@@ -672,13 +674,13 @@ setdev ()
 	Ttyslot = nmttyslot (slave_name);
 #endif 
 
-	
 
 #ifdef SYSV_TERMIOS
-	if (ioctl(0, TIOCGWINSZ, &Ttysize) == 0) {
+	if (ioctl(0, TIOCGWINSZ, &Ttysize) == 0)
 #else
-	if (ioctl(0, TIOCGSIZE, &Ttysize) == 0) {
+	if (ioctl(0, TIOCGSIZE, &Ttysize) == 0)
 #endif
+	{
 		if (!status_line)
 			--Ttysize.ts_lines;
 		if (Ttysize.ts_lines < 1) {
@@ -730,10 +732,10 @@ setdev ()
 }
 
 
-
 static char	shellbuf[128];
 
-forkshell ()
+void
+forkshell (void)
 {
 #ifdef SVR4
   struct sigaction action; 
@@ -767,15 +769,16 @@ forkshell ()
 #endif
 }
 
-sj3_setenv (ename, eval, buf)
-	char *ename, *eval, *buf;
+
+void
+sj3_setenv (char* ename, char* eval, char* buf)
 {
-	register char *cp, *dp;
-	register char **ep = environ;
+	char *cp, *dp;
+	char **ep = environ;
 
 	
 
-	while (dp = *ep++) {
+	while ((dp = *ep++) != NULL) {
 		for (cp = ename; *cp == *dp && *cp; cp++, dp++)
 			continue;
 		if (*cp == 0 && (*dp == '=' || *dp == 0)) {
@@ -787,10 +790,10 @@ sj3_setenv (ename, eval, buf)
 }
 
 
-
-shellprocess ()
+void
+shellprocess (void)
 {
-	int			t, f;
+	int	t, f;
 #ifdef SYSV_TERMIOS
 #ifdef SYSV_UTMP
 	struct utmp Utmp;
@@ -830,12 +833,11 @@ shellprocess ()
 #endif /* SYSV_UTMP */
 #else /* SYSV_TERMIOS */
 	struct utmp		Utmp;
-	register char		*p;
+	char		*p;
 /*
  * Remove warning.
  * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
  */
-	char			*ttyname (), *strrchr ();
 #define SCPYN(a, b) strncpy(a, b, sizeof(a))
 
 	if ((p = ttyname (0)) == NULL)
@@ -905,8 +907,8 @@ shellprocess ()
 }
 
 
-
-getslave ()
+void
+getslave (void)
 {
 #ifdef SVR4
 	grantpt(master);		 
@@ -956,9 +958,8 @@ getslave ()
 }
 
 
-
-execcmd (cmd, ap)
-char	*cmd, **ap;
+void
+execcmd (char* cmd, char** ap)
 {
 	int	c;
 	char	*getenv ();
@@ -967,7 +968,7 @@ char	*cmd, **ap;
 	path = getenv ("PATH");
 	cp = fullcmd;
 
-	while (c = *path++) {
+	while ((c = *path++) != 0) {
 		if (c == ':') {
 			*cp++ = '/';
 			*cp = '\0';
@@ -995,16 +996,16 @@ char	*cmd, **ap;
 }
 
 
-
-fail ()
+void
+fail (void)
 {
 	(void) kill (0, SIGTERM);
 	done ();
 }
 
 
-
-done ()
+void
+done (void)
 {
 	(void) signal (SIGWINCH, SIG_IGN);
 
@@ -1013,7 +1014,9 @@ done ()
 	done2 ();
 }
 
-done2 ()
+
+void
+done2 (void)
 {
 	chown (slave_name, 0, 0);
 	chmod (slave_name, 0666);
@@ -1037,15 +1040,17 @@ done2 ()
 	done3 ();
 }
 
-done3 ()
+
+void
+done3 (void)
 {
 	aprintf ("\r\nexit %s.\r\n", progname);
 	exit (0);
 }
 
 
-
-exitprocess ()
+void
+exitprocess (void)
 {
 #ifdef SVR4
         siginfo_t       info;
@@ -1056,14 +1061,13 @@ exitprocess ()
            return;
         if (info.si_code == CLD_STOPPED)
 #else
-	union wait	status;
-	int		pid;
+	int		pid, status;
 
 /*
  * Remove warning.
  * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
  */
-	pid = wait3 ((int *)&status, (WNOHANG|WUNTRACED), 0);
+	pid = wait3 (&status, (WNOHANG|WUNTRACED), 0);
 	if (WIFSTOPPED (status))
 #endif
 		suspend();
@@ -1072,8 +1076,8 @@ exitprocess ()
 }
 
 
-
-suspend ()
+void
+suspend (void)
 {
 #ifdef SIGTYPE_VOID
 	void		(*old_sigtstp) ();
@@ -1155,7 +1159,8 @@ cont:
 }
 
 #ifdef SVR4
-clearutmpentry()
+void
+clearutmpentry(void)
 {
 	struct utmpx		*up;
 #ifdef SVR4
@@ -1195,7 +1200,8 @@ clearutmpentry()
 }
 #else /* SVR4 */
 #ifdef SYSV_UTMP
-clearutmpentry ()
+void
+clearutmpentry (void)
 {
 	struct utmp             Utmp;
 
@@ -1214,7 +1220,8 @@ clearutmpentry ()
 	endutent();
 }
 #else /* SYSV_UTMP */
-clearutmpentry ()
+void
+clearutmpentry (void)
 {
 	int			f;
 	struct utmp		Utmp;
@@ -1234,20 +1241,21 @@ clearutmpentry ()
 #endif /* SVR4 */
 
 
-
-onwinch ()
+void
+onwinch (void)
 {
 	int ttypgrp;
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = current_conversion;
 	(void) signal (SIGWINCH, SIG_IGN);
 
 #ifdef SYSV_TERMIOS
-	if (ioctl (0, TIOCGWINSZ, &Ttysize) == 0) {
+	if (ioctl (0, TIOCGWINSZ, &Ttysize) == 0)
 #else /* SYSV_TERMIOS */
-	if (ioctl (0, TIOCGSIZE, &Ttysize) == 0) {
+	if (ioctl (0, TIOCGSIZE, &Ttysize) == 0)
 #endif /* SYSV_TERMIOS */
+	{
 		if (!status_line) {
 			clear_guide_line ();
 			--Ttysize.ts_lines;
@@ -1280,7 +1288,9 @@ onwinch ()
 	(void) signal (SIGWINCH, (void (*)())onwinch);
 }
 
-SetRegion ()
+
+void
+SetRegion (void)
 {
 	set_tty_size ();
 	
@@ -1288,7 +1298,9 @@ SetRegion ()
 		RegionSet (1, Ttysize.ts_lines);
 }
 
-set_tty_size ()
+
+void
+set_tty_size (void)
 {
 	
 #ifdef SYSV_TERMIOS
@@ -1298,11 +1310,12 @@ set_tty_size ()
 #endif /* SYSV_TERMIOS */
 }
 
-setsjserv(hname)
-char *hname;
+
+void
+setsjserv(char* hname)
 {
-        register char *p;
-        register int i;
+        char *p;
+        int i;
         char *sbuf;
  
         if (hname == NULL || *hname == '\0')    
@@ -1324,9 +1337,9 @@ char *hname;
         cur_serv = serv_list[0];
 }
 
+
 char *
-chmyhname(hname)
-char *hname;
+chmyhname(char* hname)
 {
         if (hname != NULL) {
                 if (strcmp(my_hname, hname) == 0 ||

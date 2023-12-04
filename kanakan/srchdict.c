@@ -31,24 +31,22 @@
  * $SonyRCSfile: srchdict.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:02:26 $
+ *
+ * $Id$
  */
 
 
-
+#include <sys/types.h>
+#include <string.h>
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
-Uchar	*get_idxptr();
-Int	yomicmp(), sstrlen();
-Void	get_askknj();
-TypeDicSeg	srchidx();
 
-Int	yomicmp(ptr1, ptr2, saml)
-Reg1	Uchar	*ptr1;
-Reg2	Uchar	*ptr2;
-Uchar	*saml;
+int
+yomicmp(u_char* ptr1, u_char* ptr2, u_char* saml)
 {
-	Int	i, j;
-	Int	same;
+	int	i, j;
+	int	same;
 
 	same = *saml;
 
@@ -61,7 +59,7 @@ Uchar	*saml;
 		for (i = same ; i ; i--)
 			if (*ptr1++ != *ptr2++) return OVER;
 
-		j = sstrlen(ptr2);
+		j = strlen(ptr2);
 	}
 
 	else if (i > same)
@@ -89,12 +87,12 @@ Uchar	*saml;
 }
 
 
-Uchar	*srchdict(tagp)
-Uchar	*tagp;
+u_char*
+srchdict(u_char* tagp)
 {
 	TypeDicSeg	segno;
-	Int		cmp;
-	Int		maxlen;
+	int		cmp;
+	int		maxlen;
 
 	maxlen = (cnvlen > MaxWdYomiLen) ? MaxWdYomiLen : cnvlen;
 

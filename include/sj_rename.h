@@ -467,13 +467,7 @@
 
 
 
-#define	memcpy 		Jmemcpy 
 #define	sstrncpy	Jsstrncpy
-
-
-
-#define	memset		Jmemset
-
 
 
 #define	mvmemd		Jmvmemd

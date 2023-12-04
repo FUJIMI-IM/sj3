@@ -31,15 +31,15 @@
  * $SonyRCSfile: sj_const.h,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:01:01 $
+ *
+ * $Id$
  */
 
 
 
+#ifndef	_SJ_CONST_H_
+#define	_SJ_CONST_H_	1
 
-
-#ifndef	_SJ_CONST
-
-#define	_SJ_CONST
 #include "sj_euc.h"
 
 
@@ -50,11 +50,10 @@
 #define	UNDER		4	
 
 
-
-
+#ifndef FALSE
 #define	FALSE		0
 #define	TRUE		-1
-
+#endif /* FALSE */
 
 
 
@@ -196,4 +195,4 @@
 #define	NumWordBuf	((NumKetaLength+3)/4)	
 
 
-#endif
+#endif	/* _SJ_CONST_H_ */

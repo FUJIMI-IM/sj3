@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 1991-1994  Sony Corporation
+ * Copyright (c) 1996 Hidekazu Kuroki <hidekazu at cs.titech.ac.jp>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,22 +32,22 @@
  * $SonyRCSfile: setup.c,v $  
  * $SonyRevision: 1.3 $ 
  * $SonyDate: 1994/12/09 11:27:07 $
+ *
+ * $Id$
  */
 
 
 
 
 #include "sj_sysvdef.h"
-#include <stdio.h>
 #include <ctype.h>
-#ifdef SVR4
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#else
-#include <strings.h>
-#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
+#include <unistd.h>
 #include "sj_typedef.h"
 #include "sj_const.h"
 #include "sj_var.h"
@@ -56,6 +57,8 @@
 #include "Const.h"
 #include "Struct.h"
 #include "sj_global.h"
+#include "kanakan.h"
+#include "server.h"
 
 typedef	struct	strlist {
 	u_char	*str1;
@@ -95,33 +98,30 @@ char    *proto_name     = NULL;
 
 static	int	line_number;			
 
-char	*malloc();
-
-
 
 #ifdef	OLD
-#else
-RcError(p)
-char	*p;
+#else /* !OLD */
+void
+RcError(char* p)
 {
 	fprintf(stderr, "%s: \"%s\", line %d: %s\r\n",
 		program_name, runcmd_file, line_number, p);
 	fflush(stderr);
 	exit(1);
 }
-RcWarning(p)
-char	*p;
+
+void
+RcWarning(char* p)
 {
 	fprintf(stderr, "%s: warning: \"%s\", line %d: %s\r\n",
 		program_name, runcmd_file, line_number, p);
 	fflush(stderr);
 }
-#endif
+#endif /* !OLD */
 
 
-
-static	cmpstr(src, dst)
-u_char	*src, *dst;
+static int
+cmpstr(u_char* src, u_char* dst)
 {
 	int	flg;
 	int	c;
@@ -185,9 +185,10 @@ void	*pv_dst;
 	while (*p++) ;
 	return p;
 }
-static	u_char	*get_list(p, dst)
-u_char	*p;
-StrList	**dst;
+
+
+static u_char*
+get_list(u_char* p, StrList** dst)
 {
 	StrList	*s1, *s2;
 
@@ -357,10 +358,9 @@ int	len;
 
 	return c;
 }
-read_line(fp, buf, len)
-FILE	*fp;
-char	*buf;
-int	len;
+
+int
+read_line(FILE* fp, char* buf, int len)
 {
 	int	flg;
 
@@ -374,13 +374,13 @@ int	len;
 
 
 
-void	read_runcmd()
+void
+read_runcmd(void)
 {
 	FILE	*fp;
 	u_char	buf[BUFSIZ];
 	struct	optlist *opt;
 	u_char	*p;
-	int	i;
 
 	if (!(fp = fopen(runcmd_file, "r"))) {
 		warning_out("Can't open run-command file \"%s\"", runcmd_file);
@@ -388,7 +388,7 @@ void	read_runcmd()
 	}
 	line_number = 0;
 	while (read_line(fp, buf, sizeof(buf)) != EOF) {
-		for (opt = option ; p = (u_char *)opt -> optname ; opt++)
+		for (opt = option ; (p = (u_char *)opt -> optname) != NULL ; opt++)
 			if (!cmpstr(p, buf)) break;
 		if (p) {
 			p = buf; while (*p++) ;
@@ -404,9 +404,8 @@ void	read_runcmd()
 }
 
 
-
-static	set_defstr(d, s)
-char	**d, *s;
+static void
+set_defstr(char** d, char* s)
 {
 	if (*d == NULL && s) {
 		*d = malloc(strlen(s) + 1);
@@ -414,12 +413,17 @@ char	**d, *s;
 		strcpy(*d, s);
 	}
 }
-static	set_defint(d, s)
-int	*d, s;
+
+
+static void
+set_defint(int* d, int s)
 {
 	if (*d < 0) *d = s;
 }
-void	set_default()
+
+
+void
+set_default(void)
 {
 	set_defstr(&debug_file,		DebugOutFile);
 	set_defstr(&error_file,		ErrorOutFile);
@@ -447,26 +451,27 @@ void	set_default()
 }
 
 
-
-void	parse_arg(argc, argv)
-int	argc;
-char	**argv;
+void
+parse_arg(int argc, char** argv)
 {
 	int	c;
 	int	errflg = 0;
 	char	*p;
+	size_t	ret;
 
 	extern	char	*optarg, *strrchr();
 	extern	int	optind;
 
 	p = (p = strrchr(argv[0], '/')) ? p + 1 : argv[0];
-	strcpy(program_name,	p);
-	strcpy(runcmd_file,	RunCmdFile);
+	strlcpy(program_name,	p, sizeof(program_name));
+	strlcpy(runcmd_file,	RunCmdFile, sizeof(runcmd_file));
 
 	while ((c = getopt(argc, argv, "f:")) != EOF) {
 		switch (c) {
 		case 'f':
-			strcpy(runcmd_file, optarg);
+			ret = strlcpy(runcmd_file, optarg, sizeof(runcmd_file));
+			if (ret > sizeof(runcmd_file))
+				errflg++;
 			break;
 
 		case '?':
@@ -484,7 +489,7 @@ char	**argv;
 
 
 void
-preload_dict()
+preload_dict(void)
 {
 	StrList	*p;
 	char	filename[PathNameLen];
@@ -511,7 +516,8 @@ preload_dict()
 	free(work_base);
 }
 
-preopen_dict()
+void
+preopen_dict(void)
 {
 	StrList	*p;
 	char	filename[PathNameLen];
@@ -531,9 +537,9 @@ preopen_dict()
 		if (make_full_path(filename))
 			warning_out("too long filename \"%s\"", p -> str1);
 
-		else if (dict = (DICT *)opendict(filename, p -> str2)) {
+		else if ((dict = (DICT *)opendict(filename, p -> str2)) != NULL) {
 			logging_out("open dictionary \"%s\"", filename);
-		        if (!(dictl = (DICTL *)malloc(sizeof *dictl))) {
+		        if ((dictl = (DICTL *)malloc(sizeof *dictl)) == NULL) {
 				closedict((DictFile *)dict);
 				warning_out("can't open dictionary \"%s\"", filename);	
 				continue;
@@ -548,10 +554,8 @@ preopen_dict()
 }
 
 
-
-static	str_match(s, d)
-char	*s;
-char	*d;
+static int
+str_match(char* s, char* d)
 {
 	while (*d) {
 		if (*s == '*') {
@@ -571,10 +575,8 @@ char	*d;
 }
 
 
-
-check_user(user, host)
-char	*user;
-char	*host;
+int
+check_user(char* user, char* host)
 {
 	StrList	*p;
 

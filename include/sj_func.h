@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1991-1994  Sony Corporation
+ * Copyright (c) 2004  Hiroo Ono <hiroo+sj3 at oikumene.gcd.org>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,34 +28,24 @@
  */
 
 /*
- * $SonyRCSfile: skipkstr.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:02:25 $
- *
- * $Id$
+ * $Id: sj_func.h,v 1.1 2004/07/04 08:15:19 hiroo Exp $
  */
 
 
-#include "sj_euc.h"
-#include "sj_rename.h"
+#ifndef	_SJ_FUNC
+#define	_SJ_FUNC  1
+
+#include <sys/types.h>
 #include "sj_typedef.h"
-#include "sj_const.h"
-#include "sj_dict.h"
-#include "sj_table.h"
-#include "kanakan.h"
+#include "sj_struct.h"
+#include "Struct.h"
+
+typedef	void	(*VFuncNT)(u_char*, u_char*, JREC*);
+typedef int	(*IFuncSetj)(u_char*);
+typedef int	(*IFuncHira)(u_char*, int*);
+typedef u_char* (*UCPFuncGK)(u_char*, u_char*, u_char*, int, int);
+typedef u_char* (*UCPFuncMK)(u_char*, u_char*, int);
 
 
-u_char*
-skipkstr(u_char* ptr)
-{
-	int	contf = TRUE, csize;
+#endif /* _SJ_FUNC */
 
-	do {
-		csize = codesize(*ptr);
-		if (ptr[csize] == KanjiStrEnd) contf = FALSE;
-		ptr += csize;
-	} while (contf);
-        ptr++;
-
-	return ptr;
-}

@@ -31,18 +31,20 @@
  * $SonyRCSfile: readline.c,v $  
  * $SonyRevision: 1.1 $ 
  * $SonyDate: 1994/06/03 08:00:44 $
+ *
+ * $Id$
  */
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "sj_euc.h"
 #include "sj_const.h"
 #include "sj_macro.h"
+#include "dicttool.h"
 
 
-static	long	lineloc;
-
-
+/* static	long	lineloc; */
 static	int	yomi[MaxYomiLength + 1];
 static	int	kanji[MaxKanjiLength + 1];
 static	int	hinsi[MaxHinsiNumber + 1];
@@ -50,11 +52,9 @@ static	int	atr[MaxAtrNumber + 1];
 
 
 
-static	error(s)
-char	*s;
+static void
+error(char *s)
 {
-	register int	c;
-
 	if (s) fprintf(stderr, "%s\n", s);
 	mark_file(stderr);
 
@@ -63,10 +63,11 @@ char	*s;
 
 
 
-static	readchar()
+static int
+readchar(void)
 {
-	register int	c1;
-	register int	c2;
+	int	c1;
+	int	c2;
 
 	
 	c1 = getch(); if (c1 == EOF) return EOF;
@@ -89,9 +90,10 @@ static	readchar()
 
 
 
-static	skip_blank()
+static int
+skip_blank(void)
 {
-	register int	c;
+	int	c;
 
 	c = readchar();
 	while (Isblank(c)) c = readchar();
@@ -102,10 +104,11 @@ static	skip_blank()
 
 
 
-static	readhinsi()
+static int
+readhinsi(void)
 {
 	static int	c = 0;
-	register int	i;
+	int	i;
 	unsigned char	hinsi[128];
 	int	flg;
 
@@ -182,11 +185,12 @@ retry:
 
 
 
-int *readline()
+int*
+readline(void)
 {
-	register int	c;
-	register int	i;
-	register int	j;
+	int	c;
+	int	i;
+	int	j;
 
 	
 	for ( ; ; ) {
@@ -243,7 +247,7 @@ int *readline()
 
 	
 	i = j = 0;
-	while (c = readhinsi()) {
+	while ((c = readhinsi())!=0) {
 		if (c < 0) {
 			if (i >= MaxAtrNumber) error(TooManyAtr);
 			atr[i++] = -c;
@@ -262,11 +266,10 @@ int *readline()
 }
 
 
-
-setline(func)
-int	(*func)();
+void
+setline(void (*func)(int*, int*, int, int*))
 {
-	register int	i;
+	int	i;
 
 	for (i = 0 ; hinsi[i] ; i++) (*func)(yomi, kanji, hinsi[i], atr);
 }
