@@ -64,11 +64,11 @@
 #define	MinClLen		512
 #define	MaxClLen		0x7fff
 
-#define	DebugOutFile		NULL	
+#define	DebugOutFile		ErrorOutFile
 #define	DebugLevel		0
 #define	ForkFlag		1
 #define	MaxClientNum		512
-#define	LogOutFile		NULL	
+#define	LogOutFile		ErrorOutFile
 #define	PortName		"sj3"
 #ifdef TLI
 #define LocalHost               "localhost"

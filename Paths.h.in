@@ -30,11 +30,7 @@
 #ifndef SJ3_PATHS_H_
 #define SJ3_PATHS_H_
 
-#if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
 #define ErrorOutFile	"/dev/console"
-#else
-#define ErrorOutFile	"/dev/null"
-#endif
 
 #define SocketName	"/tmp/sj3sock"
 #define LockFile	"/tmp/SJ3SERV.EXIST"
