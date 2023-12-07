@@ -25,35 +25,28 @@
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: Paths.h.in,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1997/01/23 11:20:55 $
- */
+#ifndef SJ3_PATHS_H_
+#define SJ3_PATHS_H_
 
-/*
- * Change ErrotOutFile variable.
- * Because suppress a error when sj3serv start up, change to "/dev/stderr".
- * This error is "Cannot Open "/dev/console".". 
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)                1996/8/10
- *
- * Change ErrotOutFile variable.
- * This default value is "/dev/null" in document.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)                1996/8/11
- */
 #if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
-#define        ErrorOutFile            "/dev/console"
+#define ErrorOutFile	"/dev/console"
 #else
-/* #define     ErrorOutFile            "/dev/stderr" */        /* for test */
-#define        ErrorOutFile            "/dev/null"
+#define ErrorOutFile	"/dev/null"
 #endif
 
-#define SocketName              "/tmp/sj3sock"
-#define LockFile                "/tmp/SJ3SERV.EXIST"
+#define SocketName	"/tmp/sj3sock"
+#define LockFile	"/tmp/SJ3SERV.EXIST"
 
-#define MainDictionary          "sj3main.dic"
-#define UserDictionary          "private.dic"
-#define StudyFile               "study.dat"
+#define MainDictionary	"sj3main.dic"
+#define UserDictionary	"private.dic"
+#define StudyFile	"study.dat"
+#define RunCmdFile	"@SJ3CONFDIR@/serverrc"
+#define DictRootDir	"@SJ3DICTDIR@"
+
+#define DEFRKFILE	"@SJ3CONFDIR@/sjrk"
+#define DEFRCFILE	"@SJ3CONFDIR@/sjrc"
+#define DEFKEYFILE	"@SJ3CONFDIR@/cvtkey."
+
+#endif /* SJ3_PATHS_H_ */
