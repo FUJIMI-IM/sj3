@@ -1,6 +1,8 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 1991-1994  Sony Corporation
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -19,29 +21,15 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
  * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * Except as contained in this notice, the name of Sony Corporation
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: Const.h,v $  
- * $SonyRevision: 1.4 $ 
- * $SonyDate: 1997/01/23 11:20:52 $
- *
- * $Id$
- */
-
-/*
- * Change some default values.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-
-#ifndef _Const_H_
-#define _Const_H_  1
+#ifndef SJ3_CONST_H_
+#define SJ3_CONST_H_
 
 #include "Paths.h"
 
@@ -70,17 +58,7 @@
 #define	MaxClientNum		512
 #define	LogOutFile		ErrorOutFile
 #define	PortName		"sj3"
-#ifdef TLI
-#define LocalHost               "localhost"
-#define ProtoName               "tcp"
-#define	PortNumber		"3000"
-#else
-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
 #define	PortNumber		3086
-#else /* ! __FreeBSD__ __NetBSD__ __OpenBSD__ __DragonFly__ */
-#define	PortNumber		3000
-#endif /* ! __FreeBSD__ __NetBSD__ __OpenBSD__ __DragonFly__ */
-#endif
 #define	DirectryMode		0755
 #define	DictFileMode		0644
 #define	MODE_MASK		0777
@@ -101,4 +79,4 @@
 #	define	FALSE		(!TRUE)
 #endif
 
-#endif /* _Const_H_ */
+#endif /* SJ3_Const_H_ */
