@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 *.a
+*.core
 *.dic
 *.o
 *.orig
