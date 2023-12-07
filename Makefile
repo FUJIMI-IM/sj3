@@ -31,13 +31,14 @@ VERSION := $(VMAJOR).$(VMINOR).$(VPATCH)
 LIBVER = 1
 
 CFLAGS += -fPIC
-CPPFLAGS += -I. -I./include
+CPPFLAGS += -I. -I./include -I./sj3h
 LDFLAGS += -L.
 
-SJ3LIB_OBJS = level1.o sj3lib.o string.o
+SJ3LIB_OBJS  = level1.o sj3lib.o string.o
+SJ3RKCV_OBJS = rk_conv.o sj3_rkcv.o wc16_str.o
 SJ3STAT_OBJS = sj3stat.o
 
-all: libsj3lib.a libsj3lib.so.$(LIBVER) sj3stat
+all: libsj3lib.a libsj3lib.so.$(LIBVER) libsj3rkcv.a sj3stat
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
@@ -50,11 +51,14 @@ install: all
 	$(INSTALL_DATA) sj3lib.h $(DESTDIR)$(INCLUDEDIR)
 
 libsj3lib.a: $(SJ3LIB_OBJS) compats.o
-	$(AR) rs $@ $(SJ3LIB_OBJS) compats.o
+	$(AR) crs $@ $(SJ3LIB_OBJS) compats.o
 
 libsj3lib.so.$(LIBVER): $(SJ3LIB_OBJS) compats.o
 	$(CC) -shared -o $@ $(SJ3LIB_OBJS) compats.o $(LDFLAGS) -Wl,${LINKER_SONAME},$@ $(LDLIBS)
 	ln -sf $@ `basename $@ .$(LIBVER)`
+
+libsj3rkcv.a: $(SJ3RKCV_OBJS) compats.o
+	$(AR) crs $@ $(SJ3RKCV_OBJS) compats.o
 
 sj3stat: $(SJ3STAT_OBJS) libsj3lib.a compats.o
 	$(CC) -static -o $@ $(SJ3STAT_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
