@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-.PHONY: all
+.PHONY: all install
 
 include Makefile.configure
 
@@ -38,6 +38,16 @@ SJ3LIB_OBJS = level1.o sj3lib.o string.o
 SJ3STAT_OBJS = sj3stat.o
 
 all: libsj3lib.a libsj3lib.so.$(LIBVER) sj3stat
+
+install: all
+	mkdir -p $(DESTDIR)$(BINDIR)
+	mkdir -p $(DESTDIR)$(INCLUDEDIR)
+	mkdir -p $(DESTDIR)$(LIBDIR)
+	$(INSTALL_PROGRAM) sj3stat $(DESTDIR)$(BINDIR)
+	$(INSTALL_LIB) libsj3lib.a $(DESTDIR)$(LIBDIR)
+	$(INSTALL_LIB) libsj3lib.so $(DESTDIR)$(LIBDIR)
+	$(INSTALL_LIB) libsj3lib.so.$(LIBVER) $(DESTDIR)$(LIBDIR)
+	$(INSTALL_DATA) sj3lib.h $(DESTDIR)$(INCLUDEDIR)
 
 libsj3lib.a: $(SJ3LIB_OBJS) compats.o
 	$(AR) rs $@ $(SJ3LIB_OBJS) compats.o
