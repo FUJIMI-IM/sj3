@@ -71,13 +71,14 @@ SJ3SERV_OBJS = comuni.o error.o execute.o main.o setup.o time_stamp.o version.o
 ALL_OBJS = $(SJ3LIB_OBJS) $(KANAKAN_OBJS) $(SJ3RKCV_OBJS) $(SJ3_OBJS) \
            $(SJ3DIC_OBJS) $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS) $(SJ3SERV_OBJS)
 
-all: $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(CLIENT_APPS) sj3serv
+all: $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(CLIENT_APPS) sj3serv sj3main.dic
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
 	mkdir -p $(DESTDIR)$(INCLUDEDIR)
 	mkdir -p $(DESTDIR)$(LIBDIR)
 	mkdir -p $(DESTDIR)/etc/sj3
+	mkdir -p $(DESTDIR)$(SHAREDIR)/sj3/dict
 	$(INSTALL_PROGRAM) sj3dic $(DESTDIR)$(BINDIR)
 	$(INSTALL_PROGRAM) sj3mkdic $(DESTDIR)$(BINDIR)
 	$(INSTALL_PROGRAM) sj3serv $(DESTDIR)$(BINDIR)
@@ -87,6 +88,7 @@ install: all
 	ln -sf libsj3lib.so.$(LIBVER) $(DESTDIR)$(LIBDIR)/libsj3lib.so
 	$(INSTALL_DATA) sj3lib.h $(DESTDIR)$(INCLUDEDIR)
 	$(INSTALL_DATA) serverrc $(DESTDIR)/etc/sj3
+	$(INSTALL_DATA) sj3main.dic $(DESTDIR)$(SHAREDIR)/sj3/dict
 
 libsj3lib.a: $(SJ3LIB_OBJS) compats.o
 	$(AR) crs $@ $(SJ3LIB_OBJS) compats.o
@@ -114,6 +116,9 @@ sj3serv: $(SJ3SERV_OBJS) libsj3lib.a libkanakan.a compats.o
 
 sj3stat: $(SJ3STAT_OBJS) libsj3lib.a compats.o
 	$(CC) -static -o $@ $(SJ3STAT_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
+
+sj3main.dic: sj3mkdic dict/visual.eucjp
+	./sj3mkdic dict/visual.eucjp $@ > /dev/null
 
 Paths.h: Paths.h.in
 	sed -e "s|@SJ3CONFDIR@|/etc/sj3|" -e "s|@SJ3DICTDIR@|$(SHAREDIR)/sj3/dict|" Paths.h.in > $@
