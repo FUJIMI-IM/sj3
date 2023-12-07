@@ -27,14 +27,10 @@
  *
  */
 
-/*
- * $SonyRCSfile: sj.c,v $  
- * $SonyRevision: 1.2 $ 
- * $SonyDate: 1994/12/09 11:27:09 $
- *
- * $Id$
- */
+#include "config.h"
 
+#include <sys/file.h>
+#include <sys/types.h>
 
 #include <ctype.h>
 #include <locale.h>
@@ -43,14 +39,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/file.h>
 #include <unistd.h>
-#include "sj_const.h"
+
 #include "Const.h"
 #include "sj3err.h"
-#include "sj3lib.h"
+#include "sj_const.h"
 #include "sj_hinsi.h"
+
+#include "sj3lib.h"
 
 extern	int	sj3_error_number;
 #ifdef __sony_news

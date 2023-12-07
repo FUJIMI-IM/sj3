@@ -27,48 +27,31 @@
  *
  */
 
-/*
- * $SonyRCSfile: level1.c,v $  
- * $SonyRevision: 1.4 $ 
- * $SonyDate: 1995/04/17 10:36:08 $
- *
- * $Id: level1.c,v 1.2 2004/07/20 15:55:43 hiroo Exp $
- */
-
+#include "config.h"
 
 #include "sj_sysvdef.h" 
-#include <stdio.h>
+
+#include <sys/param.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+
+#include <netinet/in.h>
+
 #include <netdb.h>
 #include <pwd.h>
-#include <string.h>
-#include <sys/un.h>
-#include <sys/types.h>
-#include <sys/param.h>
-#include <unistd.h>
-#include <netinet/in.h>
-#ifdef TLI              
-#include <fcntl.h>
-#include <tiuser.h>
-#include <stropts.h>
-#include <netdir.h>
-#include <netconfig.h>
-#else
-#include <sys/socket.h>
-#endif
 #include <signal.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
 #include "Const.h"
 #include "sj3cmd.h"
 #include "sj3err.h"
+
 #include "sj3lib.h"
 
 #ifdef SVR4
 #define signal sigset
-#endif
-
-#ifndef lint
-static	char	rcsid_sony[] = "$SonyId: level1.c,v 1.4 1995/04/17 10:36:08 notanaka Exp $ SONY;";
-static	char	rcsid_patch[] = "$Id: level1.c,v 1.2 2004/07/20 15:55:43 hiroo Exp $";
 #endif
 
 int	sj3_error_number;

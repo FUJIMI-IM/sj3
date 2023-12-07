@@ -27,17 +27,11 @@
  * written authorization from Software Research Associates.
  */
 
-/*
- * $SonyRCSfile: sj3stat.c,v $
- * $SonyRevision: 1.2 $
- * $SonyDate: 1997/01/23 11:09:41 $
- *
- * $Id$
- */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 #include "Const.h"
 #include "sj3err.h"
 #include "sj3lib.h"
