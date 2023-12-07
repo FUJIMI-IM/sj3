@@ -34,15 +34,31 @@ CFLAGS += -fPIC
 CPPFLAGS += -I. -I./include -I./sj3h
 LDFLAGS += -L.
 
+# Public API library
 SJ3LIB_OBJS   = level1.o sj3lib.o string.o
+
+# Private libraries
+KANAKAN_OBJS  = adddic.o addelcmn.o alloc.o charsize.o chrtbl.o cl2knj.o \
+                clstudy.o cmpstr.o conjunc.o connect.o cvtclknj.o cvtdict.o \
+                cvtkanji.o deldic.o depend.o dict.o functbl.o fuzoku.o \
+                fzkyomi.o getkanji.o getrank.o global2.o hzstrlen.o init.o \
+                istrcmp.o memcpy.o memory2.o memset.o mk2claus.o mkbunset.o \
+                mkjiritu.o mkkouho.o mknumber.o mvmemd.o mvmemi.o peepdic.o \
+                ph2knj.o ph_khtbl.o priority.o prtytbl.o s2ctbl.o selclrec.o \
+                selsuuji.o setconj.o setjrec.o setkouho.o setubi.o sj2code.o \
+                skiphblk.o skipkstr.o srchdict.o srchhead.o srchidx.o \
+                srchnum.o sstrcmp.o sstrlen.o sstrncmp.o stbtbl.o stttbl.o \
+                study.o suujitbl.o terminat.o termtbl.o wakachi.o
 SJ3RKCV_OBJS  = rk_conv.o sj3_rkcv.o wc16_str.o
+
+# Client applications
 SJ3DIC_OBJS   = codecnv.o dictdisp.o dictmake.o hinsi.o sj3dic.o sj3err.o \
                 sjrc.o
 SJ3MKDIC_OBJS = char.o cnvhinsi.o file.o global.o hindo.o knjcvt.o makedict.o \
                 makelist.o makeseg.o memory.o offset.o readline.o string2.o
 SJ3STAT_OBJS  = sj3stat.o
 
-all: libsj3lib.a libsj3lib.so.$(LIBVER) libsj3rkcv.a sj3dic sj3mkdic sj3stat
+all: libsj3lib.a libsj3lib.so.$(LIBVER) libkanakan.a libsj3rkcv.a sj3dic sj3mkdic sj3stat
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
@@ -62,6 +78,9 @@ libsj3lib.a: $(SJ3LIB_OBJS) compats.o
 libsj3lib.so.$(LIBVER): $(SJ3LIB_OBJS) compats.o
 	$(CC) -shared -o $@ $(SJ3LIB_OBJS) compats.o $(LDFLAGS) -Wl,${LINKER_SONAME},$@ $(LDLIBS)
 	ln -sf $@ `basename $@ .$(LIBVER)`
+
+libkanakan.a: $(KANAKAN_OBJS) compats.o
+	$(AR) crs $@ $(KANAKAN_OBJS) compats.o
 
 libsj3rkcv.a: $(SJ3RKCV_OBJS) compats.o
 	$(AR) crs $@ $(SJ3RKCV_OBJS) compats.o

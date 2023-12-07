@@ -36,7 +36,7 @@
 
 #include <stdio.h>
 #include <sys/types.h>
-#include "sj_struct.h"
+#include "sj_struct2.h"
 
 /* char.c */
 int cnvyomi (int code);

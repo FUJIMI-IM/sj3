@@ -36,7 +36,7 @@
 
 #include <stdio.h>
 #include <sys/types.h>
-#include "sj_struct.h"
+#include "sj_struct2.h"
 
 DouonRec *douon_ptr = NULL;		
 int	douon_num = 0;			

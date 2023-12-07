@@ -38,6 +38,7 @@
 #ifndef _Struct_H_
 #define _Struct_H_  1
 
+#include <sys/select.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include "sj_const.h"

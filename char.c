@@ -39,7 +39,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include "sj_euc.h"
-#include "sj_const.h"
+#include "sj_const2.h"
 
 
 int
