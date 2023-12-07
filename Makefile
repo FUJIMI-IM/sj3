@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-.PHONY: all clean distclean install uninstall
+.PHONY: all clean distclean install
 
 include Makefile.configure
 
