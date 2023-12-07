@@ -24,6 +24,8 @@
 *.o
 *.orig
 *.rej
+*.so
+*.so.*
 
 Makefile.configure
 config.h
@@ -31,5 +33,9 @@ config.log
 configure.local
 
 Paths.h
-libsj3lib.*
+
+sj3
+sj3dic
+sj3mkdic
+sj3serv
 sj3stat
