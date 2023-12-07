@@ -40,7 +40,7 @@
 #include "wchar16.h"
 #include "kctype.h"
 
-
+void Rdisp();
 
 int	i_point;		
 
@@ -705,7 +705,7 @@ Bdisp (redraw)
 }
 
 
-
+void
 Rdisp ()
 {
 	register Conversion	*cv;
@@ -804,7 +804,7 @@ register int	Total;
 }
 
 
-
+void
 Bright ()
 {
 	register Conversion	*cv;
@@ -827,7 +827,7 @@ Bright ()
 }
 
 
-
+void
 Bleft ()
 {
 	register Conversion	*cv;
@@ -850,7 +850,7 @@ Bleft ()
 }
 
 
-
+void
 Blast ()
 {
 	register Conversion	*cv;
@@ -868,7 +868,7 @@ Blast ()
 }
 
 
-
+void
 Btop ()
 {
 	register Conversion	*cv;

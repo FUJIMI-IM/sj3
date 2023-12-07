@@ -43,6 +43,8 @@ static char   rehname[SHORTLENGTH * 2];
 extern char   *cur_serv;
 static int dcflag = 0;
 
+void disp_version();
+
 exec_etc (key)
 int	key;
 {
@@ -241,6 +243,7 @@ helplevel ()
 	guide_print_pause (WCGHelp, wtmp);
 }
 
+void
 disp_version (c)
 int	c;
 {

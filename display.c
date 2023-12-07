@@ -212,7 +212,7 @@ cont:
 		if (select (master + 1, &ifds, 0, 0, &t) > 0) {
 			if (FD_ISSET (STDIN, &ifds))
 				if (ThroughIntr ())
-					return;
+					return 1;
 			if (FD_ISSET (master, &ifds))
 				output_master ();
 		} else if (errno == EINTR) {

@@ -38,7 +38,7 @@
 #include "common.h"
 #include "key.h"
 
-
+void Chain();
 
 static wchar16_t	*jpoint;
 static int	iedit, jedit;
@@ -237,7 +237,7 @@ int	small;
 }
 
 
-
+void
 Bdelete ()
 {
 	register Conversion	*cv;
@@ -288,7 +288,7 @@ Bdelete ()
 }
 
 
-
+void
 Chain (n, len)
 register int	n;	
 register int	len;	

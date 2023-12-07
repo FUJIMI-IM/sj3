@@ -180,7 +180,8 @@ strtocode()
 	}
 }
 
-ChangeCode ()
+void
+ChangeCode (void)
 {
 	if (cur_code == CODE_KUTEN2)
 		cur_code = CODE_SJIS;

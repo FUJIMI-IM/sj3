@@ -45,6 +45,8 @@ static int		Dpoint;
 static struct douon_sj3	HenkanDouon[DOUON_N];
 static wchar16_t		Dkanji[BUFFLENGTH * 2];
 
+void go_gakusyuu();
+
 SJ_getdouon (s, d, n, choice, reconv)
 wchar16_t		*s;
 struct douon_sj3	*d;
@@ -496,6 +498,7 @@ int	m, n;
 	}
 }
 
+void
 go_gakusyuu (n)
 int	n;
 {

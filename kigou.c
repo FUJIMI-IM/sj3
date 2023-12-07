@@ -47,6 +47,8 @@ static int      lastcode        = BEGIN_CODE;
 
 static u_short	row, col;
 
+void input_kigou();
+
 kigou ()
 {
 	extern int	keyvalue;
@@ -267,6 +269,7 @@ register int    code;
         SJ_print (tmp);
 }
 
+void
 input_kigou (basecode, code, increse)
 register int	basecode, code, increse;
 {

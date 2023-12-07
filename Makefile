@@ -55,6 +55,10 @@ SJ3RKCV_OBJS = rk_conv.o sj3_rkcv.o wc16_str.o
 
 # Client applications
 CLIENT_APPS   = sj3dic sj3mkdic sj3stat
+SJ3_OBJS      = code.o common.o conv.o display.o douon.o edit.o etc.o \
+                eucmessage.o funckey.o henkan.o kigou.o libif.o nmttyslot.o \
+                romaji.o screen.o sj3.o sj3ver.o sjgetchar.o sjrc2.o \
+                stat_conv.o term.o toroku.o version2.o
 SJ3DIC_OBJS   = codecnv.o dictdisp.o dictmake.o hinsi.o sj3dic.o sj3err.o \
                 sjrc.o
 SJ3MKDIC_OBJS = char.o cnvhinsi.o file.o global.o hindo.o knjcvt.o makedict.o \
@@ -64,8 +68,8 @@ SJ3STAT_OBJS  = sj3stat.o
 # Server daemon
 SJ3SERV_OBJS = comuni.o error.o execute.o main.o setup.o time_stamp.o version.o
 
-ALL_OBJS = $(SJ3LIB_OBJS) $(KANAKAN_OBJS) $(SJ3RKCV_OBJS) $(SJ3DIC_OBJS) \
-           $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS) $(SJ3SERV_OBJS)
+ALL_OBJS = $(SJ3LIB_OBJS) $(KANAKAN_OBJS) $(SJ3RKCV_OBJS) $(SJ3_OBJS) \
+           $(SJ3DIC_OBJS) $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS) $(SJ3SERV_OBJS)
 
 all: $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(CLIENT_APPS) sj3serv
 
@@ -79,8 +83,8 @@ install: all
 	$(INSTALL_PROGRAM) sj3serv $(DESTDIR)$(BINDIR)
 	$(INSTALL_PROGRAM) sj3stat $(DESTDIR)$(BINDIR)
 	$(INSTALL_LIB) libsj3lib.a $(DESTDIR)$(LIBDIR)
-	$(INSTALL_LIB) libsj3lib.so $(DESTDIR)$(LIBDIR)
 	$(INSTALL_LIB) libsj3lib.so.$(LIBVER) $(DESTDIR)$(LIBDIR)
+	ln -sf libsj3lib.so.$(LIBVER) $(DESTDIR)$(LIBDIR)/libsj3lib.so
 	$(INSTALL_DATA) sj3lib.h $(DESTDIR)$(INCLUDEDIR)
 	$(INSTALL_DATA) serverrc $(DESTDIR)/etc/sj3
 
@@ -89,13 +93,15 @@ libsj3lib.a: $(SJ3LIB_OBJS) compats.o
 
 libsj3lib.so.$(LIBVER): $(SJ3LIB_OBJS) compats.o
 	$(CC) -shared -o $@ $(SJ3LIB_OBJS) compats.o $(LDFLAGS) -Wl,${LINKER_SONAME},$@ $(LDLIBS)
-	ln -sf $@ `basename $@ .$(LIBVER)`
 
 libkanakan.a: $(KANAKAN_OBJS) compats.o
 	$(AR) crs $@ $(KANAKAN_OBJS) compats.o
 
 libsj3rkcv.a: $(SJ3RKCV_OBJS) compats.o
 	$(AR) crs $@ $(SJ3RKCV_OBJS) compats.o
+
+sj3: $(SJ3_OBJS) libsj3lib.a libsj3rkcv.a compats.o
+	$(CC) -static -o $@ $(SJ3_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -ltermcap -lsj3lib -lsj3rkcv
 
 sj3dic: $(SJ3DIC_OBJS) libsj3lib.a compats.o
 	$(CC) -static -o $@ $(SJ3DIC_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
