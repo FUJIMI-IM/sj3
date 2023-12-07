@@ -48,6 +48,8 @@ install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
 	mkdir -p $(DESTDIR)$(INCLUDEDIR)
 	mkdir -p $(DESTDIR)$(LIBDIR)
+	$(INSTALL_PROGRAM) sj3dic $(DESTDIR)$(BINDIR)
+	$(INSTALL_PROGRAM) sj3mkdic $(DESTDIR)$(BINDIR)
 	$(INSTALL_PROGRAM) sj3stat $(DESTDIR)$(BINDIR)
 	$(INSTALL_LIB) libsj3lib.a $(DESTDIR)$(LIBDIR)
 	$(INSTALL_LIB) libsj3lib.so $(DESTDIR)$(LIBDIR)
