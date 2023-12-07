@@ -252,4 +252,20 @@ int sj3_prevdict_mb(u_char *buf);
 int sj3_lockserv(void);
 int sj3_unlockserv(void);
 
+/* string.c */
+int sj3_str_sjistoeuc(unsigned char *, int, unsigned char *, unsigned char *, int *);
+int sj3_str_euctosjis(unsigned char *, int, unsigned char *, unsigned char *, int *);
+int sj3_sjistoeuclen(unsigned char *, int);
+int sj3_sjistoeuc(unsigned char *, int, unsigned char *, int);
+int sj3_euctosjis(unsigned char *, int, unsigned char *, int);
+void sj_euc2sjis(unsigned char *);
+void sj_jis2sjis(unsigned char *);
+void sj_sjis2euc(unsigned char *);
+void sj_sjis2jis(unsigned char *);
+unsigned short sj3_jis2sjis(unsigned short);
+unsigned short sj3_jis2euc(unsigned short);
+unsigned short sj3_sjis2jis(unsigned short);
+unsigned short sj3_euc2sjis(unsigned short);
+unsigned short sj3_sjis2euc(unsigned short);
+
 #endif /* _SJ3LIB_H_ */
