@@ -36,11 +36,13 @@ LDFLAGS += -L.
 
 SJ3LIB_OBJS   = level1.o sj3lib.o string.o
 SJ3RKCV_OBJS  = rk_conv.o sj3_rkcv.o wc16_str.o
+SJ3DIC_OBJS   = codecnv.o dictdisp.o dictmake.o hinsi.o sj3dic.o sj3err.o \
+                sjrc.o
 SJ3MKDIC_OBJS = char.o cnvhinsi.o file.o global.o hindo.o knjcvt.o makedict.o \
                 makelist.o makeseg.o memory.o offset.o readline.o string2.o
 SJ3STAT_OBJS  = sj3stat.o
 
-all: libsj3lib.a libsj3lib.so.$(LIBVER) libsj3rkcv.a sj3mkdic sj3stat
+all: libsj3lib.a libsj3lib.so.$(LIBVER) libsj3rkcv.a sj3dic sj3mkdic sj3stat
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
@@ -61,6 +63,9 @@ libsj3lib.so.$(LIBVER): $(SJ3LIB_OBJS) compats.o
 
 libsj3rkcv.a: $(SJ3RKCV_OBJS) compats.o
 	$(AR) crs $@ $(SJ3RKCV_OBJS) compats.o
+
+sj3dic: $(SJ3DIC_OBJS) libsj3lib.a compats.o
+	$(CC) -static -o $@ $(SJ3DIC_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
 
 sj3mkdic: $(SJ3MKDIC_OBJS) libsj3lib.a compats.o
 	$(CC) -static -o $@ $(SJ3MKDIC_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
