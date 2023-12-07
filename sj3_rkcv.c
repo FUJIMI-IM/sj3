@@ -127,14 +127,14 @@ static struct ztohkktbl {
 	u_short zen;
 	u_short han;
 } HKKtbl[8] = {
-	ZEN_KTEN, 	KANA_KTEN,
-	ZEN_FKAKKO, 	KANA_FKAKKO,
-	ZEN_EKAKKO, 	KANA_EKAKKO,
-	ZEN_TTEN, 	KANA_TTEN,
-	ZEN_CTEN, 	KANA_CTEN,
-	ZEN_CHOUON, 	KANA_CHOUON,
-	ZEN_DTEN, 	KANA_DTEN,
-	ZEN_HDTEN, 	KANA_HDTEN
+	{ZEN_KTEN, 	KANA_KTEN},
+	{ZEN_FKAKKO, 	KANA_FKAKKO},
+	{ZEN_EKAKKO, 	KANA_EKAKKO},
+	{ZEN_TTEN, 	KANA_TTEN},
+	{ZEN_CTEN, 	KANA_CTEN},
+	{ZEN_CHOUON, 	KANA_CHOUON},
+	{ZEN_DTEN, 	KANA_DTEN},
+	{ZEN_HDTEN, 	KANA_HDTEN}
 };
 
 
@@ -142,12 +142,12 @@ static struct hzkigoutbl {
 	wchar16_t han;
 	u_short zen;
 } HZKtbl[6] = {
-	',',	ZEN_TTEN,
-	'.',	ZEN_KTEN,
-	'-',	ZEN_CHOUON,
-	'@',	ZEN_CTEN,
-	'[',	ZEN_FKAKKO,
-	']',	ZEN_EKAKKO
+	{',',	ZEN_TTEN},
+	{'.',	ZEN_KTEN},
+	{'-',	ZEN_CHOUON},
+	{'@',	ZEN_CTEN},
+	{'[',	ZEN_FKAKKO},
+	{']',	ZEN_EKAKKO}
 };
 
 static u_short HZtbl[95] = {

@@ -236,50 +236,50 @@ struct	optlist {
  * Because They are lacked in here. See document.
  * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
  */
-	"DebugOut",	get_str,	&debug_file,
-	"debugout",	get_str,	&debug_file,
-	"DebugLevel",	get_int,	&debug_level,
-	"debuglevel",	get_int,	&debug_level,
-	"ForkFlag",	get_flag,	&fork_flag,
-	"forkflag",	get_flag,	&fork_flag,
+	{"DebugOut",	get_str,	&debug_file},
+	{"debugout",	get_str,	&debug_file},
+	{"DebugLevel",	get_int,	&debug_level},
+	{"debuglevel",	get_int,	&debug_level},
+	{"ForkFlag",	get_flag,	&fork_flag},
+	{"forkflag",	get_flag,	&fork_flag},
 
-	"PortName",	get_str,	&port_name,
-	"portname",	get_str,	&port_name,
+	{"PortName",	get_str,	&port_name},
+	{"portname",	get_str,	&port_name},
 #ifdef TLI
-	"PortNumber",	get_str,	&port_number,
-	"portnumber",	get_str,	&port_number,
-	"ProtoName",    get_str,        &proto_name,
-	"protoname",    get_str,        &proto_name,
+	{"PortNumber",	get_str,	&port_number},
+	{"portnumber",	get_str,	&port_number},
+	{"ProtoName",    get_str,        &proto_name},
+	{"protoname",    get_str,        &proto_name},
 #else
-	"PortNumber",	get_int,	&port_number,
-	"portnumber",	get_int,	&port_number,
+	{"PortNumber",	get_int,	&port_number},
+	{"portnumber",	get_int,	&port_number},
 #endif
-	"SocketName",	get_str,	&socket_name,
-	"socketname",	get_str,	&socket_name,
+	{"SocketName",	get_str,	&socket_name},
+	{"socketname",	get_str,	&socket_name},
 #ifdef	LOCK_FILE
-	"LockFile",	get_str,	&lock_file;
-	"lockfile",	get_str,	&lock_file;
+	{"LockFile",	get_str,	&lock_file},
+	{"lockfile",	get_str,	&lock_file},
 #endif
 
-	"MaxClient",	get_int,	&max_client,
-	"maxclient",	get_int,	&max_client,
-	"DictDir",	get_str,	&dict_dir,
-	"dictdir",	get_str,	&dict_dir,
-	"ReadDict",	get_list,	&read_dict,
-	"readdict",	get_list,	&read_dict,
-	"OpenDict",	get_list,	&open_dict,
-	"opendict",	get_list,	&open_dict,
-	"ErrorOut",	get_str,	&error_file,
-	"errorout",	get_str,	&error_file,
-	"LogOut",	get_str,	&log_file,
-	"logout",	get_str,	&log_file,
-	"DirMode",	get_int,	&dir_mode,
-	"dirmode",	get_int,	&dir_mode,
-	"FileMode",	get_int,	&file_mode,
-	"filemode",	get_int,	&file_mode,
-	"AllowUser",	get_list,	&allow_user,
-	"allowuser",	get_list,	&allow_user,
-	0, 0, 0
+	{"MaxClient",	get_int,	&max_client},
+	{"maxclient",	get_int,	&max_client},
+	{"DictDir",	get_str,	&dict_dir},
+	{"dictdir",	get_str,	&dict_dir},
+	{"ReadDict",	get_list,	&read_dict},
+	{"readdict",	get_list,	&read_dict},
+	{"OpenDict",	get_list,	&open_dict},
+	{"opendict",	get_list,	&open_dict},
+	{"ErrorOut",	get_str,	&error_file},
+	{"errorout",	get_str,	&error_file},
+	{"LogOut",	get_str,	&log_file},
+	{"logout",	get_str,	&log_file},
+	{"DirMode",	get_int,	&dir_mode},
+	{"dirmode",	get_int,	&dir_mode},
+	{"FileMode",	get_int,	&file_mode},
+	{"filemode",	get_int,	&file_mode},
+	{"AllowUser",	get_list,	&allow_user},
+	{"allowuser",	get_list,	&allow_user},
+	{0, 0, 0}
 };
 
 
