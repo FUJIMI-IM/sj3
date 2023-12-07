@@ -43,7 +43,7 @@
 #include <sys/types.h>
 #include <time.h>
 #include "sj_struct.h"
-#include "../../include/Dict.h"
+#include "Dict.h"
 #include "dicttool.h"
 
 extern	HindoRec *askknj[];

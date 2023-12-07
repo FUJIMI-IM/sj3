@@ -34,11 +34,13 @@ CFLAGS += -fPIC
 CPPFLAGS += -I. -I./include -I./sj3h
 LDFLAGS += -L.
 
-SJ3LIB_OBJS  = level1.o sj3lib.o string.o
-SJ3RKCV_OBJS = rk_conv.o sj3_rkcv.o wc16_str.o
-SJ3STAT_OBJS = sj3stat.o
+SJ3LIB_OBJS   = level1.o sj3lib.o string.o
+SJ3RKCV_OBJS  = rk_conv.o sj3_rkcv.o wc16_str.o
+SJ3MKDIC_OBJS = char.o cnvhinsi.o file.o global.o hindo.o knjcvt.o makedict.o \
+                makelist.o makeseg.o memory.o offset.o readline.o string2.o
+SJ3STAT_OBJS  = sj3stat.o
 
-all: libsj3lib.a libsj3lib.so.$(LIBVER) libsj3rkcv.a sj3stat
+all: libsj3lib.a libsj3lib.so.$(LIBVER) libsj3rkcv.a sj3mkdic sj3stat
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
@@ -60,11 +62,15 @@ libsj3lib.so.$(LIBVER): $(SJ3LIB_OBJS) compats.o
 libsj3rkcv.a: $(SJ3RKCV_OBJS) compats.o
 	$(AR) crs $@ $(SJ3RKCV_OBJS) compats.o
 
+sj3mkdic: $(SJ3MKDIC_OBJS) libsj3lib.a compats.o
+	$(CC) -static -o $@ $(SJ3MKDIC_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
+
 sj3stat: $(SJ3STAT_OBJS) libsj3lib.a compats.o
 	$(CC) -static -o $@ $(SJ3STAT_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
 
 Paths.h: Paths.h.in
 	sed -e "s|@SJ3CONFDIR@|/etc/sj3|" -e "s|@SJ3DICTDIR@|$(SHAREDIR)/sj3/dict|" Paths.h.in > $@
 
-$(SJ3LIB_OBJS) $(SJ3STAT_OBJS) compats.o: config.h
-$(SJ3LIB_OBJS) $(SJ3STAT_OBJS): Paths.h
+$(SJ3LIB_OBJS) $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS) compats.o: config.h
+$(SJ3LIB_OBJS) $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS): Paths.h
+cnvhinsi.o: GramTable
