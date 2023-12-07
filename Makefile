@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-.PHONY: all install
+.PHONY: all clean distclean install uninstall
 
 include Makefile.configure
 
@@ -89,6 +89,12 @@ install: all
 	$(INSTALL_DATA) sj3lib.h $(DESTDIR)$(INCLUDEDIR)
 	$(INSTALL_DATA) serverrc $(DESTDIR)/etc/sj3
 	./sj3mkdic dict/visual.eucjp $(DESTDIR)$(SHAREDIR)/sj3/dict/sj3main.dic > /dev/null
+
+clean:
+	rm -f $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(ALL_OBJS) compats.o
+
+distclean: clean
+	rm -f Makefile.configure config.h config.log
 
 libsj3lib.a: $(SJ3LIB_OBJS) compats.o
 	$(AR) crs $@ $(SJ3LIB_OBJS) compats.o
