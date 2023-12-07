@@ -35,42 +35,54 @@ CPPFLAGS += -I. -I./include -I./sj3h
 LDFLAGS += -L.
 
 # Public API library
-SJ3LIB_OBJS   = level1.o sj3lib.o string.o
+PUBLIC_LIBS = libsj3lib.a libsj3lib.so.$(LIBVER)
+SJ3LIB_OBJS = level1.o sj3lib.o string.o
 
 # Private libraries
-KANAKAN_OBJS  = adddic.o addelcmn.o alloc.o charsize.o chrtbl.o cl2knj.o \
-                clstudy.o cmpstr.o conjunc.o connect.o cvtclknj.o cvtdict.o \
-                cvtkanji.o deldic.o depend.o dict.o functbl.o fuzoku.o \
-                fzkyomi.o getkanji.o getrank.o global2.o hzstrlen.o init.o \
-                istrcmp.o memcpy.o memory2.o memset.o mk2claus.o mkbunset.o \
-                mkjiritu.o mkkouho.o mknumber.o mvmemd.o mvmemi.o peepdic.o \
-                ph2knj.o ph_khtbl.o priority.o prtytbl.o s2ctbl.o selclrec.o \
-                selsuuji.o setconj.o setjrec.o setkouho.o setubi.o sj2code.o \
-                skiphblk.o skipkstr.o srchdict.o srchhead.o srchidx.o \
-                srchnum.o sstrcmp.o sstrlen.o sstrncmp.o stbtbl.o stttbl.o \
-                study.o suujitbl.o terminat.o termtbl.o wakachi.o
-SJ3RKCV_OBJS  = rk_conv.o sj3_rkcv.o wc16_str.o
+PRIVATE_LIBS = libkanakan.a libsj3rkcv.a
+KANAKAN_OBJS = adddic.o addelcmn.o alloc.o charsize.o chrtbl.o cl2knj.o \
+               clstudy.o cmpstr.o conjunc.o connect.o cvtclknj.o cvtdict.o \
+               cvtkanji.o deldic.o depend.o dict.o functbl.o fuzoku.o \
+               fzkyomi.o getkanji.o getrank.o global2.o hzstrlen.o init.o \
+               istrcmp.o memcpy.o memory2.o memset.o mk2claus.o mkbunset.o \
+               mkjiritu.o mkkouho.o mknumber.o mvmemd.o mvmemi.o peepdic.o \
+               ph2knj.o ph_khtbl.o priority.o prtytbl.o s2ctbl.o selclrec.o \
+               selsuuji.o setconj.o setjrec.o setkouho.o setubi.o sj2code.o \
+               skiphblk.o skipkstr.o srchdict.o srchhead.o srchidx.o \
+               srchnum.o sstrcmp.o sstrlen.o sstrncmp.o stbtbl.o stttbl.o \
+               study.o suujitbl.o terminat.o termtbl.o wakachi.o
+SJ3RKCV_OBJS = rk_conv.o sj3_rkcv.o wc16_str.o
 
 # Client applications
+CLIENT_APPS   = sj3dic sj3mkdic sj3stat
 SJ3DIC_OBJS   = codecnv.o dictdisp.o dictmake.o hinsi.o sj3dic.o sj3err.o \
                 sjrc.o
 SJ3MKDIC_OBJS = char.o cnvhinsi.o file.o global.o hindo.o knjcvt.o makedict.o \
                 makelist.o makeseg.o memory.o offset.o readline.o string2.o
 SJ3STAT_OBJS  = sj3stat.o
 
-all: libsj3lib.a libsj3lib.so.$(LIBVER) libkanakan.a libsj3rkcv.a sj3dic sj3mkdic sj3stat
+# Server daemon
+SJ3SERV_OBJS = comuni.o error.o execute.o main.o setup.o time_stamp.o version.o
+
+ALL_OBJS = $(SJ3LIB_OBJS) $(KANAKAN_OBJS) $(SJ3RKCV_OBJS) $(SJ3DIC_OBJS) \
+           $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS) $(SJ3SERV_OBJS)
+
+all: $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(CLIENT_APPS) sj3serv
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
 	mkdir -p $(DESTDIR)$(INCLUDEDIR)
 	mkdir -p $(DESTDIR)$(LIBDIR)
+	mkdir -p $(DESTDIR)/etc/sj3
 	$(INSTALL_PROGRAM) sj3dic $(DESTDIR)$(BINDIR)
 	$(INSTALL_PROGRAM) sj3mkdic $(DESTDIR)$(BINDIR)
+	$(INSTALL_PROGRAM) sj3serv $(DESTDIR)$(BINDIR)
 	$(INSTALL_PROGRAM) sj3stat $(DESTDIR)$(BINDIR)
 	$(INSTALL_LIB) libsj3lib.a $(DESTDIR)$(LIBDIR)
 	$(INSTALL_LIB) libsj3lib.so $(DESTDIR)$(LIBDIR)
 	$(INSTALL_LIB) libsj3lib.so.$(LIBVER) $(DESTDIR)$(LIBDIR)
 	$(INSTALL_DATA) sj3lib.h $(DESTDIR)$(INCLUDEDIR)
+	$(INSTALL_DATA) serverrc $(DESTDIR)/etc/sj3
 
 libsj3lib.a: $(SJ3LIB_OBJS) compats.o
 	$(AR) crs $@ $(SJ3LIB_OBJS) compats.o
@@ -91,12 +103,15 @@ sj3dic: $(SJ3DIC_OBJS) libsj3lib.a compats.o
 sj3mkdic: $(SJ3MKDIC_OBJS) libsj3lib.a compats.o
 	$(CC) -static -o $@ $(SJ3MKDIC_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
 
+sj3serv: $(SJ3SERV_OBJS) libsj3lib.a libkanakan.a compats.o
+	$(CC) -static -o $@ $(SJ3SERV_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib -lkanakan
+
 sj3stat: $(SJ3STAT_OBJS) libsj3lib.a compats.o
 	$(CC) -static -o $@ $(SJ3STAT_OBJS) compats.o $(LDFLAGS) $(LDLIBS) -lsj3lib
 
 Paths.h: Paths.h.in
 	sed -e "s|@SJ3CONFDIR@|/etc/sj3|" -e "s|@SJ3DICTDIR@|$(SHAREDIR)/sj3/dict|" Paths.h.in > $@
 
-$(SJ3LIB_OBJS) $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS) compats.o: config.h
-$(SJ3LIB_OBJS) $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS): Paths.h
+$(ALL_OBJS) compats.o: config.h
+$(ALL_OBJS): Paths.h
 cnvhinsi.o: GramTable

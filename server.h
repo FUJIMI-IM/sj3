@@ -50,7 +50,9 @@ u_char *put_ndata(u_char *p, int n);
 void get_buf(void);
 int get_byte(void);
 int get_word(void);
+#ifndef NO_GET_INT
 int get_int(void);
+#endif
 int get_nstring(u_char *p, int n);
 u_char *get_ndata(u_char *p, int n);
 
