@@ -66,10 +66,10 @@ struct functbl {
 	char *keyword;
 	int (*func)();
 } funcs[] = {
-	"dictionary",	set_dict,
-	"userdic",	set_dict,
-	"server",	set_server,
-	NULL,		NULL
+	{"dictionary",	set_dict},
+	{"userdic",	set_dict},
+	{"server",	set_server},
+	{NULL,		NULL}
 };
 
 #define TOLOWER(c) (isupper(c) ? tolower(c) : (c))	
