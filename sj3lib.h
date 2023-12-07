@@ -27,14 +27,6 @@
  *
  */
 
-/*
- * $SonyRCSfile: sj3lib.h,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:03:57 $
- *
- * $Id$
- */
-
 #ifndef _SJ3LIB_H_
 #define _SJ3LIB_H_  1
 
@@ -154,12 +146,6 @@ typedef	struct douon {
 #define	SJ3_H_WAVERB	99		
 #define	SJ3_H_SINGLE	189		
 
-
-/* moved from include/sj3lowlib.h for function prototypes.
- * $SonyRCSfile: sj3lowlib.h,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:00:59 $
- */
 
 typedef	struct sj3_client_env {
 	int	fd;			
