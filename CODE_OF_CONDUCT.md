@@ -1,3 +1,8 @@
+<!--
+  -- SPDX-License-Identifier: CC-BY-4.0
+  -- Copyright 2014  Coraline Ada Ehmke
+  -->
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
