@@ -31,7 +31,7 @@ VERSION := $(VMAJOR).$(VMINOR).$(VPATCH)
 LIBVER = 1
 
 CFLAGS += -fPIC
-CPPFLAGS += -I. -I./include -I./sj3h
+CPPFLAGS += -I.
 LDFLAGS += -L.
 
 # Public API library
