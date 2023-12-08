@@ -1,6 +1,8 @@
-/*
+/*-
+ * SPDX-License-Identifier: MIT-open-group
+ *
  * Copyright (c) 1991-1994  Sony Corporation
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -8,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -19,60 +21,40 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
  * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * Except as contained in this notice, the name of Sony Corporation
  * shall not be used in advertising or otherwise to promote the sale, use
  * or other dealings in this Software without prior written authorization
  * from Sony Corporation.
- *
  */
 
-/*
- * $SonyRCSfile: main.c,v $  
- * $SonyRevision: 1.3 $ 
- * $SonyDate: 1995/02/03 07:38:44 $
- *
- * $Id$
- */
-
-
+#include "config.h"
 
 #include "sj_sysvdef.h"
-#include <locale.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <sys/types.h>
+
 #include <sys/file.h>
 #include <sys/ioctl.h>
+#include <sys/types.h>
 #include <sys/wait.h>
+
+#include <locale.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#ifdef SVR4
-#include <sys/fcntl.h>
-#include <sys/termios.h>
-#endif
+
 #include "Const.h"
 #include "server.h"
-
-#ifndef lint
-static char rcsid_sony[] = "$Header: /export/work/contrib/sj3/server/RCS/main.c,v 1.12 1994/06/03 07:41:30 notanaka Exp $ SONY;";
-#endif
-
-#ifdef SVR4
-#define signal sigset
-#endif
 
 extern	int	fork_flag;
 extern	char	*lock_file;
 
-
+char	*version_number = "2.08C";
+char	*time_stamp = "Mon Mar 23 16:42:59 JST 1998";
 
 static	void
 opening (void)
 {
-	extern	char	*version_number;
-	extern	char	*time_stamp;
-
 	printf("Kana-Kanji Conversion Server Version %s\r\n", version_number);
 	printf("Copyright (c) 1990-1995 Sony Corporation\r\n");
 	printf("Created at %s\r\n", time_stamp);
@@ -100,10 +82,6 @@ erase_lockfile (void)
 }
 #endif
 
-
-
-
-#if !defined(__sony_news) || defined(SVR4)
 static int
 signal_handler (int sig)
 {
@@ -121,31 +99,6 @@ terminate_handler (int sig)
 	exit(0);
 }
 
-#else	/* __sony_news && !SVR4 */
-static int
-signal_handler (sig, code, scp)
-int	sig;
-int	code;
-struct sigcontext *scp;
-{
-	warning_out("signal %d, code %d catched.", sig, code);
-}
-
-static	int	terminate_handler(sig, code, scp)
-int	sig;
-int	code;
-struct sigcontext *scp;
-{
-	close_socket();
-	sj_closeall();
-#ifdef	LOCK_FILE
-	erase_lockfile();
-#endif
-	exit(0);
-}
-#endif	/* __sony_news && !SVR4 */
-
-
 void
 server_terminate (void)
 {
@@ -156,8 +109,6 @@ server_terminate (void)
 #endif
 	exit(0);
 }
-
-
 
 static	void
 exec_fork (void)
@@ -207,9 +158,6 @@ leave_tty (void)
 	if (!tmp) fclose(stderr);
 
 	if (fork_flag) {
-#ifdef SVR4
-	        (void) setsid();
-#else
 		if ((tmp = open("/dev/tty", O_RDWR)) >= 0) {
 			ioctl(tmp, TIOCNOTTY, 0);
 			close(tmp);
@@ -223,9 +171,6 @@ leave_tty (void)
 int
 main (int argc, char **argv)
 {
-#ifdef __sony_news
-	(void) setlocale(LC_CTYPE, "ja_JP.EUC");
-#endif
 	opening();
 #ifndef __NetBSD__
 	if (setuid(geteuid())) {

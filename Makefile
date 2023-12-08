@@ -65,7 +65,7 @@ SJ3MKDIC_OBJS = char.o cnvhinsi.o file.o global.o hindo.o knjcvt.o makedict.o \
 SJ3STAT_OBJS  = sj3stat.o
 
 # Server daemon
-SJ3SERV_OBJS = comuni.o error.o execute.o main.o setup.o time_stamp.o version.o
+SJ3SERV_OBJS = comuni.o error.o execute.o main.o setup.o
 
 ALL_OBJS = $(SJ3LIB_OBJS) $(KANAKAN_OBJS) $(SJ3RKCV_OBJS) $(SJ3_OBJS) \
            $(SJ3DIC_OBJS) $(SJ3MKDIC_OBJS) $(SJ3STAT_OBJS) $(SJ3SERV_OBJS)

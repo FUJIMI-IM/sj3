@@ -118,8 +118,8 @@ knjcvt.o: knjcvt.c sj_const.h sj_euc.h sj_sysvdef.h sj_struct.h \
 level1.o: level1.c config.h Const.h Paths.h sj3cmd.h sj3err.h sj3lib.h
 libif.o: libif.c sj_sysvdef.h wchar16.h key.h kctype.h common.h \
   conversion.h sj2.h sj3libsj3.h sj3lib.h henkan.h
-main.o: main.c sj_sysvdef.h Const.h Paths.h server.h Struct.h sj_const.h \
-  sj_euc.h sj_dict.h sj_struct.h sj_typedef.h sj_var.h
+main.o: main.c config.h sj_sysvdef.h Const.h Paths.h server.h Struct.h \
+  sj_const.h sj_euc.h sj_dict.h sj_struct.h sj_typedef.h sj_var.h
 makedict.o: makedict.c sj_const.h sj_euc.h sj_sysvdef.h dicttool.h \
   sj_struct2.h sj_const2.h
 makelist.o: makelist.c sj_struct.h sj_typedef.h dicttool.h sj_struct2.h \
@@ -263,10 +263,8 @@ terminat.o: terminat.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
 termtbl.o: termtbl.c sj_rename.h sj_typedef.h sj_const.h sj_euc.h \
   sj_sysvdef.h sj_prty.h
 tests.o: tests.c
-time_stamp.o: time_stamp.c
 toroku.o: toroku.c common.h conversion.h sj2.h wchar16.h key.h \
   sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h
-version.o: version.c
 version2.o: version2.c sj2.h wchar16.h key.h sj_sysvdef.h
 wakachi.o: wakachi.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
   sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
