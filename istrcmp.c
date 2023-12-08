@@ -37,7 +37,7 @@
 
 #include "sj_rename.h"
 #include "sj_typedef.h"
-#include "sj_const.h"
+#include "const.h"
 
 Int	istrcmp(yomip, idxp, ylen, ilen)
 Reg1	Uchar	*yomip;

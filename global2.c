@@ -34,17 +34,17 @@
  */
 
 
+#include <sys/types.h>
 
 #include <stdio.h>
-#include <sys/types.h>
-#include "sj_rename.h"
-#include "sj_typedef.h"
-#include "sj_const.h"
-#include "sj_var.h"
-#include "sj_struct.h"
-#include "sj_dict.h"
-#include "Const.h"
+
 #include "Struct.h"
+#include "const.h"
+#include "sj_dict.h"
+#include "sj_rename.h"
+#include "sj_struct.h"
+#include "sj_typedef.h"
+#include "sj_var.h"
 
 Global  *global_work_base;
 

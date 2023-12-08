@@ -43,7 +43,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "Const.h"
+#include "const.h"
 #include "server.h"
 
 extern int	 fork_flag;
@@ -158,7 +158,6 @@ leave_tty(void)
 			ioctl(tmp, TIOCNOTTY, 0);
 			close(tmp);
 		}
-#endif
 	}
 }
 

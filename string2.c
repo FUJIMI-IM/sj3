@@ -27,18 +27,9 @@
  *
  */
 
-/*
- * $SonyRCSfile: string.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:00:45 $
- *
- * $id$
- */
-
-
 #include <stdio.h>
 #include <sys/types.h>
-#include "sj_const.h"
+#include "const.h"
 #include "dicttool.h"
 
 

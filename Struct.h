@@ -34,11 +34,11 @@
 #include <sys/select.h>
 #include <sys/types.h>
 #include <stdio.h>
-#include "sj_const.h"
+
+#include "const.h"
 #include "sj_dict.h"
 #include "sj_struct.h"
 #include "sj_var.h"
-#include "Const.h"
 
 typedef struct global {
 	JREC		*Jmaxjptr;

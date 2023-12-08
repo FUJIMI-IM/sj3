@@ -42,7 +42,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "Const.h"
+#include "const.h"
 #include "sj3cmd.h"
 #include "sj3err.h"
 

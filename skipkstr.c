@@ -27,19 +27,10 @@
  *
  */
 
-/*
- * $SonyRCSfile: skipkstr.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:02:25 $
- *
- * $Id$
- */
-
-
 #include "sj_euc.h"
 #include "sj_rename.h"
 #include "sj_typedef.h"
-#include "sj_const.h"
+#include "const.h"
 #include "sj_dict.h"
 #include "sj_table.h"
 #include "kanakan.h"

@@ -27,17 +27,9 @@
  *
  */
 
-/*
- * $SonyRCSfile: selsuuji.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:02:15 $
- */
-
-
-
 #include "sj_rename.h"
 #include "sj_typedef.h"
-#include "sj_const.h"
+#include "const.h"
 #include "sj_suuji.h"
 
 static	Ushort	selsjAR[] = {

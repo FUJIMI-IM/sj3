@@ -36,7 +36,7 @@
 
 
 
-#include "sj_const.h"
+#include "const.h"
 #include "sj_rename.h"
 #include "sj_typedef.h"
 

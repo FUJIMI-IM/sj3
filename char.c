@@ -27,19 +27,13 @@
  *
  */
 
-/*
- * $SonyRCSfile: char.c,v $  
- * $SonyRevision: 1.1 $ 
- * $SonyDate: 1994/06/03 08:00:32 $
- *
- * $Id$
- */
 
+#include <sys/types.h>
 
 #include <stdio.h>
-#include <sys/types.h>
+
 #include "sj_euc.h"
-#include "sj_const2.h"
+#include "const.h"
 
 
 int

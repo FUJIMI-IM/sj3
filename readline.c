@@ -39,7 +39,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sj_euc.h"
-#include "sj_const.h"
+#include "const.h"
 #include "sj_macro.h"
 #include "dicttool.h"
 

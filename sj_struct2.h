@@ -36,7 +36,7 @@
 
 
 
-#include "sj_const2.h"
+#include "const.h"
 
 #ifndef	_STRUCT_
 #define	_STRUCT_

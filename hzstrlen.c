@@ -39,7 +39,7 @@
 #include "sj_euc.h"
 #include "sj_rename.h"
 #include "sj_typedef.h"
-#include "sj_const.h"
+#include "const.h"
 #include "sj_dict.h"
 #include "kanakan.h"
 

@@ -41,9 +41,8 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "Const.h"
+#include "const.h"
 #include "sj3err.h"
-#include "sj_const.h"
 #include "sj_hinsi.h"
 
 #include "sj3lib.h"

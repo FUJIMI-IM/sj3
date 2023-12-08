@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "Const.h"
+#include "const.h"
 #include "sj3err.h"
 #include "sj3lib.h"
 

@@ -45,7 +45,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
-#include "sj_const.h"
+#include "const.h"
 #include "dicttool.h"
 
 FILE	*infp = NULL;

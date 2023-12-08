@@ -41,7 +41,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#include "sj_const.h"
+#include "const.h"
 #include "sj_struct.h"
 #include "dicttool.h"
 
