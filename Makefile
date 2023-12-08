@@ -94,7 +94,7 @@ clean:
 	rm -f $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(ALL_OBJS) compats.o $(CLIENT_APPS) sj3serv
 
 distclean: clean
-	rm -f Makefile.configure config.h config.log
+	rm -f Makefile.configure Paths.h config.h config.log
 
 libsj3lib.a: $(SJ3LIB_OBJS) compats.o
 	$(AR) crs $@ $(SJ3LIB_OBJS) compats.o
