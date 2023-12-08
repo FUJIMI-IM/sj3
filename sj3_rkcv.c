@@ -36,7 +36,7 @@
 #include <string.h>
 
 #include "wchar16.h"
-#include "sj.h"
+#include "sj2.h"
 #include "kana.h"
 #include "rk.h"
 #include "kctype.h"
