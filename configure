@@ -82,8 +82,7 @@ fi
 AR=`printf "all:\\n\\t@echo \\\$(AR)\\n" | make ${MAKE_FLAGS} -sf -`
 CC=`printf "all:\\n\\t@echo \\\$(CC)\\n" | make ${MAKE_FLAGS} -sf -`
 CFLAGS=`printf "all:\\n\\t@echo \\\$(CFLAGS)\\n" | make ${MAKE_FLAGS} -sf -`
-CFLAGS="${CFLAGS} -g -W -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes"
-CFLAGS="${CFLAGS} -Wwrite-strings -Wno-unused-parameter"
+CFLAGS="${CFLAGS} -g -Wall -Wextra"
 LDLIBS=
 LDADD=
 LDADD_B64_NTOP=
