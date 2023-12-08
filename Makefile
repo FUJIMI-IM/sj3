@@ -44,12 +44,11 @@ KANAKAN_OBJS = adddic.o addelcmn.o alloc.o charsize.o chrtbl.o cl2knj.o \
                clstudy.o cmpstr.o conjunc.o connect.o cvtclknj.o cvtdict.o \
                cvtkanji.o deldic.o depend.o dict.o functbl.o fuzoku.o \
                fzkyomi.o getkanji.o getrank.o global2.o hzstrlen.o init.o \
-               istrcmp.o memcpy.o memory2.o memset.o mk2claus.o mkbunset.o \
-               mkjiritu.o mkkouho.o mknumber.o mvmemd.o mvmemi.o peepdic.o \
-               ph2knj.o ph_khtbl.o priority.o prtytbl.o s2ctbl.o selclrec.o \
-               selsuuji.o setconj.o setjrec.o setkouho.o setubi.o sj2code.o \
-               skiphblk.o skipkstr.o srchdict.o srchhead.o srchidx.o \
-               srchnum.o sstrcmp.o sstrlen.o sstrncmp.o stbtbl.o stttbl.o \
+               istrcmp.o memory2.o mk2claus.o mkbunset.o mkjiritu.o mkkouho.o \
+               mknumber.o mvmemd.o mvmemi.o peepdic.o ph2knj.o ph_khtbl.o \
+               priority.o prtytbl.o s2ctbl.o selclrec.o selsuuji.o setconj.o \
+               setjrec.o setkouho.o setubi.o sj2code.o skiphblk.o skipkstr.o \
+               srchdict.o srchhead.o srchidx.o srchnum.o stbtbl.o stttbl.o \
                study.o suujitbl.o terminat.o termtbl.o wakachi.o
 SJ3RKCV_OBJS = rk_conv.o sj3_rkcv.o wc16_str.o
 
