@@ -91,7 +91,7 @@ install: all
 	./sj3mkdic dict/visual.eucjp $(DESTDIR)$(SHAREDIR)/sj3/dict/sj3main.dic > /dev/null
 
 clean:
-	rm -f $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(ALL_OBJS) compats.o
+	rm -f $(PUBLIC_LIBS) $(PRIVATE_LIBS) $(ALL_OBJS) compats.o $(CLIENT_APPS) sj3serv
 
 distclean: clean
 	rm -f Makefile.configure config.h config.log
