@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-.PHONY: all clean distclean install
+.PHONY: all clean depend distclean install
 
 include Makefile.configure
 
@@ -125,6 +125,7 @@ sj3stat: $(SJ3STAT_OBJS) libsj3lib.a compats.o
 Paths.h: Paths.h.in
 	sed -e "s|@SJ3CONFDIR@|/etc/sj3|" -e "s|@SJ3DICTDIR@|$(SHAREDIR)/sj3/dict|" Paths.h.in > $@
 
-$(ALL_OBJS) compats.o: config.h
-$(ALL_OBJS): Paths.h
-cnvhinsi.o: GramTable
+depend:
+	cc -E -MM -w *.c > Makefile.depend
+
+include Makefile.depend

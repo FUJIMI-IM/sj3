@@ -1,0 +1,275 @@
+adddic.o: adddic.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+addelcmn.o: addelcmn.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h sj_yomi.h kanakan.h
+alloc.o: alloc.c sj_rename.h sj_typedef.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_struct.h kanakan.h Struct.h sj_dict.h Const.h \
+  Paths.h
+char.o: char.c sj_euc.h sj_sysvdef.h sj_const2.h
+charsize.o: charsize.c sj_euc.h sj_sysvdef.h sj_rename.h sj_typedef.h \
+  sj_dict.h kanakan.h sj_struct.h Struct.h sj_const.h sj_var.h Const.h \
+  Paths.h
+chrtbl.o: chrtbl.c sj_const.h sj_euc.h sj_sysvdef.h sj_rename.h \
+  sj_typedef.h
+cl2knj.o: cl2knj.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h kanakan.h
+clstudy.o: clstudy.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+cmpstr.o: cmpstr.c sj_rename.h sj_const.h sj_euc.h sj_sysvdef.h \
+  sj_typedef.h
+cnvhinsi.o: cnvhinsi.c dicttool.h sj_struct2.h sj_const2.h GramTable
+code.o: code.c sj_sysvdef.h wchar16.h key.h kctype.h sj2.h rk.h
+codecnv.o: codecnv.c sjctype.h sj_sysvdef.h sjtool.h
+common.o: common.c conversion.h sj2.h wchar16.h key.h sj_sysvdef.h \
+  sj3libsj3.h sj3lib.h henkan.h
+compats.o: compats.c config.h
+comuni.o: comuni.c sj_sysvdef.h sj_kcnv.h sj_typedef.h sj_rename.h \
+  sj_const.h sj_euc.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h
+conjunc.o: conjunc.c sj_rename.h sj_typedef.h sj_yomi.h sj_right.h
+connect.o: connect.c sj_rename.h sj_typedef.h sj_connect.h sj_right.h
+conv.o: conv.c wchar16.h key.h select.h inkey.h common.h conversion.h \
+  sj2.h sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h
+cvtclknj.o: cvtclknj.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h
+cvtdict.o: cvtdict.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+cvtkanji.o: cvtkanji.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+deldic.o: deldic.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h kanakan.h
+depend.o: depend.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h Dict.h \
+  sj3err.h kanakan.h
+dict.o: dict.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h sj_rename.h \
+  sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h kanakan.h
+dictdisp.o: dictdisp.c
+dictmake.o: dictmake.c sj_sysvdef.h sjctype.h sj3lib.h sjtool.h
+display.o: display.c sj_sysvdef.h common.h conversion.h sj2.h wchar16.h \
+  key.h sj3libsj3.h sj3lib.h henkan.h inkey.h select.h
+douon.o: douon.c common.h conversion.h sj2.h wchar16.h key.h sj_sysvdef.h \
+  sj3libsj3.h sj3lib.h henkan.h
+edit.o: edit.c common.h conversion.h sj2.h wchar16.h key.h sj_sysvdef.h \
+  sj3libsj3.h sj3lib.h henkan.h
+error.o: error.c sj_typedef.h server.h Struct.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_dict.h sj_struct.h sj_var.h Const.h Paths.h
+etc.o: etc.c common.h conversion.h sj2.h wchar16.h key.h sj_sysvdef.h \
+  sj3libsj3.h sj3lib.h henkan.h
+eucmessage.o: eucmessage.c wchar16.h key.h kctype.h sj3libsj3.h sj3lib.h \
+  sj2.h sj_sysvdef.h
+execute.o: execute.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj3cmd.h sj3err.h Dict.h server.h
+file.o: file.c dicttool.h sj_struct2.h sj_const2.h
+funckey.o: funckey.c wchar16.h key.h sj2.h sj_sysvdef.h Paths.h sj3.h
+functbl.o: functbl.c sj_rename.h sj_func.h sj_typedef.h sj_struct.h \
+  Struct.h sj_const.h sj_euc.h sj_sysvdef.h sj_dict.h sj_var.h Const.h \
+  Paths.h kanakan.h
+fuzoku.o: fuzoku.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h sj_right.h sj_yomi.h
+fzkyomi.o: fzkyomi.c sj_const.h sj_euc.h sj_sysvdef.h sj_rename.h \
+  sj_typedef.h sj_yomi.h sj_right.h sj_left.h
+getkanji.o: getkanji.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+getrank.o: getrank.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+global.o: global.c sj_struct2.h sj_const2.h
+global2.o: global2.c sj_rename.h sj_typedef.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_struct.h sj_dict.h Const.h Paths.h Struct.h
+henkan.o: henkan.c common.h conversion.h sj2.h wchar16.h key.h \
+  sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h kctype.h
+hindo.o: hindo.c sj_struct.h sj_typedef.h dicttool.h sj_struct2.h \
+  sj_const2.h
+hinsi.o: hinsi.c sj_hinsi.h
+hzstrlen.o: hzstrlen.c sj_euc.h sj_sysvdef.h sj_rename.h sj_typedef.h \
+  sj_const.h sj_dict.h kanakan.h sj_struct.h Struct.h sj_var.h Const.h \
+  Paths.h
+init.o: init.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h
+istrcmp.o: istrcmp.c sj_rename.h sj_typedef.h sj_const.h sj_euc.h \
+  sj_sysvdef.h
+kigou.o: kigou.c common.h conversion.h sj2.h wchar16.h key.h sj_sysvdef.h \
+  sj3libsj3.h sj3lib.h henkan.h kctype.h
+knjcvt.o: knjcvt.c sj_const.h sj_euc.h sj_sysvdef.h sj_struct.h \
+  sj_typedef.h dicttool.h sj_struct2.h sj_const2.h
+level1.o: level1.c config.h Const.h Paths.h sj3cmd.h sj3err.h sj3lib.h
+libif.o: libif.c sj_sysvdef.h wchar16.h key.h kctype.h common.h \
+  conversion.h sj2.h sj3libsj3.h sj3lib.h henkan.h
+main.o: main.c sj_sysvdef.h Const.h Paths.h server.h Struct.h sj_const.h \
+  sj_euc.h sj_dict.h sj_struct.h sj_typedef.h sj_var.h
+makedict.o: makedict.c sj_const.h sj_euc.h sj_sysvdef.h dicttool.h \
+  sj_struct2.h sj_const2.h
+makelist.o: makelist.c sj_struct.h sj_typedef.h dicttool.h sj_struct2.h \
+  sj_const2.h
+makeseg.o: makeseg.c sj_struct.h sj_typedef.h Dict.h dicttool.h \
+  sj_struct2.h sj_const2.h
+memory.o: memory.c dicttool.h sj_struct2.h sj_const2.h
+memory2.o: memory2.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h
+mk2claus.o: mk2claus.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_right.h
+mkbunset.o: mkbunset.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h kanakan.h
+mkjiritu.o: mkjiritu.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+mkkouho.o: mkkouho.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h sj_suuji.h kanakan.h
+mknumber.o: mknumber.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_yomi.h sj_suuji.h kanakan.h
+mvmemd.o: mvmemd.c sj_rename.h sj_typedef.h
+mvmemi.o: mvmemi.c sj_rename.h sj_typedef.h
+nmttyslot.o: nmttyslot.c sj2.h wchar16.h key.h sj_sysvdef.h
+offset.o: offset.c sj_struct.h sj_typedef.h dicttool.h sj_struct2.h \
+  sj_const2.h
+peepdic.o: peepdic.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_yomi.h kanakan.h
+ph2knj.o: ph2knj.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h sj_yomi.h \
+  kanakan.h
+ph_khtbl.o: ph_khtbl.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+priority.o: priority.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h sj_right.h sj_prty.h
+prtytbl.o: prtytbl.c sj_rename.h sj_typedef.h
+readline.o: readline.c sj_euc.h sj_sysvdef.h sj_const.h sj_macro.h \
+  dicttool.h sj_struct2.h sj_const2.h
+rk_conv.o: rk_conv.c sj_sysvdef.h wchar16.h key.h kctype.h rk.h
+romaji.o: romaji.c common.h conversion.h sj2.h wchar16.h key.h \
+  sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h rk.h
+s2ctbl.o: s2ctbl.c sj_rename.h sj_typedef.h sj_yomi.h
+screen.o: screen.c common.h conversion.h sj2.h wchar16.h key.h \
+  sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h
+selclrec.o: selclrec.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h
+selsuuji.o: selsuuji.c sj_rename.h sj_typedef.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_suuji.h
+setconj.o: setconj.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_right.h sj_hinsi.h sj_yomi.h kanakan.h
+setjrec.o: setjrec.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h kanakan.h
+setkouho.o: setkouho.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h kanakan.h
+setubi.o: setubi.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_hinsi.h kanakan.h
+setup.o: setup.c sj_sysvdef.h sj_typedef.h sj_const.h sj_euc.h sj_var.h \
+  sj_dict.h sj_struct.h sj_rename.h Const.h Paths.h Struct.h sj_global.h \
+  kanakan.h server.h
+sj2code.o: sj2code.c sj_euc.h sj_sysvdef.h sj_kcnv.h sj_typedef.h \
+  sj_rename.h sj_const.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_yomi.h
+sj3.o: sj3.c sj_sysvdef.h wchar16.h key.h select.h common.h conversion.h \
+  sj2.h sj3libsj3.h sj3lib.h henkan.h sj3.h
+sj3_rkcv.o: sj3_rkcv.c wchar16.h key.h sj2.h sj_sysvdef.h kana.h rk.h \
+  kctype.h
+sj3dic.o: sj3dic.c sj_sysvdef.h sjtool.h sj3lib.h sj3dic.h
+sj3err.o: sj3err.c sj3err.h
+sj3lib.o: sj3lib.c config.h Const.h Paths.h sj3err.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_hinsi.h sj3lib.h
+sj3stat.o: sj3stat.c Const.h Paths.h sj3err.h sj3lib.h
+sj3ver.o: sj3ver.c sj2.h wchar16.h key.h sj_sysvdef.h
+sjgetchar.o: sjgetchar.c sj_sysvdef.h wchar16.h key.h kctype.h sj2.h \
+  select.h
+sjrc.o: sjrc.c sjctype.h sj_sysvdef.h sjtool.h
+sjrc2.o: sjrc2.c wchar16.h key.h kctype.h common.h conversion.h sj2.h \
+  sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h Paths.h
+skiphblk.o: skiphblk.c sj_rename.h sj_typedef.h sj_dict.h
+skipkstr.o: skipkstr.c sj_euc.h sj_sysvdef.h sj_rename.h sj_typedef.h \
+  sj_const.h sj_dict.h sj_table.h sj_func.h sj_struct.h Struct.h \
+  sj_var.h Const.h Paths.h kanakan.h
+srchdict.o: srchdict.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+srchhead.o: srchhead.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_yomi.h
+srchidx.o: srchidx.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  kanakan.h
+srchnum.o: srchnum.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_yomi.h sj_hinsi.h sj_suuji.h kanakan.h
+stat_conv.o: stat_conv.c common.h conversion.h sj2.h wchar16.h key.h \
+  sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h rk.h
+stbtbl.o: stbtbl.c sj_rename.h sj_typedef.h sj_yomi.h sj_hinsi.h
+string.o: string.c config.h sj_euc.h sj_sysvdef.h sj3lib.h
+string2.o: string2.c sj_const.h sj_euc.h sj_sysvdef.h dicttool.h \
+  sj_struct2.h sj_const2.h
+stttbl.o: stttbl.c sj_rename.h sj_typedef.h
+study.o: study.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h sj_func.h \
+  sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h kanakan.h
+suujitbl.o: suujitbl.c sj_const.h sj_euc.h sj_sysvdef.h sj_rename.h \
+  sj_typedef.h sj_yomi.h sj_suuji.h
+term.o: term.c sj2.h wchar16.h key.h sj_sysvdef.h
+terminat.o: terminat.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_right.h
+termtbl.o: termtbl.c sj_rename.h sj_typedef.h sj_const.h sj_euc.h \
+  sj_sysvdef.h sj_prty.h
+tests.o: tests.c
+time_stamp.o: time_stamp.c
+toroku.o: toroku.c common.h conversion.h sj2.h wchar16.h key.h \
+  sj_sysvdef.h sj3libsj3.h sj3lib.h henkan.h
+version.o: version.c
+version2.o: version2.c sj2.h wchar16.h key.h sj_sysvdef.h
+wakachi.o: wakachi.c sj_kcnv.h sj_typedef.h sj_rename.h sj_const.h \
+  sj_euc.h sj_sysvdef.h sj_var.h sj_dict.h sj_study.h sj_table.h \
+  sj_func.h sj_struct.h Struct.h Const.h Paths.h sj_global.h sj_define.h \
+  sj_right.h sj_hinsi.h kanakan.h
+wc16_str.o: wc16_str.c sj_sysvdef.h sj_euc.h wchar16.h key.h
