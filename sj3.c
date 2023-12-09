@@ -99,7 +99,7 @@ char	slave_name[SHORTLENGTH];
 char	*shellargs[SHORTLENGTH];	
 #ifdef SVR4
 char	*mptname = "/dev/ptmx";		
-char    *ptsname();
+char    *ptsname(int);
 #else
 static char	line[SHORTLENGTH];		
 #endif
