@@ -51,9 +51,9 @@ static int	bskey;
 #define SPAN_END		1
 
 save_span (mode)
-register int	mode;
+int	mode;
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	switch (mode) {
@@ -77,7 +77,7 @@ register int	mode;
 
 save_span_p ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->span_p[cv->span_point] = &(cv->out_buf[cv->out_point]);
@@ -86,7 +86,7 @@ save_span_p ()
 
 isspaned ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	if (cv->out_buf[0] != '\0')
@@ -99,7 +99,7 @@ isspaned ()
 
 buffers_clear ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	pointer_clear ();
@@ -111,7 +111,7 @@ buffers_clear ()
 
 pointer_clear ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->ha_point = cv->ha_epoint = 0;
@@ -137,8 +137,8 @@ static SaveSet		save_set0;
 
 StoreSaveSet ()
 {
-	register Conversion	*cv;
-	register SaveSet	*sv;
+	Conversion	*cv;
+	SaveSet	*sv;
 
 	cv = GetConversion ();
 	if (cv->out_point) {
@@ -156,8 +156,8 @@ StoreSaveSet ()
 
 RestoreSaveSet ()
 {
-	register Conversion	*cv;
-	register SaveSet	*sv;
+	Conversion	*cv;
+	SaveSet	*sv;
 
         sv = &save_set0;
 	if (sv->out_point) {
@@ -212,7 +212,7 @@ ClearBuffer ()
 
 SetCflag ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->Cflag = 1;
@@ -220,7 +220,7 @@ SetCflag ()
 
 ClearCflag ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->Cflag = 0;
@@ -228,7 +228,7 @@ ClearCflag ()
 
 IsCflag ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	return (cv->Cflag);
@@ -236,7 +236,7 @@ IsCflag ()
 
 exec_kettei ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	int		len;
 	wchar16_t		kanji[BUFFLENGTH * 2];
 
@@ -287,7 +287,7 @@ struct wordent  word[];
 
 ChangeBuffMode ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	if (cv->BuffMode == BUFF) {
@@ -301,7 +301,7 @@ ChangeBuffMode ()
 
 BuffYes ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	if (cv->BuffMode == BUFF)
@@ -386,10 +386,10 @@ get_pseq ()
 
 stat_conv ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	extern int	allways_buff;	
-	register int	inc;	
-        register int    i;
+	int	inc;
+        int    i;
         u_short         svlen;  
 
 	cv = GetConversion ();
@@ -709,8 +709,8 @@ more:
 
 save_obuf()
 {
-        register Conversion     *cv;
-        register int    i, cur;
+        Conversion     *cv;
+        int    i, cur;
 
         cv = GetConversion();
 
@@ -743,8 +743,8 @@ save_obuf()
 
 restore_obuf()
 {
-        register Conversion     *cv;
-        register int    i;
+        Conversion     *cv;
+        int    i;
 
         cv = GetConversion();
 
@@ -767,9 +767,9 @@ restore_obuf()
 }
 
 exec_ctrl(c)
-register int c;
+int c;
 {
-	register Conversion *cv;
+	Conversion *cv;
 	wchar16_t	s[3];
 	extern wchar16_t   pars_seq[];
 	
@@ -802,9 +802,9 @@ register int c;
 }
 
 exec_mode (key)
-register int	key;
+int	key;
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	if (key == KEY_MUHENKAN)
@@ -819,9 +819,9 @@ register int	key;
 }
 
 toggle_mode (mod)
-register int	mod;
+int	mod;
 {
-	register int	value;
+	int	value;
 
 	switch (mod) {
 	case MODE_ZHIRA:
@@ -844,7 +844,7 @@ register int	mod;
 }
 
 eval_mode (key)
-register int	key;
+int	key;
 {
 	int		mod;
 
@@ -886,7 +886,7 @@ int	len;
 }
 
 is_bsdel (c)
-register int	c;
+int	c;
 {
 	if (is_bs (c) || is_del (c))
 		return (1);
@@ -912,7 +912,7 @@ int	c;
 }
 
 is_bs (c)
-register int	c;
+int	c;
 {
 	if (c == bskey)
 		return (1);
@@ -921,7 +921,7 @@ register int	c;
 }
 
 is_del (c)
-register int	c;
+int	c;
 {
 	if (c == delkey)
 		return (1);

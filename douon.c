@@ -54,7 +54,7 @@ int		n;
 int		choice;
 int		reconv;
 {
-	register int	len;
+	int	len;
 
         Dcount = SJ2_getdouon (s, d, n, choice, reconv);
 
@@ -77,7 +77,7 @@ int		reconv;
 
 exec_douon ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	int	val;
 
 	cv = GetConversion ();
@@ -97,7 +97,7 @@ exec_douon ()
 wrap_douon (back)
 int	back;	
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	int	val;
 
 	cv = current_conversion;
@@ -124,10 +124,10 @@ int	gnum;
 {
 	
 
-	register int	i, j;
-	register int	len;
-	register wchar16_t	*s;
-	register int	dispnum;
+	int	i, j;
+	int	len;
+	wchar16_t	*s;
+	int	dispnum;
 	int		num;
 	int		displen;
 	int		base;
@@ -136,7 +136,7 @@ int	gnum;
 
 	int		gakusyuu;
 	u_short		row, col;
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = current_conversion;
 
@@ -252,10 +252,10 @@ int	gnum;
 }
 
 Dselect (lim)
-register int	lim;
+int	lim;
 {
 	extern int	keyvalue;
-	register int	c, num;
+	int	c, num;
 	char		s[2];
 
 	SaveConversion ();
@@ -297,8 +297,8 @@ int	reconv;
 {
 	
 
-	register int	len;
-	register wchar16_t	*s;
+	int	len;
+	wchar16_t	*s;
 
 	SJ_getdouon (yomi, HenkanDouon, num, choice, reconv);
 
@@ -314,8 +314,8 @@ int	reconv;
 Sdouon (Choice)
 int Choice;
 {
-	register Conversion	*cv;
-	register int	i, j;
+	Conversion	*cv;
+	int	i, j;
 	int		len;
 	wchar16_t		yomi[BUFFLENGTH * 2];
 	int		count;
@@ -395,10 +395,10 @@ tail:
 Rdouon (back)
 int	back;	
 {
-	register Conversion	*cv;
-	register int	i, j;
-	register int	len;
-	register wchar16_t	*s;
+	Conversion	*cv;
+	int	i, j;
+	int	len;
+	wchar16_t	*s;
 
 	cv = current_conversion;
 	if (Dcount > 0) {
@@ -429,8 +429,8 @@ int	back;
 Bkanji (kanji)
 wchar16_t	*kanji;
 {
-	register Conversion	*cv;
-	register int	i;
+	Conversion	*cv;
+	int	i;
 	int		plen, len;
 	wchar16_t		*s;
 
@@ -458,9 +458,9 @@ struct studyrec	*wordid;
 
 cl_gakusyuu ()
 {
-	register Conversion	*cv;
-	register int	i, j;
-	register int	o_point, n_point;
+	Conversion	*cv;
+	int	i, j;
+	int	o_point, n_point;
 
 	cv = current_conversion;
 	for (i = 0 ; i < cv->Bnum ; i ++) {
@@ -484,8 +484,8 @@ cl_gakusyuu ()
 check_and_gakusyuu (m, n)
 int	m, n;
 {
-	register Conversion	*cv;
-	register int	i, j;
+	Conversion	*cv;
+	int	i, j;
 
 	cv = current_conversion;
 	i = m;
@@ -502,8 +502,8 @@ void
 go_gakusyuu (n)
 int	n;
 {
-	register Conversion	*cv;
-	register int	i, j;
+	Conversion	*cv;
+	int	i, j;
 	wchar16_t		yomi1[BUFFLENGTH], yomi2[BUFFLENGTH];
 	struct studyrec	*gdatap;
 	int		len;

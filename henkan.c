@@ -46,9 +46,9 @@ int	i_point;
 
 exec_henkan ()
 {
-	register Conversion	*cv;
-	register int		i, j;
-	register wchar16_t		*s, *p;
+	Conversion	*cv;
+	int		i, j;
+	wchar16_t		*s, *p;
 	short			sp;
 	int			len, rlen, ilen;
 	int			opos, ipos, bnum;
@@ -229,8 +229,8 @@ exec_henkan ()
 addBun(cur, end)
 int cur, end;
 {
-	register int i;
-	register Conversion *cv;
+	int i;
+	Conversion *cv;
 
 	cv = GetConversion();
 	for (i = end; i > cur; i--) {
@@ -244,8 +244,8 @@ int cur, end;
 delspan(cur)
 int cur;
 {
-	register int i;
-	register Conversion *cv;
+	int i;
+	Conversion *cv;
 
 	cv = GetConversion();
 	for (i = cur; i < cv->span_point - 1; i++) {
@@ -258,8 +258,8 @@ int cur;
 delBun(cur, end)
 int cur, end;
 {
-	register int i;
-	register Conversion *cv;
+	int i;
+	Conversion *cv;
 
 	cv = GetConversion();
 	cv->Bun[cur].srclen += cv->Bun[cur + 1].srclen;
@@ -274,7 +274,7 @@ int cur, end;
 
 
 IsHex (c)
-register wchar16_t c;
+wchar16_t c;
 {
 	return(iswxdigit(c));
 }
@@ -282,7 +282,7 @@ register wchar16_t c;
 Getcode (in, out)
 wchar16_t	*in, *out;
 {
-	register int  c, i, j;
+	int  c, i, j;
 	u_char        s[5];
         int             base, c_code;
         u_short         code;
@@ -355,8 +355,8 @@ int	num;
 wchar16_t	*s;
 u_char	type;
 {
-	register Conversion	*cv;
-	register int	len, ilen;
+	Conversion	*cv;
+	int	len, ilen;
 	u_char		itype;
 	wchar16_t Htmp[BUFFLENGTH], Ztmp[BUFFLENGTH * 2];
 
@@ -428,9 +428,9 @@ int	num;
 wchar16_t	*htmp, *ztmp;
 u_short *omode;
 {
-	register Conversion	*cv;
-	register int	i;
-	register int	len, ilen;
+	Conversion	*cv;
+	int	i;
+	int	len, ilen;
 	u_short		*op;
 	u_char		type;
 	wchar16_t		Ztmp[DLEN + 1];
@@ -474,8 +474,8 @@ getistr(s, ostr, len)
 wchar16_t *s, *ostr;
 int len;
 {
-	register int ipos, opos;
-	register Conversion *cv;
+	int ipos, opos;
+	Conversion *cv;
 	int rlen;
 
 	cv = GetConversion();
@@ -495,7 +495,7 @@ int len;
 exec_muhenkan (first)
 int	first;
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->Bnum = 1;
@@ -538,8 +538,8 @@ Bstr (bnum, s)
 int	bnum;
 wchar16_t	*s;
 {
-	register Conversion	*cv;
-	register int	i, len;
+	Conversion	*cv;
+	int	i, len;
 
 	cv = GetConversion ();
 	if (cv->Bkettei[bnum] & Bmuhenkan) {
@@ -588,9 +588,9 @@ wchar16_t	*s;
 
 
 mode_muhenkan (mod, bkettei)
-register int	mod, bkettei;
+int	mod, bkettei;
 {
-	register int	def;
+	int	def;
 
 	if (!(bkettei & Bmuhenkan))
 		return (KEY_ZHIRA);
@@ -605,10 +605,10 @@ register int	mod, bkettei;
 }
 
 Bchange (mod)
-register int	mod;
+int	mod;
 {
-	register Conversion	*cv;
-	register int	i;
+	Conversion	*cv;
+	int	i;
 	int		PushKettei;
 
 	cv = GetConversion ();
@@ -662,8 +662,8 @@ register int	mod;
 
 Bdisp (redraw)
 {
-	register Conversion	*cv;
-	register int	i;
+	Conversion	*cv;
+	int	i;
 	int		len;
 	wchar16_t		BDtmp[BUFFLENGTH * 2];
 	int             displen;
@@ -708,9 +708,9 @@ Bdisp (redraw)
 void
 Rdisp ()
 {
-	register Conversion	*cv;
-	register int	i;
-	register int	Total;
+	Conversion	*cv;
+	int	i;
+	int	Total;
 	int		len;
 	wchar16_t		BDtmp[BUFFLENGTH * 2];
 	int             displen;
@@ -757,10 +757,10 @@ Rdisp ()
 
 AfterAllPrint (from, Total)
 int	from;
-register int	Total;
+int	Total;
 {
-	register Conversion	*cv;
-	register int	i;
+	Conversion	*cv;
+	int	i;
 	int		len;
 	wchar16_t		BDtmp[BUFFLENGTH * 2];
 	int             displen;
@@ -807,7 +807,7 @@ register int	Total;
 void
 Bright ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	int	flag;
 
 	cv = GetConversion ();
@@ -830,7 +830,7 @@ Bright ()
 void
 Bleft ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	int	flag;
 
 	cv = GetConversion ();
@@ -853,7 +853,7 @@ Bleft ()
 void
 Blast ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->PreBun = cv->CurBun;
@@ -871,7 +871,7 @@ Blast ()
 void
 Btop ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->PreBun = cv->CurBun;

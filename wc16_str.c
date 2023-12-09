@@ -111,7 +111,7 @@ int
 sj3_wslen16(ws)
 wchar16_t *ws;
 {
-	register int i=0;
+	int i=0;
 
 	if (!ws) return 0;
 
@@ -139,7 +139,7 @@ sj3_wsncmp16(ws1, ws2, n)
 wchar16_t *ws1, *ws2;
 int n;
 {
-	register int i=0;
+	int i=0;
 
 	while ((*ws1 && *ws2) && (*ws1 == *ws2) && (i < n)) {
 		ws1++;
@@ -158,7 +158,7 @@ wchar16_t *
 sj3_wscpy16(ws1, ws2)
 wchar16_t *ws1, *ws2;
 {
-	register wchar16_t *ws;
+	wchar16_t *ws;
 
 	if (!ws2) return NULL;
 	ws = ws1;
@@ -175,8 +175,8 @@ sj3_wsncpy16(ws1, ws2, n)
 wchar16_t *ws1, *ws2;
 int n;
 {
-	register wchar16_t *ws;
-	register int i=0;
+	wchar16_t *ws;
+	int i=0;
 
 	if (!ws2) return NULL;
 	ws = ws1;
@@ -193,7 +193,7 @@ wchar16_t *
 sj3_wscat16(ws1, ws2)
 wchar16_t *ws1, *ws2;
 {
-	register wchar16_t *ws;
+	wchar16_t *ws;
 
 	if (!ws1) return NULL;
 	if (!ws2) return NULL;
@@ -214,7 +214,7 @@ wchar16_t
 sj3_euc2wc16(code)
 unsigned int code;
 {
-	register wchar16_t wc = 0;
+	wchar16_t wc = 0;
 
 	if (((code >> 16) & 0xff) == SS3) {
 		wc = code & 0xff7f;
@@ -231,7 +231,7 @@ wchar16_t
 sj3_sjis2wc16(code)
 unsigned int code;
 {
-	register unsigned short ch;
+	unsigned short ch;
 
 	if ((code >> 8) & 0xff) {
 		ch = sjis2euc(code);
@@ -247,8 +247,8 @@ unsigned int
 sj3_wc2euc16(wc)
 wchar16_t wc;
 {
-	register unsigned int code = 0;
-	register unsigned char tmp;
+	unsigned int code = 0;
+	unsigned char tmp;
 
 	tmp = (wc >> 8) & 0xff;
 	if (tmp) {
@@ -272,7 +272,7 @@ unsigned int
 sj3_wc2sjis16(wc)
 wchar16_t wc;
 {
-	register unsigned int ch;
+	unsigned int ch;
 
 	ch = sj3_wc2euc16(wc);
 	if ((ch >> 16) == SS3) {
@@ -292,9 +292,9 @@ unsigned char *mb;
 wchar16_t *ws;
 int n;
 {
-	register int i = 0;
-	register unsigned int code;
-	register unsigned char c;
+	int i = 0;
+	unsigned int code;
+	unsigned char c;
 	
 	while (*ws && (i < n)) {
 		code = sj3_wc2euc16(*ws);
@@ -337,9 +337,9 @@ unsigned char *mb;
 wchar16_t *ws;
 int n;
 {
-	register int i = 0;
-	register unsigned int code;
-	register unsigned char c;
+	int i = 0;
+	unsigned int code;
+	unsigned char c;
 	
 	while (*ws && (i < n)) {
 		code = sj3_wc2sjis16(*ws);
@@ -372,8 +372,8 @@ wchar16_t *ws;
 unsigned char *mb;
 int n;
 {
-	register int i = 0;
-	register unsigned int code;
+	int i = 0;
+	unsigned int code;
 
 	while (*mb && (i < n)) {
 		if (*mb == SS3) {
@@ -404,8 +404,8 @@ wchar16_t *ws;
 unsigned char *mb;
 int n;
 {
-	register int i = 0;
-	register unsigned int code;
+	int i = 0;
+	unsigned int code;
 
 	while (*mb && (i < n)) {
 		if (issjis1(*mb)) {

@@ -46,10 +46,10 @@ extern int rkerrbell;
 exec_romaji(c)
 wchar16_t	c;
 {
-	register Conversion	*cv;
-	register wchar16_t *p;
-	register u_short c1, cc;
-	register u_int c2;
+	Conversion	*cv;
+	wchar16_t *p;
+	u_short c1, cc;
+	u_int c2;
 	u_short op;
 	u_char mode;
 	int len, i;
@@ -212,8 +212,8 @@ wchar16_t	c;
 move_cur(kval)
 int kval;
 {
-	register Conversion *cv;
-	register int i;
+	Conversion *cv;
+	int i;
 
 	cv = GetConversion();
 	switch(kval) {
@@ -255,8 +255,8 @@ int kval;
 addten(pos, c)
 u_short pos, c;
 {
-	register u_short prefix;
-	register Conversion *cv;
+	u_short prefix;
+	Conversion *cv;
 
 	cv = GetConversion();
 	prefix = cv->out_buf[pos];
@@ -266,7 +266,7 @@ u_short pos, c;
 getipos(pos)
 u_short pos;
 {
-	register Conversion *cv;
+	Conversion *cv;
 
 	cv = GetConversion();
 	return(getipos2(cv->out_mode, pos));
@@ -276,8 +276,8 @@ getipos2(omode, pos)
 u_short *omode;
 u_short pos;
 {
-	register u_short ipos;
-	register int i;
+	u_short ipos;
+	int i;
 
 	ipos = 0;
 	for (i = 0; i < (unsigned int)pos; i++) {
@@ -290,8 +290,8 @@ sj_rkconv(s1, s2, len)
 wchar16_t *s1, *s2;
 int len;
 {
-	register int i, rlen;
-	register u_int *kp;
+	int i, rlen;
+	u_int *kp;
 	int res, klen;
 	wchar16_t roma[SHORTBUFFSIZE + 1];
 	u_int kstr[MAXLLEN];
@@ -347,8 +347,8 @@ wchar16_t *s1, *s2;
 u_short *omode;
 int len;
 {
-	register int i, rlen;
-	register u_int *kp;
+	int i, rlen;
+	u_int *kp;
 	int res, klen, mlen;
 	u_short cc, c, prefix;
 	wchar16_t roma[SHORTBUFFSIZE + 1];
@@ -464,9 +464,9 @@ wchar16_t	c, *hbuf, *kbuf;
 u_short *omode;
 int cur, hcur;
 {
-	register u_short c1, cc;
-	register u_int c2;
-	register int i;
+	u_short c1, cc;
+	u_int c2;
+	int i;
 	int ocur, len, retv;
 	u_int rkstr[MAXLLEN], *rkp;
 

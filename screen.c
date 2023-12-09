@@ -47,9 +47,9 @@ wchar16_t		Mguide[LINE_LENGTH + 1];
 
 
 vbackchar (n)
-register int	n;
+int	n;
 {
-	register int	i;
+	int	i;
 
 	for (i=0 ; i < n ; i++)
 		VBackspace ();
@@ -64,7 +64,7 @@ register int	n;
 
 wrap_off ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->wrap = 0;
@@ -73,7 +73,7 @@ wrap_off ()
 
 wrap_on ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->wrap = 1;
@@ -84,7 +84,7 @@ wrap_on ()
 
 Vput_space ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	put_space (1);
@@ -99,8 +99,8 @@ Vput_space ()
 
 VBackspace ()
 {
-	register Conversion	*cv;
-	register int	i;
+	Conversion	*cv;
+	int	i;
 
 	cv = GetConversion ();
 	if (cv->wrap && ((cv->CurrentVcol % cv->column) == 1)) {
@@ -151,9 +151,9 @@ vprintU (s, mod)
 wchar16_t	*s;
 char	mod;	
 {
-	register Conversion	*cv;
-	register int		i, col, oldcol, len;
-	register u_short	*p;
+	Conversion	*cv;
+	int		i, col, oldcol, len;
+	u_short	*p;
 
 	cv = GetConversion ();
 	printU (s);
@@ -188,9 +188,9 @@ vprintR (s, mod)
 wchar16_t	*s;
 char	mod;	
 {
-	register Conversion	*cv;
-	register int		i, col, oldcol, len;
-	register u_short	*p;
+	Conversion	*cv;
+	int		i, col, oldcol, len;
+	u_short	*p;
 
 	cv = GetConversion ();
 	printR (s);
@@ -265,7 +265,7 @@ wchar16_t	*s;
 
 Csave ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	CursorRead (&(cv->SavedRow), &(cv->SavedCol));
@@ -277,7 +277,7 @@ Csave ()
 SetVcol (index)
 int	index;
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->Vlen = index;
@@ -286,7 +286,7 @@ int	index;
 
 Cload ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	CursorSet (cv->SavedRow, cv->SavedCol);
@@ -295,8 +295,8 @@ Cload ()
 Cclear (redraw)
 int	redraw;
 {
-	register Conversion	*cv;
-	register int	spaces;
+	Conversion	*cv;
+	int	spaces;
 	u_short		row, col;
 
 	if (redraw) {
@@ -312,10 +312,10 @@ int	redraw;
 }
 
 Cgoto (index)
-register int	index;
+int	index;
 {
-	register Conversion	*cv;
-	register int	row, col;
+	Conversion	*cv;
+	int	row, col;
 
 	cv = GetConversion ();
 	SetVcol (index);
@@ -326,8 +326,8 @@ register int	index;
 
 ClearToMax ()
 {
-	register Conversion	*cv;
-	register int	space;
+	Conversion	*cv;
+	int	space;
 
 	cv = GetConversion ();
 	space = cv->MaxVcol - cv->CurrentVcol;
@@ -336,8 +336,8 @@ ClearToMax ()
 
 Ccheck ()
 {
-	register Conversion	*cv;
-	register int	row, tmp, diff;
+	Conversion	*cv;
+	int	row, tmp, diff;
 
 	if (Cscroll ()) {
 		cv = GetConversion ();
@@ -352,9 +352,9 @@ Ccheck ()
 }
 
 spaceR (s)
-register wchar16_t	*s;
+wchar16_t	*s;
 {
-	register wchar16_t	*t;
+	wchar16_t	*t;
 	wchar16_t		tmp[40];
 	t = tmp;
 	while (*s != '\0') {
@@ -417,9 +417,9 @@ int	mode;
 
 disp_mode ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	int	c_code;
-	register wchar16_t	*Pmode, *Bmode;
+	wchar16_t	*Pmode, *Bmode;
 	cv = GetConversion ();
 	switch (cv->Imode) {
 	case MODE_CODE:

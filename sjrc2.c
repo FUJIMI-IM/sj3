@@ -157,7 +157,7 @@ sjrc_init ()
 
 getsjrc ()
 {
-	register char *p;
+	char *p;
 	char *getenv();
 
 	sjset_code();
@@ -191,7 +191,7 @@ getsjrc ()
 setrc (file)
 char	*file;
 {
-	register wchar16_t	*p;
+	wchar16_t	*p;
 	char		line[MAXLINE];
 	struct wordent	word[WORDN];
 	struct functbl *functp;
@@ -225,8 +225,8 @@ char	*file;
 getsjrk (erase)
 int erase;
 {
-	register char *p;
-	register int i;
+	char *p;
+	int i;
 	char *getenv();
 	char RKfile[LONGLENGTH];
 
@@ -276,7 +276,7 @@ int erase;
 match(s1, s2)
 wchar16_t *s1, *s2;
 {
-	register wchar16_t c1, c2;
+	wchar16_t c1, c2;
 
 	if (s1 == NULL)
 		return(0);
@@ -291,16 +291,16 @@ wchar16_t *s1, *s2;
 
 
 getword (s, word)
-register u_char	*s;
+u_char	*s;
 struct wordent	word[];
 {
-	register u_char	c;
-	register wchar16_t *w;
+	u_char	c;
+	wchar16_t *w;
 	wchar16_t wcbuf[MAXLINE*2];
 	wchar16_t ttmp[MAXLINE];
 	u_char  buf[MAXLINE*2];
-	register u_char *p;
-	register int	i, wcount;
+	u_char *p;
+	int	i, wcount;
 	u_short cc;
 
 	if (IsDelimitor(*s)) {
@@ -490,9 +490,9 @@ struct wordent	word[];
 }
 
 IsGoto (c)
-register u_char	c;
+u_char	c;
 {
-	register int	i;
+	int	i;
 
 	for (i = 0 ; i < goto_num ; i ++) {
 		if (c == goto_code[i])
@@ -512,9 +512,9 @@ struct wordent	word[];
 }
 
 IsTrap (c)
-register u_char	c;
+u_char	c;
 {
-	register int	i;
+	int	i;
 
 	for (i = 0 ; i < trap_num ; i ++) {
 		if (c == trap_code[i])
@@ -524,7 +524,7 @@ register u_char	c;
 }
 
 mode_key (mode)
-register int mode;
+int mode;
 {
 	switch (mode) {
 	case MODE_HALPHA:
@@ -551,9 +551,9 @@ int	Direct = 0;
 set_init_mode (word)
 struct wordent	word[];
 {
-	register Conversion	*cv;
-	register int	i, j;
-	register wchar16_t	*p;
+	Conversion	*cv;
+	int	i, j;
+	wchar16_t	*p;
 
 	cv = GetConversion ();
 	j = 1;
@@ -589,8 +589,8 @@ struct wordent	word[];
 set_defcode (word)
 struct wordent	word[];
 {
-	register wchar16_t *p;
-	register int i;
+	wchar16_t *p;
+	int i;
 	
 	p = word[1].word_str;
 	for (i = 0; i < 5; i++) {
@@ -604,8 +604,8 @@ struct wordent	word[];
 set_muhenkan (word)
 struct wordent	word[];
 {
-	register int	i;
-	register wchar16_t	*p;
+	int	i;
+	wchar16_t	*p;
 
 	p = word[1].word_str;
 	for (i = 0 ; i < 5 ; i ++) {
@@ -619,8 +619,8 @@ struct wordent	word[];
 set_muedit (word)
 struct wordent	word[];
 {
-	register int	i;
-	register wchar16_t	*p;
+	int	i;
+	wchar16_t	*p;
 
 	p = word[1].word_str;
 	for (i = 0 ; i < 5 ; i ++) {
@@ -662,7 +662,7 @@ is_bstudy ()
 
 eval_muhenkan ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	if (muhenkan_toggle && (KEY_ZHIRA != mode_key (cv->Imode)))
@@ -679,7 +679,7 @@ value_muhenkan ()
 set_guide (word)
 struct wordent	word[];
 {
-	register int	i;
+	int	i;
 
 	if (*word[2].word_str == '\0') {
 		return;
@@ -788,8 +788,8 @@ struct wordent	word[];
 set_server(word)
 struct wordent	word[];
 {
-        register int i, j, size;
-        register char *p;
+        int i, j, size;
+        char *p;
         char *sbuf;
         extern char *cur_serv, **serv_list;
 	char host[LONGLENGTH];
@@ -824,8 +824,8 @@ struct wordent	word[];
 set_dict(word)
 struct wordent	word[];
 {
-        register int i, j, size, suffix_len;
-        register char *p;
+        int i, j, size, suffix_len;
+        char *p;
         char *sbuf;
 	char dict[LONGLENGTH];
 

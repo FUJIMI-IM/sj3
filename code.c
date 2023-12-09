@@ -54,7 +54,7 @@ codeconv(c, rkstr)
 wchar16_t c;
 u_int *rkstr;
 {
-	register u_short ccode, i;
+	u_short ccode, i;
         u_short CheckCcode();
 	extern int erase_char;
 
@@ -94,8 +94,8 @@ u_short
 CheckCcode (c)
 wchar16_t c;
 {
-        register u_char c1;   
-        register u_short code;
+        u_char c1;
+        u_short code;
 
         if (!WcIsASCII(c) ||  !isxdigit(WcLowByte(c)) ||
             (cur_code == CODE_KUTEN && !isdigit(WcLowByte(c))))
@@ -152,7 +152,7 @@ wchar16_t c;
 u_short
 strtocode()
 {
-        register int c;
+        int c;
         u_short code;
 
 	while (ccnt < 4) {

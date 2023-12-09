@@ -47,7 +47,7 @@ Void	cvtkouho(), setstyrec();
 
 Void	cvtclknj()
 {
-	Reg1	KHREC	*krec;		
+	KHREC	*krec;
 	Int	i;
 
 	

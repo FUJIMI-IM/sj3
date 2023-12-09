@@ -62,7 +62,7 @@ checkterm ()
 {
 	char	*kb, *area, *tgetstr (), *tmp;
 	int	val;
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = current_conversion;
 
@@ -185,7 +185,7 @@ end_guideline ()
 put_space (n)
 int	n;
 {
-	register int	i;
+	int	i;
 
 	for (i = 0 ; i < n ; i ++)
 		putchar (' ');
@@ -307,7 +307,7 @@ CursorRead (row, col)
 u_short	*row, *col;
 {
 	
-	register int	count;
+	int	count;
 	int		row1, col1, row2, col2;
 
 	row2 = col2 = 0;
@@ -343,11 +343,11 @@ u_short	*row, *col;
 CRP (row, col)
 int	*row, *col;
 {
-	register char	*sa, *sd;
-	register int	c;
+	char	*sa, *sd;
+	int	c;
 	char		Rchar[4], Cchar[4];
 	wchar16_t		Back[BACKLIM];
-	register int	Back_count, count;
+	int	Back_count, count;
 
 	
 
@@ -413,12 +413,12 @@ top:
 
 
 unget_inkey2 (s, n)
-register wchar16_t *s;
-register int	n;
+wchar16_t *s;
+int	n;
 {
 	extern wchar16_t	ibuf[];
 	extern int	buf_count;
-	register int	i;
+	int	i;
 
 	if (buf_count < KEYBUFSIZ - n) {
 		for (i = 0 ; i < n ; i ++)
@@ -456,7 +456,7 @@ Clear_EOL ()
 StartGuide (row, col)
 u_short	*row, *col;
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = current_conversion;
 	master_flush_flag = 0;

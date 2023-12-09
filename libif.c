@@ -103,7 +103,7 @@ sjislen(str, max)
 unsigned char *str;
 int max;
 {
-	register int len = 0, bytes = 1;
+	int len = 0, bytes = 1;
 
 	if (!max) return 0;
 	while ((bytes <= max) && *str) {
@@ -125,7 +125,7 @@ euclen(str, max)
 unsigned char *str;
 int max;
 {
-	register int len = 0, bytes = 1;
+	int len = 0, bytes = 1;
 
 	if (!max) return 0;
 	while ((bytes <= max) && *str) {
@@ -294,7 +294,7 @@ SJ2_henkan_end ()
 
 SJ2_henkan_init ()
 {
-        register int i, err;
+        int i, err;
 	int *err_dict = NULL;
 	int  err_num = 0;
 
@@ -335,7 +335,7 @@ SJ2_henkan_init ()
 
 sj3_autocon() 
 {
-        register int i, err;
+        int i, err;
   
 	if (dict_num && dict_list) {
 		if (!(err = sj3_open_with_list(chmyhname(cur_serv), user_name, dict_num,

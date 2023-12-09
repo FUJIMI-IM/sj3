@@ -158,7 +158,7 @@ static	u_char	*get_int(p, pv_dst)
 u_char	*p;
 void	*pv_dst;
 {
-	register char	*fmt;
+	char	*fmt;
 	int		*dst;
 
 	dst = pv_dst;
@@ -286,7 +286,7 @@ struct	optlist {
 static	int	skip_blank(fp)
 FILE	*fp;
 {
-	register int	c;
+	int	c;
 
 	c = getc(fp);
 	while (c == ' ' || c == '\t') c = getc(fp);
@@ -295,7 +295,7 @@ FILE	*fp;
 static	int	skip_line(fp)
 FILE	*fp;
 {
-	register int	c;
+	int	c;
 
 	c = getc(fp);
 	while (c != '\n' && c != EOF) c = getc(fp);

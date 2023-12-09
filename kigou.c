@@ -52,7 +52,7 @@ void input_kigou();
 kigou ()
 {
 	extern int	keyvalue;
-        register int    increse, code, basecode;
+        int    increse, code, basecode;
         int             inc, ki, low;
         u_short         num, CheckCcode(), strtocode();
 	int		rval;
@@ -198,7 +198,7 @@ int	c;
 }
 
 IsCKey (inc)
-register int	inc;
+int	inc;
 {
 	switch (inc) {
 	case 'l':
@@ -215,9 +215,9 @@ register int	inc;
 }
 
 guide_kigou (bcode, code, increse)
-register int	bcode, code, increse;
+int	bcode, code, increse;
 {
-	register int	i;
+	int	i;
 	extern wchar16_t	Mguide[];
 	wchar16_t          wtmp[20];
 	char		tmp[20];
@@ -248,7 +248,7 @@ register int	bcode, code, increse;
 
 
 pkigou (code)
-register int    code;
+int    code;
 {
 	wchar16_t	tmp[3];
         u_short ccode;
@@ -271,11 +271,11 @@ register int    code;
 
 void
 input_kigou (basecode, code, increse)
-register int	basecode, code, increse;
+int	basecode, code, increse;
 {
 	wchar16_t	s[2];
         u_short ccode, svlen;
-        register Conversion *cv;
+        Conversion *cv;
 
 	if (jis2euc(code) == 0) {
                 beep();

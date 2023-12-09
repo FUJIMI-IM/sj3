@@ -112,7 +112,7 @@ int
 getsjrc ()
 {
 	FILE *fd;
-	register char *p;
+	char *p;
 
 	sjset_code();
 	RCfile[0] = '\0';
@@ -149,9 +149,9 @@ char	*file;
 FILE	*fd;
 {
 	char		line[MAXLINE];
-	register int	w;
+	int	w;
 	struct wordent word[WORDN];
-	register char	*p;
+	char	*p;
 	struct functbl *functp;
 
 	while ((p = fgets (line, MAXLINE, fd)) != NULL) {
@@ -174,7 +174,7 @@ int
 much(s1, s2)
 char *s1, *s2;
 {
-	register char c1, c2;
+	char c1, c2;
 
 	if (s1 == NULL)
 		return 0;
@@ -190,12 +190,12 @@ char *s1, *s2;
 
 int
 getword (s, word)
-register char	*s;
+char	*s;
 struct wordent	word[];
 {
-	register u_char	c, cc;
-	register char *p;
-	register int	i, wcount;
+	u_char	c, cc;
+	char *p;
+	int	i, wcount;
 
 	if (IsDelimitor(*s)) {
 		s++;
