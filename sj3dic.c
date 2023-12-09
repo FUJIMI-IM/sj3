@@ -182,7 +182,6 @@ parsearg(int argc, char* argv[])
 	int	cmd;
 	int	mode = 0;
 	char	tmp[LONGLENGTH];
-	extern char *strrchr();
 
 	strcpy(prog_name, (p = strrchr(argv[0], '/')) ? p + 1 : argv[0]);
 

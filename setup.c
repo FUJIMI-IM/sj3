@@ -459,7 +459,7 @@ parse_arg(int argc, char** argv)
 	char	*p;
 	size_t	ret;
 
-	extern	char	*optarg, *strrchr();
+	extern	char	*optarg;
 	extern	int	optind;
 
 	p = (p = strrchr(argv[0], '/')) ? p + 1 : argv[0];

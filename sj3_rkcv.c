@@ -286,7 +286,7 @@ u_short c;
 }
 
 
-extern int sj3_hantozen_w16();
+int sj3_hantozen_w16(wchar16_t *, wchar16_t *);
 
 sj3_hantozen(out, in)
 u_char *out, *in;
@@ -483,7 +483,7 @@ u_char *s1, *s2;
   	  return sj3_hantozen(s1, s2);
 }
 
-sj3_hantozen_w16(s1, s2)
+int sj3_hantozen_w16(s1, s2)
 wchar16_t *s1, *s2;
 {
 	return sj_hantozen(s1, s2, wslen(s2));
@@ -559,7 +559,7 @@ u_short c;
 	return(cc);
 }
 
-extern int sj3_zentohan_w16();
+int sj3_zentohan_w16(wchar16_t *, wchar16_t *);
 
 sj3_zentohan(out, in)
 u_char *out, *in;
@@ -751,7 +751,7 @@ u_char *s1, *s2;
 	  return sj3_zentohan(s1, s2);
 }
 
-sj3_zentohan_w16 (s1, s2)
+int sj3_zentohan_w16 (s1, s2)
 wchar16_t *s1, *s2;
 {
 	return sj_zentohan(s1, s2, wslen(s2));

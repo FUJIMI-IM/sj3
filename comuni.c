@@ -237,8 +237,8 @@ open_af_inet(void)
 	struct opthdr *hdr;
         void *handlep;
         extern int t_errno;
-        extern void *setnetpath();
-        extern struct netconfig *getnetpath();
+        extern void *setnetpath(void);
+        extern struct netconfig *getnetpath(void *);
 #else
 	struct sockaddr_in	sin;
 	struct servent	*sp;

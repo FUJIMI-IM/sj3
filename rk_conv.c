@@ -1076,7 +1076,7 @@ int wlen;
 
 
 
-extern int sj3_rkconv_w16();
+int sj3_rkconv_w16(wchar16_t *, wchar16_t *);
 
 sj3_rkconv(romaji, kana)
 u_char *romaji;
@@ -1180,7 +1180,7 @@ u_char *kana;
 	  return sj3_rkconv(romaji, kana);
 }
 
-sj3_rkconv_w16(wstr, kstr)
+int sj3_rkconv_w16(wstr, kstr)
 wchar16_t *wstr;
 wchar16_t *kstr;
 {

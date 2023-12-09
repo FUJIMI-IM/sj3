@@ -61,7 +61,6 @@ char	*y, *k, *h;
 	int	err;
 	int	grm;
 	unsigned char buf[BUFSIZ], *hp;
-	extern int sjistoeuc();
 
 	if (_sys_code == SYS_SJIS) {
 		(void) sjistoeuc(buf, BUFSIZ, h, strlen(h)+1);
