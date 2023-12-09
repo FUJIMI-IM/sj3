@@ -42,9 +42,9 @@
 
 Int	sj2cd_chr(euc, yomi)
 Uchar	*euc;			
-Reg2	Uchar	*yomi;		
+Uchar	*yomi;
 {
-	Reg1	Uchar	chr;
+	Uchar	chr;
 
 	if ((chr = *euc++) == EUC_a1) {
 		chr = *euc;
@@ -118,9 +118,9 @@ Reg2	Uchar	*yomi;
 
 
 Int	sj2cd_str(euc, yomi, len)
-Reg1	Uchar	*euc;	
-Reg2	Uchar	*yomi;	
-Reg3	Int	len;	
+Uchar	*euc;
+Uchar	*yomi;
+Int	len;
 {
 	
 	if (!len--) return FALSE;

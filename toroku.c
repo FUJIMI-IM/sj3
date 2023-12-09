@@ -47,7 +47,7 @@ extern int	keyvalue;
 
 exec_toroku ()
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 	wchar16_t			yomi[YOMILEN+1], kanji[KLEN+1];
 	wchar16_t			*hinshi;
 	int			inc;
@@ -120,8 +120,8 @@ getyomi (yomi, lim, prompt, kanji)
 wchar16_t	*yomi, *prompt, *kanji;
 int	lim;
 {
-	register int	inc, c;
-	register Conversion *cv;
+	int	inc, c;
+	Conversion *cv;
 	int		len;
 	wchar16_t		wtmp[BUFFLENGTH], ytmp[YOMILEN+1], ktmp[KLEN+1];
 	u_char		tmp[BUFFLENGTH];
@@ -191,7 +191,7 @@ int	lim;
 
 gethinshi()
 {
-	register int inc, hcode;
+	int inc, hcode;
 
 	TopGuide(); 
 	printR(WCGtoroku);
@@ -211,7 +211,7 @@ gethinshi()
 getcheck (yomi, kanji, hinshi, prompt)
 wchar16_t	*yomi, *kanji, *hinshi, *prompt;
 {
-	register int	c;
+	int	c;
 	u_char		tmp[BUFFLENGTH + KLEN];
 	extern wchar16_t  *Y;
 	wchar16_t         wtmp[BUFFLENGTH + KLEN];
@@ -270,8 +270,8 @@ getkstr (s, lim, guide)
 wchar16_t	*s, *guide;
 int	lim;
 {
-	register Conversion	*cv;
-	register int		i;
+	Conversion	*cv;
+	int		i;
 	wchar16_t			tmp[BUFFLENGTH * 2];
 	wchar16_t			*p;
 	int			plen, chbun;
@@ -301,10 +301,10 @@ int	lim;
 getbunsetu (kanji, guide)
 wchar16_t	*kanji, *guide;
 {
-	register Conversion	*cv;
-	register int		c;
-	register int		bstart, bend;
-	register int		i;
+	Conversion	*cv;
+	int		c;
+	int		bstart, bend;
+	int		i;
 	u_short			row, col;
 	wchar16_t			*p;
 	int			plen, len;
@@ -402,7 +402,7 @@ wchar16_t	*kanji, *guide;
 
 exec_syoukyo ()
 {
-	register int 	i;
+	int 	i;
 	wchar16_t		yomi[YOMILEN+1], kanji[KLEN+1];
 	wchar16_t		tmp[BUFFLENGTH], tmp2[BUFFLENGTH * 2];
         u_char          ytmp[YOMILEN+1], ktmp[KLEN+1], 

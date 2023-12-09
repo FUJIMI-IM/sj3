@@ -40,7 +40,7 @@
 Void	free_jrec(), free_clrec();
 
 JREC	*free_jlst(p)
-Reg1	JREC	*p;
+JREC	*p;
 {
 	JREC	*jpk;
 	JREC	*jp;
@@ -71,7 +71,7 @@ Reg1	JREC	*p;
 }
 
 CLREC	*free_clst(p, l)
-Reg1	CLREC	*p;
+CLREC	*p;
 Int	l;
 {
 	CLREC	*cpk;
@@ -116,7 +116,7 @@ Int	l;
 }
 
 Void	free_clall(p)
-Reg1	CLREC	*p;
+CLREC	*p;
 {
 	CLREC	*next;
 
@@ -129,7 +129,7 @@ Reg1	CLREC	*p;
 }
 
 Void	free_jall(p)
-Reg1	JREC	*p;
+JREC	*p;
 {
 	JREC	*next;
 

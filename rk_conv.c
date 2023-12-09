@@ -489,7 +489,7 @@ sj3_rkinit_sub(rkfile, mbfunc)
 char *rkfile;
 int (*mbfunc)();
 {
-	register char *p;
+	char *p;
 	int len, klen, rlen, retv;
 	FILE *fp, *fopen();
 	char line[MAXLEN + 1];
@@ -562,8 +562,8 @@ char *istr;
 wchar16_t *ostr;
 int *len;
 {
-	register char c, *p;
-	register int i;
+	char c, *p;
+	int i;
 
 	while (ENDMARK(*istr))
 		istr++;
@@ -620,9 +620,9 @@ char *istr;
 wchar16_t *ostr;
 int *len;
 {
-	register u_char c;	
-	register u_char *p;
-	register int i;
+	u_char c;
+	u_char *p;
+	int i;
 	u_short cc;
 
 	while (ENDMARK(*istr))
@@ -682,7 +682,7 @@ int *len;
 
 cltable()
 {
-	register int i;
+	int i;
 
 	if (rkpp != NULL) {
 	    for (i = 0; i < MAXCODE; i++) {
@@ -704,8 +704,8 @@ chk_rstr(rstr, rkey, rlen, klen)
 wchar16_t *rstr, *rkey;
 int rlen, klen;
 {
-	register int i;
-	register wchar16_t *p;
+	int i;
+	wchar16_t *p;
 
 	if (rlen >= klen)
 		return(1);
@@ -724,8 +724,8 @@ int rlen, klen;
 RkTablW16 *
 rkalloc()
 {
-	register RkTablW16 *rkp;
-	register RkbufRec *rkbrp;
+	RkTablW16 *rkp;
+	RkbufRec *rkbrp;
 
 	if (rkpp == NULL) {
 		rkp = (RkTablW16 *)malloc(RKSIZE * sizeof(RkTablW16));
@@ -762,8 +762,8 @@ wchar16_t **cp;
 wchar16_t *str;
 int len;
 {
-	register wchar16_t *strp;
-	register StrbufRec *sbrp;
+	wchar16_t *strp;
+	StrbufRec *sbrp;
 
 	if (len <= 1)
 		return(0);
@@ -798,9 +798,9 @@ kstradd(cp, kstr, len)
 wchar16_t **cp, *kstr;
 int len;
 {
-	register int i;
-	register wchar16_t *usp;
-	register YmibufRec *ybrp;
+	int i;
+	wchar16_t *usp;
+	YmibufRec *ybrp;
 
 	if (len <= 1)
 		return(0);
@@ -836,8 +836,8 @@ mktable(key, len)
 wchar16_t *key;
 int len;
 {
-	register int i;
-	register RkTablW16 *nrktp, *orktp;
+	int i;
+	RkTablW16 *nrktp, *orktp;
 	RkTablW16 *rktp;
 	u_int code;
 
@@ -908,8 +908,8 @@ sj3_rkconvc(c, rkstr)
 wchar16_t c;
 u_int *rkstr;
 {
-	register int i;
-	register wchar16_t *p, *q;
+	int i;
+	wchar16_t *p, *q;
 	int len;
 	wchar16_t wstr[MAXLLEN];
 	u_int kstr[MAXLLEN], *kp;
@@ -983,8 +983,8 @@ u_int *kstr;
 int wlen;
 {
 
-	register int i;
-	register wchar16_t *p, *q, *s;
+	int i;
+	wchar16_t *p, *q, *s;
 	int rlen, len;
 	wchar16_t svstr[MAXLLEN];
 	RkTablW16 *rktp;
@@ -1185,9 +1185,9 @@ wchar16_t *wstr;
 wchar16_t *kstr;
 {
 
-	register int i;
-	register wchar16_t *p, *q, *s;
-	register u_short cc;
+	int i;
+	wchar16_t *p, *q, *s;
+	u_short cc;
 	int rlen, len;
 	wchar16_t svstr[MAXLLEN];
 	RkTablW16 *rktp;
@@ -1248,7 +1248,7 @@ rkmatch(s1, s2, len)
 wchar16_t *s1, *s2;
 int len;
 {
-	register int i;
+	int i;
 
 	i = 1;
 	if (s2 == NULL)

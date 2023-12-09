@@ -54,8 +54,8 @@ static	char	*ttys	= "/etc/ttys";
 nmttyslot (name)
 char	*name;
 {
-	register char	*tp, *p;
-	register int	s, tf;
+	char	*tp, *p;
+	int	s, tf;
 
 	tp = name;
 
@@ -82,7 +82,7 @@ getttys (f)
 int	f;
 {
 	static char line[LINESIZE];
-	register char *lp;
+	char *lp;
 top:
 	for (lp = line ; lp < &line[LINESIZE] ; lp ++) {
 		if (read (f, lp, 1) != 1)

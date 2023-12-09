@@ -45,9 +45,9 @@ static int	iedit, jedit;
 static int	ilen, jlen;
 
 push_obj (i, j)
-register int	i, j;
+int	i, j;
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	jpoint = cv->Ppoint[j];
@@ -58,9 +58,9 @@ register int	i, j;
 }
 
 pop_obj (i, j)
-register int	i, j;
+int	i, j;
 {
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 	cv->Ppoint[j] = jpoint;
@@ -74,8 +74,8 @@ register int	i, j;
 
 Bbig ()
 {
-	register Conversion	*cv;
-	register int		i, j, k;
+	Conversion	*cv;
+	int		i, j, k;
 	int			moji, last, val;
 
 	cv = GetConversion ();
@@ -137,8 +137,8 @@ Bbig ()
 Bsmall (small)
 int	small;		
 {
-	register Conversion	*cv;
-	register int	i, j, k, moji;
+	Conversion	*cv;
+	int	i, j, k, moji;
 	int		val;
 
 	cv = GetConversion ();
@@ -240,8 +240,8 @@ int	small;
 void
 Bdelete ()
 {
-	register Conversion	*cv;
-	register int	i, j, deletelen, val;
+	Conversion	*cv;
+	int	i, j, deletelen, val;
 
 	cv = GetConversion ();
 	if (cv->CurBun < 0) {
@@ -290,13 +290,13 @@ Bdelete ()
 
 void
 Chain (n, len)
-register int	n;	
-register int	len;	
+int	n;
+int	len;
 {
-	register Conversion	*cv;
-	register int		i;
-	register wchar16_t		*p;
-	register u_short	*pp;
+	Conversion	*cv;
+	int		i;
+	wchar16_t		*p;
+	u_short	*pp;
 	int 			mlen, plen, ipos, rlen, imlen;
 
 	cv = GetConversion ();
@@ -339,9 +339,9 @@ static int Elimit;
 static int Ehlimit;
 exec_edit ()
 {
-	register Conversion	*cv;
-	register int		edit, inc, i;
-	register wchar16_t	*s;
+	Conversion	*cv;
+	int		edit, inc, i;
+	wchar16_t	*s;
 	wchar16_t			Htmp[BUFFLENGTH], Ztmp[BUFFLENGTH * 2];
 	u_short			Omode[BUFFLENGTH * 2];
 	int			bun;
@@ -619,7 +619,7 @@ wchar16_t	*Hs, *Zs;
 u_short *omode;
 int cur, num;
 {
-	register int	i, len, inc;
+	int	i, len, inc;
 	int		beep_on, icur1, icur2;
 	wchar16_t		roma[SHORTBUFFSIZE+1], kana[SHORTBUFFSIZE+1];
 	wchar16_t		work[DLEN+1];
@@ -699,7 +699,7 @@ int *cur, num;
 {
 	wchar16_t		work[DLEN + 1];
 	wchar16_t		work2[DLEN + 1];
-	register int	len;
+	int	len;
 
 	len = wslen(&Zs[*cur]);
 	if (len < num)
@@ -725,7 +725,7 @@ wchar16_t	*Hs, *Zs;
 u_short *omode;
 int cur;
 {
-	register int	inc, len, i;
+	int	inc, len, i;
 	int		limit, hlimit, ylen, res, icur, rlen;
 	wchar16_t		ztmp[DLEN + 1], htmp[DLEN + 1];
 	u_short		otmp[DLEN + 1];
@@ -793,7 +793,7 @@ wchar16_t	*Hs, *Zs;
 u_short *omode;
 int	cur, num;
 {
-	register int	i, j;
+	int	i, j;
 	int		icur, len, rlen;
 
 	if (!(omode[cur] & OMODE_MASK))
@@ -827,7 +827,7 @@ wchar16_t *Hs, *Zs;
 u_short *omode;
 int cur;
 {
-	register int i, j, len;
+	int i, j, len;
 	int prep, nextp;
 	int hprep, hnextp;
 	wchar16_t hkana[BUFFLENGTH], *hkp;
@@ -853,7 +853,7 @@ int cur;
 }
 
 Print_EOL (s)
-register wchar16_t *s;
+wchar16_t *s;
 {
 	if (*s != '\0')
 		SJ_print (s);
@@ -865,7 +865,7 @@ register wchar16_t *s;
 backspace (n)
 int	n;
 {
-	register int	i;
+	int	i;
 
 	for (i = 0 ; i < n ; i ++)
 		Backspace ();

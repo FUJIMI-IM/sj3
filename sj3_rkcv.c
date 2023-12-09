@@ -168,8 +168,8 @@ static u_short HZtbl[95] = {
 #ifdef ADDHK
 setl_hktozh()
 {
-	register int i;
-	register u_short c, zen1;
+	int i;
+	u_short c, zen1;
 	wchar16_t rstr[2];
 	wchar16_t kstr[2];
 	RkTablW16 *rktp, *mktable();
@@ -206,7 +206,7 @@ setl_hktozh()
 
 mkkigou()
 {
-	register int i;
+	int i;
 	wchar16_t rstr[2];
 	wchar16_t kstr[2];
 	RkTablW16 *rktp, *mktable();
@@ -228,7 +228,7 @@ mkkigou()
 sj_addten(prefix, c)
 u_short prefix, c;
 {
-	register u_short c1, cc;
+	u_short c1, cc;
 
 	cc = 0;
 	if ((c == ZEN_DTEN || c == ZEN_HDTEN) &&
@@ -249,8 +249,8 @@ u_short prefix, c;
 sj_han2zen(c)
 u_short c;
 {
-	register int i;
-	register u_short cc;
+	int i;
+	u_short cc;
 
 	if (WcIsHANKAKU(c) && iskana2(c)) {
 		for (i = 0; i < ZKATAn; i++) {
@@ -494,9 +494,9 @@ sj_hantozen(s1, s2, len)
 wchar16_t *s1, *s2;
 int len;
 {
-	register u_short c1, cc, prefix;
-	register wchar16_t c;
-	register int i;
+	u_short c1, cc, prefix;
+	wchar16_t c;
+	int i;
 	int rlen;
 
 	prefix = 0;
@@ -527,8 +527,8 @@ int len;
 sj_zen2han(c)
 u_short c;
 {
-	register int i;
-	register u_short cc;
+	int i;
+	u_short cc;
 	
 	i = ZKATAn;
 	cc = c & MASK;
@@ -761,9 +761,9 @@ sj_zentohan(s1, s2, len)
 wchar16_t *s1, *s2;
 int len;
 {
-	register u_short cc;
-	register wchar16_t c;
-	register int i, rlen;
+	u_short cc;
+	wchar16_t c;
+	int i, rlen;
 
 	rlen = 0;
 	for (i = 0; i < len && *s2 != (wchar16_t) '\0'; i++) {
@@ -812,8 +812,8 @@ wchar16_t c;
 sj_htok(s1, s2)
 wchar16_t *s1, *s2;
 {
-	register wchar16_t cc;
-	register wchar16_t c;
+	wchar16_t cc;
+	wchar16_t c;
 
 	while ((c = *s2++) != (wchar16_t) '\0') {
 		if (WcIsX0208(c)) {
@@ -828,8 +828,8 @@ wchar16_t *s1, *s2;
 sj_ktoh(s1, s2)
 wchar16_t *s1, *s2;
 {
-	register wchar16_t cc;
-	register wchar16_t c;
+	wchar16_t cc;
+	wchar16_t c;
 
 	while ((c = *s2++) != (wchar16_t) '\0') {
 		if (WcIsX0208(c)) {

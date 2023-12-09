@@ -49,11 +49,11 @@ exec_etc (key)
 int	key;
 {
 	u_short		row, col;
-	register int	inc;
+	int	inc;
 	int		chbun;
 	int 		edited;
 	int		etckey;
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 
@@ -162,7 +162,7 @@ normal:
 Ssbun(flag)
 int flag;
 {
-	register Conversion *cv;
+	Conversion *cv;
 	static short ScurBun, SpreBun;
 
 	cv = GetConversion();
@@ -183,7 +183,7 @@ int	key;
 {
 	extern int	u_etckeys;
 	extern int	Uetckey[], Uetcval[];
-	register int	i;
+	int	i;
 	int		val;
 
 	for (i = 0 ; i < u_etckeys ; i ++) {
@@ -222,7 +222,7 @@ helplevel ()
 	wchar16_t                 wtmp[BUFFLENGTH];
 	u_char                  mtmp[BUFFLENGTH];
 	u_char			tmp[BUFFLENGTH];
-	register Conversion	*cv;
+	Conversion	*cv;
 
 	cv = GetConversion ();
 
@@ -302,7 +302,7 @@ static int	seed = 100000;
 
 change_weight ()
 {
-	register int	c;
+	int	c;
 	char		s[2];
 	char		tmp[BUFFLENGTH];
 	u_char          mtmp[BUFFLENGTH];
@@ -334,7 +334,7 @@ int	sw;
 dconnect(aflag)
 int aflag;
 {
-        register int err;
+        int err;
 	char tmp[BUFFLENGTH];
 	wchar16_t wtmp[BUFFLENGTH];
 	u_char  dtmp[BUFFLENGTH];
@@ -377,7 +377,7 @@ IsDcflag()
 
 reconnect ()
 {
-	register int	inc, err;
+	int	inc, err;
 	char		tmp[BUFFLENGTH], *hp;
 	char		newserv[SHORTLENGTH * 2], *nsp;
 	wchar16_t wtmp[BUFFLENGTH];
