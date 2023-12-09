@@ -40,7 +40,7 @@
 #include "sj_connect.h"
 #include "sj_right.h"
 
-static	Uchar	mizen1[] = {
+static	u_char	mizen1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -72,7 +72,7 @@ static	Uchar	mizen1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	mizen2[] = {
+static	u_char	mizen2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -104,7 +104,7 @@ static	Uchar	mizen2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mizen3[] = {
+static	u_char	mizen3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -136,7 +136,7 @@ static	Uchar	mizen3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mizen4[] = {
+static	u_char	mizen4[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -168,7 +168,7 @@ static	Uchar	mizen4[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mizen5[] = {
+static	u_char	mizen5[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -200,7 +200,7 @@ static	Uchar	mizen5[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	arou[] = {
+static	u_char	arou[] = {
 		wo_x+ttatte_o +ttara_o +tte1_o +tte2_x +ppanasi_x +ppoi_x +ue_x,
 		uti_x +oite_x +okeru_x +ori_x +ka1_x +ka2_o +kai_x +kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -232,7 +232,7 @@ static	Uchar	arou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	you1[] = {
+static	u_char	you1[] = {
 		wo_x+ttatte_o +ttara_o +tte1_o +tte2_x +ppanasi_x +ppoi_x +ue_x,
 		uti_x +oite_x +okeru_x +ori_x +ka1_x +ka2_o +kai_x +kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -264,7 +264,7 @@ static	Uchar	you1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	karou[] = {	
+static	u_char	karou[] = {
 		wo_x+ttatte_o +ttara_x +tte1_o +tte2_x +ppanasi_x +ppoi_x +ue_x,
 		uti_x +oite_x +okeru_x +ori_x +ka1_x +ka2_o +kai_x +kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -297,7 +297,7 @@ static	Uchar	karou[] = {
 	};
 		
 
-static	Uchar	darou[] = {
+static	u_char	darou[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_o+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -329,7 +329,7 @@ static	Uchar	darou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	deshou[] = {
+static	u_char	deshou[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -361,7 +361,7 @@ static	Uchar	deshou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ko[] = {
+static	u_char	ko[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -393,7 +393,7 @@ static	Uchar	ko[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	bekara[] = {
+static	u_char	bekara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -425,7 +425,7 @@ static	Uchar	bekara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tagara[] = {
+static	u_char	tagara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -457,7 +457,7 @@ static	Uchar	tagara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	si1[] = {
+static	u_char	si1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -489,7 +489,7 @@ static	Uchar	si1[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ji[] = {
+static	u_char	ji[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -521,7 +521,7 @@ static	Uchar	ji[] = {
 		yasui_o+yoi_o+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	age[] = {
+static	u_char	age[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -553,7 +553,7 @@ static	Uchar	age[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	i[] = {
+static	u_char	i[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -585,7 +585,7 @@ static	Uchar	i[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	e[] = {
+static	u_char	e[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -617,7 +617,7 @@ static	Uchar	e[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kake[] = {
+static	u_char	kake[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -649,7 +649,7 @@ static	Uchar	kake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kane2[] = {
+static	u_char	kane2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -681,7 +681,7 @@ static	Uchar	kane2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sugi[] = {
+static	u_char	sugi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -713,7 +713,7 @@ static	Uchar	sugi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	deki[] = {
+static	u_char	deki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -745,7 +745,7 @@ static	Uchar	deki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mi[] = {
+static	u_char	mi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -777,7 +777,7 @@ static	Uchar	mi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sase[] = {
+static	u_char	sase[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -809,7 +809,7 @@ static	Uchar	sase[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	rare[] = {
+static	u_char	rare[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -841,7 +841,7 @@ static	Uchar	rare[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	itadake[] = {
+static	u_char	itadake[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -873,7 +873,7 @@ static	Uchar	itadake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	exp[] = {
+static	u_char	exp[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -905,7 +905,7 @@ static	Uchar	exp[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	renyou1[] = {
+static	u_char	renyou1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -937,7 +937,7 @@ static	Uchar	renyou1[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	renyou3[] = {
+static	u_char	renyou3[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -969,7 +969,7 @@ static	Uchar	renyou3[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	renyou4[] = {
+static	u_char	renyou4[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1001,7 +1001,7 @@ static	Uchar	renyou4[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	renyou5[] = {
+static	u_char	renyou5[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1033,7 +1033,7 @@ static	Uchar	renyou5[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	renyou7[] = {
+static	u_char	renyou7[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1065,7 +1065,7 @@ static	Uchar	renyou7[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	renyou8[] = {
+static	u_char	renyou8[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1097,7 +1097,7 @@ static	Uchar	renyou8[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sa5renyou1[] = {
+static	u_char	sa5renyou1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1129,7 +1129,7 @@ static	Uchar	sa5renyou1[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sa5renyou3[] = {
+static	u_char	sa5renyou3[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1161,7 +1161,7 @@ static	Uchar	sa5renyou3[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sa5renyou4[] = {
+static	u_char	sa5renyou4[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1193,7 +1193,7 @@ static	Uchar	sa5renyou4[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	krenyou[] = {
+static	u_char	krenyou[] = {
 		wo_x+ttatte_o+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1225,7 +1225,7 @@ static	Uchar	krenyou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	drenyou1[] = {
+static	u_char	drenyou1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1257,7 +1257,7 @@ static	Uchar	drenyou1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	drenyou2[] = {
+static	u_char	drenyou2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_o+okeru_o+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1289,7 +1289,7 @@ static	Uchar	drenyou2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	drenyou3[] = {
+static	u_char	drenyou3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1321,7 +1321,7 @@ static	Uchar	drenyou3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	onbin1[] = {
+static	u_char	onbin1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1354,7 +1354,7 @@ static	Uchar	onbin1[] = {
 	};
 		
 
-static	Uchar	onbin2[] = {
+static	u_char	onbin2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1386,7 +1386,7 @@ static	Uchar	onbin2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	onbin3[] = {
+static	u_char	onbin3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1418,7 +1418,7 @@ static	Uchar	onbin3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	deshi[] = {
+static	u_char	deshi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1450,7 +1450,7 @@ static	Uchar	deshi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	axtu[] = {
+static	u_char	axtu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1482,7 +1482,7 @@ static	Uchar	axtu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	onbin6[] = {
+static	u_char	onbin6[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1514,7 +1514,7 @@ static	Uchar	onbin6[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	onbin8[] = {
+static	u_char	onbin8[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1546,7 +1546,7 @@ static	Uchar	onbin8[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ari1[] = {
+static	u_char	ari1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1578,7 +1578,7 @@ static	Uchar	ari1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ari2[] = {
+static	u_char	ari2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1610,7 +1610,7 @@ static	Uchar	ari2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ari3[] = {
+static	u_char	ari3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1642,7 +1642,7 @@ static	Uchar	ari3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	iki[] = {
+static	u_char	iki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1674,7 +1674,7 @@ static	Uchar	iki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	itasi[] = {
+static	u_char	itasi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1706,7 +1706,7 @@ static	Uchar	itasi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	itadaki[] = {
+static	u_char	itadaki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1738,7 +1738,7 @@ static	Uchar	itadaki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ori2[] = {
+static	u_char	ori2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1770,7 +1770,7 @@ static	Uchar	ori2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	gataku[] = {
+static	u_char	gataku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1802,7 +1802,7 @@ static	Uchar	gataku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ki[] = {
+static	u_char	ki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1834,7 +1834,7 @@ static	Uchar	ki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	fzkki[] = {
+static	u_char	fzkki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1866,7 +1866,7 @@ static	Uchar	fzkki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	deha[] = {
+static	u_char	deha[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1898,7 +1898,7 @@ static	Uchar	deha[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	kudasai[] = {
+static	u_char	kudasai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1930,7 +1930,7 @@ static	Uchar	kudasai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	gozai[] = {
+static	u_char	gozai[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1962,7 +1962,7 @@ static	Uchar	gozai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	gotoku[] = {
+static	u_char	gotoku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1994,7 +1994,7 @@ static	Uchar	gotoku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	beku[] = {	
+static	u_char	beku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2026,7 +2026,7 @@ static	Uchar	beku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	soude[] = {
+static	u_char	soude[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2058,7 +2058,7 @@ static	Uchar	soude[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	souni[] = {
+static	u_char	souni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2090,7 +2090,7 @@ static	Uchar	souni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tagari[] = {
+static	u_char	tagari[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2122,7 +2122,7 @@ static	Uchar	tagari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	taku[] = {
+static	u_char	taku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2154,7 +2154,7 @@ static	Uchar	taku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	de[] = {
+static	u_char	de[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2186,7 +2186,7 @@ static	Uchar	de[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	naide[] = {
+static	u_char	naide[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2218,7 +2218,7 @@ static	Uchar	naide[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	naku[] = {
+static	u_char	naku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2250,7 +2250,7 @@ static	Uchar	naku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nasai[] = {
+static	u_char	nasai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2282,7 +2282,7 @@ static	Uchar	nasai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	fuuni[] = {
+static	u_char	fuuni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2314,7 +2314,7 @@ static	Uchar	fuuni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	yori2[] = {
+static	u_char	yori2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2346,7 +2346,7 @@ static	Uchar	yori2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	rashuu[] = {
+static	u_char	rashuu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2378,7 +2378,7 @@ static	Uchar	rashuu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dshuusi1[] = {
+static	u_char	dshuusi1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_o+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2410,7 +2410,7 @@ static	Uchar	dshuusi1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dshuusi2[] = {
+static	u_char	dshuusi2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2442,7 +2442,7 @@ static	Uchar	dshuusi2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	gotosi[] = {
+static	u_char	gotosi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2474,7 +2474,7 @@ static	Uchar	gotosi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	besi[] = {
+static	u_char	besi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2506,7 +2506,7 @@ static	Uchar	besi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	zu[] = {
+static	u_char	zu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2538,7 +2538,7 @@ static	Uchar	zu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	souda[] = {
+static	u_char	souda[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_o+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2570,7 +2570,7 @@ static	Uchar	souda[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mai[] = {
+static	u_char	mai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2602,7 +2602,7 @@ static	Uchar	mai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mitaida[] = {
+static	u_char	mitaida[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2634,7 +2634,7 @@ static	Uchar	mitaida[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	shuusi[] = {
+static	u_char	shuusi[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2666,7 +2666,7 @@ static	Uchar	shuusi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kshuusi[] = {
+static	u_char	kshuusi[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2698,7 +2698,7 @@ static	Uchar	kshuusi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	zaru[] = {
+static	u_char	zaru[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2730,7 +2730,7 @@ static	Uchar	zaru[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	soudesu[] = {
+static	u_char	soudesu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2762,7 +2762,7 @@ static	Uchar	soudesu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ta[] = {
+static	u_char	ta[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2794,7 +2794,7 @@ static	Uchar	ta[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tai[] = {
+static	u_char	tai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2826,7 +2826,7 @@ static	Uchar	tai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	desu[] = {
+static	u_char	desu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2858,7 +2858,7 @@ static	Uchar	desu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nai[] = {
+static	u_char	nai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2890,7 +2890,7 @@ static	Uchar	nai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nu[] = {
+static	u_char	nu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2922,7 +2922,7 @@ static	Uchar	nu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	masu[] = {
+static	u_char	masu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2954,7 +2954,7 @@ static	Uchar	masu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nn2[] = {
+static	u_char	nn2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2986,7 +2986,7 @@ static	Uchar	nn2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	rasii[] = {
+static	u_char	rasii[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -3018,7 +3018,7 @@ static	Uchar	rasii[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	drentai1[] = {
+static	u_char	drentai1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3050,7 +3050,7 @@ static	Uchar	drentai1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	drentai2[] = {
+static	u_char	drentai2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3082,7 +3082,7 @@ static	Uchar	drentai2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	drentai3[] = {
+static	u_char	drentai3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3114,7 +3114,7 @@ static	Uchar	drentai3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	krentai[] = {
+static	u_char	krentai[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3146,7 +3146,7 @@ static	Uchar	krentai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	gotoki[] = {
+static	u_char	gotoki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3178,7 +3178,7 @@ static	Uchar	gotoki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	beki[] = {
+static	u_char	beki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -3210,7 +3210,7 @@ static	Uchar	beki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	souna1[] = {
+static	u_char	souna1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3242,7 +3242,7 @@ static	Uchar	souna1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	souna2[] = {
+static	u_char	souna2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3274,7 +3274,7 @@ static	Uchar	souna2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	na2[] = {
+static	u_char	na2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3306,7 +3306,7 @@ static	Uchar	na2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	katei1[] = {
+static	u_char	katei1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3338,7 +3338,7 @@ static	Uchar	katei1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	katei2[] = {
+static	u_char	katei2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3370,7 +3370,7 @@ static	Uchar	katei2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	katei3[] = {
+static	u_char	katei3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3402,7 +3402,7 @@ static	Uchar	katei3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kamei[] = {
+static	u_char	kamei[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3434,7 +3434,7 @@ static	Uchar	kamei[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ike[] = {
+static	u_char	ike[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3466,7 +3466,7 @@ static	Uchar	ike[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kure[] = {
+static	u_char	kure[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3498,7 +3498,7 @@ static	Uchar	kure[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	meirei1[] = {
+static	u_char	meirei1[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3530,7 +3530,7 @@ static	Uchar	meirei1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	meirei2[] = {
+static	u_char	meirei2[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3562,7 +3562,7 @@ static	Uchar	meirei2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dgokan[] = {
+static	u_char	dgokan[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -3594,7 +3594,7 @@ static	Uchar	dgokan[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_o
 	};
 		
-static	Uchar	kgokan[] = {
+static	u_char	kgokan[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3626,7 +3626,7 @@ static	Uchar	kgokan[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_o
 	};
 		
-static	Uchar	sgokan[] = {
+static	u_char	sgokan[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3658,7 +3658,7 @@ static	Uchar	sgokan[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	gati[] = {
+static	u_char	gati[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -3690,7 +3690,7 @@ static	Uchar	gati[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	jya[] = {
+static	u_char	jya[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3722,7 +3722,7 @@ static	Uchar	jya[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sou[] = {
+static	u_char	sou[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3754,7 +3754,7 @@ static	Uchar	sou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mitai[] = {
+static	u_char	mitai[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3786,7 +3786,7 @@ static	Uchar	mitai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	yotte[] = {
+static	u_char	yotte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3818,7 +3818,7 @@ static	Uchar	yotte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	you2[] = {
+static	u_char	you2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3850,7 +3850,7 @@ static	Uchar	you2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sho[] = {
+static	u_char	sho[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3882,7 +3882,7 @@ static	Uchar	sho[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	meisi[] = {
+static	u_char	meisi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -3914,7 +3914,7 @@ static	Uchar	meisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	wo_meisi[] = {
+static	u_char	wo_meisi[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -3946,7 +3946,7 @@ static	Uchar	wo_meisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dmeisi[] = {
+static	u_char	dmeisi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -3978,7 +3978,7 @@ static	Uchar	dmeisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_o
 	};
 		
-static	Uchar	smeisi1[] = {
+static	u_char	smeisi1[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_o+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4010,7 +4010,7 @@ static	Uchar	smeisi1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	smeisi2[] = {
+static	u_char	smeisi2[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_o+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4042,7 +4042,7 @@ static	Uchar	smeisi2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kstb[] = {
+static	u_char	kstb[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4074,7 +4074,7 @@ static	Uchar	kstb[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ichisetubi[] = {
+static	u_char	ichisetubi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4106,7 +4106,7 @@ static	Uchar	ichisetubi[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	josuusi[] = {
+static	u_char	josuusi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4138,7 +4138,7 @@ static	Uchar	josuusi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	rentaisi[] = {
+static	u_char	rentaisi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4170,7 +4170,7 @@ static	Uchar	rentaisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	cut[] = {	
+static	u_char	cut[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4202,7 +4202,7 @@ static	Uchar	cut[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	shuujo[] = {
+static	u_char	shuujo[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4234,7 +4234,7 @@ static	Uchar	shuujo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	wo[] = {
+static	u_char	wo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4266,7 +4266,7 @@ static	Uchar	wo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	wo_s[] = {
+static	u_char	wo_s[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4298,7 +4298,7 @@ static	Uchar	wo_s[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	ttatte[] = {
+static	u_char	ttatte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4330,7 +4330,7 @@ static	Uchar	ttatte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ttara[] = {
+static	u_char	ttara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4362,7 +4362,7 @@ static	Uchar	ttara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tte1[] = {
+static	u_char	tte1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4394,7 +4394,7 @@ static	Uchar	tte1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tte2[] = {
+static	u_char	tte2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4426,7 +4426,7 @@ static	Uchar	tte2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ppanasi[] = {
+static	u_char	ppanasi[] = {
 		wo_o+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4458,7 +4458,7 @@ static	Uchar	ppanasi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ppoi[] = {
+static	u_char	ppoi[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -4490,7 +4490,7 @@ static	Uchar	ppoi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ue[] = {
+static	u_char	ue[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4522,7 +4522,7 @@ static	Uchar	ue[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	uti[] = {
+static	u_char	uti[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4554,7 +4554,7 @@ static	Uchar	uti[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	oite[] = {
+static	u_char	oite[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4586,7 +4586,7 @@ static	Uchar	oite[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	okeru[] = {	
+static	u_char	okeru[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4618,7 +4618,7 @@ static	Uchar	okeru[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ori[] = {
+static	u_char	ori[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4650,7 +4650,7 @@ static	Uchar	ori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	ka1[] = {
+static	u_char	ka1[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -4683,7 +4683,7 @@ static	Uchar	ka1[] = {
 	};
 		
 		
-static	Uchar	ka2[] = {
+static	u_char	ka2[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4715,7 +4715,7 @@ static	Uchar	ka2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	katagata[] = {
+static	u_char	katagata[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4747,7 +4747,7 @@ static	Uchar	katagata[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kadouka[] = {
+static	u_char	kadouka[] = {
 		wo_o+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -4779,7 +4779,7 @@ static	Uchar	kadouka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kamo[] = {
+static	u_char	kamo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4811,7 +4811,7 @@ static	Uchar	kamo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kara1[] = {
+static	u_char	kara1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -4843,7 +4843,7 @@ static	Uchar	kara1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kara2[] = {
+static	u_char	kara2[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -4875,7 +4875,7 @@ static	Uchar	kara2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ga1[] = {
+static	u_char	ga1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4907,7 +4907,7 @@ static	Uchar	ga1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ga2[] = {
+static	u_char	ga2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4939,7 +4939,7 @@ static	Uchar	ga2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	gatera[] = {
+static	u_char	gatera[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4971,7 +4971,7 @@ static	Uchar	gatera[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kiri[] = {
+static	u_char	kiri[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5003,7 +5003,7 @@ static	Uchar	kiri[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kuseni[] = {
+static	u_char	kuseni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5035,7 +5035,7 @@ static	Uchar	kuseni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kurai[] = {
+static	u_char	kurai[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5067,7 +5067,7 @@ static	Uchar	kurai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	gurumi[] = {
+static	u_char	gurumi[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5099,7 +5099,7 @@ static	Uchar	gurumi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kedo[] = {
+static	u_char	kedo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5131,7 +5131,7 @@ static	Uchar	kedo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	koso[] = {
+static	u_char	koso[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -5163,7 +5163,7 @@ static	Uchar	koso[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	koto[] = {
+static	u_char	koto[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5195,7 +5195,7 @@ static	Uchar	koto[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sae[] = {
+static	u_char	sae[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5227,7 +5227,7 @@ static	Uchar	sae[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	si2[] = {
+static	u_char	si2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5259,7 +5259,7 @@ static	Uchar	si2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sika[] = {
+static	u_char	sika[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5291,7 +5291,7 @@ static	Uchar	sika[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	sura[] = {
+static	u_char	sura[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -5323,7 +5323,7 @@ static	Uchar	sura[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	zutu[] = {
+static	u_char	zutu[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5355,7 +5355,7 @@ static	Uchar	zutu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tame[] = {
+static	u_char	tame[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -5387,7 +5387,7 @@ static	Uchar	tame[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tari[] = {
+static	u_char	tari[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5419,7 +5419,7 @@ static	Uchar	tari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dake[] = {
+static	u_char	dake[] = {
 		wo_o+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5451,7 +5451,7 @@ static	Uchar	dake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dano[] = {
+static	u_char	dano[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -5484,7 +5484,7 @@ static	Uchar	dano[] = {
 	};
 		
 
-static	Uchar	darake[] = {
+static	u_char	darake[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5516,7 +5516,7 @@ static	Uchar	darake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tuite[] = {
+static	u_char	tuite[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -5548,7 +5548,7 @@ static	Uchar	tuite[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tuki[] = {
+static	u_char	tuki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5580,7 +5580,7 @@ static	Uchar	tuki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tutu[] = {
+static	u_char	tutu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5612,7 +5612,7 @@ static	Uchar	tutu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tumori[] = {
+static	u_char	tumori[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -5644,7 +5644,7 @@ static	Uchar	tumori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	te1[] = {
+static	u_char	te1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5676,7 +5676,7 @@ static	Uchar	te1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	te2[] = {
+static	u_char	te2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_x,
@@ -5708,7 +5708,7 @@ static	Uchar	te2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	teru[] = {
+static	u_char	teru[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_o+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -5740,7 +5740,7 @@ static	Uchar	teru[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	to1[] = {
+static	u_char	to1[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -5772,7 +5772,7 @@ static	Uchar	to1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	to2[] = {
+static	u_char	to2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5804,7 +5804,7 @@ static	Uchar	to2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	totte[] = {
+static	u_char	totte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5836,7 +5836,7 @@ static	Uchar	totte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	toiu[] = {
+static	u_char	toiu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_o+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -5868,7 +5868,7 @@ static	Uchar	toiu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	toori[] = {
+static	u_char	toori[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -5900,7 +5900,7 @@ static	Uchar	toori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	toki[] = {
+static	u_char	toki[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5932,7 +5932,7 @@ static	Uchar	toki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tokoro[] = {
+static	u_char	tokoro[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5964,7 +5964,7 @@ static	Uchar	tokoro[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tote[] = {
+static	u_char	tote[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5996,7 +5996,7 @@ static	Uchar	tote[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tohaie[] = {
+static	u_char	tohaie[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6028,7 +6028,7 @@ static	Uchar	tohaie[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	tomo[] = {
+static	u_char	tomo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6060,7 +6060,7 @@ static	Uchar	tomo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	fdo[] = {
+static	u_char	fdo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6092,7 +6092,7 @@ static	Uchar	fdo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	doori[] = {
+static	u_char	doori[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6124,7 +6124,7 @@ static	Uchar	doori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dokoro[] = {
+static	u_char	dokoro[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6156,7 +6156,7 @@ static	Uchar	dokoro[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	dokoroka[] = {
+static	u_char	dokoroka[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6188,7 +6188,7 @@ static	Uchar	dokoroka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	domo[] = {
+static	u_char	domo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6220,7 +6220,7 @@ static	Uchar	domo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nagara[] = {
+static	u_char	nagara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -6252,7 +6252,7 @@ static	Uchar	nagara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nagara2[] = {
+static	u_char	nagara2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -6284,7 +6284,7 @@ static	Uchar	nagara2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	nazo[] = {
+static	u_char	nazo[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6316,7 +6316,7 @@ static	Uchar	nazo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nado[] = {
+static	u_char	nado[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6348,7 +6348,7 @@ static	Uchar	nado[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nari[] = {
+static	u_char	nari[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6380,7 +6380,7 @@ static	Uchar	nari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nanka[] = {
+static	u_char	nanka[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6412,7 +6412,7 @@ static	Uchar	nanka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nanzo[] = {
+static	u_char	nanzo[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6444,7 +6444,7 @@ static	Uchar	nanzo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nante[] = {
+static	u_char	nante[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6476,7 +6476,7 @@ static	Uchar	nante[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ni1[] = {
+static	u_char	ni1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_o+okeru_o+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -6508,7 +6508,7 @@ static	Uchar	ni1[] = {
 		yasui_x+yoi_x+yaru_o
 	};
 		
-static	Uchar	ni2[] = {
+static	u_char	ni2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6540,7 +6540,7 @@ static	Uchar	ni2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ni3[] = {
+static	u_char	ni3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6572,7 +6572,7 @@ static	Uchar	ni3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nite[] = {
+static	u_char	nite[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6604,7 +6604,7 @@ static	Uchar	nite[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nimo[] = {
+static	u_char	nimo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6636,7 +6636,7 @@ static	Uchar	nimo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	no1[] = {
+static	u_char	no1[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6668,7 +6668,7 @@ static	Uchar	no1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	no2[] = {
+static	u_char	no2[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6700,7 +6700,7 @@ static	Uchar	no2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	node[] = {
+static	u_char	node[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6732,7 +6732,7 @@ static	Uchar	node[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	noni[] = {
+static	u_char	noni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6764,7 +6764,7 @@ static	Uchar	noni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nomi[] = {
+static	u_char	nomi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6796,7 +6796,7 @@ static	Uchar	nomi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nominrz[] = {
+static	u_char	nominrz[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6828,7 +6828,7 @@ static	Uchar	nominrz[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ha[] = {
+static	u_char	ha[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6860,7 +6860,7 @@ static	Uchar	ha[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	hazu[] = {
+static	u_char	hazu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -6892,7 +6892,7 @@ static	Uchar	hazu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ba[] = {
+static	u_char	ba[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6924,7 +6924,7 @@ static	Uchar	ba[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	bakari[] = {
+static	u_char	bakari[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6956,7 +6956,7 @@ static	Uchar	bakari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	he[] = {
+static	u_char	he[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6988,7 +6988,7 @@ static	Uchar	he[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	hou[] = {
+static	u_char	hou[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -7020,7 +7020,7 @@ static	Uchar	hou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	hoka[] = {
+static	u_char	hoka[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7052,7 +7052,7 @@ static	Uchar	hoka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	hodo[] = {
+static	u_char	hodo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -7084,7 +7084,7 @@ static	Uchar	hodo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	made[] = {
+static	u_char	made[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -7116,7 +7116,7 @@ static	Uchar	made[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mama[] = {
+static	u_char	mama[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -7148,7 +7148,7 @@ static	Uchar	mama[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mo1[] = {
+static	u_char	mo1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7180,7 +7180,7 @@ static	Uchar	mo1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mo2[] = {
+static	u_char	mo2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -7212,7 +7212,7 @@ static	Uchar	mo2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	motte[] = {
+static	u_char	motte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7244,7 +7244,7 @@ static	Uchar	motte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	mono[] = {
+static	u_char	mono[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -7276,7 +7276,7 @@ static	Uchar	mono[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ya1[] = {
+static	u_char	ya1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7308,7 +7308,7 @@ static	Uchar	ya1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	ya2[] = {
+static	u_char	ya2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7340,7 +7340,7 @@ static	Uchar	ya2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	yara[] = {
+static	u_char	yara[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -7372,7 +7372,7 @@ static	Uchar	yara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	yue[] = {
+static	u_char	yue[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7404,7 +7404,7 @@ static	Uchar	yue[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	yori1[] = {
+static	u_char	yori1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7436,7 +7436,7 @@ static	Uchar	yori1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	wake[] = {
+static	u_char	wake[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -7468,7 +7468,7 @@ static	Uchar	wake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	nn1[] = {
+static	u_char	nn1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7500,7 +7500,7 @@ static	Uchar	nn1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	aisatu[] = {
+static	u_char	aisatu[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7532,7 +7532,7 @@ static	Uchar	aisatu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	kosodo[] = {
+static	u_char	kosodo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_x+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -7564,7 +7564,7 @@ static	Uchar	kosodo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	Uchar	site[] = {
+static	u_char	site[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7596,7 +7596,7 @@ static	Uchar	site[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	Uchar	n_si[] = {
+static	u_char	n_si[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7628,7 +7628,7 @@ static	Uchar	n_si[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 
-Uchar	connadr[] = {
+u_char	connadr[] = {
 		0,			
 		R_MEISI,		
 		R_MEISI,		
@@ -7854,7 +7854,7 @@ Uchar	connadr[] = {
 		R_MEISI			
 	};
 
-Uchar	*rigtadr[] = {
+u_char	*rigtadr[] = {
 		0,		
 		de,		
 		wo,		

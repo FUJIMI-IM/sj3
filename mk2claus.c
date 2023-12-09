@@ -38,11 +38,11 @@
 #include "sj_kcnv.h"
 #include "sj_right.h"
 
-Int	terminate(), priority();
-Void	mkjiritu(), mkbunsetu(), wakachi(), pritiny();
-Void	free_clall(), free_jall();
+int	terminate(), priority();
+void	mkjiritu(), mkbunsetu(), wakachi(), pritiny();
+void	free_clall(), free_jall();
 
-Static	Int	set2nd(clrec)
+Static	int	set2nd(clrec)
 CLREC	*clrec;
 {
 
@@ -65,17 +65,17 @@ CLREC	*clrec;
 	return rec2 ? (clrec -> cllen + rec2 -> cllen) : (clrec -> cllen);
 }
 
-Void	mk2claus()
+void	mk2claus()
 {
-	Uchar	*keepptr;
-	Int	keeplen;
+	u_char	*keepptr;
+	int	keeplen;
 	CLREC	*clrec;
-	Int	len;
-	Int	save2ln;
-	Int	prty;
-	Int	maxprty;
-	Int	count;
-	Int	prty2;
+	int	len;
+	int	save2ln;
+	int	prty;
+	int	maxprty;
+	int	count;
+	int	prty2;
 
 	prty = maxprty = prty2 = 0;
 
@@ -117,9 +117,9 @@ Void	mk2claus()
 		}
 
 		if (Termtbl[clrec -> right] & T_SHUUJO)
-			clrec -> cl2len = (Uchar)len;
+			clrec -> cl2len = (u_char)len;
 		else
-			clrec -> cl2len = (Uchar)save2ln;
+			clrec -> cl2len = (u_char)save2ln;
 
 		if (selcl -> cl2len > clrec -> cl2len) continue;
 

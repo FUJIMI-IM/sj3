@@ -41,7 +41,7 @@
 #include "sj_kcnv.h"
 #include "kanakan.h"
 
-Int	srchhead();
+int	srchhead();
 
 static void dic_mu(int mode);
 static void dic_cl(void);
@@ -176,7 +176,7 @@ dic_cl(void)
 
 	if (!StudyExist()) return;
 
-	if ((pos = ClStudyIdx[(Short) *cnvstart / ClStudyStep]) != (u_short)-1) {
+	if ((pos = ClStudyIdx[(short) *cnvstart / ClStudyStep]) != (u_short)-1) {
 
 		for (p = ClStudyDict + pos ; !iseocl(p) ; p = ClNextTag(p)) {
 			cmp = strncmp(cnvstart, (u_char*)ClYomiPos(p),

@@ -38,7 +38,7 @@
 #include "sj_rename.h"
 #include "sj_typedef.h"
 
-Uchar	taipri[7][45] = {
+u_char	taipri[7][45] = {
 
 	{ 0,  4,  4,  4,  4,  4,  4,  4,  4,  4,
 		  4,  4,  3,  3,  3,  3,  3,  3,  0,  0,
@@ -78,7 +78,7 @@ Uchar	taipri[7][45] = {
 
 
 
-Uchar	sttpri[5][31] = {
+u_char	sttpri[5][31] = {
 
 	{ 0,  7,  7,  7,  7,  7,  7,  7,  7,  7,
 		  7,  7,  2,  4,  4,  4,  4,  4,  0,  0,

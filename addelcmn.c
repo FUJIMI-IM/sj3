@@ -44,27 +44,27 @@
 #include "kanakan.h"
 
 
-Int	sj2cd_str();
-Void	mvmemi(), mvmemd(), mkidxtbl();
+int	sj2cd_str();
+void	mvmemi(), mvmemd(), mkidxtbl();
 
 
 
 void
-set_size (Uchar *p, Int size, Int plen, Int nlen)
+set_size (u_char *p, int size, int plen, int nlen)
 {
-	*p = (Uchar)(size >> 8);
+	*p = (u_char)(size >> 8);
 	if (nlen & 0x10) *p |= NokoriYomiTop;
 	if (plen & 0x10) *p |= AssyukuYomiTop;
-	*(p + 1) = (Uchar)size;
-	*(p + 2) = (Uchar)((nlen & 0x0f) | ((plen & 0x0f) << 4));
+	*(p + 1) = (u_char)size;
+	*(p + 2) = (u_char)((nlen & 0x0f) | ((plen & 0x0f) << 4));
 }
 
 
 
-static	Int
-isvyomi (Uchar *yp)
+static	int
+isvyomi (u_char *yp)
 {
-	Int	len;
+	int	len;
 
 	if (!*yp) return FALSE;	
 
@@ -80,10 +80,10 @@ isvyomi (Uchar *yp)
 
 
 
-static	Int
-isvknj(Uchar *kanji)
+static	int
+isvknj(u_char *kanji)
 {
-	Int	len;
+	int	len;
 
 	if (!*kanji) return FALSE; 	
 
@@ -110,10 +110,10 @@ isvknj(Uchar *kanji)
 
 
 
-static	Int
+static	int
 isgrm (TypeGram gram)
 {
-	Int	grm = gram;
+	int	grm = gram;
 
 	if (MEISI_1    <= grm && grm <= D_MEISI_6)  return TRUE;
 	if (MYOUJI     <= grm && grm <= JOSUUSI2)   return TRUE;
@@ -132,10 +132,10 @@ isgrm (TypeGram gram)
 
 
 
-Uint
-addel_arg (Uchar *yp, Uchar *kp, TypeGram grm, Uchar *nyp, Int len)
+u_int
+addel_arg (u_char *yp, u_char *kp, TypeGram grm, u_char *nyp, int len)
 {
-	Ushort	err = 0;
+	u_short	err = 0;
 
 	if (!sj2cd_str(yp, nyp, len)) err |= AD_BadYomi;
 	if (!isvyomi(nyp)) err |= AD_BadYomi;
@@ -147,10 +147,10 @@ addel_arg (Uchar *yp, Uchar *kp, TypeGram grm, Uchar *nyp, Int len)
 
 
 static	void
-yomi2kata (Uchar *src, Uchar *dst)
+yomi2kata (u_char *src, u_char *dst)
 {
-	Int	first;
-	Int	second;
+	int	first;
+	int	second;
 
 	while ((first = *src++) != 0) {
 		second = *src++;
@@ -170,10 +170,10 @@ yomi2kata (Uchar *src, Uchar *dst)
 
 
 
-static	Int
-top_strcmp (Uchar *src, Uchar *dst)
+static	int
+top_strcmp (u_char *src, u_char *dst)
 {
-	Int	i;
+	int	i;
 	for (i = 0 ; *src && (*src == *dst) ; src++, dst++) i++;
 	i /= 2;
 	return (i > MaxYomiAskNumber) ? MaxYomiAskNumber : i;
@@ -181,11 +181,11 @@ top_strcmp (Uchar *src, Uchar *dst)
 
 
 
-static	Int
-last_strcmp (Uchar *src, Uchar *dst)
+static	int
+last_strcmp (u_char *src, u_char *dst)
 {
-	Int	slen;
-	Int	dlen;
+	int	slen;
+	int	dlen;
 
 	slen = strlen(src);
 	dlen = strlen(dst);
@@ -199,21 +199,21 @@ last_strcmp (Uchar *src, Uchar *dst)
 
 
 
-Int
-cvtknj (Uchar *yomi, Uchar *knj, Uchar *dst)
+int
+cvtknj (u_char *yomi, u_char *knj, u_char *dst)
 {
-	Uchar	kana[MaxWdYomiLen * 2 + 1];
-	Int	len;
-	Uchar	*keep;
+	u_char	kana[MaxWdYomiLen * 2 + 1];
+	int	len;
+	u_char	*keep;
 
 	keep = dst;			
 	yomi2kata(yomi, kana);		
 
 	if ((len = top_strcmp(yomi, knj)) != 0) {
-                *dst = (Uchar)(ZenHiraAssyuku | (len - 1));
+                *dst = (u_char)(ZenHiraAssyuku | (len - 1));
 	}
 	else if ((len = top_strcmp(kana, knj)) != 0) {
-                *dst = (Uchar)(ZenKataAssyuku | (len - 1));
+                *dst = (u_char)(ZenKataAssyuku | (len - 1));
 	}
 
 	if (len) {
@@ -224,16 +224,16 @@ cvtknj (Uchar *yomi, Uchar *knj, Uchar *dst)
 	if (*knj) {
 		for ( ; ; ) {
 			if ((len = last_strcmp(yomi, knj)) != 0) {
-				*dst++ = (Uchar)(ZenHiraAssyuku | (len - 1));
+				*dst++ = (u_char)(ZenHiraAssyuku | (len - 1));
 				break;
 			}
 			else if ((len = last_strcmp(kana, knj)) != 0) {
-				*dst++ = (Uchar)(ZenKataAssyuku | (len - 1));
+				*dst++ = (u_char)(ZenKataAssyuku | (len - 1));
 				break;
 			}
 			else if (*knj == SS2) {
 				knj++;
-				*dst++ = (Uchar)LeadingHankaku;
+				*dst++ = (u_char)LeadingHankaku;
 				*dst++ = *knj++;
 			} else if (*knj == SS3) {
 				knj++;
@@ -244,7 +244,7 @@ cvtknj (Uchar *yomi, Uchar *knj, Uchar *dst)
 				*dst++ = (*knj & NormalKanjiMask); knj++;
 			}
 			else {
-				*dst++ = (Uchar)LeadingHankaku;
+				*dst++ = (u_char)LeadingHankaku;
 				*dst++ = *knj++;
 			}
 
@@ -261,14 +261,14 @@ cvtknj (Uchar *yomi, Uchar *knj, Uchar *dst)
 
 
 
-Int
-srchkana (Uchar **ptr, Int *saml)	
+int
+srchkana (u_char **ptr, int *saml)
 {
-	Uchar	*p;
-	Int	cmp;
-	Int	cnt = 0;
-	Uchar	same;
-	Int	flg = 0;
+	u_char	*p;
+	int	cmp;
+	int	cnt = 0;
+	u_char	same;
+	int	flg = 0;
 
 	same = 0;
 
@@ -301,12 +301,12 @@ srchkana (Uchar **ptr, Int *saml)
 
 
 
-Int
-srchgram (Uchar *ptr, Uchar **dst, TypeGram hinsi)
+int
+srchgram (u_char *ptr, u_char **dst, TypeGram hinsi)
 {
-	Uchar	*endp;
-	Int	cnt = 0, nlen;
-	Int	flg = FALSE;
+	u_char	*endp;
+	int	cnt = 0, nlen;
+	int	flg = FALSE;
 
 	endp = getntag(ptr);
 
@@ -333,14 +333,14 @@ srchgram (Uchar *ptr, Uchar **dst, TypeGram hinsi)
 
 
 
-Int
-srchkanji (Uchar **dst, Uchar *knj, Int klen)
+int
+srchkanji (u_char **dst, u_char *knj, int klen)
 {
-	Uchar	*ptr;
-	Uchar	*p, *q;
-	Int	len;
-	Int	flg = FALSE;
-	Int	cnt = 0;
+	u_char	*ptr;
+	u_char	*p, *q;
+	int	len;
+	int	flg = FALSE;
+	int	cnt = 0;
 
 	ptr = *dst + 1;
 
@@ -370,7 +370,7 @@ srchkanji (Uchar **dst, Uchar *knj, Int klen)
 TypeIdxOfs
 count_uidx (void)
 {
-	Uchar	*p;
+	u_char	*p;
 
 	p = get_idxptr(curdict->segunit - 1);
 	while (*p++) ;
@@ -381,10 +381,10 @@ count_uidx (void)
 
 
 void
-chg_uidx (TypeDicSeg seg, Uchar *yomi, Int len)
+chg_uidx (TypeDicSeg seg, u_char *yomi, int len)
 {
-	Uchar		*p, *q;
-	Int		olen;
+	u_char		*p, *q;
+	int		olen;
 
 	p = get_idxptr(seg);
 
@@ -393,10 +393,10 @@ chg_uidx (TypeDicSeg seg, Uchar *yomi, Int len)
 	q = idxbuf + curdict->idxlen;
 
 	if (len > olen) {
-		mvmemd(q - (len-olen), q, (Int)(q - (len-olen) - p));
+		mvmemd(q - (len-olen), q, (int)(q - (len-olen) - p));
 	}
 	else {
-		mvmemi(p + (olen-len), p, (Int)(q - (p + (olen-len))));
+		mvmemi(p + (olen-len), p, (int)(q - (p + (olen-len))));
 	}
 
 	while (len--) *p++ = *yomi++;

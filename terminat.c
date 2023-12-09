@@ -38,11 +38,11 @@
 #include "sj_kcnv.h"
 #include "sj_right.h"
 
-Int	terminate(right, yomi)
+int	terminate(right, yomi)
 TypeCnct	right;
-Uchar		*yomi;
+u_char		*yomi;
 {
-	Uchar	ch;
+	u_char	ch;
 
 
 	if ((yomi > cnvstart) && (Chrtbl[*(yomi - 1)] & NUMBER))

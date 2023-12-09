@@ -171,7 +171,7 @@ adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 			curdict->segunit++;
 
 			(*curdict->getdic)(curdict, curdict->segunit - 1);
-			memset(dicbuf, DicSegTerm, (Int)curdict->seglen);
+			memset(dicbuf, DicSegTerm, (int)curdict->seglen);
 			dicbuf[0] = 0;
 			(*curdict->putdic)(curdict, curdict->segunit - 1);
 			(*curdict->rszdic)(curdict, curdict->segunit);
@@ -264,7 +264,7 @@ adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 
 		for (p1 = ClStudyDict ; !iseocl(p1) ; p1 = ClNextTag(p1)) {
 			err = strncmp(yptr, (u_char*)ClYomiPos(p1),
-					(Int)ClYomiLen(p1));
+					(int)ClYomiLen(p1));
 			if (err == MATCH) {
 				delclsub(p1);		
 				mkclidx();		
@@ -287,7 +287,7 @@ adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 	stdydat.sttlen       = 0;
 	stdydat.sttfg        = 0;
 	stdydat.ka_fg        = 0;
-	(Void)study(&stdydat);
+	(void)study(&stdydat);
 
 	return AD_Done;
 }
@@ -468,7 +468,7 @@ sprt_seg(TypeDicSeg seg, TypeDicOfs ofs)
 	}
 
 	(*curdict->getdic)(curdict, seg);
-	memset(dicbuf + ofs, DicSegTerm, (Int)(curdict->seglen - ofs));
+	memset(dicbuf + ofs, DicSegTerm, (int)(curdict->seglen - ofs));
 	(*curdict->putdic)(curdict, seg);
 }
 
@@ -483,7 +483,7 @@ apnd_uidx(TypeDicSeg seg, u_char* yomi, int len)
 	while (*p++) ;
 
 	q = idxbuf + curdict->idxlen;
-	mvmemd(q - (len + 1), q, (Int)(q - (len + 1) - p));
+	mvmemd(q - (len + 1), q, (int)(q - (len + 1) - p));
 
 	while (len--) *p++ = *yomi++;
 	*p = 0;

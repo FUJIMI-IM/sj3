@@ -280,7 +280,7 @@ srch_number1(u_char* ptr)
 {
 	u_char		ch;
 	u_char		mode;
-	u_char		TFar	*p;
+	u_char		*p;
 	int		l;
 	TypeClass	cls;
 	int		len;

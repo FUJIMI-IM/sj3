@@ -41,14 +41,14 @@
 
 
 
-Void	cvtkouho(), setstyrec();
+void	cvtkouho(), setstyrec();
 
 
 
-Void	cvtclknj()
+void	cvtclknj()
 {
 	KHREC	*krec;
-	Int	i;
+	int	i;
 
 	
 
@@ -59,7 +59,7 @@ Void	cvtclknj()
 	krec = kouhotbl;		
 
 	while (i--) {
-		if ((Int)krec -> rank == (Int)selectid) break;
+		if ((int)krec -> rank == (int)selectid) break;
 		krec++;
 	}
 

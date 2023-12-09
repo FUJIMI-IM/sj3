@@ -39,7 +39,7 @@
 #include "sj_typedef.h"
 #include "sj_yomi.h"
 
-Uchar	kigou[] = {
+u_char	kigou[] = {
 		Y_L_KAKKO,
 		Y_KUTEN,
 		Y_TOUTEN,

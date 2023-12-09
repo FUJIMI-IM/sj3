@@ -41,7 +41,7 @@
 #include "sj_hinsi.h"
 #include "kanakan.h"
 
-Uchar*
+u_char*
 getstb(TypeGram hinsi)
 {
 	if (hinsi < MEISI_1 || hinsi > TIMEI) return NULL;
@@ -51,14 +51,14 @@ getstb(TypeGram hinsi)
 
 
 void
-setubi(JREC *rec, Uchar *stbtbl)
+setubi(JREC *rec, u_char *stbtbl)
 {
-	Uchar	*stb;
-	Uchar	*yptr;
-	Uchar	*sptr;
-	Int	slen;
+	u_char	*stb;
+	u_char	*yptr;
+	u_char	*sptr;
+	int	slen;
 	JREC	*new;
-	Int	cmp;
+	int	cmp;
 
 	stb = stbtbl--;
 
@@ -75,9 +75,9 @@ setubi(JREC *rec, Uchar *stbtbl)
 
 		if ((cmp != MATCH) || isdpnd(*(yptr + slen))) continue;
 
-		if (!(new = argjrec((Int)(rec -> jlen + slen), rec))) continue;
+		if (!(new = argjrec((int)(rec -> jlen + slen), rec))) continue;
 
-		new -> stbofs = (Uchar)(stb - stbtbl);
+		new -> stbofs = (u_char)(stb - stbtbl);
 		new -> flags  |= StbBakeru(stb) ? JFLAG_KA : 0;
 	}
 }

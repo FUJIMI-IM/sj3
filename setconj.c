@@ -42,11 +42,11 @@
 #include "sj_yomi.h"
 #include "kanakan.h"
 
-static	Int
-cnjstrcmp (Uchar *yptr, Uchar *cnjp, Int *saml)
+static	int
+cnjstrcmp (u_char *yptr, u_char *cnjp, int *saml)
 {
-	Int	asklen;
-	Int	nkrlen;
+	int	asklen;
+	int	nkrlen;
 
 	asklen = CnjAskLen(cnjp);
 
@@ -82,7 +82,7 @@ static	TypeCnct
 cnvrow (JREC *rec, TypeCnct row)
 {
 	TypeGram	hinsi;
-	Int		stt;
+	int		stt;
 
 	hinsi = rec -> hinsi;
 
@@ -111,16 +111,16 @@ cnvrow (JREC *rec, TypeCnct row)
 	return row;
 }
 
-Int
+int
 setconj (TypeGram hinsi, JREC *jrec, CREC *crec)
 {
-	Uchar	*yptr;
-	Int	cmp;
+	u_char	*yptr;
+	int	cmp;
 	TypeCnct	right;
-	Int	saml;
-	Int	ofslen;
+	int	saml;
+	int	ofslen;
 	int	count = 0;
-	Uchar	*cnj;
+	u_char	*cnj;
 
 	if ((cnj  = Conjadr(hinsi)) != NULL) {
 		saml = ofslen = 0;
@@ -146,7 +146,7 @@ setconj (TypeGram hinsi, JREC *jrec, CREC *crec)
 			if (isdpnd(*(yptr + saml))) continue;
 
 			if ((right = cnvrow(jrec, (TypeCnct)CnjRight(cnj))) != '\0') {
-				crec -> len   = (Uchar)(ofslen + saml);
+				crec -> len   = (u_char)(ofslen + saml);
 				crec -> right = right;
 				count++;
 				crec++;

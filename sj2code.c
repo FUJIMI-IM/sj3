@@ -40,11 +40,11 @@
 #include "sj_kcnv.h"
 #include "sj_yomi.h"
 
-Int	sj2cd_chr(euc, yomi)
-Uchar	*euc;			
-Uchar	*yomi;
+int	sj2cd_chr(euc, yomi)
+u_char	*euc;
+u_char	*yomi;
 {
-	Uchar	chr;
+	u_char	chr;
 
 	if ((chr = *euc++) == EUC_a1) {
 		chr = *euc;
@@ -117,10 +117,10 @@ Uchar	*yomi;
 
 
 
-Int	sj2cd_str(euc, yomi, len)
-Uchar	*euc;
-Uchar	*yomi;
-Int	len;
+int	sj2cd_str(euc, yomi, len)
+u_char	*euc;
+u_char	*yomi;
+int	len;
 {
 	
 	if (!len--) return FALSE;

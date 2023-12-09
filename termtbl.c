@@ -33,7 +33,7 @@
 #include "sj_prty.h"
 
 
-Uchar	termtbl[] = {
+u_char	termtbl[] = {
 	0,
 	T_KANOU + P_JOSHI_B,
 	T_KANOU + P_JOSHI_A,

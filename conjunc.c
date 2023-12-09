@@ -39,7 +39,7 @@
 #include "sj_yomi.h"
 #include "sj_right.h"
 
-static	Uchar	sahencnj[] = {
+static	u_char	sahencnj[] = {
 		0x00,				R_SGOKAN,	
 		0x01,	_SA,			R_MIZEN1,	
 		0x01,	_SI,			R_SI1,		
@@ -63,7 +63,7 @@ static	Uchar	sahencnj[] = {
 		0xff
 	};
 
-static	Uchar	zahencnj[] = {
+static	u_char	zahencnj[] = {
 		0x00,				R_CUT,		
 		0x01,	_ZI,			R_JI,		
 		0x11,	_YO,			R_MEIREI2,	
@@ -77,7 +77,7 @@ static	Uchar	zahencnj[] = {
 		0xff
 	};
 
-static	Uchar	ka5cnj1[] = {
+static	u_char	ka5cnj1[] = {
 		0x01,	_I,			R_ONBIN2,	
 		0x01,	_KA,			R_MIZEN5,	
 		0x01,	_KI,			R_RENYOU5,	
@@ -87,7 +87,7 @@ static	Uchar	ka5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	ka5cnj3[] = {
+static	u_char	ka5cnj3[] = {
 		0x01,	_I,			R_ONBIN2,	
 		0x01,	_KA,			R_MIZEN5,	
 		0x01,	_KI,			R_RENYOU7,	
@@ -97,7 +97,7 @@ static	Uchar	ka5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	ka5cnj5[] = {
+static	u_char	ka5cnj5[] = {
 		0x01,	_I,			R_ONBIN2,	
 		0x01,	_KA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
@@ -113,7 +113,7 @@ static	Uchar	ka5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	ka5cnj7[] = {
+static	u_char	ka5cnj7[] = {
 		0x01,	_I,			R_ONBIN2,	
 		0x01,	_KA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
@@ -129,7 +129,7 @@ static	Uchar	ka5cnj7[] = {
 		0xff
 	};
 
-static	Uchar	ga5cnj1[] = {
+static	u_char	ga5cnj1[] = {
 		0x01,	_I,			R_ONBIN3,	
 		0x01,	_GA,			R_MIZEN5,	
 		0x01,	_GI,			R_RENYOU5,	
@@ -139,7 +139,7 @@ static	Uchar	ga5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	ga5cnj3[] = {
+static	u_char	ga5cnj3[] = {
 		0x01,	_I,			R_ONBIN3,	
 		0x01,	_GA,			R_MIZEN5,	
 		0x01,	_GI,			R_RENYOU7,	
@@ -149,7 +149,7 @@ static	Uchar	ga5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	ga5cnj5[] = {
+static	u_char	ga5cnj5[] = {
 		0x01,	_I,			R_ONBIN3,	
 		0x01,	_GA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
@@ -165,7 +165,7 @@ static	Uchar	ga5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	ga5cnj7[] = {
+static	u_char	ga5cnj7[] = {
 		0x01,	_I,			R_ONBIN3,	
 		0x01,	_GA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
@@ -181,7 +181,7 @@ static	Uchar	ga5cnj7[] = {
 		0xff
 	};
 
-static	Uchar	sa5cnj1[] = {
+static	u_char	sa5cnj1[] = {
 		0x01,	_SA,			R_MIZEN5,	
 		0x01,	_SI,			R_SA5RENYOU1,	
 		0x01,	_SU,			R_SHUUSI,	
@@ -190,7 +190,7 @@ static	Uchar	sa5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	sa5cnj3[] = {
+static	u_char	sa5cnj3[] = {
 		0x01,	_SA,			R_MIZEN5,	
 		0x01,	_SI,			R_SA5RENYOU3,	
 		0x01,	_SU,			R_SHUUSI,	
@@ -199,7 +199,7 @@ static	Uchar	sa5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	sa5cnj5[] = {
+static	u_char	sa5cnj5[] = {
 		0x01,	_SA,			R_MIZEN5,	
 		0x01,	_SI,			R_SA5RENYOU1,	
 		0x01,	_SU,			R_SHUUSI,	
@@ -210,7 +210,7 @@ static	Uchar	sa5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	sa5cnj7[] = {
+static	u_char	sa5cnj7[] = {
 		0x01,	_SA,			R_MIZEN5,	
 		0x01,	_SI,			R_SA5RENYOU3,	
 		0x01,	_SU,			R_SHUUSI,	
@@ -221,7 +221,7 @@ static	Uchar	sa5cnj7[] = {
 		0xff
 	};
 
-static	Uchar	ta5cnj1[] = {
+static	u_char	ta5cnj1[] = {
 		0x01,	_TA,			R_MIZEN5,	
 		0x01,	_TI,			R_RENYOU5,	
 		0x01,	_XTU,			R_ONBIN2,	
@@ -231,7 +231,7 @@ static	Uchar	ta5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	ta5cnj3[] = {
+static	u_char	ta5cnj3[] = {
 		0x01,	_TA,			R_MIZEN5,	
 		0x01,	_TI,			R_RENYOU7,	
 		0x01,	_XTU,			R_ONBIN2,	
@@ -241,7 +241,7 @@ static	Uchar	ta5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	ta5cnj5[] = {
+static	u_char	ta5cnj5[] = {
 		0x01,	_TA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
 		0x11,	_SI,			R_SA5RENYOU3,	
@@ -257,7 +257,7 @@ static	Uchar	ta5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	ta5cnj7[] = {
+static	u_char	ta5cnj7[] = {
 		0x01,	_TA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
 		0x11,	_SI,			R_SA5RENYOU3,	
@@ -274,7 +274,7 @@ static	Uchar	ta5cnj7[] = {
 	};
 		
 
-static	Uchar	na5cnj[] = {
+static	u_char	na5cnj[] = {
 		0x01,	_NA,			R_MIZEN5,	
 		0x01,	_NI,			R_RENYOU5,	
 		0x01,	_NU,			R_SHUUSI,	
@@ -284,7 +284,7 @@ static	Uchar	na5cnj[] = {
 		0xff
 	};
 
-static	Uchar	ba5cnj1[] = {
+static	u_char	ba5cnj1[] = {
 		0x01,	_BA,			R_MIZEN5,	
 		0x01,	_BI,			R_RENYOU5,	
 		0x01,	_BU,			R_SHUUSI,	
@@ -294,7 +294,7 @@ static	Uchar	ba5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	ba5cnj3[] = {
+static	u_char	ba5cnj3[] = {
 		0x01,	_BA,			R_MIZEN5,	
 		0x01,	_BI,			R_RENYOU7,	
 		0x01,	_BU,			R_SHUUSI,	
@@ -304,7 +304,7 @@ static	Uchar	ba5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	ba5cnj5[] = {
+static	u_char	ba5cnj5[] = {
 		0x01,	_BA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
 		0x11,	_SI,			R_SA5RENYOU3,	
@@ -320,7 +320,7 @@ static	Uchar	ba5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	ba5cnj7[] = {
+static	u_char	ba5cnj7[] = {
 		0x01,	_BA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
 		0x11,	_SI,			R_SA5RENYOU3,	
@@ -336,7 +336,7 @@ static	Uchar	ba5cnj7[] = {
 		0xff
 	};
 
-static	Uchar	ma5cnj1[] = {
+static	u_char	ma5cnj1[] = {
 		0x01,	_MA,			R_MIZEN5,	
 		0x01,	_MI,			R_RENYOU5,	
 		0x01,	_MU,			R_SHUUSI,	
@@ -346,7 +346,7 @@ static	Uchar	ma5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	ma5cnj3[] = {
+static	u_char	ma5cnj3[] = {
 		0x01,	_MA,			R_MIZEN5,	
 		0x01,	_MI,			R_RENYOU7,	
 		0x01,	_MU,			R_SHUUSI,	
@@ -356,7 +356,7 @@ static	Uchar	ma5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	ma5cnj5[] = {
+static	u_char	ma5cnj5[] = {
 		0x01,	_MA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
 		0x11,	_SI,			R_SA5RENYOU3,	
@@ -372,7 +372,7 @@ static	Uchar	ma5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	ma5cnj7[] = {
+static	u_char	ma5cnj7[] = {
 		0x01,	_MA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
 		0x11,	_SI,			R_SA5RENYOU3,	
@@ -388,7 +388,7 @@ static	Uchar	ma5cnj7[] = {
 		0xff
 	};
 
-static	Uchar	ra5cnj1[] = {
+static	u_char	ra5cnj1[] = {
 		0x01,	_XTU,			R_ONBIN2,	
 		0x01,	_RA,			R_MIZEN5,	
 		0x01,	_RI,			R_RENYOU5,	
@@ -398,7 +398,7 @@ static	Uchar	ra5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	ra5cnj3[] = {
+static	u_char	ra5cnj3[] = {
 		0x01,	_XTU,			R_ONBIN2,	
 		0x01,	_RA,			R_MIZEN5,	
 		0x01,	_RI,			R_RENYOU7,	
@@ -408,7 +408,7 @@ static	Uchar	ra5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	ra5cnj5[] = {
+static	u_char	ra5cnj5[] = {
 		0x01,	_XTU,			R_ONBIN2,	
 		0x01,	_RA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
@@ -424,7 +424,7 @@ static	Uchar	ra5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	ra5cnj7[] = {
+static	u_char	ra5cnj7[] = {
 		0x01,	_XTU,			R_ONBIN2,	
 		0x01,	_RA,			R_MIZEN5,	
 		0x11,	_SA,			R_MIZEN5,	
@@ -440,7 +440,7 @@ static	Uchar	ra5cnj7[] = {
 		0xff
 	};
 
-static	Uchar	wa5cnj1[] = {
+static	u_char	wa5cnj1[] = {
 		0x01,	_I,			R_RENYOU5,	
 		0x01,	_U,			R_SHUUSI,	
 		0x01,	_E,			R_KAMEI,	
@@ -450,7 +450,7 @@ static	Uchar	wa5cnj1[] = {
 		0xff
 	};
 
-static	Uchar	wa5cnj3[] = {
+static	u_char	wa5cnj3[] = {
 		0x01,	_I,			R_RENYOU7,	
 		0x01,	_U,			R_SHUUSI,	
 		0x01,	_E,			R_KAMEI,	
@@ -460,7 +460,7 @@ static	Uchar	wa5cnj3[] = {
 		0xff
 	};
 
-static	Uchar	wa5cnj5[] = {
+static	u_char	wa5cnj5[] = {
 		0x01,	_I,			R_RENYOU5,	
 		0x01,	_U,			R_SHUUSI,	
 		0x01,	_E,			R_EXP,		
@@ -476,7 +476,7 @@ static	Uchar	wa5cnj5[] = {
 		0xff
 	};
 
-static	Uchar	wa5cnj7[] = {
+static	u_char	wa5cnj7[] = {
 		0x01,	_I,			R_RENYOU7,	
 		0x01,	_U,			R_SHUUSI,	
 		0x01,	_E,			R_EXP,		
@@ -492,7 +492,7 @@ static	Uchar	wa5cnj7[] = {
 		0xff
 	};
 
-static	Uchar	ichicnj1[] = {
+static	u_char	ichicnj1[] = {
 		0x00,				R_RENYOU1,	
 		0x01,	_YO,			R_MEIREI2,	
 		0x01,	_RU,			R_SHUUSI,	
@@ -501,7 +501,7 @@ static	Uchar	ichicnj1[] = {
 		0xff
 	};
 
-static	Uchar	ichicnj3[] = {
+static	u_char	ichicnj3[] = {
 		0x00,				R_RENYOU3,	
 		0x01,	_YO,			R_MEIREI2,	
 		0x01,	_RU,			R_SHUUSI,	
@@ -510,7 +510,7 @@ static	Uchar	ichicnj3[] = {
 		0xff
 	};
 
-static	Uchar	keiyou1[] = {
+static	u_char	keiyou1[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -521,7 +521,7 @@ static	Uchar	keiyou1[] = {
 		0xff
 	};
 
-static	Uchar	keiyou2[] = {
+static	u_char	keiyou2[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -533,7 +533,7 @@ static	Uchar	keiyou2[] = {
 		0xff
 	};
 
-static	Uchar	keiyou3[] = {
+static	u_char	keiyou3[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -556,7 +556,7 @@ static	Uchar	keiyou3[] = {
 		0xff
 	};
 
-static	Uchar	keiyou4[] = {
+static	u_char	keiyou4[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -574,7 +574,7 @@ static	Uchar	keiyou4[] = {
 		0xff
 	};
 
-static	Uchar	keiyou5[] = {
+static	u_char	keiyou5[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -603,7 +603,7 @@ static	Uchar	keiyou5[] = {
 		0xff
 	};
 
-static	Uchar	keiyou6[] = {
+static	u_char	keiyou6[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -637,7 +637,7 @@ static	Uchar	keiyou6[] = {
 		0xff
 	};
 
-static	Uchar	keiyou7[] = {
+static	u_char	keiyou7[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -677,7 +677,7 @@ static	Uchar	keiyou7[] = {
 		0xff
 	};
 
-static	Uchar	keiyou8[] = {
+static	u_char	keiyou8[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -718,7 +718,7 @@ static	Uchar	keiyou8[] = {
 		0xff
 	};
 
-static	Uchar	keiyou9[] = {
+static	u_char	keiyou9[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -747,7 +747,7 @@ static	Uchar	keiyou9[] = {
 		0xff
 	};
 
-static	Uchar	keiyou10[] = {
+static	u_char	keiyou10[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -787,7 +787,7 @@ static	Uchar	keiyou10[] = {
 		0xff
 	};
 
-static	Uchar	keiyou11[] = {
+static	u_char	keiyou11[] = {
 		0x80,				R_KGOKAN,	
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -811,7 +811,7 @@ static	Uchar	keiyou11[] = {
 		0xff
 	};
 
-static	Uchar	keidou1[] = {
+static	u_char	keidou1[] = {
 		0x80,				R_DGOKAN,	
 		0x01,	_DA,			R_DSHUUSI1,	
 		0x11,	_XTU,			R_ONBIN1,	
@@ -826,7 +826,7 @@ static	Uchar	keidou1[] = {
 		0xff
 	};
 
-static	Uchar	keidou2[] = {
+static	u_char	keidou2[] = {
 		0x80,				R_DGOKAN,	
 		0x02,	_TA, _RU,		R_DRENTAI2,	
 		0x11,	_RE,			R_KATEI2,	
@@ -834,7 +834,7 @@ static	Uchar	keidou2[] = {
 		0xff
 	};
 
-static	Uchar	keidou4[] = {
+static	u_char	keidou4[] = {
 		0x80,				R_DGOKAN,	
 		0x01,	_SA,			R_FZKMEISI,	
 		0x01,	_DA,			R_DSHUUSI1,	
@@ -850,7 +850,7 @@ static	Uchar	keidou4[] = {
 		0xff
 	};
 
-static	Uchar	keidou9[] = {
+static	u_char	keidou9[] = {
 		0x80,				R_DGOKAN,	
 		0x01,	_DA,			R_DSHUUSI1,	
 		0x11,	_XTU,			R_ONBIN1,	
@@ -867,7 +867,7 @@ static	Uchar	keidou9[] = {
 		0xff
 	};
 
-static	Uchar	sahenmeisi1[] = {
+static	u_char	sahenmeisi1[] = {
 		0x00,				R_SMEISI1,	
 		0x01,	_SA,			R_MIZEN1,	
 		0x01,	_SI,			R_SI1,		
@@ -880,7 +880,7 @@ static	Uchar	sahenmeisi1[] = {
 		0xff
 	};
 
-static	Uchar	sahenmeisi2[] = {
+static	u_char	sahenmeisi2[] = {
 		0x00,				R_SMEISI1,	
 		0x01,	_SA,			R_MIZEN1,	
 		0x01,	_SI,			R_SI1,		
@@ -893,7 +893,7 @@ static	Uchar	sahenmeisi2[] = {
 		0xff
 	};
 
-static	Uchar	keidoumeisi[] = {
+static	u_char	keidoumeisi[] = {
 		0x00,				R_DMEISI,	
 		0x01,	_SA,			R_FZKMEISI,	
 		0x01,	_DA,			R_DSHUUSI1,	
@@ -909,7 +909,7 @@ static	Uchar	keidoumeisi[] = {
 		0xff
 	};
 
-static	Uchar	keiyoustb[] = {
+static	u_char	keiyoustb[] = {
 		0x00,				R_KSTB,		
 		0x01,	_I,			R_KSHUUSI,	
 		0x02,	_KA, _XTU,		R_ONBIN1,	
@@ -920,7 +920,7 @@ static	Uchar	keiyoustb[] = {
 		0xff
 	};
 
-static	Uchar	ichistb[] = {
+static	u_char	ichistb[] = {
 		0x00,				R_ICHISETUBI,	
 		0x01,	_YO,			R_MEIREI2,	
 		0x01,	_RU,			R_SHUUSI,	
@@ -929,7 +929,7 @@ static	Uchar	ichistb[] = {
 		0xff
 	};
 
-static	Uchar	fukusi2[] = {
+static	u_char	fukusi2[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_TO,			R_F_FUKUSI,	
 		0x11,	_SI,			R_SI1,		
@@ -937,7 +937,7 @@ static	Uchar	fukusi2[] = {
 		0xff
 	};
 
-static	Uchar	fukusi3[] = {
+static	u_char	fukusi3[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_SA,			R_MIZEN1,	
 		0x01,	_SI,			R_SI1,		
@@ -953,7 +953,7 @@ static	Uchar	fukusi3[] = {
 		0xff
 	};
 
-static	Uchar	fukusi4[] = {
+static	u_char	fukusi4[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_SA,			R_MIZEN1,	
 		0x01,	_SI,			R_SI1,		
@@ -966,25 +966,25 @@ static	Uchar	fukusi4[] = {
 		0xff
 	};
 
-static	Uchar	fukusi5[] = {
+static	u_char	fukusi5[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_NI,			R_F_FUKUSI,	
 		0xff
 	};
 
-static	Uchar	fukusi6[] = {
+static	u_char	fukusi6[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_MO,			R_F_FUKUSI,	
 		0xff
 	};
 
-static	Uchar	fukusi7[] = {
+static	u_char	fukusi7[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_NO,			R_F_FUKUSI,	
 		0xff
 	};
 
-static	Uchar	fukusi8[] = {
+static	u_char	fukusi8[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_DA,			R_DSHUUSI1,	
 		0x11,	_XTU,			R_ONBIN1,	
@@ -998,7 +998,7 @@ static	Uchar	fukusi8[] = {
 		0xff
 	};
 
-static	Uchar	fukusi9[] = {
+static	u_char	fukusi9[] = {
 		0x00,				R_FUKUSI,	
 		0x01,	_SA,			R_MIZEN1,	
 		0x01,	_SI,			R_SI1,		
@@ -1021,7 +1021,7 @@ static	Uchar	fukusi9[] = {
 		0xff
 	};
 
-Uchar	*conjadr[] = {
+u_char	*conjadr[] = {
 		0,			
 		0,			
 		0,			

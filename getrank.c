@@ -62,7 +62,7 @@ setstynum (void)
 {
 	KHREC	*kptr;
 	STDYIN	*sptr;
-	Int	count;
+	int	count;
 
 	for (kptr = kouhotbl, count = khcount ; count-- ; kptr++) { 
 		sptr = srchstdy(kptr -> clrec -> jnode -> jseg, kptr -> offs,
@@ -78,7 +78,7 @@ static	void
 setnspr (KHREC *kptr, STDYIN *sptr)
 {
 	KHREC		*ptr;
-	Int		keepnm;
+	int		keepnm;
 	TypeStyNum	styno;
 
 	styno = kptr -> styno = sptr -> styno;
@@ -112,7 +112,7 @@ setnspr (KHREC *kptr, STDYIN *sptr)
 		}
 	}
 
-	kptr -> rank = (Uchar)keepnm;
+	kptr -> rank = (u_char)keepnm;
 	trank++;
 	if (keepnm <= nrank) nrank++;
 	if (sptr -> nmflg && (nrank > keepnm)) nrank = keepnm;
@@ -124,8 +124,8 @@ static	void
 regetrank (void)
 {
 	KHREC	*kptr;		
-	Int	count;
-	Int	tmp;
+	int	count;
+	int	tmp;
 
 	if (nrank < trank) {
 		tmp = nrank;
@@ -138,12 +138,12 @@ regetrank (void)
 	for (count = khcount, kptr = kouhotbl ; count-- ; kptr++) {
 		if (!(kptr -> rank)) {
 			if (tmp && kptr -> mode && !(kptr -> offs)) {
-				kptr -> rank = (Uchar)tmp++;
+				kptr -> rank = (u_char)tmp++;
 			}
 			else
-				kptr -> rank = (Uchar)trank++;
+				kptr -> rank = (u_char)trank++;
 		}
-		else if ((Short)kptr -> rank >= nrank)
-			kptr -> rank += (Uchar)nkhcount;
+		else if ((short)kptr -> rank >= nrank)
+			kptr -> rank += (u_char)nkhcount;
 	}
 }

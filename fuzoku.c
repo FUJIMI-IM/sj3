@@ -45,16 +45,16 @@
 
 
 CLREC	*argclrec();
-Int	terminate();
+int	terminate();
 
 
 
-Static	Int	fzkstrcmp(yptr, fzkp, saml)
-Uchar	*yptr;
-Uchar	TFar	*fzkp;		
-Int	*saml;			
+Static	int	fzkstrcmp(yptr, fzkp, saml)
+u_char	*yptr;
+u_char	*fzkp;
+int	*saml;
 {
-	Int	asklen, nkrlen;
+	int	asklen, nkrlen;
 
 	asklen = FzkAskLen(fzkp);
 
@@ -93,14 +93,14 @@ Int	*saml;
 
 
 
-Void	setclrec(jrec, yptr, right)
+void	setclrec(jrec, yptr, right)
 JREC		*jrec;		
-Uchar		*yptr;		
+u_char		*yptr;
 TypeCnct	right;		
 {
 	CLREC		*new;
 	TypeGram	hinsi;
-	Int		len;
+	int		len;
 
 	
 	if (!(len = yptr - cnvstart)) return;
@@ -181,11 +181,11 @@ TypeCnct	right;
 		new -> kubun = K_TAIGEN;
 }
 
-Static	Int	fzkcnct(right, left)
+Static	int	fzkcnct(right, left)
 TypeCnct	right;
 TypeCnct	left;
 {
-	Uchar	TFar	*cncttbl;
+	u_char	*cncttbl;
 
 	if (right && left) {
 		cncttbl = Rigtadr(right);
@@ -197,20 +197,19 @@ TypeCnct	left;
 	return FALSE;
 }
 
-RECURS
-Void	srchfzk(jrec, yptr, right, level)
+void	srchfzk(jrec, yptr, right, level)
 JREC		*jrec;			
-Uchar		*yptr;
+u_char		*yptr;
 TypeCnct	right;			
-Int		level;			
+int		level;
 {
-	Uchar	TFar	*fzk;	
-	Int	len = 0;	
-	Int	cmp;		
-	Uchar	*next;		
+	u_char	*fzk;
+	int	len = 0;
+	int	cmp;
+	u_char	*next;
 	FREC	*fzkrec;	
-	Int	i;		
-	Int	nlen;
+	int	i;
+	int	nlen;
 	TypeCnct	rt;
 
 	if ((level >= MAXFLVL) && !(Chrtbl[*yptr] & FZK_KGU)) return;

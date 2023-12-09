@@ -41,16 +41,16 @@
 #include "kanakan.h"
 
 
-Void	mkknjmax();
-Void	mvmemi(), free_clall();
-Void	free_jall();
+void	mkknjmax();
+void	mvmemi(), free_clall();
+void	free_jall();
 
 
 
 void
 cvtphknj (void)
 {
-	Int	i, j;
+	int	i, j;
 	CLREC	*clrec;
 	CLREC	*clkp;
 
@@ -93,8 +93,8 @@ cvtphknj (void)
 		
                 ystart += clt1st -> cllen;
 
-                j = hzstrlen(inputyomi, (Int)clt1st -> cllen);
-		kanjibuf[0] = (Uchar)j;
+                j = hzstrlen(inputyomi, (int)clt1st -> cllen);
+		kanjibuf[0] = (u_char)j;
 
 		
 		inputyomi += j;
@@ -143,7 +143,7 @@ cvtkouho (KHREC *krec)
 
 	case C_BUNSETU :		
 	case C_MINASI  :		
-		cvtminasi((Int)clrec -> cllen);
+		cvtminasi((int)clrec -> cllen);
 		break;
 
 	case C_WAKACHI :		
@@ -162,8 +162,8 @@ setstyrec (KHREC *krec)
 {
 	JREC	*jrec;
 	KHREC	*kptr;
-	Int	ii;
-	Uchar	*fptr;
+	int	ii;
+	u_char	*fptr;
 	STDYOUT	stdy;
 
 	jrec  = krec -> clrec -> jnode;
@@ -207,7 +207,7 @@ setstyrec (KHREC *krec)
 		stdy.sttlen = 0;
 
 	
-	memcpy((Uchar *)&stdy, kanjitmp, sizeof(STDYOUT));
+	memcpy((u_char *)&stdy, kanjitmp, sizeof(STDYOUT));
 	kanjitmp += sizeof(STDYOUT);
 }
 

@@ -40,16 +40,16 @@
 #include "sj_kcnv.h"
 #include "kanakan.h"
 
-Void	mvmemi(), mvmemd();
+void	mvmemi(), mvmemd();
 
-Int
+int
 study(STDYOUT *stdy)
 {
 	STDYOUT		outp;
 	STDYIN		*p1;
 	STDYIN		*p2;
-	Int		wcnt;
-	Int		ret;
+	int		wcnt;
+	int		ret;
 	TypeDicSeg	seg;
 	TypeDicOfs	ofs;
 	TypeStyNum	nm;
@@ -57,7 +57,7 @@ study(STDYOUT *stdy)
 
 	if (!StudyExist()) return StudyNoDict;
 
-	memcpy((Uchar *)stdy, (Uchar *)&outp, sizeof(outp));
+	memcpy((u_char *)stdy, (u_char *)&outp, sizeof(outp));
 
 	if (outp.stdy1.offset == 0) return StudyNotStudy;
 
@@ -95,7 +95,7 @@ study(STDYOUT *stdy)
 		}
 
 		if (p2) {
-			mvmemi((Uchar *)(p2 + 1), (Uchar *)p2,
+			mvmemi((u_char *)(p2 + 1), (u_char *)p2,
 				(StudyTail - p2) * StudyRecSize);
 			StudyCount -= 1;
 		}
@@ -123,8 +123,8 @@ study(STDYOUT *stdy)
 		p1++;
 	}
 
-	mvmemd((Uchar *)(StudyTail - 1), (Uchar *)StudyTail,
-			(Uchar *)(StudyTail - 1) - (Uchar *)p1);
+	mvmemd((u_char *)(StudyTail - 1), (u_char *)StudyTail,
+			(u_char *)(StudyTail - 1) - (u_char *)p1);
 	p1 -> offset = outp.stdy1.offset;
 	p1 -> seg    = outp.stdy1.seg;
 	p1 -> dicid  = outp.stdy1.dicid;
@@ -144,9 +144,9 @@ STDYIN* srchstdy(
 	TypeDicOfs ofs,
 	TypeDicID  dicid)
 {
-	Int	high;
-	Int	mid;
-	Int	low;
+	int	high;
+	int	mid;
+	int	low;
 	STDYIN	*ptr;
 
 

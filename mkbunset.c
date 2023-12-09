@@ -42,8 +42,8 @@
 #include "sj_hinsi.h"
 #include "kanakan.h"
 
-Int	terminate();
-Void	setclrec(), srchfzk();
+int	terminate();
+void	setclrec(), srchfzk();
 
 void
 mkbunsetu(void)

@@ -41,8 +41,8 @@
 #include "sj_hinsi.h"
 #include "kanakan.h"
 
-Int	terminate();
-Void	setclrec(), srchfzk();
+int	terminate();
+void	setclrec(), srchfzk();
 
 void
 wakachi (void)
@@ -51,11 +51,11 @@ wakachi (void)
 	CLREC		*clrec;
 
 	CREC		crec[4];
-	Int		count;
-	Uchar		*next;
+	int		count;
+	u_char		*next;
 	TypeCnct	right;
-	Int		i;
-	Int		maxlen;
+	int		i;
+	int		maxlen;
 
 	free_jall(maxjptr);
 	maxjptr = NULL;
@@ -88,7 +88,7 @@ wakachi (void)
 		jrec -> class  = C_WAKACHI;
 		jrec -> hinsi  = MEISI_6;
 
-		while ((Int)jrec -> jlen < maxlen) {
+		while ((int)jrec -> jlen < maxlen) {
 
 			count = setconj((TypeGram)MEISI_6, jrec, crec);
 
@@ -124,7 +124,7 @@ wakachi (void)
 		return;
 
 	if (jrec -> jlen) {
-		if ((clrec = argclrec((Int)jrec -> jlen)) != NULL) {
+		if ((clrec = argclrec((int)jrec -> jlen)) != NULL) {
 			clrec -> jnode   = jrec;
 			clrec -> right   = R_MEISI;
 			clrec -> kubun   = K_TAIGEN;

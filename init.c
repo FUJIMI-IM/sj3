@@ -37,11 +37,11 @@
 
 #include "sj_kcnv.h"
 
-Void	seg_count(dict)
+void	seg_count(dict)
 DICT	*dict;
 {
-	Uchar	*p;
-	Uchar	*q;
+	u_char	*p;
+	u_char	*q;
 	TypeDicSeg	segcnt = 0;
 
 	if (dict-> getidx) {
@@ -58,10 +58,10 @@ DICT	*dict;
 	dict->segunit = (segcnt == 0) ? 1 : segcnt;
 }
 
-Void	mkidxtbl(dict)
+void	mkidxtbl(dict)
 DICT	*dict;
 {
-	Uchar	*p;
+	u_char	*p;
 	TypeDicSeg	seg;
 
 	if (!dict->getidx || !dict->getofs) return;
@@ -78,7 +78,7 @@ DICT	*dict;
 	}
 }
 
-Void	initwork()
+void	initwork()
 {
 	jrt1st = jrt2nd = maxjptr = (JREC *)0;
 	clt1st = clt2nd = maxclptr = (CLREC *)0;
