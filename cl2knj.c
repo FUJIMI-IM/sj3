@@ -41,7 +41,7 @@
 #include "kanakan.h"
 
 
-Int	sj2cd_chr();
+int	sj2cd_chr();
 void	cvtclknj(), freework();
 
 

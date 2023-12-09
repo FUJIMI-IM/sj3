@@ -300,9 +300,9 @@ opendict(char* name, char* passwd)
 	}
 
 #if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
-	if ((dp = (Uchar *)malloc((long)sbuf.st_size)) == NULL) {
+	if ((dp = (u_char *)malloc((long)sbuf.st_size)) == NULL) {
 #else
-	if ((dp = (Uchar *)malloc(sbuf.st_size)) == NULL) {
+	if ((dp = (u_char *)malloc(sbuf.st_size)) == NULL) {
 #endif
 		serv_errno = SJ3_NotEnoughMemory; goto error1;
 	}
@@ -437,7 +437,7 @@ openstdy(char* name, char* passwd)
 	StdyFile	*sfp;
 	u_char		*hd;
 	STDYIN		*sp;
-	Ushort		*cip;
+	u_short		*cip;
 	u_char		*clp;
 	long		stdycnt, stdypos, stdylen, stdymax;
 	long		clidxpos, clidxlen;
@@ -502,7 +502,7 @@ openstdy(char* name, char* passwd)
 	if ((sp = (STDYIN *)malloc(len)) == NULL) {
 		serv_errno = SJ3_NotEnoughMemory; goto error2;
 	}
-	if ((cip = (Ushort *)malloc(clidxlen)) == NULL) {
+	if ((cip = (u_short *)malloc(clidxlen)) == NULL) {
 		serv_errno = SJ3_NotEnoughMemory; goto error3;
 	}
 	if ((clp = (u_char *)malloc(clstdylen)) == NULL) {
@@ -711,7 +711,7 @@ makestdy(char* path, int stynum, int clstep, int cllen)
 	put4byte(tmp + VersionPos, StdyVersion);
 
 	
-	j = 256 * sizeof(Ushort);
+	j = 256 * sizeof(u_short);
 	put4byte(tmp + StdyClIdxPos, pos);
 	put4byte(tmp + StdyClIdxLen, j);
 	put4byte(tmp + StdyClIdxStep, clstep);

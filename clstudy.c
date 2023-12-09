@@ -68,7 +68,7 @@ clstudy(u_char* yomi1, u_char* yomi2, STDYOUT *stdy)
 		if (!sj2cd_str(yomi1, ytmp, CLSTDY_TMPLEN))
 			return ClstudyYomiErr;
 
-		(Void)delcldata(ytmp);
+		(void)delcldata(ytmp);
 
 		ret = ClstudyNormEnd;
 	}
@@ -101,9 +101,9 @@ clstudy(u_char* yomi1, u_char* yomi2, STDYOUT *stdy)
 
 			ptr = ClStudyTail - alen;
 			mvmemd(ptr, ClStudyTail, (ptr - dst));
-			ClYomiLen(dst)  = (Uchar)len2;
+			ClYomiLen(dst)  = (u_char)len2;
 			ClGramCode(dst) = stdy -> hinshi;
-			ClYomi1Len(dst) = (Uchar)len1;
+			ClYomi1Len(dst) = (u_char)len1;
 			ClSetNum(dst, 1);
 			memcpy(ytmp, ClYomiPos(dst), len2);
 
@@ -278,9 +278,9 @@ mkclidx(void)
 			ptr = ClNextTag(ptr);
 		}
 
-		if (ClYomiLen(ptr) && ((Int)*ClYomiPos(ptr) < ed))
+		if (ClYomiLen(ptr) && ((int)*ClYomiPos(ptr) < ed))
 			ClStudyIdx[num] = ptr - ClStudyDict;
 		else
-			ClStudyIdx[num] = (Ushort)-1;
+			ClStudyIdx[num] = (u_short)-1;
 	}
 }

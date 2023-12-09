@@ -33,8 +33,8 @@
 #include "const.h"
 #include "sj_typedef.h"
 
-Int
-istrcmp(Uchar *yomip, Uchar *idxp, Int ylen, Int ilen)
+int
+istrcmp(u_char *yomip, u_char *idxp, int ylen, int ilen)
 {
 	while (1) {
 		if ((ilen | ylen) == 0)

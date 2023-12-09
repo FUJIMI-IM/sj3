@@ -42,7 +42,7 @@
 
 
 
-Uchar	chrtbl[256] =		
+u_char	chrtbl[256] =
 {
 	0,				
 	FZKTOP,				

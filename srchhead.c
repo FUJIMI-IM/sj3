@@ -38,7 +38,7 @@
 #include "sj_kcnv.h"
 #include "sj_yomi.h"
 
-Int	srchhead()
+int	srchhead()
 {
 	if (*cnvstart == _O) {
 		headcode = SETTOU_O;

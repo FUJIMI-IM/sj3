@@ -49,7 +49,7 @@ setkouho(CLREC* clrec, TypeDicOfs offs, int mode)
 {
 	JREC	*jrec;
 	KHREC	*kptr;		
-	u_char	TFar	*fptr;
+	u_char	*fptr;
 	int	flg;
 	int	i;
 
@@ -140,7 +140,7 @@ void
 ph_setkouho(CLREC* clrec, TypeDicOfs offs, STDYIN* sptr)
 {
 	JREC	*jrec;
-	u_char	TFar	*p;
+	u_char	*p;
 
 	
 	if (sptr) {

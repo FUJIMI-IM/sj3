@@ -39,22 +39,6 @@
 #ifndef	_SJ_TYPEDEF
 #define	_SJ_TYPEDEF  1
 
-#define	RECURS
-
-#define	TFar
-#define	Far
-
-#define	Void	void
-#define	Char	char
-#define	Uchar	unsigned char
-#define	Short	short
-#define	Ushort	unsigned short
-#define	Int	int
-#define	Uint	unsigned int
-#define	Long	long
-#define	Ulong	unsigned long
-
-
 #include <sys/types.h>
 
 typedef	u_char	TypeGroup;

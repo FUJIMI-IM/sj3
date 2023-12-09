@@ -42,21 +42,21 @@
 #include "kanakan.h"
 
 
-Int	sj2cd_chr();
+int	sj2cd_chr();
 void	mk2claus();
-Void	freework();
-Void    selclrec();
+void	freework();
+void    selclrec();
 CLREC	*free_clst();
 JREC	*free_jlst();
 
 
 
-Int	ph2knj
-(Uchar *zyomi, Uchar *kanji, Int knjlen)
+int	ph2knj
+(u_char *zyomi, u_char *kanji, int knjlen)
 {
-	Uchar	*ptr;
-	Uchar	*dst;
-	Int	i;
+	u_char	*ptr;
+	u_char	*dst;
+	int	i;
 
 	for (ptr = zyomi, dst = hyomi, i = 0 ; *ptr ; ) {
 		if (i++ >= MaxPhInputLen) { *kanji = 0; return 0; }
@@ -94,7 +94,7 @@ Int	ph2knj
 		prevclgrm = selcl -> jnode -> hinsi;
 		prevclrow = selcl -> right;
 
-                clt1st = free_clst(clt1st, (Int)selcl -> cllen);
+                clt1st = free_clst(clt1st, (int)selcl -> cllen);
                 jrt1st = free_jlst(jrt1st);
 
 		cnvstart += selcl -> cllen;

@@ -32,7 +32,7 @@
 #include "const.h"
 #include "sj_suuji.h"
 
-static	Ushort	selsjAR[] = {
+static	u_short	selsjAR[] = {
 	SelArb0,
 	SelArbCma	| JFLAG_NK4 | JFLAG_NN0,
 	SelKanSjYm	| JFLAG_NN0,
@@ -41,7 +41,7 @@ static	Ushort	selsjAR[] = {
 	SelNumTerm
 };
 
-static	Ushort	selsjARCM[] = {
+static	u_short	selsjARCM[] = {
 	SelArbCma	| JFLAG_NK4 | JFLAG_NN0,
 	SelArb0,
 	SelKanSjYm	| JFLAG_NN0,
@@ -50,7 +50,7 @@ static	Ushort	selsjARCM[] = {
 	SelNumTerm
 };
 
-static	Ushort	selsjKAZU[] = {
+static	u_short	selsjKAZU[] = {
 	SelKanSjYm	| JFLAG_NN0,
 	SelKanSjYm2	| SelNum1_23_10_1 | JFLAG_NN0,
 	SelKanSj0	| JFLAG_NK2,
@@ -59,49 +59,49 @@ static	Ushort	selsjKAZU[] = {
 	SelNumTerm
 };
 
-static	Ushort	selsjSUUJI[] = {
+static	u_short	selsjSUUJI[] = {
 	SelKanSj0,
 	SelArb0,
 	SelNumTerm
 };
 
-static	Ushort	selsjNANSUU[] = {
+static	u_short	selsjNANSUU[] = {
 	SelKanSjYm,
 	SelNumTerm
 };
 
-static	Ushort	selsjAR17[] = {
+static	u_short	selsjAR17[] = {
 	SelLongArb,
 	SelLongArbCma,
 	SelNumTerm
 };
 
-static	Ushort	selsjAR17CM[] = {
+static	u_short	selsjAR17CM[] = {
 	SelLongArbCma,
 	SelLongArb,
 	SelNumTerm
 };
 
-static	Ushort	selsjAR17SJ[] = {
+static	u_short	selsjAR17SJ[] = {
 	SelLongArb,
 	SelLongSj,
 	SelNumTerm
 };
 
-static	Ushort	selsjKANKURA[] = {
+static	u_short	selsjKANKURA[] = {
 	SelKanSjKr,
 	SelArbKr,
 	SelNumTerm
 };
 
-static	Ushort	selsjARAKURA[] = {
+static	u_short	selsjARAKURA[] = {
 	SelArbKr,
 	SelKanSjKr	| JFLAG_NSN,
 	SelNumTerm
 };
 
 
-Ushort	*selsjadrs[] = {
+u_short	*selsjadrs[] = {
 		selsjAR,
 		selsjARCM,
 			selsjKAZU,

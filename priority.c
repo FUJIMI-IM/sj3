@@ -40,7 +40,7 @@
 #include "sj_right.h"
 #include "sj_prty.h"
 
-Static	Int	isfukusi(hinsi)
+Static	int	isfukusi(hinsi)
 TypeGram	hinsi;
 {
 	if (FUKUSI_1 <= hinsi && hinsi <= FUKUSI_7)
@@ -50,7 +50,7 @@ TypeGram	hinsi;
 	return FALSE;
 }
 
-Static	Int	istaigen(right)
+Static	int	istaigen(right)
 TypeCnct	right;
 {
 	if (right == R_MEISI || right == R_DMEISI || right == R_SMEISI1)
@@ -62,7 +62,7 @@ TypeCnct	right;
 	return FALSE;
 }
 
-Static	Int	taicnt(hinsi1, hinsi2)
+Static	int	taicnt(hinsi1, hinsi2)
 TypeGram	hinsi1;
 TypeGram	hinsi2;
 {
@@ -91,7 +91,7 @@ TypeGram	hinsi2;
 	}
 }
 
-Static	Int	sttcnt(hinsi1, hinsi2)
+Static	int	sttcnt(hinsi1, hinsi2)
 TypeGram	hinsi1;
 TypeGram	hinsi2;
 {
@@ -102,15 +102,15 @@ TypeGram	hinsi2;
 	return 4;
 }
 
-Int	priority(clrec)
+int	priority(clrec)
 CLREC	*clrec;
 {
 	int		prty;
 	CLREC		*cl2rec;
-	Int		keeplen;
+	int		keeplen;
 	TypeGram	hinsi1;
-	Int		i;
-	Int		prev = 0;
+	int		i;
+	int		prev = 0;
 
 	if (clrec->cllen == clrec->cl2len) return 0xff;
 
@@ -155,7 +155,7 @@ CLREC	*clrec;
 
 	if (clrec->right == R_WO  || clrec->right == R_WO_S ||
 	    clrec->right == R_NI1 || clrec->right == R_DRENYOU2) {
-		while (cl2rec && (Int)cl2rec->cllen == keeplen) {
+		while (cl2rec && (int)cl2rec->cllen == keeplen) {
 			if (cl2rec->kubun == K_DOUSHI) {
 				prty = 14;
 				goto finish;
@@ -166,7 +166,7 @@ CLREC	*clrec;
 
 	else if (clrec->right == R_SETTOU) {
 		prty = 0;
-		while (cl2rec && (Int)cl2rec -> cllen == keeplen) {
+		while (cl2rec && (int)cl2rec -> cllen == keeplen) {
 			if (cl2rec -> jnode -> sttofs )
 				i = 2;
 			else
@@ -181,7 +181,7 @@ CLREC	*clrec;
 
 	else if (istaigen(clrec->right)) {
 		prty = 0;
-		while (cl2rec && (Int)cl2rec->cllen == keeplen) {
+		while (cl2rec && (int)cl2rec->cllen == keeplen) {
 			i = taicnt(hinsi1, cl2rec->jnode->hinsi);
 			if (i > prty)
 				prty = i;
@@ -198,7 +198,7 @@ CLREC	*clrec;
 
 
 	if (prty & RENTAI) {
-		while (cl2rec && (Int)cl2rec->cllen == keeplen) {
+		while (cl2rec && (int)cl2rec->cllen == keeplen) {
 			if (cl2rec -> kubun == K_TAIGEN) {
 				prty &= GETPRI;
 				goto finish;
@@ -213,7 +213,7 @@ CLREC	*clrec;
 
 		if (prty == P_RENYOU_J || prty == P_RENYOU_M ) {
 			while (clrec->cllen != 1 && cl2rec &&
-			       (Int)cl2rec->cllen == keeplen ) {
+			       (int)cl2rec->cllen == keeplen ) {
 				if (cl2rec->kubun == K_DOUSHI) {
 					prty = 6;
 					goto finish;
@@ -251,17 +251,17 @@ finish:
 }
 
 
-Void	pritiny()
+void	pritiny()
 {
 	CLREC	*clrec;
-	Int	keeplen;
+	int	keeplen;
 	int	i, prty = 0;
 
 	clrec = selcl;
 	keeplen = clrec -> cllen;
 
 	if (istaigen(prevclrow)) {
-		while (clrec && (Int)clrec -> cllen == keeplen) {
+		while (clrec && (int)clrec -> cllen == keeplen) {
 			i = taicnt(prevclgrm, clrec -> jnode -> hinsi);
 			if (i > prty) {
 				selcl = clrec;
@@ -273,7 +273,7 @@ Void	pritiny()
 
 	else {
 
-		while (clrec && (Int)clrec -> cllen == keeplen) {
+		while (clrec && (int)clrec -> cllen == keeplen) {
 			if (clrec -> jnode -> hinsi >= MYOUJI &&
 			    clrec -> jnode -> hinsi <= KEN_KU)
 				clrec = clrec -> clsort;

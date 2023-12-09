@@ -46,14 +46,14 @@ void
 cvtdict(KHREC *krec, CLREC *clrec, int flg)
 {
 	TypeDicOfs	ofs;		
-	Uchar		*yptr;		
-	Int		jlen;		
-	Int		stblen;		
-	Int		sttlen;		
-	Uchar		*fptr;
-	Int		cllen;
+	u_char		*yptr;
+	int		jlen;
+	int		stblen;
+	int		sttlen;
+	u_char		*fptr;
+	int		cllen;
 	JREC		*jrec;
-	Int		i, j;
+	int		i, j;
 
 	
 	ofs   = krec -> offs;
@@ -160,9 +160,9 @@ cvtdict(KHREC *krec, CLREC *clrec, int flg)
 
 
 void
-cvtminasi(Int len)
+cvtminasi(int len)
 {
-	Uchar	*ptr;		
+	u_char	*ptr;
 
 	ptr = inputyomi;	
 
@@ -189,10 +189,10 @@ cvtminasi(Int len)
 void
 cvtwakachi(CLREC *clrec)
 {
-	Int	jlen;	
-	Uchar	*ym;
-	Int	cnt;
-	Uchar	ch;
+	int	jlen;
+	u_char	*ym;
+	int	cnt;
+	u_char	ch;
 
 	ym = inputyomi;		
 

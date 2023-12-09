@@ -38,10 +38,10 @@
 #include "sj_rename.h"
 #include "sj_typedef.h"
 
-Void	mvmemi(src, dest, len)
-Uchar	*src;
-Uchar	*dest;
-Int	len;
+void	mvmemi(src, dest, len)
+u_char	*src;
+u_char	*dest;
+int	len;
 {
 	while (len-- > 0) *dest++ = *src++;
 }

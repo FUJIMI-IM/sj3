@@ -41,31 +41,31 @@
 
 
 
-static	Uchar	o_settou[] = {					
+static	u_char	o_settou[] = {
 	0xA1,	0xb8, 0xe6,	0xa4, 0xaa
 };
 
-static	Uchar	go_settou[] = {					
+static	u_char	go_settou[] = {
 	0xA1,	0xb8, 0xe6,	0xa4, 0xb4
 };
 
-static	Uchar	dai_settou[] = {				
+static	u_char	dai_settou[] = {
 	0x22,	0xc2, 0xe8,	0xc2, 0xe8
 };
 
-static	Uchar	kigou_settou[] = {		
+static	u_char	kigou_settou[] = {
 	0x01
 };
 
 
 
-Uchar	*settou_ptr[] = {
+u_char	*settou_ptr[] = {
 	NULL, o_settou, go_settou, dai_settou, kigou_settou
 };
 
 
 
-Uchar	scncttbl[2][24] = {
+u_char	scncttbl[2][24] = {
 	{	
  	     
 		 0x48,  0x80,  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,

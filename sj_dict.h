@@ -87,7 +87,7 @@
 
 
 
-#define getsize(p)	(((Int)(*(p) & 0x0f) * 0x100) + *((p) + 1))
+#define getsize(p)	(((int)(*(p) & 0x0f) * 0x100) + *((p) + 1))
 
 
 

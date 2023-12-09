@@ -43,8 +43,8 @@
 #include "sj_dict.h"
 #include "kanakan.h"
 
-Int
-euc_codesize (Uchar c)
+int
+euc_codesize (u_char c)
 {
 	if ((c & KanjiModeMask) == 0x90) {
 		return 1;
@@ -57,10 +57,10 @@ euc_codesize (Uchar c)
 	}
 }
 
-Int
-hzstrlen (Uchar *ptr, Int len)
+int
+hzstrlen (u_char *ptr, int len)
 {
-	Uchar	*head;
+	u_char	*head;
 	head = ptr;
 	while (len-- > 0) ptr += euc_codesize(*ptr);
 	return (ptr - head);

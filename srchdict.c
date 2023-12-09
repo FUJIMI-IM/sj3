@@ -99,7 +99,7 @@ srchdict(u_char* tagp)
 	while ((int)dicinl <= maxlen) {
 
 
-		segno = srchidx(prevseg, (Int)dicinl);
+		segno = srchidx(prevseg, (int)dicinl);
 
 		(*curdict->getdic)(curdict, segno);
 

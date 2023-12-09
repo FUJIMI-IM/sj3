@@ -46,7 +46,7 @@ ph_setsty (CLREC *clrec)
 {
 	JREC		*jrec;
 	TypeDicOfs	offset;
-	Uchar		*ptr;
+	u_char		*ptr;
 	STDYIN		*sptr;
 
 	if (!seldict((jrec = clrec -> jnode) -> dicid)) {
@@ -83,11 +83,11 @@ ph_setsty (CLREC *clrec)
 
 
 
-Int
+int
 ph_khtbl (CLREC *clrec)
 {
 	JREC	*jrec;
-	Int	flg = FALSE;
+	int	flg = FALSE;
 
 	switch((jrec = clrec -> jnode) -> class) {
 	case C_DICT:

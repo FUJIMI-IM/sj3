@@ -37,7 +37,7 @@
 
 #include "sj_kcnv.h"
 
-Void	free_jrec(), free_clrec();
+void	free_jrec(), free_clrec();
 
 JREC	*free_jlst(p)
 JREC	*p;
@@ -72,12 +72,12 @@ JREC	*p;
 
 CLREC	*free_clst(p, l)
 CLREC	*p;
-Int	l;
+int	l;
 {
 	CLREC	*cpk;
 	CLREC	*cp;
 	CLREC	*cn;
-	Int	i = FALSE;
+	int	i = FALSE;
 
 	cp = cpk = NULL;
 
@@ -85,7 +85,7 @@ Int	l;
 
 		cn = p -> clsort;
 
-		if ((Int)p -> cllen == l) {
+		if ((int)p -> cllen == l) {
 			if (p == selcl) {
 				if (cp) {
 					p -> clsort = cpk;
@@ -115,7 +115,7 @@ Int	l;
 	return cpk;
 }
 
-Void	free_clall(p)
+void	free_clall(p)
 CLREC	*p;
 {
 	CLREC	*next;
@@ -128,7 +128,7 @@ CLREC	*p;
 	}
 }
 
-Void	free_jall(p)
+void	free_jall(p)
 JREC	*p;
 {
 	JREC	*next;
@@ -140,7 +140,7 @@ JREC	*p;
 	}
 }
 
-Void	freework()
+void	freework()
 {
 	free_clall(maxclptr);
 	clt1st = maxclptr = NULL;

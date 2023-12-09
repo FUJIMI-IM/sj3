@@ -138,25 +138,25 @@
 #define	K_RENTAISI	5	
 #define	K_SONOTA	6	
 
-#define EUC_a1          (Uchar)0xa1
-#define EUC_a2          (Uchar)0xa2
-#define EUC_a3          (Uchar)0xa3
-#define EUC_a4          (Uchar)0xa4
-#define EUC_a5          (Uchar)0xa5
+#define EUC_a1          (u_char)0xa1
+#define EUC_a2          (u_char)0xa2
+#define EUC_a3          (u_char)0xa3
+#define EUC_a4          (u_char)0xa4
+#define EUC_a5          (u_char)0xa5
 
-#define EUC_START       (Uchar)0xa1
-#define EUC_END         (Uchar)0xfe
-#define EUC_END_KIGOU   (Uchar)0xae
-#define EUC_0           (Uchar)0xb0
-#define EUC_END_0       (Uchar)0xb9
-#define EUC_A           (Uchar)0xc1
-#define EUC_END_A       (Uchar)0xda
-#define EUC_a           (Uchar)0xe1
-#define EUC_END_a       (Uchar)0xfa
-#define EUC_END_HIRA    (Uchar)0xf3
-#define EUC_VU          (Uchar)0xf4
-#define EUC_XKA         (Uchar)0xf5
-#define EUC_XKE         (Uchar)0xf6
+#define EUC_START       (u_char)0xa1
+#define EUC_END         (u_char)0xfe
+#define EUC_END_KIGOU   (u_char)0xae
+#define EUC_0           (u_char)0xb0
+#define EUC_END_0       (u_char)0xb9
+#define EUC_A           (u_char)0xc1
+#define EUC_END_A       (u_char)0xda
+#define EUC_a           (u_char)0xe1
+#define EUC_END_a       (u_char)0xfa
+#define EUC_END_HIRA    (u_char)0xf3
+#define EUC_VU          (u_char)0xf4
+#define EUC_XKA         (u_char)0xf5
+#define EUC_XKE         (u_char)0xf6
 
 #define	isknj1(c)	(((c) == SS2) || (((c) & 0x80) && ((c) != SS3)))
 

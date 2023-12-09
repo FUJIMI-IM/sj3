@@ -41,14 +41,14 @@
 
 
 
-Void	free_clall(), free_jall(), mkjiritu(), mkbunsetu();
-Void	wakachi();
+void	free_clall(), free_jall(), mkjiritu(), mkbunsetu();
+void	wakachi();
 
 
 
-Void	selclrec()
+void	selclrec()
 {
-	Int	len;
+	int	len;
 	CLREC	*rec;
 
 	
@@ -96,8 +96,8 @@ Void	selclrec()
 
 	
 	if (rec == NULL) {
-		Int	klen;
-		Uchar	ch;
+		int	klen;
+		u_char	ch;
 
 		
 		free_clall(clt1st);
