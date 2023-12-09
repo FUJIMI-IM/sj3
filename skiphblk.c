@@ -42,7 +42,7 @@
 Uchar	*skipkstr();
 
 Uchar	*skiphblk(ptr)
-Reg1	Uchar	*ptr;
+Uchar	*ptr;
 {
 	ptr++;
 

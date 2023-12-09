@@ -50,7 +50,7 @@ Conversion	*default_conversion;
 Conversion *
 AllocConversion ()
 {
-	register Conversion	*c;
+	Conversion	*c;
 
 	if ((c = (Conversion *)malloc (sizeof(Conversion))) == NULL) {
 		fprintf (stderr, "conversion: can't alloc memory\n\r");
@@ -126,9 +126,9 @@ EndConversion ()
 
 int
 wcbyte(str)
-register wchar16_t *str;
+wchar16_t *str;
 {
-	register count=0;
+	count=0;
 
 	while (*str) {
 		if (WcHighMASK & *str++) 

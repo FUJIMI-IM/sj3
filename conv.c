@@ -99,7 +99,7 @@ convert_stat ()
 
 inputprocess ()
 {
-	register int	c;
+	int	c;
 	wchar16_t		obuf[2];
 
 	if (Direct) {
@@ -139,9 +139,9 @@ static int	escape = 0;
 
 inkey ()
 {
-	register Conversion	*cv;
-	register int	i, j;
-        register wchar16_t c;
+	Conversion	*cv;
+	int	i, j;
+        wchar16_t c;
 
 	cv = current_conversion;
 	keyvalue = KEY_NORMAL;
@@ -196,15 +196,15 @@ inkey ()
 
 sequence (buf, count)
 wchar16_t         *buf;
-register int	*count;
+int	*count;
 {
 	
 
 
-	register int	n;
+	int	n;
 	SELECT_FD	ifds;
 	struct timeval	t;
-	register wchar16_t *s;
+	wchar16_t *s;
 	int		value;
 
 
@@ -241,11 +241,11 @@ register int	*count;
 
 
 parse_escape (s, count, more)
-register wchar16_t *s;
-register int	*count;
+wchar16_t *s;
+int	*count;
 int		more;
 {
-	register int	i, j;
+	int	i, j;
 	wchar16_t		temp[KEYBUFSIZ];
 	int		possible;
 

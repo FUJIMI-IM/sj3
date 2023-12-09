@@ -125,9 +125,9 @@ output_master()
 	int flags = 0;
 	u_char ctlstuff;
 	int f, stop, ixon, ret;
-	register struct iocblk *ioc;
-	register struct termios *tp;
-	register struct termio *ti;
+	struct iocblk *ioc;
+	struct termios *tp;
+	struct termio *ti;
 	struct tchars	tc, tc1;
 
 	memset((char *)&ctlbuf, '\0', sizeof(ctlbuf));
@@ -256,7 +256,7 @@ output_master()
 
 output_master()
 {
-	register int	n, m;
+	int	n, m;
 	char		outbuf[BUFSIZ];
 	int		f;
 #ifdef SYSV_TERMIOS
@@ -328,9 +328,9 @@ set_eucmode ()
 
 SJ_write (s, n)
 wchar16_t         *s;
-register int	n;
+int	n;
 {
-	register int	val;
+	int	val;
 	wchar16_t wb[BUFFLENGTH];
 	u_char	buff[BUFFLENGTH * 3];
 
@@ -350,7 +350,7 @@ register int	n;
 
 write_stdout(s, n)
 u_char *s;
-register int n;
+int n;
 {
       static u_char knj1st = 0, knj2nd = 0;
 
@@ -385,7 +385,7 @@ int	n;
 {
 	u_char buff[BUFFLENGTH];
 	wchar16_t wcbuff[BUFFLENGTH];
-	register int i, count, remain, c;
+	int i, count, remain, c;
 	size_t wnum;
 	extern int current_locale;
 

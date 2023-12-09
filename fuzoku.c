@@ -50,7 +50,7 @@ Int	terminate();
 
 
 Static	Int	fzkstrcmp(yptr, fzkp, saml)
-Uchar	*yptr;			
+Uchar	*yptr;
 Uchar	TFar	*fzkp;		
 Int	*saml;			
 {
@@ -200,7 +200,7 @@ TypeCnct	left;
 RECURS
 Void	srchfzk(jrec, yptr, right, level)
 JREC		*jrec;			
-Reg1		Uchar	*yptr;		
+Uchar		*yptr;
 TypeCnct	right;			
 Int		level;			
 {

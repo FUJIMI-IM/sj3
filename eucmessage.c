@@ -282,7 +282,7 @@ struct wcvtkey wcvtkeytbl[CURWCVTKEY];
 int 
 init_wcvtkey()
 {
-	register int i = 0;
+	int i = 0;
 
 	for (i = 0; i < CURWCVTKEY; i++) {
 		wcvtkeytbl[i].key_seq[0] = 0;
@@ -432,7 +432,7 @@ init_messages()
 	char *loc;
         short message_len[CURMESSAGES];
 	int ret;
-	register int i;
+	int i;
         int all_len = 0;
 	int saved_locale = 0;
 	extern int current_locale;

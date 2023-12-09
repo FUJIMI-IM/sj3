@@ -43,14 +43,6 @@
 
 #define	TFar
 #define	Far
-#define	Reg1	register
-#define	Reg2	register
-#define	Reg3	register
-#define	Reg4	register
-#define	Reg5	register
-#define	Reg6	register
-#define	Reg7	register
-#define	Reg8	register
 
 #define	Void	void
 #define	Char	char

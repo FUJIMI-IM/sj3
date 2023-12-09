@@ -151,7 +151,7 @@ sj3_str_euctosjis(unsigned char *out, int outlen, unsigned char *in,
 int
 sj3_sjistoeuclen(unsigned char *str, int max)
 {
-	register int len = 0, bytes = 1;
+	int len = 0, bytes = 1;
 
 	if (!max)
 		return 0;
@@ -205,8 +205,8 @@ sj_euc2sjis(unsigned char *s)
 void
 sj_jis2sjis(unsigned char *s)
 {
-	register int    high, low;
-	register int    nh, nl;
+	int    high, low;
+	int    nh, nl;
 
 	high = s[0];
 	low = s[1];
@@ -234,8 +234,8 @@ sj_sjis2euc(unsigned char *s)
 void
 sj_sjis2jis(unsigned char *s)
 {
-	register int byte1, byte2;
-	register unsigned char *sp;
+	int byte1, byte2;
+	unsigned char *sp;
 
 	sp = s;
 	byte1 = *sp++;
