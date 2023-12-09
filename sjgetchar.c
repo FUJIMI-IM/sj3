@@ -116,7 +116,7 @@ static char stopc = CTRL('s');
 static char startc = CTRL('q');
 static char outbuf[BUFSIZ];
 extern int slave;
-extern char *slave_name, *ptsname();
+extern char *slave_name, *ptsname(int);
 
 output_master()
 {
