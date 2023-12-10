@@ -42,7 +42,7 @@ int	terminate(), priority();
 void	mkjiritu(), mkbunsetu(), wakachi(), pritiny();
 void	free_clall(), free_jall();
 
-Static	int	set2nd(clrec)
+static	int	set2nd(clrec)
 CLREC	*clrec;
 {
 
