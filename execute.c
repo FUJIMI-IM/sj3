@@ -51,8 +51,6 @@
 #include "server.h"
 
 
-#define rmemcpy(a, b, n) memcpy((b), (a), (n))
-
 #define SJIS_PROTO 1
 #define EUC_PROTO 2
 
@@ -511,13 +509,13 @@ exec_ph2knj (int mb_flag)
 			srclen = *p;
 			buf_size -= stdy_size;
 			if (buf_size <= 0) goto CCONVERR;
-			(void) rmemcpy(q, p, stdy_size);
+			memcpy(p, q, stdy_size);
 			p += stdy_size;
 			q += stdy_size; 
 			l = sj3_str_euctosjis(q, buf_size, p, cur_cli->def_char, &defuse);
 			if (l < 0) goto CCONVERR;
 			if (defuse) {
-				(void) rmemcpy(buf3, &(buf2[srchead-srclen]), srclen);
+				memcpy(&(buf2[srchead-srclen]), buf3, srclen);
 				buf3[srclen] = '\0';
                                 j = cl2knj(buf3, srclen, buf4);
                                 l = sj3_str_euctosjis(q, buf_size, &(buf4[stdy_size]),
@@ -529,7 +527,7 @@ exec_ph2knj (int mb_flag)
 					if (l < 0) goto CCONVERR;
 				}
                                 if (!defuse && (j == srclen)) {
-					(void) rmemcpy(q-stdy_size, buf4, stdy_size);
+					memcpy(buf4, q-stdy_size, stdy_size);
 				} else {
 					l = sj3_str_euctosjis(q, buf_size, buf3, 
 						  cur_cli->def_char, &defuse);
@@ -585,7 +583,7 @@ exec_cl2knj (int mb_flag)
 		buf_size = sizeof(skbuf);
 		stdy_size = sizeof(STDYOUT);
 		
-		(void) rmemcpy(q, ptr, stdy_size);
+		memcpy(ptr, q, stdy_size);
 		ptr += stdy_size;
 		q += stdy_size; 
 		buf_size -= stdy_size;
@@ -601,7 +599,7 @@ exec_cl2knj (int mb_flag)
 				if (l < 0) goto CCONVERR;
 			}
 			if (!defuse && (j == i)) {
-				(void) rmemcpy(q-stdy_size, buf4, stdy_size);
+				memcpy(buf4, q-stdy_size, stdy_size);
 			} else {
 				l = sj3_str_euctosjis(q, buf_size, buf2,
 						  cur_cli->def_char, &defuse);
@@ -645,7 +643,7 @@ exec_nextcl (int mb_flag)
 		buf_size = sizeof(skbuf);
 		stdy_size = sizeof(STDYOUT);
 		
-		(void) rmemcpy(q, ptr, stdy_size);
+		memcpy(ptr, q, stdy_size);
 		ptr += stdy_size;
 		q += stdy_size; 
 		buf_size -= stdy_size;
@@ -658,7 +656,7 @@ exec_nextcl (int mb_flag)
 			if (l < 0) goto CCONVERR;
 		}
 		if (!defuse && i) {
-			(void) rmemcpy(q-stdy_size, kbuf, stdy_size);
+			memcpy(kbuf, q-stdy_size, stdy_size);
 		} else {
 			put_int(SJ3_NoMoreDouonWord);
 			return;
@@ -698,7 +696,7 @@ exec_prevcl (int mb_flag)
 		buf_size = sizeof(skbuf);
 		stdy_size = sizeof(STDYOUT);
 		
-		(void) rmemcpy(q, ptr, stdy_size);
+		memcpy(ptr, q, stdy_size);
 		ptr += stdy_size;
 		q += stdy_size; 
 		buf_size -= stdy_size;
@@ -711,7 +709,7 @@ exec_prevcl (int mb_flag)
 			if (l < 0) goto CCONVERR;
 		}
 		if (!defuse && i) {
-			(void) rmemcpy(q-stdy_size, kbuf, stdy_size);
+			memcpy(kbuf, q-stdy_size, stdy_size);
 		} else {
 			put_int(SJ3_NoMoreDouonWord);
 			return;
@@ -806,7 +804,7 @@ exec_cl2knj_all (int mb_flag)
 		buf_size = sizeof(skbuf);
 		stdy_size = sizeof(STDYOUT);
 		
-		(void) rmemcpy(q, ptr, stdy_size);
+		memcpy(ptr, q, stdy_size);
 		ptr += stdy_size;
 		q += stdy_size; 
 		buf_size -= stdy_size;
@@ -821,7 +819,7 @@ exec_cl2knj_all (int mb_flag)
                                 if (l < 0) goto CCONVERR;
 			}
 			if (!defuse && (i == len)) {
-                                (void) rmemcpy(q-stdy_size, kbuf, stdy_size);
+                                memcpy(kbuf, q-stdy_size, stdy_size);
 			} else {
 				put_int(SJ3_NoMoreDouonWord);
 				return;
@@ -845,7 +843,7 @@ exec_cl2knj_all (int mb_flag)
 				buf_size = sizeof(skbuf);
 				stdy_size = sizeof(STDYOUT);
 				
-				(void) rmemcpy(q, ptr, stdy_size);
+				memcpy(ptr, q, stdy_size);
 				ptr += stdy_size;
 				q += stdy_size; 
 				buf_size -= stdy_size;
@@ -862,8 +860,8 @@ exec_cl2knj_all (int mb_flag)
 						if (l < 0) goto CCONVERR;
 					}
 					if (!defuse && (len == i)) {
-						(void) rmemcpy(q-stdy_size, 
-							       kbuf, stdy_size);
+						memcpy(kbuf,
+							  q-stdy_size, stdy_size);
 					}
 				}
 				ptr = skbuf;
