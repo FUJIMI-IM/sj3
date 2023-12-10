@@ -112,7 +112,7 @@ setnspr (KHREC *kptr, STDYIN *sptr)
 		}
 	}
 
-	kptr -> rank = (u_char)keepnm;
+	kptr -> rank = (unsigned char)keepnm;
 	trank++;
 	if (keepnm <= nrank) nrank++;
 	if (sptr -> nmflg && (nrank > keepnm)) nrank = keepnm;
@@ -138,12 +138,12 @@ regetrank (void)
 	for (count = khcount, kptr = kouhotbl ; count-- ; kptr++) {
 		if (!(kptr -> rank)) {
 			if (tmp && kptr -> mode && !(kptr -> offs)) {
-				kptr -> rank = (u_char)tmp++;
+				kptr -> rank = (unsigned char)tmp++;
 			}
 			else
-				kptr -> rank = (u_char)trank++;
+				kptr -> rank = (unsigned char)trank++;
 		}
 		else if ((short)kptr -> rank >= nrank)
-			kptr -> rank += (u_char)nkhcount;
+			kptr -> rank += (unsigned char)nkhcount;
 	}
 }

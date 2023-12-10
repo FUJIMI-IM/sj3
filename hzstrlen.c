@@ -44,7 +44,7 @@
 #include "kanakan.h"
 
 int
-euc_codesize (u_char c)
+euc_codesize (unsigned char c)
 {
 	if ((c & KanjiModeMask) == 0x90) {
 		return 1;
@@ -58,9 +58,9 @@ euc_codesize (u_char c)
 }
 
 int
-hzstrlen (u_char *ptr, int len)
+hzstrlen (unsigned char *ptr, int len)
 {
-	u_char	*head;
+	unsigned char	*head;
 	head = ptr;
 	while (len-- > 0) ptr += euc_codesize(*ptr);
 	return (ptr - head);

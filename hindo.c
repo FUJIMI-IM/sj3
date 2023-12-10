@@ -51,7 +51,7 @@ extern	int	kanji_num;
 
 
 int
-check_hindo(u_char* ptr, int len)
+check_hindo(unsigned char* ptr, int len)
 {
 	int	low, high, mid;
 	int	i;
@@ -262,10 +262,10 @@ reset_assyuku(HindoRec* hrec)
 
 
 static HindoRec*
-makehindo(u_char* ptr, int len, int alen)
+makehindo(unsigned char* ptr, int len, int alen)
 {
 	HindoRec *hrec;
-	u_char	*p;
+	unsigned char	*p;
 
 	
 	hrec = (HindoRec *)Malloc(sizeof(HindoRec));
@@ -273,7 +273,7 @@ makehindo(u_char* ptr, int len, int alen)
 		fprintf(stderr, "\245\341\245\342\245\352\244\254\302\255\244\352\244\336\244\273\244\363\n");
 		exit(1);
 	}
-	p = (u_char *)Malloc(len);
+	p = (unsigned char *)Malloc(len);
 	if (!p) {
 		fprintf(stderr, "\245\341\245\342\245\352\244\254\302\255\244\352\244\336\244\273\244\363\n");
 		exit(1);
@@ -301,7 +301,7 @@ makehindo(u_char* ptr, int len, int alen)
 
 
 static void
-set_hindo(u_char* ptr, int len, int alen)
+set_hindo(unsigned char* ptr, int len, int alen)
 {
 	HindoRec *hrec;
 	int	low, high, mid;
@@ -376,7 +376,7 @@ set_hindo(u_char* ptr, int len, int alen)
 
 
 static void
-reset_hindo(u_char* p, int l)
+reset_hindo(unsigned char* p, int l)
 {
 	HindoRec *hrec;
 	int	low, high, mid;
@@ -428,13 +428,13 @@ reset_hindo(u_char* p, int l)
 
 
 void
-knjhnd_set(u_char* p, int l)
+knjhnd_set(unsigned char* p, int l)
 {
-	u_char	*kp1;
-	u_char	*kp2;
+	unsigned char	*kp1;
+	unsigned char	*kp2;
 	int	i;
 	int	kl1;
-	u_char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2 + 1];
+	unsigned char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2 + 1];
 
 	for (kp1 = p, kl1 = l ; kl1 > 0 ; ) {
 
@@ -462,13 +462,13 @@ knjhnd_set(u_char* p, int l)
 
 
 void
-knjhnd_reset(u_char* p, int l)
+knjhnd_reset(unsigned char* p, int l)
 {
-	u_char	*kp1;
-	u_char	*kp2;
+	unsigned char	*kp1;
+	unsigned char	*kp2;
 	int	i;
 	int	kl1;
-	u_char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2 + 1];
+	unsigned char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2 + 1];
 
 	for (kp1 = p, kl1 = l ; kl1 > 0 ; ) {
 
@@ -499,7 +499,7 @@ knjhnd_reset(u_char* p, int l)
 static int
 check_assyuku(HindoRec* p, HindoRec* q)
 {
-	u_char	ptmp[128], qtmp[128];
+	unsigned char	ptmp[128], qtmp[128];
 	int	plen;
 	int	qlen;
 
@@ -528,7 +528,7 @@ decide_knjask(void)
 	int	i, j;
 	AssyukuRec *p;
 	HindoRec *q;
-	u_char	*r;
+	unsigned char	*r;
 	int	len = 0;
 
 	askknj_num = 0;
@@ -582,7 +582,7 @@ decide_knjask(void)
 end:
 {
 	int	i, j, len;
-	u_char	*p;
+	unsigned char	*p;
 
 	for (i = 0 ; i < askknj_num ; i++) {
 		len = askknj[i] -> klen;

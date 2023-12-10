@@ -39,9 +39,9 @@
 int
 cnvyomi(int code)
 {
-	u_short hh;
-	u_char	high;
-	u_char low;
+	unsigned short	hh;
+	unsigned char	high;
+	unsigned char	low;
 
 	hh = ((code >> 16) & 0xffff);
 	high = ((code >> 8) & 0xff);
@@ -96,9 +96,9 @@ cnvyomi(int code)
 int
 h2kcode(int code)
 {
-	u_short hh;
-	u_char	high;
-	u_char	low;
+	unsigned short	hh;
+	unsigned char	high;
+	unsigned char	low;
 
 	hh = ((code >> 16) & 0xffff);
 	high = ((code >> 8) & 0xff);
@@ -118,7 +118,7 @@ h2kcode(int code)
 
 
 int
-codesize(u_char code)
+codesize(unsigned char code)
 {
 	switch (code&KanjiModeMask) {
 	      case ZenHiraAssyuku: 
@@ -137,7 +137,7 @@ codesize(u_char code)
 
 
 void
-output_knj(FILE* fp, u_char* p, int l)
+output_knj(FILE* fp, unsigned char* p, int l)
 {
 	while (l > 0) {
 		switch (*p & KanjiModeMask) {
@@ -258,7 +258,7 @@ yomi2zen(int code)
 
 
 void
-output_yomi(FILE* fp, u_char* p)
+output_yomi(FILE* fp, unsigned char* p)
 {
 	int	i;
 

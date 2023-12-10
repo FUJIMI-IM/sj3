@@ -53,34 +53,34 @@ typedef struct global {
 	short		 Jtrank;
 	short		 Jnrank;
 
-	u_char		*Jinputyomi;
-	u_char		*Jcnvstart;
+	unsigned char	*Jinputyomi;
+	unsigned char	*Jcnvstart;
 	short		 Jcnvlen;
-	u_char		*Jystart;
-	u_char		 Jhyomi[MaxPhInputLen + 1];
-	u_char		 Jorgyomi[MaxClInputLen*2 + 1];
+	unsigned char	*Jystart;
+	unsigned char	 Jhyomi[MaxPhInputLen + 1];
+	unsigned char	 Jorgyomi[MaxClInputLen*2 + 1];
 
-	u_char		 Jkanjibuf[MinPhOutputLen];
-	u_char		*Jkanjipos;
-	u_char		*Jkanjitmp;
+	unsigned char	 Jkanjibuf[MinPhOutputLen];
+	unsigned char	*Jkanjipos;
+	unsigned char	*Jkanjitmp;
 	short		 Jkanjilen;
 
-	u_char		 Jdicinl;
-	u_char		 Jdicsaml;
+	unsigned char	 Jdicinl;
+	unsigned char	 Jdicsaml;
 	TypeDicSeg	 Jprevseg;
 
-	u_char		 Jfzkcount;
-	u_char		 Jfzk_ka_flg;
+	unsigned char	 Jfzkcount;
+	unsigned char	 Jfzk_ka_flg;
 	FREC		 Jfzktbl[MAXFREC];
 
-	u_char		 Jheadcode;
-	u_char		 Jheadlen;
+	unsigned char	 Jheadcode;
+	unsigned char	 Jheadlen;
 
-	u_char		 Jgobilen;
+	unsigned char	 Jgobilen;
 
 	TypeGram	 Jprevclgrm;
 	TypeCnct	 Jprevclrow;
-	u_char		 Jnextcllen;
+	unsigned char	 Jnextcllen;
 
 	short		 Jkhcount;
 	short		 Jnkhcount;
@@ -89,31 +89,31 @@ typedef struct global {
 
 	DICT		*Jcurdict;
 	DICTL		*Jdictlist;
-	u_char		*Jdicbuf;
-	u_char		*Jidxbuf;
+	unsigned char	*Jdicbuf;
+	unsigned char	*Jidxbuf;
 	TypeIdxOfs	*Jidxofs;
-	u_char		*Jaskknj[MaxKnjAskNumber];
-	u_char		*Jaskknj_k[MaxKnjAskNumber];
+	unsigned char	*Jaskknj[MaxKnjAskNumber];
+	unsigned char	*Jaskknj_k[MaxKnjAskNumber];
 
 	STDY		*Jcurstdy;
 
-	u_short		 Jsuuji_wbuf[NumWordBuf];
-	u_char		 Jsuuji_ubuf[NumKetaLength];
+	unsigned short	 Jsuuji_wbuf[NumWordBuf];
+	unsigned char	 Jsuuji_ubuf[NumKetaLength];
 	TypeClass	 Jsuuji_class;
-	u_char		 Jsuuji_comma;
-	u_char		 Jsuuji_keta;
-	u_char		*Jsuuji_yptr;
-	u_char		 Jsuuji_len;
-	u_char		 Jsuuji_exit;
-	u_short		*Jsuuji_wkeep;
-	u_char		*Jsuuji_ukeep;
+	unsigned char	 Jsuuji_comma;
+	unsigned char	 Jsuuji_keta;
+	unsigned char	*Jsuuji_yptr;
+	unsigned char	 Jsuuji_len;
+	unsigned char	 Jsuuji_exit;
+	unsigned short	*Jsuuji_wkeep;
+	unsigned char	*Jsuuji_ukeep;
 
-	u_char		 Jpeepyomi[MaxWdYomiLen * 2 + 1];
-	u_char		 Jpeepknj[MaxWdKanjiLen + 1];
+	unsigned char	 Jpeepyomi[MaxWdYomiLen * 2 + 1];
+	unsigned char	 Jpeepknj[MaxWdKanjiLen + 1];
 	TypeGram	 Jpeepgrm;
-	u_char		*Jpeepdptr;
-	u_char		*Jpeephptr;
-	u_char		*Jpeepkptr;
+	unsigned char	*Jpeepdptr;
+	unsigned char	*Jpeephptr;
+	unsigned char	*Jpeepkptr;
 	TypeDicSeg	 Jpeepidx;
 } Global;
 
@@ -124,7 +124,7 @@ typedef struct dictfile {
 	FILE		*fp;
 	int		 fd;
 
-	u_char		*buffer;
+	unsigned char	*buffer;
 	long		 bufsiz;
 
 	long		 idxstrt;
@@ -142,7 +142,7 @@ typedef struct stdyfile {
 	FILE		*fp;
 	int		 fd;
 
-	u_char		*header;
+	unsigned char	*header;
 
 	struct stdyfile	*link;
 } StdyFile;
@@ -165,7 +165,7 @@ typedef struct client {
 	WorkArea	*work;
 	StdyFile	*stdy;
 	short		 version;
-	u_char		 def_char[2];
+	unsigned char	 def_char[2];
 	uid_t		 uid;
 	struct client	*next;
 } Client;

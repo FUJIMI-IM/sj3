@@ -67,18 +67,18 @@ extern	char	*dict_dir;
 extern	int	dir_mode;
 extern	int	file_mode;
 
-static	u_char	buf1[YomiBufSize];
-static	u_char	buf2[YomiBufSize];
-static	u_char	buf3[YomiBufSize];
-static	u_char	buf4[YomiBufSize];
-static	u_char	kbuf[KanjiBufSize];
-static	u_char	skbuf[KanjiBufSize];
+static	unsigned char	buf1[YomiBufSize];
+static	unsigned char	buf2[YomiBufSize];
+static	unsigned char	buf3[YomiBufSize];
+static	unsigned char	buf4[YomiBufSize];
+static	unsigned char	kbuf[KanjiBufSize];
+static	unsigned char	skbuf[KanjiBufSize];
 
 static	jmp_buf	error_ret;
 static	WorkArea *worklist = NULL;	
 static	Client	*cur_cli;		
 
-static u_char defaultchar[2] = {(u_char)0x81, (u_char)0x40};
+static unsigned char defaultchar[2] = {(unsigned char)0x81, (unsigned char)0x40};
 static int  defuse=0, defuse2=0;
 
 DictFile *opendict();
@@ -86,7 +86,7 @@ int	closedict();
 StdyFile *openstdy();
 int	closestdy();
 
-u_char	*put_ndata(), *put_string();
+unsigned char	*put_ndata(), *put_string();
 
 
 
@@ -486,7 +486,7 @@ void
 exec_ph2knj (int mb_flag)
 {
 	int	i, j, l, stdy_size, buf_size, srchead = 0, srclen;
-	u_char	*p,*q;
+	unsigned char	*p,*q;
 
 	i = get_nstring(buf1, sizeof(buf1));
 
@@ -564,7 +564,7 @@ exec_cl2knj (int mb_flag)
 {
 	int	len, stdy_size, buf_size;
 	int	i, j, l;
-	u_char	*ptr, *q;
+	unsigned char	*ptr, *q;
 
 	len = get_int();
 	i = get_nstring(buf1, sizeof(buf1));
@@ -629,7 +629,7 @@ exec_nextcl (int mb_flag)
 {
 	int	mode, stdy_size, buf_size;
 	int	i, l;
-	u_char	*ptr, *q;
+	unsigned char	*ptr, *q;
 
 	mode = get_int();
 
@@ -682,7 +682,7 @@ exec_prevcl (int mb_flag)
 {
 	int	mode, stdy_size, buf_size;
 	int	i, l;
-	u_char	*ptr, *q;
+	unsigned char	*ptr, *q;
 
 	mode = get_int();
 
@@ -784,7 +784,7 @@ exec_cl2knj_all (int mb_flag)
 {
 	int	len, stdy_size, buf_size;
 	int	i, l;
-	u_char	*ptr, *q;
+	unsigned char	*ptr, *q;
 
 	len = get_int();
 	i = get_nstring(buf1, sizeof(buf1));
@@ -1082,7 +1082,7 @@ exec_getdict (int mb_flag)
 	TypeDicID	dicid;
 	int		err, buf_size, l;
 	DICTL		*dl;
-	u_char		*ptr, *q;
+	unsigned char	*ptr, *q;
 
 	
 	dicid = get_int();
@@ -1166,7 +1166,7 @@ exec_nextdict (int mb_flag)
 	TypeDicID	dicid;
 	int		err, buf_size, l;
 	DICTL		*dl;
-	u_char		*ptr, *q;
+	unsigned char	*ptr, *q;
 
 	
 	dicid = get_int();
@@ -1250,7 +1250,7 @@ exec_prevdict (int mb_flag)
 	TypeDicID	dicid;
 	int		err, buf_size, l;
 	DICTL		*dl;
-	u_char		*ptr, *q;
+	unsigned char	*ptr, *q;
 
 	
 	dicid = get_int();

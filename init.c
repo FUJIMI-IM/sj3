@@ -40,8 +40,8 @@
 void	seg_count(dict)
 DICT	*dict;
 {
-	u_char	*p;
-	u_char	*q;
+	unsigned char	*p;
+	unsigned char	*q;
 	TypeDicSeg	segcnt = 0;
 
 	if (dict-> getidx) {
@@ -61,7 +61,7 @@ DICT	*dict;
 void	mkidxtbl(dict)
 DICT	*dict;
 {
-	u_char	*p;
+	unsigned char	*p;
 	TypeDicSeg	seg;
 
 	if (!dict->getidx || !dict->getofs) return;

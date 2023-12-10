@@ -46,27 +46,27 @@ void	mvmemi();
 void	mkidxtbl();
 
 
-static int del_douon(TypeDicSeg seg, u_char* ptr, TypeDicOfs ofs);
+static int del_douon(TypeDicSeg seg, unsigned char* ptr, TypeDicOfs ofs);
 static int del_segment(TypeDicSeg seg);
 static void del_uidx(TypeDicSeg seg);
 static void del_stdy(TypeDicSeg seg, TypeDicOfs ofs, int size);
 
 
-u_int
-deldic(u_char* yomi, u_char* kanji, TypeGram hinsi)
+unsigned int
+deldic(unsigned char* yomi, unsigned char* kanji, TypeGram hinsi)
 {
-	u_char		yptr[MaxWdYomiLen + 1];
-	u_char		kptr[MaxWdKanjiLen + 1];
-	u_short		err;
+	unsigned char	yptr[MaxWdYomiLen + 1];
+	unsigned char	kptr[MaxWdKanjiLen + 1];
+	unsigned int	err;
 	int		knjlen;
 	TypeDicSeg	useg;
 	TypeDicOfs	ofs;
-	u_char		*p1, *p2, *p3;
+	unsigned char	*p1, *p2, *p3;
 	int		dblknum;
 	int		hblknum;
 	int		kblknum;
 	int		samlen;
-	u_char		*stp, *edp;
+	unsigned char	*stp, *edp;
 	int		size, len;
 
 	if ((err = addel_arg(yomi, kanji, hinsi, yptr, sizeof(yptr))) != 0)
@@ -131,9 +131,9 @@ deldic(u_char* yomi, u_char* kanji, TypeGram hinsi)
 
 
 static int
-del_douon(TypeDicSeg seg, u_char* ptr, TypeDicOfs ofs)
+del_douon(TypeDicSeg seg, unsigned char* ptr, TypeDicOfs ofs)
 {
-	u_char	*nxt, *p1, *p2;
+	unsigned char	*nxt, *p1, *p2;
 	int	size;
 	int	nlen, plen, len;
 
@@ -218,7 +218,8 @@ del_segment(TypeDicSeg seg)
 			else {
 				stdynum = styp -> styno;
 				StudyCount--;
-				mvmemi((u_char*)(styp + 1), (u_char*)styp,
+				mvmemi((unsigned char*)(styp + 1),
+				       (unsigned char*)styp,
 					sizeof(*styp) * (StudyCount - i));
 				continue;
 			}
@@ -239,7 +240,7 @@ del_segment(TypeDicSeg seg)
 static void
 del_uidx(TypeDicSeg seg)
 {
-	u_char	*p, *q;
+	unsigned char	*p, *q;
 	int	len;
 
 	p = get_idxptr(seg);
@@ -280,7 +281,8 @@ del_stdy(TypeDicSeg seg, TypeDicOfs ofs, int size)
 			else if (stdy -> offset == ofs) {
 				stdynum = stdy -> styno;
 				StudyCount--;
-				mvmemi((u_char*)(stdy + 1), (u_char*)stdy,
+				mvmemi((unsigned char*)(stdy + 1),
+				       (unsigned char*)stdy,
 					sizeof(*stdy) * (StudyCount - i));
 				continue;
 			}

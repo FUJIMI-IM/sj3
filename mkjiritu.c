@@ -49,10 +49,10 @@ static void dic_cl(void);
 void
 mkjiritu(int mode)
 {
-	u_char	chkind1;
-	u_char	chkind2;
+	unsigned char	chkind1;
+	unsigned char	chkind2;
 	JREC	*jrec;
-	u_char	*stb;
+	unsigned char	*stb;
 
 	headcode = headlen = 0;
 
@@ -95,7 +95,7 @@ mkjiritu(int mode)
 static void
 dic_mu(int mode)
 {
-	u_char	*tagp;
+	unsigned char	*tagp;
 	DICTL	*dp;
 
 	for (dp = dictlist ; dp ; dp = dp -> next) {
@@ -136,10 +136,10 @@ argjrec(int len, JREC* rec)
 	}
 
 	if (rec)
-		memcpy((u_char*)rec, (u_char*)jrec, sizeof(JREC));
+		memcpy((unsigned char*)rec, (unsigned char*)jrec, sizeof(JREC));
 	else
-		memset((u_char*)jrec, 0, sizeof(*jrec));
-	jrec -> jlen = (u_char)len;
+		memset((unsigned char*)jrec, 0, sizeof(*jrec));
+	jrec -> jlen = (unsigned char)len;
 
 	if (!maxjptr) {
 		maxjptr = jrec;
@@ -169,17 +169,17 @@ argjrec(int len, JREC* rec)
 static void
 dic_cl(void)
 {
-	u_char	*p;
-	u_short	pos;
+	unsigned char	*p;
+	unsigned short	pos;
 	int	len;
 	int	cmp;
 
 	if (!StudyExist()) return;
 
-	if ((pos = ClStudyIdx[(short) *cnvstart / ClStudyStep]) != (u_short)-1) {
+	if ((pos = ClStudyIdx[(short) *cnvstart / ClStudyStep]) != (unsigned short)-1) {
 
 		for (p = ClStudyDict + pos ; !iseocl(p) ; p = ClNextTag(p)) {
-			cmp = strncmp(cnvstart, (u_char*)ClYomiPos(p),
+			cmp = strncmp(cnvstart, (unsigned char*)ClYomiPos(p),
 					len = ClYomiLen(p));
 
 			if (cmp == MATCH) {

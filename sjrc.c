@@ -193,7 +193,7 @@ getword (s, word)
 char	*s;
 struct wordent	word[];
 {
-	u_char	c, cc;
+	unsigned char	c, cc;
 	char *p;
 	int	i, wcount;
 
@@ -280,28 +280,28 @@ struct wordent	word[];
 
 int
 IsTerminator (c)
-u_char	c;
+unsigned char	c;
 {
 	return (c == '\n') ? 1 : 0;
 }
 
 int
 isTerminator (c)
-u_char	c;
+unsigned char	c;
 {
 	return (c == '#') ? 1 : 0;
 }
 
 int
 IsEscape (c)
-u_char	c;
+unsigned char	c;
 {
 	return (c == '\\') ? 1 : 0;
 }
 
 int
 IsDelimitor (c)
-u_char	c;
+unsigned char	c;
 {
 	return (c == ' ' || c == '\t' || c == '.') ? 1 : 0;
 }

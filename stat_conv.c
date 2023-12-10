@@ -126,11 +126,11 @@ pointer_clear ()
 
 typedef struct	_SaveSet {
 	wchar16_t	out_buf[BUFFLENGTH * 2];
-	u_short out_mode[BUFFLENGTH * 2];
-	u_short out_point;
-	u_short ha_point;
+	unsigned short out_mode[BUFFLENGTH * 2];
+	unsigned short out_point;
+	unsigned short ha_point;
 	wchar16_t	Halpha[BUFFLENGTH];
-	u_char	in_mode[BUFFLENGTH * 2];
+	unsigned char	in_mode[BUFFLENGTH * 2];
 } SaveSet;
 
 static SaveSet		save_set0;
@@ -146,9 +146,9 @@ StoreSaveSet ()
 		sv->out_point = cv->out_point;
 		sv->ha_point = cv->ha_point;
 		memcpy (sv->out_mode, cv->out_mode, 
-			cv->out_point * sizeof(u_short));
+			cv->out_point * sizeof(unsigned short));
 		memcpy (sv->in_mode, cv->in_mode,
-			cv->out_point * sizeof(u_char));
+			cv->out_point * sizeof(unsigned char));
 		wscpy (sv->Halpha, cv->Halpha);
 		wscpy (sv->out_buf, cv->out_buf);
 	}
@@ -165,9 +165,9 @@ RestoreSaveSet ()
 		cv->out_point = sv->out_point;
 		cv->ha_point = sv->ha_point;
 		memcpy (cv->out_mode, sv->out_mode, 
-			sv->out_point * sizeof(u_short));
+			sv->out_point * sizeof(unsigned short));
 		memcpy (cv->in_mode, sv->in_mode, 
-			sv->out_point * sizeof(u_char));
+			sv->out_point * sizeof(unsigned char));
 		wscpy (cv->Halpha, sv->Halpha);
 		wscpy (cv->out_buf, sv->out_buf);
 	}
@@ -390,7 +390,7 @@ stat_conv ()
 	extern int	allways_buff;	
 	int	inc;
         int    i;
-        u_short         svlen;  
+        unsigned short  svlen;
 
 	cv = GetConversion ();
 	cv->word_regist = 0;

@@ -62,9 +62,9 @@ static int		 defuse = 0;
 static long		*dicid_list = NULL;
 static int		 dicid_num = 0;
 
-static u_char buf1[YomiBufSize];
-static u_char buf2[YomiBufSize];
-static u_char kbuf[KanjiBufSize];
+static unsigned char buf1[YomiBufSize];
+static unsigned char buf2[YomiBufSize];
+static unsigned char kbuf[KanjiBufSize];
 
 static int
 set_sys_code(void)
@@ -382,9 +382,9 @@ server_dead:
 }
 
 int
-sj3_getkan(u_char *yomi, SJ3_BUNSETU *bun, u_char *knj, int knjsiz)
+sj3_getkan(unsigned char *yomi, SJ3_BUNSETU *bun, unsigned char *knj, int knjsiz)
 {
-	u_char	*src;
+	unsigned char	*src;
 	int	 buncnt = 0;
 	int	 len;
 	int	 stysiz = client.stdy_size;
@@ -437,9 +437,9 @@ sj3_getkan(u_char *yomi, SJ3_BUNSETU *bun, u_char *knj, int knjsiz)
 }
 
 int
-sj3_getkan_euc(u_char *yomi, SJ3_BUNSETU *bun, u_char *knj, int knjsiz)
+sj3_getkan_euc(unsigned char *yomi, SJ3_BUNSETU *bun, unsigned char *knj, int knjsiz)
 {
-	u_char		*src, *yp, *kp, *khp;
+	unsigned char		*src, *yp, *kp, *khp;
 	int		 buncnt = 0, i;
 	int		 len, flag, mflag = 0;
 	int		 stysiz = client.stdy_size;
@@ -458,7 +458,7 @@ sj3_getkan_euc(u_char *yomi, SJ3_BUNSETU *bun, u_char *knj, int knjsiz)
 		yp = buf1;
 		if (knjsiz > sizeof(kbuf)) {
 			mflag = 1;
-			kp = khp = (u_char *)malloc(knjsiz);
+			kp = khp = (unsigned char *)malloc(knjsiz);
 		} else {
 			kp = khp = kbuf;
 		}
@@ -539,7 +539,7 @@ sj3_getkan_euc(u_char *yomi, SJ3_BUNSETU *bun, u_char *knj, int knjsiz)
 }
 
 int
-sj3_getkan_mb(u_char *yomi, SJ3_BUNSETU *bun, u_char *knj, int knjsiz)
+sj3_getkan_mb(unsigned char *yomi, SJ3_BUNSETU *bun, unsigned char *knj, int knjsiz)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -550,7 +550,7 @@ sj3_getkan_mb(u_char *yomi, SJ3_BUNSETU *bun, u_char *knj, int knjsiz)
 }
 
 int
-sj3_douoncnt(u_char *yomi)
+sj3_douoncnt(unsigned char *yomi)
 {
 	int	i;
 
@@ -571,10 +571,10 @@ sj3_douoncnt(u_char *yomi)
 }
 
 int
-sj3_douoncnt_euc(u_char *yomi)
+sj3_douoncnt_euc(unsigned char *yomi)
 {
 	int	 i, l, flag;
-	u_char	*yp;
+	unsigned char	*yp;
 
 	if ((i = strlen(yomi)) > SJ3_BUNSETU_YOMI)
 		return 0;
@@ -605,7 +605,7 @@ sj3_douoncnt_euc(u_char *yomi)
 }
 
 int
-sj3_douoncnt_mb(u_char *yomi)
+sj3_douoncnt_mb(unsigned char *yomi)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -616,7 +616,7 @@ sj3_douoncnt_mb(u_char *yomi)
 }
 
 int
-sj3_getdouon(u_char *yomi, SJ3_DOUON *dou)
+sj3_getdouon(unsigned char *yomi, SJ3_DOUON *dou)
 {
 	int	i;
 
@@ -636,7 +636,7 @@ sj3_getdouon(u_char *yomi, SJ3_DOUON *dou)
 }
 
 int
-sj3_getdouon_euc(u_char *yomi, SJ3_DOUON *dou)
+sj3_getdouon_euc(unsigned char *yomi, SJ3_DOUON *dou)
 {
 	int	i, j, l;
 
@@ -680,7 +680,7 @@ sj3_getdouon_euc(u_char *yomi, SJ3_DOUON *dou)
 }
 
 int
-sj3_getdouon_mb(u_char *yomi, SJ3_DOUON *dou)
+sj3_getdouon_mb(unsigned char *yomi, SJ3_DOUON *dou)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -704,7 +704,7 @@ sj3_gakusyuu(SJ3_STUDYREC *dcid)
 }
 
 int
-sj3_gakusyuu2(u_char *yomi1, u_char *yomi2, SJ3_STUDYREC *dcid)
+sj3_gakusyuu2(unsigned char *yomi1, unsigned char *yomi2, SJ3_STUDYREC *dcid)
 {
 	if (sj3_bunsetu_gakusyuu(&client, yomi1, yomi2, dcid, MBCODE_SJIS) ==
 	    ERROR) {
@@ -718,10 +718,10 @@ sj3_gakusyuu2(u_char *yomi1, u_char *yomi2, SJ3_STUDYREC *dcid)
 }
 
 int
-sj3_gakusyuu2_euc(u_char *yomi1, u_char *yomi2, SJ3_STUDYREC *dcid)
+sj3_gakusyuu2_euc(unsigned char *yomi1, unsigned char *yomi2, SJ3_STUDYREC *dcid)
 {
 	int l, flag;
-	u_char *y1p, *y2p;
+	unsigned char *y1p, *y2p;
 
 	if (client.svr_version == 1) {
 		defuse = 0;
@@ -753,7 +753,7 @@ sj3_gakusyuu2_euc(u_char *yomi1, u_char *yomi2, SJ3_STUDYREC *dcid)
 }
 
 int
-sj3_gakusyuu2_mb(u_char *yomi1, u_char *yomi2, SJ3_STUDYREC *dcid)
+sj3_gakusyuu2_mb(unsigned char *yomi1, unsigned char *yomi2, SJ3_STUDYREC *dcid)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -764,7 +764,7 @@ sj3_gakusyuu2_mb(u_char *yomi1, u_char *yomi2, SJ3_STUDYREC *dcid)
 }
 
 int
-sj3_touroku(u_char *yomi, u_char *kanji, int code)
+sj3_touroku(unsigned char *yomi, unsigned char *kanji, int code)
 {
 	if (sj3_tango_touroku(&client, udicid, yomi, kanji, code,
 	    MBCODE_SJIS)) {
@@ -791,11 +791,11 @@ sj3_touroku(u_char *yomi, u_char *kanji, int code)
 }
 
 int
-sj3_touroku_euc(u_char *yomi, u_char *kanji, int code)
+sj3_touroku_euc(unsigned char *yomi, unsigned char *kanji, int code)
 {
 	int l, flag;
-	u_char *yp;
-	u_char *kp;
+	unsigned char *yp;
+	unsigned char *kp;
 	if (client.svr_version == 1) {
 		defuse = 0;
 		l = sj3_str_euctosjis(buf1, sizeof(buf1), yomi,
@@ -839,7 +839,7 @@ sj3_touroku_euc(u_char *yomi, u_char *kanji, int code)
 }
 
 int
-sj3_touroku_mb(u_char *yomi, u_char *kanji, int code)
+sj3_touroku_mb(unsigned char *yomi, unsigned char *kanji, int code)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -850,7 +850,7 @@ sj3_touroku_mb(u_char *yomi, u_char *kanji, int code)
 }
 
 int
-sj3_syoukyo(u_char *yomi, u_char *kanji, int code)
+sj3_syoukyo(unsigned char *yomi, unsigned char *kanji, int code)
 {
 	if (sj3_tango_sakujo(&client, udicid, yomi, kanji, code, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -872,11 +872,11 @@ sj3_syoukyo(u_char *yomi, u_char *kanji, int code)
 }
 
 int
-sj3_syoukyo_euc(u_char *yomi, u_char *kanji, int code)
+sj3_syoukyo_euc(unsigned char *yomi, unsigned char *kanji, int code)
 {
 	int l, flag;
-	u_char *yp;
-	u_char *kp;
+	unsigned char *yp;
+	unsigned char *kp;
 	if (client.svr_version == 1) {
 		defuse = 0;
 		l = sj3_str_euctosjis(buf1, sizeof(buf1), yomi,
@@ -916,7 +916,7 @@ sj3_syoukyo_euc(u_char *yomi, u_char *kanji, int code)
 }
 
 int
-sj3_syoukyo_mb(u_char *yomi, u_char *kanji, int code)
+sj3_syoukyo_mb(unsigned char *yomi, unsigned char *kanji, int code)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -927,7 +927,7 @@ sj3_syoukyo_mb(u_char *yomi, u_char *kanji, int code)
 }
 
 int
-sj3_getdict(u_char *buf)
+sj3_getdict(unsigned char *buf)
 {
 	if (sj3_tango_syutoku(&client, udicid, buf, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -940,7 +940,7 @@ sj3_getdict(u_char *buf)
 }
 
 int
-sj3_getdict_euc(u_char *buf)
+sj3_getdict_euc(unsigned char *buf)
 {
 	int l, ll, slen;
 
@@ -982,7 +982,7 @@ sj3_getdict_euc(u_char *buf)
 }
 
 int
-sj3_getdict_mb(u_char *buf)
+sj3_getdict_mb(unsigned char *buf)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -993,7 +993,7 @@ sj3_getdict_mb(u_char *buf)
 }
 
 int
-sj3_nextdict(u_char *buf)
+sj3_nextdict(unsigned char *buf)
 {
 	if (sj3_tango_jikouho(&client, udicid, buf, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -1006,7 +1006,7 @@ sj3_nextdict(u_char *buf)
 }
 
 int
-sj3_nextdict_euc(u_char *buf)
+sj3_nextdict_euc(unsigned char *buf)
 {
 	int l, ll, slen;
 
@@ -1048,7 +1048,7 @@ sj3_nextdict_euc(u_char *buf)
 }
 
 int
-sj3_nextdict_mb(u_char *buf)
+sj3_nextdict_mb(unsigned char *buf)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();
@@ -1059,7 +1059,7 @@ sj3_nextdict_mb(u_char *buf)
 }
 
 int
-sj3_prevdict(u_char *buf)
+sj3_prevdict(unsigned char *buf)
 {
 	if (sj3_tango_maekouho(&client, udicid, buf, MBCODE_SJIS)) {
 		if (client.fd < 0) {
@@ -1072,7 +1072,7 @@ sj3_prevdict(u_char *buf)
 }
 
 int
-sj3_prevdict_euc(u_char *buf)
+sj3_prevdict_euc(unsigned char *buf)
 {
 	int l, ll, slen;
 
@@ -1114,7 +1114,7 @@ sj3_prevdict_euc(u_char *buf)
 }
 
 int
-sj3_prevdict_mb(u_char *buf)
+sj3_prevdict_mb(unsigned char *buf)
 {
 	if (_sys_code == SYS_NOTDEF)
 		_sys_code = set_sys_code();

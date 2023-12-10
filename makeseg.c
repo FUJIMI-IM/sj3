@@ -52,16 +52,16 @@ extern	DouonRec *douon_ptr;
 extern	FILE	*outfp;
 extern	int	douon_num;
 
-static	u_char	segindex[MainSegmentLength];	
+static	unsigned char	segindex[MainSegmentLength];
 static	int	idxpos = 0;		
 static	int	idxnum = 0;		
 
 
-static u_char*
-set_ofsask(u_char* src, u_char* dst)
+static unsigned char*
+set_ofsask(unsigned char* src, unsigned char* dst)
 {
 	int	len;
-	u_char	*ptr;
+	unsigned char	*ptr;
 	OffsetRec *ofsrec;
 
 	
@@ -109,9 +109,9 @@ set_ofsask(u_char* src, u_char* dst)
 
 
 size_t
-make_knjstr(u_char* src, int len, u_char* dst)
+make_knjstr(unsigned char* src, int len, unsigned char* dst)
 {
-	u_char	*keep = dst;
+	unsigned char	*keep = dst;
 
 	while (len > 0) {
 		switch (*src & KanjiModeMask) {
@@ -160,8 +160,8 @@ static int
 make_knjask(void)
 {
 	int	i;
-	u_char	*p;
-	u_char	buf[128];
+	unsigned char	*p;
+	unsigned char	buf[128];
 	int	len;
 	int	tlen = 0;
 
@@ -175,7 +175,7 @@ make_knjask(void)
 		Free(askknj[i] -> kptr);
 
 		
-		p = (u_char *)Malloc(len);
+		p = (unsigned char *)Malloc(len);
 		if (!p) {
 			fprintf(stderr, "\245\341\245\342\245\352\244\254\302\255\244\352\244\336\244\273\244\363\n");
 			exit(1);
@@ -197,15 +197,15 @@ make_knjask(void)
 void
 makeseg(void)
 {
-	u_char	buf[MainSegmentLength];
+	unsigned char	buf[MainSegmentLength];
 	DouonRec *drec;
 	HinsiRec *hrec;
 	KanjiRec *krec;
 	int	i, j, k;
 	int	slen;
-	u_char	*dst;
-	u_char	*sdst;
-	u_char	*p, *q;
+	unsigned char	*dst;
+	unsigned char	*sdst;
+	unsigned char	*p, *q;
 
 #ifndef	HEHE
 #define	datset(i)	{ if (dst >= buf+sizeof(buf)) goto err; *dst++ = i; } 
@@ -375,7 +375,7 @@ err:
 }
 
 static void
-put4byte(u_char* p, size_t n)
+put4byte(unsigned char* p, size_t n)
 {
         p += 3;
         *p-- = n; n >>= 8;
@@ -385,11 +385,11 @@ put4byte(u_char* p, size_t n)
 }
 
 void
-makehead(u_char* dict_name)
+makehead(unsigned char* dict_name)
 {
-        u_char  header[HeaderLength + CommentLength];
+        unsigned char  header[HeaderLength + CommentLength];
         long    i;
-        u_char  *p;
+        unsigned char  *p;
 	time_t	curtime;
 
 #define IndexPos        (HeaderLength + CommentLength)

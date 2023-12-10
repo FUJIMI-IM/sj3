@@ -43,19 +43,19 @@
 #include "kanakan.h"
 
 
-static u_int checkdict(u_char* kanji, TypeGram grm);
-static int cal_nextym(u_char* ptr);
+static unsigned int checkdict(unsigned char* kanji, TypeGram grm);
+static int cal_nextym(unsigned char* ptr);
 static int usr_freelen(void);
 static void sprt_seg(TypeDicSeg seg, TypeDicOfs ofs);
-static void apnd_uidx(TypeDicSeg seg, u_char* yomi, int len);
+static void apnd_uidx(TypeDicSeg seg, unsigned char* yomi, int len);
 
 
-u_int
-adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
+unsigned int
+adddic(unsigned char* yomi, unsigned char* kanji, TypeGram  hinsi)
 {
-	u_int		err;			
-	u_char		yptr[MaxWdYomiLen+1];	
-	u_char		kptr[MaxWdKanjiLen+1];	
+	unsigned int	err;
+	unsigned char	yptr[MaxWdYomiLen+1];
+	unsigned char	kptr[MaxWdKanjiLen+1];
 	int		klen;			
 	TypeDicSeg	segnum;			
 	int		saml;			
@@ -68,10 +68,10 @@ adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 	TypeDicOfs	oldsiz;			
 	TypeDicOfs	fresiz;			
 	TypeIdxOfs	freidx;			
-	u_char		*douptr;
-	u_char		*dstptr;
+	unsigned char	*douptr;
+	unsigned char	*dstptr;
 	TypeDicOfs	pos;
-	u_char		*p1;			
+	unsigned char	*p1;
 	int		i;
 	int		nlen, plen;
 	int		size;
@@ -197,7 +197,7 @@ adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 	douptr = dicbuf + douofs;
 
 	if (nxtask) {
-		u_char	*tp;
+		unsigned char	*tp;
 
 		size = getsize(douptr) - nxtask;
 		plen = getplen(douptr) + nxtask;
@@ -263,7 +263,7 @@ adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 		}
 
 		for (p1 = ClStudyDict ; !iseocl(p1) ; p1 = ClNextTag(p1)) {
-			err = strncmp(yptr, (u_char*)ClYomiPos(p1),
+			err = strncmp(yptr, (unsigned char*)ClYomiPos(p1),
 					(int)ClYomiLen(p1));
 			if (err == MATCH) {
 				delclsub(p1);		
@@ -294,14 +294,14 @@ adddic(u_char* yomi, u_char* kanji, TypeGram  hinsi)
 
 
 static int
-checksub(u_char* kanji, TypeGram grm)
+checksub(unsigned char* kanji, TypeGram grm)
 {
-	u_char	*tagp;		
-	u_char	*ptr;
-	u_char	*endp;
+	unsigned char	*tagp;
+	unsigned char	*ptr;
+	unsigned char	*endp;
 	int	flg, nlen;
 	int	dounum;
-	u_char	buf[MaxWdKanjiLen + 1];
+	unsigned char	buf[MaxWdKanjiLen + 1];
 
 	dicinl = cnvlen;
 	dicsaml = 0;
@@ -336,8 +336,8 @@ checksub(u_char* kanji, TypeGram grm)
 }
 
 
-static u_int
-checkdict(u_char* kanji, TypeGram grm)
+static unsigned int
+checkdict(unsigned char* kanji, TypeGram grm)
 {
 	DICTL	*dp;
 	int	dounum = 0;
@@ -363,10 +363,10 @@ checkdict(u_char* kanji, TypeGram grm)
 
 
 static int
-cal_nextym(u_char* ptr)
+cal_nextym(unsigned char* ptr)
 {
 	int	count = 0;
-	u_char	*src;
+	unsigned char	*src;
 	int	len;
 	
 	if (!segend(ptr)) {
@@ -389,7 +389,7 @@ cal_nextym(u_char* ptr)
 static int
 usr_freelen(void)
 {
-	u_char* ptr;
+	unsigned char* ptr;
 
 	ptr = segtop();
 	while (!segend(ptr)) ptr += getsize(ptr);
@@ -402,14 +402,14 @@ static void
 sprt_seg(TypeDicSeg seg, TypeDicOfs ofs)
 {
 	TypeDicSeg	s;
-	u_char	*pos;
-	u_char	*p;
-	u_char	*q;
+	unsigned char	*pos;
+	unsigned char	*p;
+	unsigned char	*q;
 	int		i;
 	int		j;
 	int		ylen, nlen;
 	TypeDicID	dicid;
-	u_char		yomi[MaxWdYomiLen];
+	unsigned char		yomi[MaxWdYomiLen];
 	STDYIN		*stdy;
 
 	for (s = curdict->segunit - 1 ; s >= seg ; s--) {
@@ -474,10 +474,10 @@ sprt_seg(TypeDicSeg seg, TypeDicOfs ofs)
 
 
 static void
-apnd_uidx(TypeDicSeg seg, u_char* yomi, int len)
+apnd_uidx(TypeDicSeg seg, unsigned char* yomi, int len)
 {
-	u_char	*p;
-	u_char	*q;
+	unsigned char	*p;
+	unsigned char	*q;
 
 	p = get_idxptr(seg);
 	while (*p++) ;

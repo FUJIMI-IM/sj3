@@ -40,9 +40,9 @@
 
 int	terminate(right, yomi)
 TypeCnct	right;
-u_char		*yomi;
+unsigned char	*yomi;
 {
-	u_char	ch;
+	unsigned char	ch;
 
 
 	if ((yomi > cnvstart) && (Chrtbl[*(yomi - 1)] & NUMBER))

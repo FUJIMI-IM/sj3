@@ -46,7 +46,7 @@ ph_setsty (CLREC *clrec)
 {
 	JREC		*jrec;
 	TypeDicOfs	offset;
-	u_char		*ptr;
+	unsigned char	*ptr;
 	STDYIN		*sptr;
 
 	if (!seldict((jrec = clrec -> jnode) -> dicid)) {

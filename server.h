@@ -45,16 +45,16 @@ void put_flush(void);
 void put_byte(int c);
 void put_work(int c);
 void put_int(int c);
-u_char *put_string(u_char *p);
-u_char *put_ndata(u_char *p, int n);
+unsigned char *put_string(unsigned char *p);
+unsigned char *put_ndata(unsigned char *p, int n);
 void get_buf(void);
 int get_byte(void);
 int get_word(void);
 #ifndef NO_GET_INT
 int get_int(void);
 #endif
-int get_nstring(u_char *p, int n);
-u_char *get_ndata(u_char *p, int n);
+int get_nstring(unsigned char *p, int n);
+unsigned char *get_ndata(unsigned char *p, int n);
 
 /* error.c */
 int open_debug(void);

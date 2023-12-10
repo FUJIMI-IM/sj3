@@ -50,11 +50,11 @@ mkbunsetu(void)
 {
 	JREC	*jrec;
 	TypeGram	hinsi;
-	u_char	*cnj;
+	unsigned char	*cnj;
 	CREC	crec[4];
 	int	count;
 	TypeCnct	right;
-	u_char	*next;
+	unsigned char	*next;
 	int	i;
 
 	fzkcount = 0;
@@ -132,8 +132,8 @@ argclrec(int len)
 		if (rec -> jnode) (rec -> jnode)--;
 	}
 
-	memset((u_char*)rec, 0, sizeof(*rec));
-	rec -> cllen = rec -> cl2len = (u_char)len;
+	memset((unsigned char*)rec, 0, sizeof(*rec));
+	rec -> cllen = rec -> cl2len = (unsigned char)len;
 
 	if (!maxclptr) {
 		maxclptr = rec;

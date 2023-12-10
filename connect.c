@@ -40,7 +40,7 @@
 #include "sj_connect.h"
 #include "sj_right.h"
 
-static	u_char	mizen1[] = {
+static	unsigned char	mizen1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -72,7 +72,7 @@ static	u_char	mizen1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	mizen2[] = {
+static	unsigned char	mizen2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -104,7 +104,7 @@ static	u_char	mizen2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mizen3[] = {
+static	unsigned char	mizen3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -136,7 +136,7 @@ static	u_char	mizen3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mizen4[] = {
+static	unsigned char	mizen4[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -168,7 +168,7 @@ static	u_char	mizen4[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mizen5[] = {
+static	unsigned char	mizen5[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -200,7 +200,7 @@ static	u_char	mizen5[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	arou[] = {
+static	unsigned char	arou[] = {
 		wo_x+ttatte_o +ttara_o +tte1_o +tte2_x +ppanasi_x +ppoi_x +ue_x,
 		uti_x +oite_x +okeru_x +ori_x +ka1_x +ka2_o +kai_x +kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -232,7 +232,7 @@ static	u_char	arou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	you1[] = {
+static	unsigned char	you1[] = {
 		wo_x+ttatte_o +ttara_o +tte1_o +tte2_x +ppanasi_x +ppoi_x +ue_x,
 		uti_x +oite_x +okeru_x +ori_x +ka1_x +ka2_o +kai_x +kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -264,7 +264,7 @@ static	u_char	you1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	karou[] = {
+static	unsigned char	karou[] = {
 		wo_x+ttatte_o +ttara_x +tte1_o +tte2_x +ppanasi_x +ppoi_x +ue_x,
 		uti_x +oite_x +okeru_x +ori_x +ka1_x +ka2_o +kai_x +kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -297,7 +297,7 @@ static	u_char	karou[] = {
 	};
 		
 
-static	u_char	darou[] = {
+static	unsigned char	darou[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_o+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -329,7 +329,7 @@ static	u_char	darou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	deshou[] = {
+static	unsigned char	deshou[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -361,7 +361,7 @@ static	u_char	deshou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ko[] = {
+static	unsigned char	ko[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -393,7 +393,7 @@ static	u_char	ko[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	bekara[] = {
+static	unsigned char	bekara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -425,7 +425,7 @@ static	u_char	bekara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tagara[] = {
+static	unsigned char	tagara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -457,7 +457,7 @@ static	u_char	tagara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	si1[] = {
+static	unsigned char	si1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -489,7 +489,7 @@ static	u_char	si1[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ji[] = {
+static	unsigned char	ji[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -521,7 +521,7 @@ static	u_char	ji[] = {
 		yasui_o+yoi_o+yaru_x+ttarasii_x
 	};
 		
-static	u_char	age[] = {
+static	unsigned char	age[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -553,7 +553,7 @@ static	u_char	age[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	i[] = {
+static	unsigned char	i[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -585,7 +585,7 @@ static	u_char	i[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	e[] = {
+static	unsigned char	e[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -617,7 +617,7 @@ static	u_char	e[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kake[] = {
+static	unsigned char	kake[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -649,7 +649,7 @@ static	u_char	kake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kane2[] = {
+static	unsigned char	kane2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -681,7 +681,7 @@ static	u_char	kane2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sugi[] = {
+static	unsigned char	sugi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -713,7 +713,7 @@ static	u_char	sugi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	deki[] = {
+static	unsigned char	deki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -745,7 +745,7 @@ static	u_char	deki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mi[] = {
+static	unsigned char	mi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -777,7 +777,7 @@ static	u_char	mi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sase[] = {
+static	unsigned char	sase[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -809,7 +809,7 @@ static	u_char	sase[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	rare[] = {
+static	unsigned char	rare[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -841,7 +841,7 @@ static	u_char	rare[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	itadake[] = {
+static	unsigned char	itadake[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -873,7 +873,7 @@ static	u_char	itadake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	exp[] = {
+static	unsigned char	exp[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -905,7 +905,7 @@ static	u_char	exp[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	renyou1[] = {
+static	unsigned char	renyou1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -937,7 +937,7 @@ static	u_char	renyou1[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	renyou3[] = {
+static	unsigned char	renyou3[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -969,7 +969,7 @@ static	u_char	renyou3[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	renyou4[] = {
+static	unsigned char	renyou4[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1001,7 +1001,7 @@ static	u_char	renyou4[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	renyou5[] = {
+static	unsigned char	renyou5[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1033,7 +1033,7 @@ static	u_char	renyou5[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	renyou7[] = {
+static	unsigned char	renyou7[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1065,7 +1065,7 @@ static	u_char	renyou7[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	renyou8[] = {
+static	unsigned char	renyou8[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1097,7 +1097,7 @@ static	u_char	renyou8[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sa5renyou1[] = {
+static	unsigned char	sa5renyou1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1129,7 +1129,7 @@ static	u_char	sa5renyou1[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sa5renyou3[] = {
+static	unsigned char	sa5renyou3[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1161,7 +1161,7 @@ static	u_char	sa5renyou3[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sa5renyou4[] = {
+static	unsigned char	sa5renyou4[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -1193,7 +1193,7 @@ static	u_char	sa5renyou4[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	krenyou[] = {
+static	unsigned char	krenyou[] = {
 		wo_x+ttatte_o+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1225,7 +1225,7 @@ static	u_char	krenyou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	drenyou1[] = {
+static	unsigned char	drenyou1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1257,7 +1257,7 @@ static	u_char	drenyou1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	drenyou2[] = {
+static	unsigned char	drenyou2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_o+okeru_o+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1289,7 +1289,7 @@ static	u_char	drenyou2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	drenyou3[] = {
+static	unsigned char	drenyou3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1321,7 +1321,7 @@ static	u_char	drenyou3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	onbin1[] = {
+static	unsigned char	onbin1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1354,7 +1354,7 @@ static	u_char	onbin1[] = {
 	};
 		
 
-static	u_char	onbin2[] = {
+static	unsigned char	onbin2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1386,7 +1386,7 @@ static	u_char	onbin2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	onbin3[] = {
+static	unsigned char	onbin3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1418,7 +1418,7 @@ static	u_char	onbin3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	deshi[] = {
+static	unsigned char	deshi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1450,7 +1450,7 @@ static	u_char	deshi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	axtu[] = {
+static	unsigned char	axtu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1482,7 +1482,7 @@ static	u_char	axtu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	onbin6[] = {
+static	unsigned char	onbin6[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1514,7 +1514,7 @@ static	u_char	onbin6[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	onbin8[] = {
+static	unsigned char	onbin8[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1546,7 +1546,7 @@ static	u_char	onbin8[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ari1[] = {
+static	unsigned char	ari1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1578,7 +1578,7 @@ static	u_char	ari1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ari2[] = {
+static	unsigned char	ari2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1610,7 +1610,7 @@ static	u_char	ari2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ari3[] = {
+static	unsigned char	ari3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1642,7 +1642,7 @@ static	u_char	ari3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	iki[] = {
+static	unsigned char	iki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1674,7 +1674,7 @@ static	u_char	iki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	itasi[] = {
+static	unsigned char	itasi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1706,7 +1706,7 @@ static	u_char	itasi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	itadaki[] = {
+static	unsigned char	itadaki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1738,7 +1738,7 @@ static	u_char	itadaki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ori2[] = {
+static	unsigned char	ori2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1770,7 +1770,7 @@ static	u_char	ori2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	gataku[] = {
+static	unsigned char	gataku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1802,7 +1802,7 @@ static	u_char	gataku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ki[] = {
+static	unsigned char	ki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1834,7 +1834,7 @@ static	u_char	ki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	fzkki[] = {
+static	unsigned char	fzkki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1866,7 +1866,7 @@ static	u_char	fzkki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	deha[] = {
+static	unsigned char	deha[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1898,7 +1898,7 @@ static	u_char	deha[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	kudasai[] = {
+static	unsigned char	kudasai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1930,7 +1930,7 @@ static	u_char	kudasai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	gozai[] = {
+static	unsigned char	gozai[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1962,7 +1962,7 @@ static	u_char	gozai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	gotoku[] = {
+static	unsigned char	gotoku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -1994,7 +1994,7 @@ static	u_char	gotoku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	beku[] = {
+static	unsigned char	beku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2026,7 +2026,7 @@ static	u_char	beku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	soude[] = {
+static	unsigned char	soude[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2058,7 +2058,7 @@ static	u_char	soude[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	souni[] = {
+static	unsigned char	souni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2090,7 +2090,7 @@ static	u_char	souni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tagari[] = {
+static	unsigned char	tagari[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2122,7 +2122,7 @@ static	u_char	tagari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	taku[] = {
+static	unsigned char	taku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2154,7 +2154,7 @@ static	u_char	taku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	de[] = {
+static	unsigned char	de[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2186,7 +2186,7 @@ static	u_char	de[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	naide[] = {
+static	unsigned char	naide[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2218,7 +2218,7 @@ static	u_char	naide[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	naku[] = {
+static	unsigned char	naku[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2250,7 +2250,7 @@ static	u_char	naku[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nasai[] = {
+static	unsigned char	nasai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2282,7 +2282,7 @@ static	u_char	nasai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	fuuni[] = {
+static	unsigned char	fuuni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2314,7 +2314,7 @@ static	u_char	fuuni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	yori2[] = {
+static	unsigned char	yori2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2346,7 +2346,7 @@ static	u_char	yori2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	rashuu[] = {
+static	unsigned char	rashuu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2378,7 +2378,7 @@ static	u_char	rashuu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dshuusi1[] = {
+static	unsigned char	dshuusi1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_o+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2410,7 +2410,7 @@ static	u_char	dshuusi1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dshuusi2[] = {
+static	unsigned char	dshuusi2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2442,7 +2442,7 @@ static	u_char	dshuusi2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	gotosi[] = {
+static	unsigned char	gotosi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2474,7 +2474,7 @@ static	u_char	gotosi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	besi[] = {
+static	unsigned char	besi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2506,7 +2506,7 @@ static	u_char	besi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	zu[] = {
+static	unsigned char	zu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2538,7 +2538,7 @@ static	u_char	zu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	souda[] = {
+static	unsigned char	souda[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_o+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2570,7 +2570,7 @@ static	u_char	souda[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mai[] = {
+static	unsigned char	mai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2602,7 +2602,7 @@ static	u_char	mai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mitaida[] = {
+static	unsigned char	mitaida[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2634,7 +2634,7 @@ static	u_char	mitaida[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	shuusi[] = {
+static	unsigned char	shuusi[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2666,7 +2666,7 @@ static	u_char	shuusi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kshuusi[] = {
+static	unsigned char	kshuusi[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2698,7 +2698,7 @@ static	u_char	kshuusi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	zaru[] = {
+static	unsigned char	zaru[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -2730,7 +2730,7 @@ static	u_char	zaru[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	soudesu[] = {
+static	unsigned char	soudesu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2762,7 +2762,7 @@ static	u_char	soudesu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ta[] = {
+static	unsigned char	ta[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2794,7 +2794,7 @@ static	u_char	ta[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tai[] = {
+static	unsigned char	tai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2826,7 +2826,7 @@ static	u_char	tai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	desu[] = {
+static	unsigned char	desu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2858,7 +2858,7 @@ static	u_char	desu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nai[] = {
+static	unsigned char	nai[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2890,7 +2890,7 @@ static	u_char	nai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nu[] = {
+static	unsigned char	nu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2922,7 +2922,7 @@ static	u_char	nu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	masu[] = {
+static	unsigned char	masu[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_o+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -2954,7 +2954,7 @@ static	u_char	masu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nn2[] = {
+static	unsigned char	nn2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -2986,7 +2986,7 @@ static	u_char	nn2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	rasii[] = {
+static	unsigned char	rasii[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -3018,7 +3018,7 @@ static	u_char	rasii[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	drentai1[] = {
+static	unsigned char	drentai1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3050,7 +3050,7 @@ static	u_char	drentai1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	drentai2[] = {
+static	unsigned char	drentai2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3082,7 +3082,7 @@ static	u_char	drentai2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	drentai3[] = {
+static	unsigned char	drentai3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3114,7 +3114,7 @@ static	u_char	drentai3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	krentai[] = {
+static	unsigned char	krentai[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3146,7 +3146,7 @@ static	u_char	krentai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	gotoki[] = {
+static	unsigned char	gotoki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3178,7 +3178,7 @@ static	u_char	gotoki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	beki[] = {
+static	unsigned char	beki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -3210,7 +3210,7 @@ static	u_char	beki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	souna1[] = {
+static	unsigned char	souna1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3242,7 +3242,7 @@ static	u_char	souna1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	souna2[] = {
+static	unsigned char	souna2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3274,7 +3274,7 @@ static	u_char	souna2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	na2[] = {
+static	unsigned char	na2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3306,7 +3306,7 @@ static	u_char	na2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	katei1[] = {
+static	unsigned char	katei1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3338,7 +3338,7 @@ static	u_char	katei1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	katei2[] = {
+static	unsigned char	katei2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3370,7 +3370,7 @@ static	u_char	katei2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	katei3[] = {
+static	unsigned char	katei3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3402,7 +3402,7 @@ static	u_char	katei3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kamei[] = {
+static	unsigned char	kamei[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3434,7 +3434,7 @@ static	u_char	kamei[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ike[] = {
+static	unsigned char	ike[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3466,7 +3466,7 @@ static	u_char	ike[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kure[] = {
+static	unsigned char	kure[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3498,7 +3498,7 @@ static	u_char	kure[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	meirei1[] = {
+static	unsigned char	meirei1[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3530,7 +3530,7 @@ static	u_char	meirei1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	meirei2[] = {
+static	unsigned char	meirei2[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3562,7 +3562,7 @@ static	u_char	meirei2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dgokan[] = {
+static	unsigned char	dgokan[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -3594,7 +3594,7 @@ static	u_char	dgokan[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_o
 	};
 		
-static	u_char	kgokan[] = {
+static	unsigned char	kgokan[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3626,7 +3626,7 @@ static	u_char	kgokan[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_o
 	};
 		
-static	u_char	sgokan[] = {
+static	unsigned char	sgokan[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3658,7 +3658,7 @@ static	u_char	sgokan[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	gati[] = {
+static	unsigned char	gati[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -3690,7 +3690,7 @@ static	u_char	gati[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	jya[] = {
+static	unsigned char	jya[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3722,7 +3722,7 @@ static	u_char	jya[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sou[] = {
+static	unsigned char	sou[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3754,7 +3754,7 @@ static	u_char	sou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mitai[] = {
+static	unsigned char	mitai[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3786,7 +3786,7 @@ static	u_char	mitai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	yotte[] = {
+static	unsigned char	yotte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3818,7 +3818,7 @@ static	u_char	yotte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	you2[] = {
+static	unsigned char	you2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3850,7 +3850,7 @@ static	u_char	you2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sho[] = {
+static	unsigned char	sho[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -3882,7 +3882,7 @@ static	u_char	sho[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	meisi[] = {
+static	unsigned char	meisi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -3914,7 +3914,7 @@ static	u_char	meisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	wo_meisi[] = {
+static	unsigned char	wo_meisi[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -3946,7 +3946,7 @@ static	u_char	wo_meisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dmeisi[] = {
+static	unsigned char	dmeisi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -3978,7 +3978,7 @@ static	u_char	dmeisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_o
 	};
 		
-static	u_char	smeisi1[] = {
+static	unsigned char	smeisi1[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_o+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4010,7 +4010,7 @@ static	u_char	smeisi1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	smeisi2[] = {
+static	unsigned char	smeisi2[] = {
 		wo_x+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_o+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4042,7 +4042,7 @@ static	u_char	smeisi2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kstb[] = {
+static	unsigned char	kstb[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4074,7 +4074,7 @@ static	u_char	kstb[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ichisetubi[] = {
+static	unsigned char	ichisetubi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_o+ppoi_o+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4106,7 +4106,7 @@ static	u_char	ichisetubi[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	josuusi[] = {
+static	unsigned char	josuusi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4138,7 +4138,7 @@ static	u_char	josuusi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	rentaisi[] = {
+static	unsigned char	rentaisi[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4170,7 +4170,7 @@ static	u_char	rentaisi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	cut[] = {
+static	unsigned char	cut[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4202,7 +4202,7 @@ static	u_char	cut[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	shuujo[] = {
+static	unsigned char	shuujo[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4234,7 +4234,7 @@ static	u_char	shuujo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	wo[] = {
+static	unsigned char	wo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4266,7 +4266,7 @@ static	u_char	wo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	wo_s[] = {
+static	unsigned char	wo_s[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4298,7 +4298,7 @@ static	u_char	wo_s[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	ttatte[] = {
+static	unsigned char	ttatte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4330,7 +4330,7 @@ static	u_char	ttatte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ttara[] = {
+static	unsigned char	ttara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4362,7 +4362,7 @@ static	u_char	ttara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tte1[] = {
+static	unsigned char	tte1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4394,7 +4394,7 @@ static	u_char	tte1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tte2[] = {
+static	unsigned char	tte2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4426,7 +4426,7 @@ static	u_char	tte2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ppanasi[] = {
+static	unsigned char	ppanasi[] = {
 		wo_o+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4458,7 +4458,7 @@ static	u_char	ppanasi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ppoi[] = {
+static	unsigned char	ppoi[] = {
 		wo_x+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -4490,7 +4490,7 @@ static	u_char	ppoi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ue[] = {
+static	unsigned char	ue[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4522,7 +4522,7 @@ static	u_char	ue[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	uti[] = {
+static	unsigned char	uti[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -4554,7 +4554,7 @@ static	u_char	uti[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	oite[] = {
+static	unsigned char	oite[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4586,7 +4586,7 @@ static	u_char	oite[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	okeru[] = {
+static	unsigned char	okeru[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4618,7 +4618,7 @@ static	u_char	okeru[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ori[] = {
+static	unsigned char	ori[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4650,7 +4650,7 @@ static	u_char	ori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	ka1[] = {
+static	unsigned char	ka1[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -4683,7 +4683,7 @@ static	u_char	ka1[] = {
 	};
 		
 		
-static	u_char	ka2[] = {
+static	unsigned char	ka2[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4715,7 +4715,7 @@ static	u_char	ka2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	katagata[] = {
+static	unsigned char	katagata[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4747,7 +4747,7 @@ static	u_char	katagata[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kadouka[] = {
+static	unsigned char	kadouka[] = {
 		wo_o+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -4779,7 +4779,7 @@ static	u_char	kadouka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kamo[] = {
+static	unsigned char	kamo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4811,7 +4811,7 @@ static	u_char	kamo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kara1[] = {
+static	unsigned char	kara1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -4843,7 +4843,7 @@ static	u_char	kara1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kara2[] = {
+static	unsigned char	kara2[] = {
 		wo_x+ttatte_o+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -4875,7 +4875,7 @@ static	u_char	kara2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ga1[] = {
+static	unsigned char	ga1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4907,7 +4907,7 @@ static	u_char	ga1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ga2[] = {
+static	unsigned char	ga2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4939,7 +4939,7 @@ static	u_char	ga2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	gatera[] = {
+static	unsigned char	gatera[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -4971,7 +4971,7 @@ static	u_char	gatera[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kiri[] = {
+static	unsigned char	kiri[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5003,7 +5003,7 @@ static	u_char	kiri[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kuseni[] = {
+static	unsigned char	kuseni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5035,7 +5035,7 @@ static	u_char	kuseni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kurai[] = {
+static	unsigned char	kurai[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5067,7 +5067,7 @@ static	u_char	kurai[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	gurumi[] = {
+static	unsigned char	gurumi[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5099,7 +5099,7 @@ static	u_char	gurumi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kedo[] = {
+static	unsigned char	kedo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5131,7 +5131,7 @@ static	u_char	kedo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	koso[] = {
+static	unsigned char	koso[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -5163,7 +5163,7 @@ static	u_char	koso[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	koto[] = {
+static	unsigned char	koto[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5195,7 +5195,7 @@ static	u_char	koto[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sae[] = {
+static	unsigned char	sae[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5227,7 +5227,7 @@ static	u_char	sae[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	si2[] = {
+static	unsigned char	si2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5259,7 +5259,7 @@ static	u_char	si2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sika[] = {
+static	unsigned char	sika[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5291,7 +5291,7 @@ static	u_char	sika[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	sura[] = {
+static	unsigned char	sura[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -5323,7 +5323,7 @@ static	u_char	sura[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	zutu[] = {
+static	unsigned char	zutu[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5355,7 +5355,7 @@ static	u_char	zutu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tame[] = {
+static	unsigned char	tame[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -5387,7 +5387,7 @@ static	u_char	tame[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tari[] = {
+static	unsigned char	tari[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5419,7 +5419,7 @@ static	u_char	tari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dake[] = {
+static	unsigned char	dake[] = {
 		wo_o+ttatte_o+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5451,7 +5451,7 @@ static	u_char	dake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dano[] = {
+static	unsigned char	dano[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -5484,7 +5484,7 @@ static	u_char	dano[] = {
 	};
 		
 
-static	u_char	darake[] = {
+static	unsigned char	darake[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5516,7 +5516,7 @@ static	u_char	darake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tuite[] = {
+static	unsigned char	tuite[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -5548,7 +5548,7 @@ static	u_char	tuite[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tuki[] = {
+static	unsigned char	tuki[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5580,7 +5580,7 @@ static	u_char	tuki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tutu[] = {
+static	unsigned char	tutu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5612,7 +5612,7 @@ static	u_char	tutu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tumori[] = {
+static	unsigned char	tumori[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -5644,7 +5644,7 @@ static	u_char	tumori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	te1[] = {
+static	unsigned char	te1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5676,7 +5676,7 @@ static	u_char	te1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	te2[] = {
+static	unsigned char	te2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_o+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_x,
@@ -5708,7 +5708,7 @@ static	u_char	te2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	teru[] = {
+static	unsigned char	teru[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_o,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_o+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_o+ga1_x,
@@ -5740,7 +5740,7 @@ static	u_char	teru[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	to1[] = {
+static	unsigned char	to1[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -5772,7 +5772,7 @@ static	u_char	to1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	to2[] = {
+static	unsigned char	to2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5804,7 +5804,7 @@ static	u_char	to2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	totte[] = {
+static	unsigned char	totte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5836,7 +5836,7 @@ static	u_char	totte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	toiu[] = {
+static	unsigned char	toiu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_o+kana_x+kane_x+kamo_x+kara1_x+kara2_o+ga1_x,
@@ -5868,7 +5868,7 @@ static	u_char	toiu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	toori[] = {
+static	unsigned char	toori[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -5900,7 +5900,7 @@ static	u_char	toori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	toki[] = {
+static	unsigned char	toki[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5932,7 +5932,7 @@ static	u_char	toki[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tokoro[] = {
+static	unsigned char	tokoro[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -5964,7 +5964,7 @@ static	u_char	tokoro[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tote[] = {
+static	unsigned char	tote[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -5996,7 +5996,7 @@ static	u_char	tote[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tohaie[] = {
+static	unsigned char	tohaie[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6028,7 +6028,7 @@ static	u_char	tohaie[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	tomo[] = {
+static	unsigned char	tomo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6060,7 +6060,7 @@ static	u_char	tomo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	fdo[] = {
+static	unsigned char	fdo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6092,7 +6092,7 @@ static	u_char	fdo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	doori[] = {
+static	unsigned char	doori[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6124,7 +6124,7 @@ static	u_char	doori[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dokoro[] = {
+static	unsigned char	dokoro[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6156,7 +6156,7 @@ static	u_char	dokoro[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	dokoroka[] = {
+static	unsigned char	dokoroka[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6188,7 +6188,7 @@ static	u_char	dokoroka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	domo[] = {
+static	unsigned char	domo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6220,7 +6220,7 @@ static	u_char	domo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nagara[] = {
+static	unsigned char	nagara[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -6252,7 +6252,7 @@ static	u_char	nagara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nagara2[] = {
+static	unsigned char	nagara2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -6284,7 +6284,7 @@ static	u_char	nagara2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	nazo[] = {
+static	unsigned char	nazo[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6316,7 +6316,7 @@ static	u_char	nazo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nado[] = {
+static	unsigned char	nado[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6348,7 +6348,7 @@ static	u_char	nado[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nari[] = {
+static	unsigned char	nari[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6380,7 +6380,7 @@ static	u_char	nari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nanka[] = {
+static	unsigned char	nanka[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6412,7 +6412,7 @@ static	u_char	nanka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nanzo[] = {
+static	unsigned char	nanzo[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_o+kara2_x+ga1_o,
@@ -6444,7 +6444,7 @@ static	u_char	nanzo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nante[] = {
+static	unsigned char	nante[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6476,7 +6476,7 @@ static	u_char	nante[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ni1[] = {
+static	unsigned char	ni1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_o+okeru_o+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -6508,7 +6508,7 @@ static	u_char	ni1[] = {
 		yasui_x+yoi_x+yaru_o
 	};
 		
-static	u_char	ni2[] = {
+static	unsigned char	ni2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6540,7 +6540,7 @@ static	u_char	ni2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ni3[] = {
+static	unsigned char	ni3[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6572,7 +6572,7 @@ static	u_char	ni3[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nite[] = {
+static	unsigned char	nite[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6604,7 +6604,7 @@ static	u_char	nite[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nimo[] = {
+static	unsigned char	nimo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6636,7 +6636,7 @@ static	u_char	nimo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	no1[] = {
+static	unsigned char	no1[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_o+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6668,7 +6668,7 @@ static	u_char	no1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	no2[] = {
+static	unsigned char	no2[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6700,7 +6700,7 @@ static	u_char	no2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	node[] = {
+static	unsigned char	node[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6732,7 +6732,7 @@ static	u_char	node[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	noni[] = {
+static	unsigned char	noni[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6764,7 +6764,7 @@ static	u_char	noni[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nomi[] = {
+static	unsigned char	nomi[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6796,7 +6796,7 @@ static	u_char	nomi[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nominrz[] = {
+static	unsigned char	nominrz[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6828,7 +6828,7 @@ static	u_char	nominrz[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ha[] = {
+static	unsigned char	ha[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6860,7 +6860,7 @@ static	u_char	ha[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	hazu[] = {
+static	unsigned char	hazu[] = {
 		wo_x+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -6892,7 +6892,7 @@ static	u_char	hazu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ba[] = {
+static	unsigned char	ba[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6924,7 +6924,7 @@ static	u_char	ba[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	bakari[] = {
+static	unsigned char	bakari[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -6956,7 +6956,7 @@ static	u_char	bakari[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	he[] = {
+static	unsigned char	he[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -6988,7 +6988,7 @@ static	u_char	he[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	hou[] = {
+static	unsigned char	hou[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -7020,7 +7020,7 @@ static	u_char	hou[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	hoka[] = {
+static	unsigned char	hoka[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7052,7 +7052,7 @@ static	u_char	hoka[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	hodo[] = {
+static	unsigned char	hodo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -7084,7 +7084,7 @@ static	u_char	hodo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	made[] = {
+static	unsigned char	made[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_x+kara2_x+ga1_o,
@@ -7116,7 +7116,7 @@ static	u_char	made[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mama[] = {
+static	unsigned char	mama[] = {
 		wo_o+ttatte_x+ttara_o+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -7148,7 +7148,7 @@ static	u_char	mama[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mo1[] = {
+static	unsigned char	mo1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7180,7 +7180,7 @@ static	u_char	mo1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mo2[] = {
+static	unsigned char	mo2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -7212,7 +7212,7 @@ static	u_char	mo2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	motte[] = {
+static	unsigned char	motte[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7244,7 +7244,7 @@ static	u_char	motte[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	mono[] = {
+static	unsigned char	mono[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_o+kara1_o+kara2_x+ga1_o,
@@ -7276,7 +7276,7 @@ static	u_char	mono[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ya1[] = {
+static	unsigned char	ya1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7308,7 +7308,7 @@ static	u_char	ya1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	ya2[] = {
+static	unsigned char	ya2[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7340,7 +7340,7 @@ static	u_char	ya2[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	yara[] = {
+static	unsigned char	yara[] = {
 		wo_o+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -7372,7 +7372,7 @@ static	u_char	yara[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	yue[] = {
+static	unsigned char	yue[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7404,7 +7404,7 @@ static	u_char	yue[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	yori1[] = {
+static	unsigned char	yori1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7436,7 +7436,7 @@ static	u_char	yori1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	wake[] = {
+static	unsigned char	wake[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_o+kai_x+kasira_o,
 		katagata_x+kadouka_o+kana_o+kane_o+kamo_x+kara1_x+kara2_x+ga1_o,
@@ -7468,7 +7468,7 @@ static	u_char	wake[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	nn1[] = {
+static	unsigned char	nn1[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7500,7 +7500,7 @@ static	u_char	nn1[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	aisatu[] = {
+static	unsigned char	aisatu[] = {
 		wo_o+ttatte_x+ttara_x+tte1_o+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7532,7 +7532,7 @@ static	u_char	aisatu[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	kosodo[] = {
+static	unsigned char	kosodo[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_o+ka2_x+kai_x+kasira_o,
 		katagata_x+kadouka_x+kana_o+kane_x+kamo_o+kara1_x+kara2_x+ga1_x,
@@ -7564,7 +7564,7 @@ static	u_char	kosodo[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 		
-static	u_char	site[] = {
+static	unsigned char	site[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_x+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7596,7 +7596,7 @@ static	u_char	site[] = {
 		yasui_x+yoi_x+yaru_x+ttarasii_x
 	};
 
-static	u_char	n_si[] = {
+static	unsigned char	n_si[] = {
 		wo_x+ttatte_x+ttara_x+tte1_x+tte2_x+ppanasi_o+ppoi_x+ue_x,
 		uti_x+oite_x+okeru_x+ori_x+ka1_x+ka2_x+kai_x+kasira_x,
 		katagata_x+kadouka_x+kana_x+kane_x+kamo_x+kara1_x+kara2_x+ga1_x,
@@ -7628,7 +7628,7 @@ static	u_char	n_si[] = {
 		yasui_o+yoi_x+yaru_x+ttarasii_x
 	};
 
-u_char	connadr[] = {
+unsigned char	connadr[] = {
 		0,			
 		R_MEISI,		
 		R_MEISI,		
@@ -7854,7 +7854,7 @@ u_char	connadr[] = {
 		R_MEISI			
 	};
 
-u_char	*rigtadr[] = {
+unsigned char	*rigtadr[] = {
 		0,		
 		de,		
 		wo,		

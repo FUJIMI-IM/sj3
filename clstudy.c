@@ -45,16 +45,16 @@
 int	sj2cd_str();
 void	mvmemd(), mvmemi();
 
-static u_char* delcldata(u_char* ycode);
+static unsigned char* delcldata(unsigned char* ycode);
 static int delclold(void);
-static u_char* srchclpos(u_char* ycode);
+static unsigned char* srchclpos(unsigned char* ycode);
 
 
 int
-clstudy(u_char* yomi1, u_char* yomi2, STDYOUT *stdy)
+clstudy(unsigned char* yomi1, unsigned char* yomi2, STDYOUT *stdy)
 {
-	u_char	ytmp[CLSTDY_TMPLEN];
-	u_char	*dst, *ptr;
+	unsigned char	ytmp[CLSTDY_TMPLEN];
+	unsigned char	*dst, *ptr;
 	int	ret;
 	int	len1, len2;
 	int	alen, blen;
@@ -101,9 +101,9 @@ clstudy(u_char* yomi1, u_char* yomi2, STDYOUT *stdy)
 
 			ptr = ClStudyTail - alen;
 			mvmemd(ptr, ClStudyTail, (ptr - dst));
-			ClYomiLen(dst)  = (u_char)len2;
+			ClYomiLen(dst)  = (unsigned char)len2;
 			ClGramCode(dst) = stdy -> hinshi;
-			ClYomi1Len(dst) = (u_char)len1;
+			ClYomi1Len(dst) = (unsigned char)len1;
 			ClSetNum(dst, 1);
 			memcpy(ytmp, ClYomiPos(dst), len2);
 
@@ -121,12 +121,12 @@ clstudy(u_char* yomi1, u_char* yomi2, STDYOUT *stdy)
 }
 
 
-static u_char*
-delcldata(u_char* ycode)
+static unsigned char*
+delcldata(unsigned char* ycode)
 {
-	u_char	*tagptr;
-	u_char	*ptr1;
-	u_char	*ptr2;
+	unsigned char	*tagptr;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 	int	len1;
 
 	tagptr = ClStudyDict;
@@ -155,9 +155,9 @@ delcldata(u_char* ycode)
 
 
 void
-delclsub(u_char* target)
+delclsub(unsigned char* target)
 {
-	u_char	*src;
+	unsigned char	*src;
 	int	num;
 	int	tmp;
 	int	len;
@@ -185,8 +185,8 @@ delclsub(u_char* target)
 static int
 delclold(void)
 {
-	u_char	*tagptr;
-	u_char	*target;
+	unsigned char	*tagptr;
+	unsigned char	*target;
 	int	num;
 	int	tmp;
 
@@ -216,13 +216,13 @@ delclold(void)
 }
 
 
-static u_char*
-srchclpos(u_char* ycode)
+static unsigned char*
+srchclpos(unsigned char* ycode)
 {
-	u_char	*tagptr;
-	u_char	*target;
-	u_char	*ptr1;
-	u_char	*ptr2;
+	unsigned char	*tagptr;
+	unsigned char	*target;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 	int	len;
 	int	tmp;
 
@@ -263,7 +263,7 @@ srchclpos(u_char* ycode)
 void
 mkclidx(void)
 {
-	u_char	*ptr;
+	unsigned char	*ptr;
 	int	num;
 	int	st, ed;
 
@@ -281,6 +281,6 @@ mkclidx(void)
 		if (ClYomiLen(ptr) && ((int)*ClYomiPos(ptr) < ed))
 			ClStudyIdx[num] = ptr - ClStudyDict;
 		else
-			ClStudyIdx[num] = (u_short)-1;
+			ClStudyIdx[num] = (unsigned short)-1;
 	}
 }

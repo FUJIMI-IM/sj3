@@ -39,10 +39,10 @@
 #include "sj_typedef.h"
 #include "sj_dict.h"
 
-u_char	*skipkstr();
+unsigned char	*skipkstr();
 
-u_char	*skiphblk(ptr)
-u_char	*ptr;
+unsigned char	*skiphblk(ptr)
+unsigned char	*ptr;
 {
 	ptr++;
 

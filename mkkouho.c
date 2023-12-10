@@ -46,8 +46,8 @@
 
 static void getkhtbl(CLREC* clrec);
 static void cl_kanji(JREC* jrec, CLREC* clrec);
-static u_char* makekan(u_char* s, u_char* d, int flg);
-static int  diffknj(JREC* jrec, u_char* ptr, int num);
+static unsigned char* makekan(unsigned char* s, unsigned char* d, int flg);
+static int  diffknj(JREC* jrec, unsigned char* ptr, int num);
 static void cl_numcmn(JREC* jrec, CLREC* clrec);
 
 
@@ -114,7 +114,7 @@ getkhtbl(CLREC* clrec)
 static void
 cl_kanji(JREC* jrec, CLREC* clrec)
 {
-	u_char	*ptr;		
+	unsigned char	*ptr;
 	int	kcount = khcount;
 
 	
@@ -144,15 +144,15 @@ cl_kanji(JREC* jrec, CLREC* clrec)
 }
 
 
-u_char*
-makekan_none(u_char* s, u_char* d, int flg)
+unsigned char*
+makekan_none(unsigned char* s, unsigned char* d, int flg)
 {
 	return d;
 }
 
 
-u_char*
-makekan_1byte(u_char* s, u_char* d, int flg)
+unsigned char*
+makekan_1byte(unsigned char* s, unsigned char* d, int flg)
 {
 	if ((*s & KanjiModeMask) == ZenHiraAssyuku)
 	  *d++ = 0x10 | (*s & KnjAssyukuMask); 
@@ -164,16 +164,16 @@ makekan_1byte(u_char* s, u_char* d, int flg)
 }
 
 
-u_char*
-makekan_knj(u_char* s, u_char* d, int flg)
+unsigned char*
+makekan_knj(unsigned char* s, unsigned char* d, int flg)
 {
 	
 	return makekan(askknj[*s & KnjAssyukuMask], d, flg);
 }
 
 
-u_char*
-makekan_ofs(u_char* s, u_char* d, int flg)
+unsigned char*
+makekan_ofs(unsigned char* s, unsigned char* d, int flg)
 {
 	
         return makekan(dicbuf + ((*s & KanjiCodeMask) << 8) + *(s + 1),
@@ -181,10 +181,10 @@ makekan_ofs(u_char* s, u_char* d, int flg)
 }
 
 
-u_char*
-makekan_norm(u_char* s, u_char* d, int flg)
+unsigned char*
+makekan_norm(unsigned char* s, unsigned char* d, int flg)
 {
-	u_char c;
+	unsigned char c;
 
 	if (*s != 0) {
 		c = s[1];
@@ -201,10 +201,10 @@ makekan_norm(u_char* s, u_char* d, int flg)
 }
 
 
-u_char*
-makekan_ascii(u_char* s, u_char* d, int flg)
+unsigned char*
+makekan_ascii(unsigned char* s, unsigned char* d, int flg)
 {
-	u_char c;
+	unsigned char c;
 
 	c = s[1];
 	if (c & 0x80)
@@ -217,8 +217,8 @@ makekan_ascii(u_char* s, u_char* d, int flg)
 }
 
 
-static u_char*
-makekan(u_char* s, u_char* d, int flg)
+static unsigned char*
+makekan(unsigned char* s, unsigned char* d, int flg)
 {
 	int csize;
 
@@ -283,7 +283,7 @@ makekan(u_char* s, u_char* d, int flg)
 #define	PEND	2
 #define	QEND	1
 static int
-sameknj(u_char* p, int plen, u_char* q, int qlen)
+sameknj(unsigned char* p, int plen, unsigned char* q, int qlen)
 {
 	int	i;
 	int	j;
@@ -343,13 +343,13 @@ sameknj(u_char* p, int plen, u_char* q, int qlen)
 
 
 static int
-diffknj(JREC* jrec, u_char* ptr, int num)
+diffknj(JREC* jrec, unsigned char* ptr, int num)
 {
 	KHREC	*kptr;
 	JREC	*jptr;
 	int	i;
-	u_char	kbuf1[MaxWdKanjiLen];
-	u_char	kbuf2[MaxWdKanjiLen];
+	unsigned char	kbuf1[MaxWdKanjiLen];
+	unsigned char	kbuf2[MaxWdKanjiLen];
 
 	if (jrec -> hinsi == TANKANJI) return TRUE;
 
@@ -382,9 +382,9 @@ diffknj(JREC* jrec, u_char* ptr, int num)
 
 
 static int
-chrck_numtbl(u_short flg, u_short cond)
+chrck_numtbl(unsigned short flg, unsigned short cond)
 {
-	u_short	must;
+	unsigned short	must;
 
 	if ((cond = SelNumCond(cond)) != 0) {
 		if ((must = (cond & SelNumMust)) != 0) {
@@ -401,9 +401,9 @@ chrck_numtbl(u_short flg, u_short cond)
 int
 sel_sjmode(JREC* jrec)
 {
-	u_short	i;
-	u_short	*p;
-	u_short	*q;
+	unsigned short	i;
+	unsigned short	*p;
+	unsigned short	*q;
 
 	switch (jrec -> class) {
 	case C_N_ARABIA:
@@ -438,10 +438,10 @@ sel_sjmode(JREC* jrec)
 static void
 cl_numcmn(JREC* jrec, CLREC* clrec)
 {
-	u_char	*p;
+	unsigned char	*p;
 	int	i;
-	u_short	j;
-	u_short	*tbl;
+	unsigned short	j;
+	unsigned short	*tbl;
 
 	
 	p = cnvstart;

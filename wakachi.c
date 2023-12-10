@@ -52,7 +52,7 @@ wakachi (void)
 
 	CREC		crec[4];
 	int		count;
-	u_char		*next;
+	unsigned char	*next;
 	TypeCnct	right;
 	int		i;
 	int		maxlen;

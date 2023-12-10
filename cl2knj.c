@@ -47,14 +47,14 @@ void	cvtclknj(), freework();
 
 static CLREC* nextrecblk(void);
 static CLREC* prevrecblk(void);
-static void initkbuf(u_char* kouho);
+static void initkbuf(unsigned char* kouho);
 
 
 int
-cl2knj(u_char* yomi, int len, u_char* kouho)
+cl2knj(unsigned char* yomi, int len, unsigned char* kouho)
 {
-	u_char	*ptr1;
-	u_char	*ptr2;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 	int	i;
 
 	khcount = nkhcount = 0;
@@ -102,7 +102,7 @@ cl2knj(u_char* yomi, int len, u_char* kouho)
 
 
 int
-nextcl(u_char* kouho, int mode)
+nextcl(unsigned char* kouho, int mode)
 {
 	CLREC	*clptr;
 
@@ -147,7 +147,7 @@ nextrecblk(void)
 
 
 int
-prevcl(u_char* kouho, int mode)
+prevcl(unsigned char* kouho, int mode)
 {
 	CLREC	*clptr;
 
@@ -201,7 +201,7 @@ prevrecblk(void)
 
 
 static void
-initkbuf(u_char* kouho)
+initkbuf(unsigned char* kouho)
 {
 	kanjitmp = kouho;
 	memset(kanjitmp, 0, sizeof(STDYOUT) + 1);

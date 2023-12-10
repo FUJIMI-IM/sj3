@@ -85,7 +85,7 @@
 
 
 
-#define	iseocl(p)	( !ClYomiLen(p) || (u_char *)(p) >= ClStudyTail )
+#define	iseocl(p)	( !ClYomiLen(p) || (unsigned char *)(p) >= ClStudyTail )
 
 
 
@@ -104,7 +104,7 @@
 #define	ClHighNum(p)	*(p + CL_NUMH)
 #define	ClLowNum(p)	*(p + CL_NUML)
 #define	ClGetNum(p)	(ClHighNum(p) * 0x100 + ClLowNum(p))
-#define	ClSetNum(p, n)	(ClHighNum(p)=(u_char)((n) >> 8), ClLowNum(p)=(u_char)(n))
+#define	ClSetNum(p, n)	(ClHighNum(p)=(unsigned char)((n) >> 8), ClLowNum(p)=(unsigned char)(n))
 
 
 

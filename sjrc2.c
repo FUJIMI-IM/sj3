@@ -291,17 +291,17 @@ wchar16_t *s1, *s2;
 
 
 getword (s, word)
-u_char	*s;
+unsigned char	*s;
 struct wordent	word[];
 {
-	u_char	c;
+	unsigned char	c;
 	wchar16_t *w;
 	wchar16_t wcbuf[MAXLINE*2];
 	wchar16_t ttmp[MAXLINE];
-	u_char  buf[MAXLINE*2];
-	u_char *p;
+	unsigned char  buf[MAXLINE*2];
+	unsigned char *p;
 	int	i, wcount;
-	u_short cc;
+	unsigned short cc;
 
 	if (IsDelimitor(*s)) {
 		s++;
@@ -317,9 +317,9 @@ struct wordent	word[];
 			(void) mbstowcs(wcbuf, (char *)p, MAXLINE*2);
 		} else {
 			if (file_code == SJ3_SJIS) {
-				(void) sjistoeuc(buf, MAXLINE*2, (u_char *)p, MAXLINE);
+				(void) sjistoeuc(buf, MAXLINE*2, (unsigned char *)p, MAXLINE);
 			} else if (file_code == SJ3_EUC) {
-				(void) euctosjis(buf, MAXLINE*2, (u_char *)p, MAXLINE);
+				(void) euctosjis(buf, MAXLINE*2, (unsigned char *)p, MAXLINE);
 			} else {
 				(void) strcpy(buf, p);
 			}
@@ -402,7 +402,7 @@ struct wordent	word[];
 }
 
 IsTerminator (c)
-u_char	c;
+unsigned char	c;
 {
 	if (c == '\n')
 		return (1);
@@ -411,7 +411,7 @@ u_char	c;
 }
 
 isTerminator (c)
-u_char	c;
+unsigned char	c;
 {
 	if (c == '#')
 		return (1);
@@ -420,7 +420,7 @@ u_char	c;
 }
 
 IsEscape (c)
-u_char	c;
+unsigned char	c;
 {
 	if (c == '\\')
 		return (1);
@@ -429,7 +429,7 @@ u_char	c;
 }
 
 IsDelimitor (c)
-u_char	c;
+unsigned char	c;
 {
 	if (c == ' ' || c == '\t' || c == '.')
 		return (1);
@@ -471,7 +471,7 @@ struct wordent	word[];
 }
 
 isintr (c)
-u_char	c;
+unsigned char	c;
 {
 	if (c == intr_code)
 		return (1);
@@ -490,7 +490,7 @@ struct wordent	word[];
 }
 
 IsGoto (c)
-u_char	c;
+unsigned char	c;
 {
 	int	i;
 
@@ -512,7 +512,7 @@ struct wordent	word[];
 }
 
 IsTrap (c)
-u_char	c;
+unsigned char	c;
 {
 	int	i;
 

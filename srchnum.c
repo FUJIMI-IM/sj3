@@ -45,13 +45,13 @@
 #include "kanakan.h"
 
 
-static void srch_kurai1(u_char* ptr, u_char* cnct);
-static void srch_kurai2(u_char* ptr, u_char* cnct);
+static void srch_kurai1(unsigned char* ptr, unsigned char* cnct);
+static void srch_kurai2(unsigned char* ptr, unsigned char* cnct);
 
 static void
 srch_josuu_sub(JREC *jrec, TypeGram gram)
 {
-	u_char	*tagp;
+	unsigned char	*tagp;
 	DICTL	*dp;
 
 	for (dp = dictlist ; dp ; dp = dp -> next) {
@@ -67,7 +67,7 @@ srch_josuu_sub(JREC *jrec, TypeGram gram)
 static void
 srch_josuu(JREC *jrec)
 {
-	u_char	*kp;
+	unsigned char	*kp;
 	int	klen;
 	int	len;
 
@@ -88,7 +88,7 @@ srch_josuu(JREC *jrec)
 }
 
 static void
-setnrec_sub(u_char* p, u_short flag, int stb)
+setnrec_sub(unsigned char* p, unsigned short flag, int stb)
 {
 	JREC	*rec;
 	int	len1;
@@ -100,7 +100,7 @@ setnrec_sub(u_char* p, u_short flag, int stb)
 
 	if ((int)suuji_len == len2) {
 		if (suuji_wkeep) {
-			memcpy((u_char*)suuji_wbuf, (u_char*)suuji_wkeep,
+			memcpy((unsigned char*)suuji_wbuf, (unsigned char*)suuji_wkeep,
 				sizeof(suuji_wbuf[0]) * NumWordBuf);
 		}
 		if (suuji_ukeep) {
@@ -114,16 +114,16 @@ setnrec_sub(u_char* p, u_short flag, int stb)
 		rec -> class  = suuji_class;
 		rec -> hinsi  = SUUSI;
 		rec -> sttofs = headcode;
-		rec -> stbofs = (u_char)stb;
+		rec -> stbofs = (unsigned char)stb;
 		rec -> flags  = flag;
-		rec -> numlen = (u_char)len2;
+		rec -> numlen = (unsigned char)len2;
 
 		if (!stb) srch_josuu(rec);
 	}
 }
 
 static void
-setnrec(u_char* p, u_short flag)
+setnrec(unsigned char* p, unsigned short flag)
 {
 	setnrec_sub(p, flag, 0);
 
@@ -132,11 +132,11 @@ setnrec(u_char* p, u_short flag)
 	}
 }
 
-static u_char*
-srchtbl(u_char ch, u_char* tbl, int rec, int n)
+static unsigned char*
+srchtbl(unsigned char ch, unsigned char* tbl, int rec, int n)
 {
 	int	high, low, mid;
-	u_char	*p;
+	unsigned char	*p;
 
 	if (!ch) return NULL;
 
@@ -165,15 +165,15 @@ srchtbl(u_char ch, u_char* tbl, int rec, int n)
 }
 
 static int
-isconnect(u_char* cnct, int num)
+isconnect(unsigned char* cnct, int num)
 {
 	return (cnct[num / 8] & (0x80 >> (num % 8)));
 }
 
 static int
-string_cmp(u_char* s, int l, u_char* d)
+string_cmp(unsigned char* s, int l, unsigned char* d)
 {
-	u_char	*p;
+	unsigned char	*p;
 
 	p = s;
 
@@ -187,7 +187,7 @@ string_cmp(u_char* s, int l, u_char* d)
 }
 
 static int
-check_num(u_char* ptr)
+check_num(unsigned char* ptr)
 {
 	int	i;
 	int	j;
@@ -197,9 +197,9 @@ check_num(u_char* ptr)
 	int	lketa;
 	int	flg = FALSE;
 	int	cnt;
-	u_short	flag;
+	unsigned short	flag;
 
-	memset((u_char*)suuji_wbuf, 0, sizeof(u_short) * NumWordBuf);
+	memset((unsigned char*)suuji_wbuf, 0, sizeof(unsigned short) * NumWordBuf);
 	flag = 0;
 
 	hketa = lketa = cnt = 0;
@@ -276,15 +276,15 @@ check_num(u_char* ptr)
 }
 
 static void
-srch_number1(u_char* ptr)
+srch_number1(unsigned char* ptr)
 {
-	u_char		ch;
-	u_char		mode;
-	u_char		*p;
+	unsigned char	ch;
+	unsigned char	mode;
+	unsigned char	*p;
 	int		l;
 	TypeClass	cls;
 	int		len;
-	u_char		*tptr;
+	unsigned char	*tptr;
 
 	if (suuji_keta >= NumKetaLength) return;
 
@@ -308,7 +308,7 @@ srch_number1(u_char* ptr)
 
 			check_num(tptr);
 			srch_number1(tptr);
-			srch_kurai2(tptr, (u_char*)NULL);
+			srch_kurai2(tptr, (unsigned char*)NULL);
 
 			break;
 
@@ -317,8 +317,8 @@ srch_number1(u_char* ptr)
 
 			check_num(tptr);
 			srch_number1(tptr);
-			srch_kurai1(tptr, (u_char*)NULL);
-			srch_kurai2(tptr, (u_char*)NULL);
+			srch_kurai1(tptr, (unsigned char*)NULL);
+			srch_kurai2(tptr, (unsigned char*)NULL);
 
 			break;
 
@@ -342,7 +342,7 @@ srch_number1(u_char* ptr)
 				suuji_class = C_N_ARABIA;
 				check_num(tptr);
 				srch_number1(tptr);
-				srch_kurai2(tptr, (u_char*)NULL);
+				srch_kurai2(tptr, (unsigned char*)NULL);
 
 				suuji_class = C_N_KAZU;
 			}
@@ -376,16 +376,16 @@ srch_number1(u_char* ptr)
 }
 
 static void
-srch_kurai1(u_char* ptr, u_char* cnct)
+srch_kurai1(unsigned char* ptr, unsigned char* cnct)
 {
-	u_char		ch;
-	u_char		*p;
+	unsigned char	ch;
+	unsigned char	*p;
 	int		l;
 	int		keta;
 	int		mode;
 	TypeClass	cls;
 	int		len;
-	u_char		*tptr;
+	unsigned char	*tptr;
 
 	if (!(p = srchtbl((ch = *ptr), Kurai1_tbl, Kr1TblRecLen, Kr1TblRecNum)))
 		return;
@@ -425,7 +425,7 @@ srch_kurai1(u_char* ptr, u_char* cnct)
 		check_num(tptr);
 
 		srch_number1(tptr);
-		srch_kurai1(tptr, (u_char*)NULL);
+		srch_kurai1(tptr, (unsigned char*)NULL);
 		srch_kurai2(tptr, Kr1TblCnctP(p));
 
 		if (cnct)
@@ -436,16 +436,16 @@ srch_kurai1(u_char* ptr, u_char* cnct)
 }
 
 static void
-srch_kurai2(u_char* ptr, u_char* cnct)
+srch_kurai2(unsigned char* ptr, unsigned char* cnct)
 {
-	u_char		ch;
-	u_char		*p;
+	unsigned char	ch;
+	unsigned char	*p;
 	int		l;
 	int		keta;
 	int		mode;
 	TypeClass	cls;
 	int		len;
-	u_char		*tptr;
+	unsigned char	*tptr;
 
 	if ((suuji_ubuf[0] & 0x0f) == _Num0) return;
 
@@ -486,7 +486,7 @@ srch_kurai2(u_char* ptr, u_char* cnct)
 		check_num(tptr);
 
 		srch_number1(tptr);
-		srch_kurai1(tptr, (u_char*)NULL);
+		srch_kurai1(tptr, (unsigned char*)NULL);
 
 		if (cnct)
 			suuji_ubuf[suuji_keta - 1] &= 0x3f;
@@ -496,9 +496,9 @@ srch_kurai2(u_char* ptr, u_char* cnct)
 }
 
 static void
-srch_number2(u_char* p)
+srch_number2(unsigned char* p)
 {
-	u_char	ch;
+	unsigned char	ch;
 	int	i;
 
 	suuji_class = (*p == N_0) ? C_N_SUUJILONG : C_N_KAZULONG;
@@ -551,7 +551,7 @@ srch_number2(u_char* p)
 }
 
 static void
-srchnum_sub(u_char* p)
+srchnum_sub(unsigned char* p)
 {
 	suuji_yptr = p;
 
@@ -561,7 +561,7 @@ srchnum_sub(u_char* p)
 
 	suuji_keta = 0;
 	suuji_class = C_N_KAZU;
-	srch_kurai1(p, (u_char*)NULL);
+	srch_kurai1(p, (unsigned char*)NULL);
 	if (suuji_exit) return;
 
 	srch_number2(p);
@@ -585,9 +585,9 @@ srchnum(void)
 }
 
 void
-setwdnum(u_char* p, int len, u_short* wd)
+setwdnum(unsigned char* p, int len, unsigned short* wd)
 {
-	suuji_len   = (u_char)len;
+	suuji_len   = (unsigned char)len;
 	suuji_wkeep = wd;
 	suuji_ukeep = NULL;
 	headcode = headlen = 0;
@@ -597,9 +597,9 @@ setwdnum(u_char* p, int len, u_short* wd)
 }
 
 int
-setucnum(u_char* p, int len, u_char* ud)
+setucnum(unsigned char* p, int len, unsigned char* ud)
 {
-	suuji_len   = (u_char)len;
+	suuji_len   = (unsigned char)len;
 	suuji_wkeep = NULL;
 	suuji_ukeep = ud;
 	headcode = headlen = 0;

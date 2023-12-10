@@ -41,10 +41,10 @@
 #include "sj_yomi.h"
 
 int	sj2cd_chr(euc, yomi)
-u_char	*euc;
-u_char	*yomi;
+unsigned char	*euc;
+unsigned char	*yomi;
 {
-	u_char	chr;
+	unsigned char	chr;
 
 	if ((chr = *euc++) == EUC_a1) {
 		chr = *euc;
@@ -118,8 +118,8 @@ u_char	*yomi;
 
 
 int	sj2cd_str(euc, yomi, len)
-u_char	*euc;
-u_char	*yomi;
+unsigned char	*euc;
+unsigned char	*yomi;
 int	len;
 {
 	

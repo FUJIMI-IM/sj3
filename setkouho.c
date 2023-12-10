@@ -41,7 +41,7 @@
 #include "sj_hinsi.h"
 #include "kanakan.h"
 
-static int hiraknj(u_char *p);
+static int hiraknj(unsigned char *p);
 
 
 void
@@ -49,7 +49,7 @@ setkouho(CLREC* clrec, TypeDicOfs offs, int mode)
 {
 	JREC	*jrec;
 	KHREC	*kptr;		
-	u_char	*fptr;
+	unsigned char	*fptr;
 	int	flg;
 	int	i;
 
@@ -68,7 +68,7 @@ setkouho(CLREC* clrec, TypeDicOfs offs, int mode)
 	kptr -> offs   = offs;			
 	kptr -> rank   = 0;			
 	kptr -> styno  = 0;			
-	kptr -> mode   = (u_char)mode;		
+	kptr -> mode   = (unsigned char)mode;
 
 	
 	if (jrec -> flags & JFLAG_KA) {
@@ -122,7 +122,7 @@ setkouho(CLREC* clrec, TypeDicOfs offs, int mode)
 	kptr -> offs   = offs;			
 	kptr -> rank   = 0;			
 	kptr -> styno  = 0;			
-	kptr -> mode   = (u_char)mode;		
+	kptr -> mode   = (unsigned char)mode;
 
 	kptr -> sttfg  = 1;
 	kptr -> sttkj  = 1;
@@ -140,7 +140,7 @@ void
 ph_setkouho(CLREC* clrec, TypeDicOfs offs, STDYIN* sptr)
 {
 	JREC	*jrec;
-	u_char	*p;
+	unsigned char	*p;
 
 	
 	if (sptr) {
@@ -163,7 +163,7 @@ ph_setkouho(CLREC* clrec, TypeDicOfs offs, STDYIN* sptr)
 	kouhotbl[0].mode = sel_sjmode(jrec = clrec -> jnode);
 
 	
-	kouhotbl[0].sttfg = (u_char)
+	kouhotbl[0].sttfg = (unsigned char)
 		((p = Settou_ptr(jrec->sttofs)) ? (SttHiraKnj(p)?1:0) : 0);
 
 	
@@ -187,7 +187,7 @@ ph_setkouho(CLREC* clrec, TypeDicOfs offs, STDYIN* sptr)
 
 
 static int
-hiraknj(u_char *p)
+hiraknj(unsigned char *p)
 {
 	char	flg = TRUE;
 	int	i;
@@ -228,7 +228,7 @@ hiraknj(u_char *p)
 
 
 int
-hiraknj_atrb(u_char* p, int* len)
+hiraknj_atrb(unsigned char* p, int* len)
 {
 	*len = 2;
 	return 0;
@@ -236,7 +236,7 @@ hiraknj_atrb(u_char* p, int* len)
 
 
 int
-hiraknj_ofs(u_char* p, int* len)
+hiraknj_ofs(unsigned char* p, int* len)
 {
 	*len = 2;
         return hiraknj(dicbuf + ((*p & KanjiCodeMask) << 8) + *(p + 1));
@@ -244,7 +244,7 @@ hiraknj_ofs(u_char* p, int* len)
 
 
 int
-hiraknj_knj(u_char* p, int* len)
+hiraknj_knj(unsigned char* p, int* len)
 {
 	*len = 1;
 	return hiraknj(askknj[*p & KnjAssyukuMask]);
@@ -252,7 +252,7 @@ hiraknj_knj(u_char* p, int* len)
 
 
 int
-hiraknj_hask(u_char* p, int* len)
+hiraknj_hask(unsigned char* p, int* len)
 {
 	*len = 1;
 	return 2;
@@ -260,7 +260,7 @@ hiraknj_hask(u_char* p, int* len)
 
 
 int
-hiraknj_kask(u_char* p, int* len)
+hiraknj_kask(unsigned char* p, int* len)
 {
 	*len = 1;
 	return 3;
@@ -268,7 +268,7 @@ hiraknj_kask(u_char* p, int* len)
 
 
 int
-hiraknj_norm(u_char* p, int* len)
+hiraknj_norm(unsigned char* p, int* len)
 {
 	*len = codesize(*p);
 	return 1;
@@ -276,9 +276,9 @@ hiraknj_norm(u_char* p, int* len)
 
 
 int
-hiraknj_hira(u_char* p, int* len)
+hiraknj_hira(unsigned char* p, int* len)
 {
-	u_char	ch;
+	unsigned char	ch;
 
 	*len = codesize(*p);
 	ch = *(p + 1);

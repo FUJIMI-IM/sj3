@@ -39,8 +39,8 @@
 #include "sj_typedef.h"
 
 void	mvmemi(src, dest, len)
-u_char	*src;
-u_char	*dest;
+unsigned char	*src;
+unsigned char	*dest;
 int	len;
 {
 	while (len-- > 0) *dest++ = *src++;

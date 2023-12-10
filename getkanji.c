@@ -41,18 +41,18 @@
 #include "kanakan.h"
 
 
-static u_char*
-code2kanji(u_char* s, u_char* d, u_char* ym, int yl, int flg);
+static unsigned char*
+code2kanji(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg);
 
-u_char*
-getkan_none(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+unsigned char*
+getkan_none(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
 	return d;
 }
 
 
-u_char*
-getkan_hira(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+unsigned char*
+getkan_hira(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
 	int	cnt, csize;
 
@@ -71,11 +71,11 @@ getkan_hira(u_char* s, u_char* d, u_char* ym, int yl, int flg)
 }
 
 
-u_char*
-getkan_kata(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+unsigned char*
+getkan_kata(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
 	int	cnt, csize;
-	u_char	ch;
+	unsigned char	ch;
 
 	csize = codesize(*s);
 	
@@ -108,16 +108,16 @@ getkan_kata(u_char* s, u_char* d, u_char* ym, int yl, int flg)
 }
 
 
-u_char*
-getkan_knj(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+unsigned char*
+getkan_knj(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
 	
 	return code2kanji(askknj[*s & KnjAssyukuMask], d, ym, yl, flg);
 }
 
 
-u_char*
-getkan_ofs(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+unsigned char*
+getkan_ofs(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
 	
         return code2kanji(dicbuf + ((*s & KanjiCodeMask) << 8) + *(s + 1),
@@ -125,10 +125,10 @@ getkan_ofs(u_char* s, u_char* d, u_char* ym, int yl, int flg)
 }
 
 
-u_char*
-getkan_norm(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+unsigned char*
+getkan_norm(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
-	u_char c;
+	unsigned char c;
 
 	if (*s != 0) {
 		c = s[1];
@@ -143,10 +143,10 @@ getkan_norm(u_char* s, u_char* d, u_char* ym, int yl, int flg)
 }
 
 
-u_char*
-getkan_ascii(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+unsigned char*
+getkan_ascii(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
-	u_char c;
+	unsigned char c;
 
 	c = s[1];
 	if (c & 0x80)
@@ -157,8 +157,8 @@ getkan_ascii(u_char* s, u_char* d, u_char* ym, int yl, int flg)
 }
 
 
-static u_char*
-code2kanji(u_char* s, u_char* d, u_char* ym, int yl, int flg)
+static unsigned char*
+code2kanji(unsigned char* s, unsigned char* d, unsigned char* ym, int yl, int flg)
 {
 	int csize;
 
@@ -221,9 +221,9 @@ code2kanji(u_char* s, u_char* d, u_char* ym, int yl, int flg)
 
 
 int
-getkanji(u_char* ym, int yl, u_char* ptr, u_char* buf)
+getkanji(unsigned char* ym, int yl, unsigned char* ptr, unsigned char* buf)
 {
-	u_char	*q;
+	unsigned char	*q;
 	
 	q = code2kanji(ptr, buf, ym, yl, TRUE);
 

@@ -34,9 +34,9 @@
 
 
 int
-bubun_str(u_char* p1, int l1, u_char* p2, int l2)
+bubun_str(unsigned char* p1, int l1, unsigned char* p2, int l2)
 {
-	u_char	*p;
+	unsigned char	*p;
 	int	l;
 	int	i;
 
@@ -74,13 +74,13 @@ bubun_str(u_char* p1, int l1, u_char* p2, int l2)
 
 
 int
-overlap_str(u_char *p1, int l1, u_char* p2, int l2)
+overlap_str(unsigned char *p1, int l1, unsigned char* p2, int l2)
 {
-	u_char	*p;
+	unsigned char	*p;
 	int	l;
 	int	i;
 	int	j;
-	u_char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2];
+	unsigned char	tmp[MaxKanjiLength * 2 + MaxAtrNumber * 2];
 
 	for (p = p1, l = l1 ; l > 0 ; ) {
 		
@@ -194,7 +194,7 @@ last_strcmp(int* src, int* dst)
 
 
 int
-string_cmp(u_char* p1, int l1, u_char* p2, int l2)
+string_cmp(unsigned char* p1, int l1, unsigned char* p2, int l2)
 {
 	while (l1 > 0 && l2 > 0) {
 		if (*p1 != *p2) return (*p1 - *p2);

@@ -45,7 +45,7 @@
 
 static int      lastcode        = BEGIN_CODE;
 
-static u_short	row, col;
+static unsigned short	row, col;
 
 void input_kigou();
 
@@ -54,7 +54,7 @@ kigou ()
 	extern int	keyvalue;
         int    increse, code, basecode;
         int             inc, ki, low;
-        u_short         num, CheckCcode(), strtocode();
+        unsigned short  num, CheckCcode(), strtocode();
 	int		rval;
 
 	increse = INCRESE;
@@ -221,7 +221,7 @@ int	bcode, code, increse;
 	extern wchar16_t	Mguide[];
 	wchar16_t          wtmp[20];
 	char		tmp[20];
-        u_short         prcode;
+        unsigned short  prcode;
 
 	TopGuide ();
 	printR (Mguide);
@@ -251,7 +251,7 @@ pkigou (code)
 int    code;
 {
 	wchar16_t	tmp[3];
-        u_short ccode;
+        unsigned short ccode;
 
 	if (jis2euc(code) == 0) {
 		ccode = BEGIN_CODE;
@@ -274,7 +274,7 @@ input_kigou (basecode, code, increse)
 int	basecode, code, increse;
 {
 	wchar16_t	s[2];
-        u_short ccode, svlen;
+        unsigned short ccode, svlen;
         Conversion *cv;
 
 	if (jis2euc(code) == 0) {

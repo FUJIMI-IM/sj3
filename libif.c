@@ -71,8 +71,8 @@ int		kanjilen;
 	int retv;
 	SJ3_BUNSETU sbun[BUFFLENGTH];
 	int i, sentou, saigo;
-	u_char yomi[BUFFLENGTH * 3];
-	u_char kanji[BUFFLENGTH * 6];
+	unsigned char yomi[BUFFLENGTH * 3];
+	unsigned char kanji[BUFFLENGTH * 6];
 
 	(void) wcstombs((char *) yomi, yomiout, BUFFLENGTH*3);
 	if (current_locale == LC_CTYPE_SHIFTJIS) {
@@ -162,7 +162,7 @@ int		reconv;
 {
 	int i, ret;
 	SJ3_DOUON d_sjis[DOUON_N];
-	u_char yomi[BUFFLENGTH * 3];
+	unsigned char yomi[BUFFLENGTH * 3];
 
 	(void) wcstombs((char *) yomi, s, BUFFLENGTH*3);
 
@@ -202,8 +202,8 @@ SJ2_clstudy (yomi1, yomi2, dcid)
 wchar16_t		*yomi1, *yomi2;
 struct studyrec	*dcid;
 {
-	u_char y1[BUFFLENGTH*2];
-	u_char y2[BUFFLENGTH*2];
+	unsigned char y1[BUFFLENGTH*2];
+	unsigned char y2[BUFFLENGTH*2];
 
 	(void) wcstombs((char *) y1, yomi1, BUFFLENGTH*2);
 	(void) wcstombs((char *) y2, yomi2, BUFFLENGTH*2);
@@ -219,8 +219,8 @@ SJ2_toroku (yomi, kanji, hinshi)
 wchar16_t	*yomi, *kanji;
 int	hinshi;
 {
-	u_char  y[(YOMILEN+1)*3];
-        u_char  k[(KLEN+1)*3];
+	unsigned char  y[(YOMILEN+1)*3];
+        unsigned char  k[(KLEN+1)*3];
 	int ret;
 
 	(void)wcstombs((char *) y, yomi, (YOMILEN+1)*3);
@@ -237,8 +237,8 @@ SJ2_syoukyo (yomi, kanji, hinshi)
 wchar16_t	*yomi, *kanji;
 int	hinshi;
 {
-	u_char  y[(YOMILEN+1)*3];
-        u_char  k[(KLEN+1)*3];
+	unsigned char  y[(YOMILEN+1)*3];
+        unsigned char  k[(KLEN+1)*3];
 	int ret;
 
 	(void)wcstombs((char *) y, yomi, (YOMILEN+1)*3);

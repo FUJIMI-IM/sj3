@@ -291,7 +291,7 @@ int		more;
 
 		
 		for (j = 0 ; j < *count ; j ++) {
-			if (s[j] != (u_char)funckey[i][j])
+			if (s[j] != (unsigned char)funckey[i][j])
 				break;
 		}
 

@@ -123,7 +123,7 @@ output_master()
 	struct strbuf ctlbuf;
 	struct strbuf databuf;
 	int flags = 0;
-	u_char ctlstuff;
+	unsigned char ctlstuff;
 	int f, stop, ixon, ret;
 	struct iocblk *ioc;
 	struct termios *tp;
@@ -158,13 +158,13 @@ output_master()
 	switch (ctlstuff) {
 	case M_DATA:
 	
-		write_stdout((u_char *)&outbuf[0], databuf.len);
+		write_stdout((unsigned char *)&outbuf[0], databuf.len);
 		fflush (stdout);
 		while (ret & MOREDATA) {
 			if ((ret = getmsg(master, &ctlbuf, &databuf, &flags)) == -1) {
 				  return;
 			}
-			write_stdout((u_char *)&outbuf[0], databuf.len);
+			write_stdout((unsigned char *)&outbuf[0], databuf.len);
 			fflush (stdout);
 		}
 		return;
@@ -270,7 +270,7 @@ output_master()
 		m = outbuf[0];
 		if (m == TIOCPKT_DATA) {
 		
-			write_stdout((u_char *)&outbuf[1], n - 1);
+			write_stdout((unsigned char *)&outbuf[1], n - 1);
 		
 			fflush (stdout);
 			return;
@@ -332,7 +332,7 @@ int	n;
 {
 	int	val;
 	wchar16_t wb[BUFFLENGTH];
-	u_char	buff[BUFFLENGTH * 3];
+	unsigned char	buff[BUFFLENGTH * 3];
 
 	wsncpy(wb, s, n);
 	wb[n] = 0;
@@ -349,10 +349,10 @@ int	n;
 }
 
 write_stdout(s, n)
-u_char *s;
+unsigned char *s;
 int n;
 {
-      static u_char knj1st = 0, knj2nd = 0;
+      static unsigned char knj1st = 0, knj2nd = 0;
 
       while (n-- > 0) {
               if (knj1st) {
@@ -383,7 +383,7 @@ SJ_read (s, n)
 wchar16_t *s;
 int	n;
 {
-	u_char buff[BUFFLENGTH];
+	unsigned char buff[BUFFLENGTH];
 	wchar16_t wcbuff[BUFFLENGTH];
 	int i, count, remain, c;
 	size_t wnum;
@@ -470,7 +470,7 @@ wchar16_t	*s;
 SJ_print (s)
 wchar16_t *s;
 {
-	u_char buff[BUFFLENGTH * 3];
+	unsigned char buff[BUFFLENGTH * 3];
 	size_t num;
 
 	num = wcstombs((char *) buff, s, (size_t ) (BUFFLENGTH * 3));

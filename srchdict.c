@@ -43,7 +43,7 @@
 
 
 int
-yomicmp(u_char* ptr1, u_char* ptr2, u_char* saml)
+yomicmp(unsigned char* ptr1, unsigned char* ptr2, unsigned char* saml)
 {
 	int	i, j;
 	int	same;
@@ -87,8 +87,8 @@ yomicmp(u_char* ptr1, u_char* ptr2, u_char* saml)
 }
 
 
-u_char*
-srchdict(u_char* tagp)
+unsigned char*
+srchdict(unsigned char* tagp)
 {
 	TypeDicSeg	segno;
 	int		cmp;

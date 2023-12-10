@@ -45,17 +45,17 @@
 #include "key.h"
 #include "rk.h"
 
-static u_char cbuf[5];
+static unsigned char cbuf[5];
 static int	cur_code = CODE_EUC;
 extern int      current_locale;
 static int ccnt = 0;
 
 codeconv(c, rkstr)
 wchar16_t c;
-u_int *rkstr;
+unsignedint *rkstr;
 {
-	u_short ccode, i;
-        u_short CheckCcode();
+	unsigned short ccode, i;
+        unsigned short CheckCcode();
 	extern int erase_char;
 
 	if (c == erase_char) {
@@ -90,12 +90,12 @@ u_int *rkstr;
 	*rkstr = RKEND;
 }
 
-u_short
+unsigned short
 CheckCcode (c)
 wchar16_t c;
 {
-        u_char c1;
-        u_short code;
+        unsigned char c1;
+        unsigned short code;
 
         if (!WcIsASCII(c) ||  !isxdigit(WcLowByte(c)) ||
             (cur_code == CODE_KUTEN && !isdigit(WcLowByte(c))))
@@ -113,7 +113,7 @@ wchar16_t c;
 		} else
                         code = 1;
 	} else {
-                code = (u_short)strtol((char *)cbuf, (char **)NULL, 16);
+                code = (unsigned short)strtol((char *)cbuf, (char **)NULL, 16);
                 if (ccnt % 2)
                         c1 = code & 0xff;
                 else
@@ -149,11 +149,11 @@ wchar16_t c;
         return(code);
 }
 
-u_short
+unsigned short
 strtocode()
 {
         int c;
-        u_short code;
+        unsigned short code;
 
 	while (ccnt < 4) {
                 c = inkey();

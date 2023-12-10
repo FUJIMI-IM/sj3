@@ -42,8 +42,8 @@
 #include "sj_typedef.h"
 
 int	cmpstr(src, dst)
-u_char	*src;
-u_char	*dst;
+unsigned char	*src;
+unsigned char	*dst;
 {
 	while (*src) {
 		if (*src != *dst) return FALSE;

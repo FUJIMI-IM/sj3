@@ -131,15 +131,15 @@ clear_list(void)
 
 
 
-static u_char*
+static unsigned char*
 makekanji(int *yomi, int* kanji, int* atr, int* len)
 {
 	int	kana[MaxYomiLength + 1];
-	u_char	ktmp[MaxKanjiLength * 3 + MaxAtrNumber * 2 + 1];
+	unsigned char	ktmp[MaxKanjiLength * 3 + MaxAtrNumber * 2 + 1];
 	int	i;
 	int	pos = 0;
 	int	*p;
-	u_char	*q;
+	unsigned char	*q;
 
 	
 	for (p = yomi, i = 0 ; *p ; )
@@ -206,7 +206,7 @@ makekanji(int *yomi, int* kanji, int* atr, int* len)
 	*len = pos;
 
 	
-	q = (u_char *)Malloc(pos);
+	q = (unsigned char *)Malloc(pos);
 	if (!q) {
 		fprintf(stderr, "\245\341\245\342\245\352\244\254\311\324\302\255\244\267\244\336\244\267\244\277");
 		exit(1);
@@ -218,14 +218,14 @@ makekanji(int *yomi, int* kanji, int* atr, int* len)
 
 
 
-static u_char*
+static unsigned char*
 makeyomi(int* yomi)
 {
-	u_char	tmp[MaxYomiLength + 1];
+	unsigned char	tmp[MaxYomiLength + 1];
 	int	i;
 	int	j;
 	int	*y = yomi;
-	u_char	*p;
+	unsigned char	*p;
 
 	
 	for (i = 0 ; *y ; ) {
@@ -240,7 +240,7 @@ makeyomi(int* yomi)
 	tmp[i++] = 0;
 
 	
-	p = (u_char *)Malloc(i);
+	p = (unsigned char *)Malloc(i);
 	if (!p) {
 		fprintf(stderr, "\245\341\245\342\245\352\244\254\311\324\302\255\244\267\244\336\244\267\244\277");
 		exit(1);
@@ -253,7 +253,7 @@ makeyomi(int* yomi)
 
 
 static KanjiRec*
-make_krec(u_char* kcode, int klen)
+make_krec(unsigned char* kcode, int klen)
 {
 	KanjiRec *krec;
 
@@ -299,7 +299,7 @@ make_hrec(int hinsi)
 
 
 static DouonRec*
-make_drec(u_char* ycode)
+make_drec(unsigned char* ycode)
 {
 	DouonRec *drec;
 
@@ -326,8 +326,8 @@ diff_ylen(DouonRec *drec)
 {
 	DouonRec *dptr;
 	DouonRec *dprev;
-	u_char	*p1;
-	u_char	*p2;
+	unsigned char	*p1;
+	unsigned char	*p2;
 	int	ylen = 0;
 
 	
@@ -370,8 +370,8 @@ douon_knj(DouonRec* drec)
 {
 	int	i;
 	int	len = 0;
-	u_char	*p;
-	u_char	*knjofscvt();
+	unsigned char	*p;
+	unsigned char	*knjofscvt();
 	HinsiRec *hrec;
 	KanjiRec *krec;
 
@@ -564,8 +564,8 @@ flush_douon(void)
 void
 makelist(int* yomi, int* kanji, int hinsi, int*  atr)
 {
-	u_char	*ycode;
-	u_char	*kcode;
+	unsigned char	*ycode;
+	unsigned char	*kcode;
 	int	klen;
 	HinsiRec *hrec;
 	KanjiRec *krec, *kprev;

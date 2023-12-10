@@ -135,7 +135,7 @@ int	gnum;
 	wchar16_t		wtmp[BUFFLENGTH], wtmp2[BUFFLENGTH * 2];
 
 	int		gakusyuu;
-	u_short		row, col;
+	unsigned short	row, col;
 	Conversion	*cv;
 
 	cv = current_conversion;

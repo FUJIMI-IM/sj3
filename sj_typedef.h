@@ -41,16 +41,16 @@
 
 #include <sys/types.h>
 
-typedef	u_char	TypeGroup;
-typedef	u_char	TypeGram;
-typedef	u_short	TypeIdxOfs;
+typedef	unsigned char	TypeGroup;
+typedef	unsigned char	TypeGram;
+typedef	unsigned short	TypeIdxOfs;
 typedef	short	TypeDicSeg;
-typedef	u_short	TypeDicOfs;
+typedef	unsigned short	TypeDicOfs;
 typedef	ino_t	TypeDicID;
-typedef	u_char	TypeCnct;
-typedef	u_short	TypeStyNum;
-typedef	u_char	TypeClass;
-typedef	u_char	TypeBunNum;
+typedef	unsigned char	TypeCnct;
+typedef	unsigned short	TypeStyNum;
+typedef	unsigned char	TypeClass;
+typedef	unsigned char	TypeBunNum;
 
 #ifndef	NULL
 #	define	NULL	0

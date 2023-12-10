@@ -42,17 +42,17 @@
 typedef struct bunsetu_sj3	Bunsetu;
 
 typedef struct _Conversion {
-	u_short	out_mode[BUFFLENGTH*2];	
+	unsigned short	out_mode[BUFFLENGTH*2];
 
-	u_short	Plen[BUFFLENGTH];	
-	u_short	OrgPlen[BUFFLENGTH];	
-	u_short	Bpoint[BUFFLENGTH];	
-	u_short	Edit[BUFFLENGTH];	
-	u_short	span_l[BUFFLENGTH];	
-	u_short	Elen[BUFFLENGTH];	
-	u_short	Displen[BUFFLENGTH];	
+	unsigned short	Plen[BUFFLENGTH];
+	unsigned short	OrgPlen[BUFFLENGTH];
+	unsigned short	Bpoint[BUFFLENGTH];
+	unsigned short	Edit[BUFFLENGTH];
+	unsigned short	span_l[BUFFLENGTH];
+	unsigned short	Elen[BUFFLENGTH];
+	unsigned short	Displen[BUFFLENGTH];
 
-	u_short Vindex[BUFFLENGTH * 2];
+	unsigned short Vindex[BUFFLENGTH * 2];
 
 	short	ha_point;		
 	short	ha_epoint;		
@@ -63,15 +63,15 @@ typedef struct _Conversion {
 	short	Enum;			
 	short	e_point;		
 
-	u_short line;
-	u_short column;
+	unsigned short line;
+	unsigned short column;
 
-	u_short	PushCurrentVcol;
-	u_short	Vlen;
-	u_short	SavedRow;
-	u_short	SavedCol;
-	u_short	CurrentVcol;
-	u_short	MaxVcol;
+	unsigned short	PushCurrentVcol;
+	unsigned short	Vlen;
+	unsigned short	SavedRow;
+	unsigned short	SavedCol;
+	unsigned short	CurrentVcol;
+	unsigned short	MaxVcol;
 
 	short	CurBun;			
 	short	PreBun;			
@@ -79,36 +79,36 @@ typedef struct _Conversion {
 	Bunsetu	Bun[BUFFLENGTH];	
 
 	wchar16_t	out_buf[BUFFLENGTH * 2];
-	u_char	in_mode[BUFFLENGTH * 2];
+	unsigned char	in_mode[BUFFLENGTH * 2];
 	wchar16_t	*span_p[BUFFLENGTH];	
 	wchar16_t	*Ppoint[BUFFLENGTH];	
 	wchar16_t	*Epoint[BUFFLENGTH];	
 	wchar16_t	Halpha[BUFFLENGTH];	
-	u_char	kettei[BUFFLENGTH];	
-	u_char	Pkettei[BUFFLENGTH];	
-	u_char	Pedited[BUFFLENGTH];	
+	unsigned char	kettei[BUFFLENGTH];
+	unsigned char	Pkettei[BUFFLENGTH];
+	unsigned char	Pedited[BUFFLENGTH];
 	wchar16_t	Ebuff[EDITLEN];		
-	u_char	Bkettei[BUFFLENGTH];	
-	u_char	Dispmod[BUFFLENGTH];	
+	unsigned char	Bkettei[BUFFLENGTH];
+	unsigned char	Dispmod[BUFFLENGTH];
 	wchar16_t	yomiout[BUFFLENGTH * 2];
 	wchar16_t	kanjiout[BUFFLENGTH * 4];
 
-	u_char	Imode;			
-	u_char	BuffMode;		
-	u_char	Kanji;			
-	u_char	Dflag;			
-	u_char	word_regist;
-	u_char	Cflag;
-	u_char	henkanflag;
+	unsigned char	Imode;
+	unsigned char	BuffMode;
+	unsigned char	Kanji;
+	unsigned char	Dflag;
+	unsigned char	word_regist;
+	unsigned char	Cflag;
+	unsigned char	henkanflag;
 
-	u_char	wrap;
+	unsigned char	wrap;
 } Conversion;
 
 
 wchar16_t osave_buf[BUFFLENGTH * 2];  
-u_short osave_mode[BUFFLENGTH * 2];
-u_short isave_mode[BUFFLENGTH * 2];
-u_short os_point;
+unsigned short osave_mode[BUFFLENGTH * 2];
+unsigned short isave_mode[BUFFLENGTH * 2];
+unsigned short os_point;
 
 wchar16_t hsave_buf[BUFFLENGTH];
-u_short hs_point;
+unsigned short hs_point;

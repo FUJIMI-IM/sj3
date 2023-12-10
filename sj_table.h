@@ -78,13 +78,13 @@
 
 #define	StbHinsi(p)	(*((p) + 1))
 
-extern	u_char	charsize[], chrtbl[], *conjadr[], connadr[];
-extern  u_char   *fzkadr[], kigou[], kurai1_tbl[], kurai2_tbl[];
-extern	u_char	num1tbl[], num2tbl[], num3tbl[], num4tbl[];
-extern	u_char	num5tbl[], num6tbl[], *rigtadr[], scncttbl[2][24];
-extern	u_char	*settou_ptr[], *stbadr[], sttpri[5][31];
-extern  u_char   suuji_tbl[], taipri[7][45], termtbl[];
-extern	u_short	*selsjadrs[];
+extern	unsigned char	charsize[], chrtbl[], *conjadr[], connadr[];
+extern  unsigned char   *fzkadr[], kigou[], kurai1_tbl[], kurai2_tbl[];
+extern	unsigned char	num1tbl[], num2tbl[], num3tbl[], num4tbl[];
+extern	unsigned char	num5tbl[], num6tbl[], *rigtadr[], scncttbl[2][24];
+extern	unsigned char	*settou_ptr[], *stbadr[], sttpri[5][31];
+extern  unsigned char   suuji_tbl[], taipri[7][45], termtbl[];
+extern	unsigned short	*selsjadrs[];
 extern	UCPFuncGK	getkan_func[];
 extern	UCPFuncMK	makekan_func[];
 extern	VFuncNT	cvtnum_func[];

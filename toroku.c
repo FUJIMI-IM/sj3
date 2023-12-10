@@ -124,7 +124,7 @@ int	lim;
 	Conversion *cv;
 	int		len;
 	wchar16_t		wtmp[BUFFLENGTH], ytmp[YOMILEN+1], ktmp[KLEN+1];
-	u_char		tmp[BUFFLENGTH];
+	unsigned char	tmp[BUFFLENGTH];
 
 	cv = GetConversion();
  	TopGuide ();  
@@ -212,10 +212,10 @@ getcheck (yomi, kanji, hinshi, prompt)
 wchar16_t	*yomi, *kanji, *hinshi, *prompt;
 {
 	int	c;
-	u_char		tmp[BUFFLENGTH + KLEN];
+	unsigned char	tmp[BUFFLENGTH + KLEN];
 	extern wchar16_t  *Y;
 	wchar16_t         wtmp[BUFFLENGTH + KLEN];
-	u_char          ktmp[KLEN+1], ytmp[YOMILEN+1], htmp[YOMILEN+1],
+	unsigned char   ktmp[KLEN+1], ytmp[YOMILEN+1], htmp[YOMILEN+1],
 	                ttmp[BUFFLENGTH];
 	
 	TopGuide (); 
@@ -305,7 +305,7 @@ wchar16_t	*kanji, *guide;
 	int		c;
 	int		bstart, bend;
 	int		i;
-	u_short			row, col;
+	unsigned short		row, col;
 	wchar16_t			*p;
 	int			plen, len;
 
@@ -405,7 +405,7 @@ exec_syoukyo ()
 	int 	i;
 	wchar16_t		yomi[YOMILEN+1], kanji[KLEN+1];
 	wchar16_t		tmp[BUFFLENGTH], tmp2[BUFFLENGTH * 2];
-        u_char          ytmp[YOMILEN+1], ktmp[KLEN+1], 
+        unsigned char   ytmp[YOMILEN+1], ktmp[KLEN+1],
 	                mtmp[BUFFLENGTH], mtmp2[BUFFLENGTH * 2],
 	                ttmp[BUFFLENGTH];
 	int		inc;
