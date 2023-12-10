@@ -296,7 +296,7 @@ int	len;
 	Conversion	*cv;
 	int		i;
 	wchar16_t		*p;
-	u_short	*pp;
+	unsigned short	*pp;
 	int 			mlen, plen, ipos, rlen, imlen;
 
 	cv = GetConversion ();
@@ -343,7 +343,7 @@ exec_edit ()
 	int		edit, inc, i;
 	wchar16_t	*s;
 	wchar16_t			Htmp[BUFFLENGTH], Ztmp[BUFFLENGTH * 2];
-	u_short			Omode[BUFFLENGTH * 2];
+	unsigned short		Omode[BUFFLENGTH * 2];
 	int			bun;
 	int			edited, editlen;
 	int			len, rlen, hlen, diff;
@@ -616,14 +616,14 @@ int	*numpoint;
 
 Replace(Hs, Zs, omode, cur, num)
 wchar16_t	*Hs, *Zs;
-u_short *omode;
+unsigned short *omode;
 int cur, num;
 {
 	int	i, len, inc;
 	int		beep_on, icur1, icur2;
 	wchar16_t		roma[SHORTBUFFSIZE+1], kana[SHORTBUFFSIZE+1];
 	wchar16_t		work[DLEN+1];
-	u_short		otmp[SHORTBUFFSIZE+1];
+	unsigned short	otmp[SHORTBUFFSIZE+1];
 
 	*roma = '\0';
 	*kana = '\0';
@@ -694,7 +694,7 @@ int cur, num;
 
 Substitute(Hs, Zs, omode, cur, num)
 wchar16_t	*Hs, *Zs;
-u_short *omode;
+unsigned short *omode;
 int *cur, num;
 {
 	wchar16_t		work[DLEN + 1];
@@ -722,13 +722,13 @@ int *cur, num;
 
 Insert(Hs, Zs, omode, cur)
 wchar16_t	*Hs, *Zs;
-u_short *omode;
+unsigned short *omode;
 int cur;
 {
 	int	inc, len, i;
 	int		limit, hlimit, ylen, res, icur, rlen;
 	wchar16_t		ztmp[DLEN + 1], htmp[DLEN + 1];
-	u_short		otmp[DLEN + 1];
+	unsigned short		otmp[DLEN + 1];
 
 	ylen = wslen(Zs);
 	limit = Elimit - ylen;
@@ -790,7 +790,7 @@ int cur;
 
 EditDel (Hs, Zs, omode, cur, num)
 wchar16_t	*Hs, *Zs;
-u_short *omode;
+unsigned short *omode;
 int	cur, num;
 {
 	int	i, j;
@@ -824,7 +824,7 @@ int	cur, num;
 
 chhstr(Hs, Zs, omode, cur)
 wchar16_t *Hs, *Zs;
-u_short *omode;
+unsigned short *omode;
 int cur;
 {
 	int i, j, len;

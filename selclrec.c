@@ -97,7 +97,7 @@ void	selclrec()
 	
 	if (rec == NULL) {
 		int	klen;
-		u_char	ch;
+		unsigned char	ch;
 
 		
 		free_clall(clt1st);

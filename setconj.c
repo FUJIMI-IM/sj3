@@ -43,7 +43,7 @@
 #include "kanakan.h"
 
 static	int
-cnjstrcmp (u_char *yptr, u_char *cnjp, int *saml)
+cnjstrcmp (unsigned char *yptr, unsigned char *cnjp, int *saml)
 {
 	int	asklen;
 	int	nkrlen;
@@ -114,13 +114,13 @@ cnvrow (JREC *rec, TypeCnct row)
 int
 setconj (TypeGram hinsi, JREC *jrec, CREC *crec)
 {
-	u_char	*yptr;
+	unsigned char	*yptr;
 	int	cmp;
 	TypeCnct	right;
 	int	saml;
 	int	ofslen;
 	int	count = 0;
-	u_char	*cnj;
+	unsigned char	*cnj;
 
 	if ((cnj  = Conjadr(hinsi)) != NULL) {
 		saml = ofslen = 0;
@@ -146,7 +146,7 @@ setconj (TypeGram hinsi, JREC *jrec, CREC *crec)
 			if (isdpnd(*(yptr + saml))) continue;
 
 			if ((right = cnvrow(jrec, (TypeCnct)CnjRight(cnj))) != '\0') {
-				crec -> len   = (u_char)(ofslen + saml);
+				crec -> len   = (unsigned char)(ofslen + saml);
 				crec -> right = right;
 				count++;
 				crec++;

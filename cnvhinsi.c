@@ -51,7 +51,7 @@ struct gram_code {
 #define	GramMax	(sizeof(gramtbl)/sizeof(struct gram_code) - 1)
 
 int
-u_strcmp(u_char* a, u_char* b)
+u_strcmp(unsigned char* a, unsigned char* b)
 {
 	if (!a || !b) return 0;
 
@@ -68,7 +68,7 @@ u_strcmp(u_char* a, u_char* b)
 
 
 int
-cnvhinsi(u_char *buf)
+cnvhinsi(unsigned char *buf)
 {
 	int	min;
 	int	max;

@@ -40,7 +40,7 @@
 
 
 
-u_char	suuji_tbl[] = {
+unsigned char	suuji_tbl[] = {
 	N_0,_NIL,_NIL,	_Num0  | NA,		0x00, 0x00,
 	N_1,_NIL,_NIL,	_Num1  | NA,		0xec, 0x07,
 	N_2,_NIL,_NIL,	_Num2  | NA,		0xec, 0x07,
@@ -80,7 +80,7 @@ u_char	suuji_tbl[] = {
 
 
 
-u_char	kurai1_tbl[] = {
+unsigned char	kurai1_tbl[] = {
 	_ZI,_XYU,_U,  	(1<<4)+0+Kr1TblTopF,	0x05,
 	_ZI,_XYU,_XTU,	(1<<4)+1+Kr1TblTopF,	0x02,
 	_SE,_NN, _NIL,	(3<<4)+2+Kr1TblTopF,	0x07,
@@ -96,7 +96,7 @@ u_char	kurai1_tbl[] = {
 
 
 
-u_char	kurai2_tbl[] = {
+unsigned char	kurai2_tbl[] = {
 	_O, _KU, _NIL,	 (2<<4)+13,
 	_TI,_XYO,_U,  	 (3<<4)+14,
 	_MA,_NN, _NIL,	 (1<<4)+15,
@@ -105,7 +105,7 @@ u_char	kurai2_tbl[] = {
 
 
 
-u_char	num1tbl[]  = {
+unsigned char	num1tbl[]  = {
 	0xa3, 0xb0,	
 	0xa3, 0xb1,	
 	0xa3, 0xb2,	
@@ -123,7 +123,7 @@ u_char	num1tbl[]  = {
 
 
 
-u_char	num2tbl[]  = {
+unsigned char	num2tbl[]  = {
 	0xa1, 0xbb,	
 	0xb0, 0xec,	
 	0xc6, 0xf3,	
@@ -141,7 +141,7 @@ u_char	num2tbl[]  = {
 
 
 
-u_char	num3tbl[]  = {
+unsigned char	num3tbl[]  = {
 	0xce, 0xed,	
 	0xb0, 0xed,	
 	0xc6, 0xf5,	
@@ -159,7 +159,7 @@ u_char	num3tbl[]  = {
 
 
 
-u_char	num4tbl[] = {
+unsigned char	num4tbl[] = {
 	0xc0, 0xe9,	
 	0xc9, 0xb4,	
 	0xbd, 0xbd,	
@@ -168,7 +168,7 @@ u_char	num4tbl[] = {
 
 
 
-u_char	num5tbl[] = {
+unsigned char	num5tbl[] = {
 	0xc0, 0xe9,	
 	0xc9, 0xb4,	
 	0xbd, 0xa6,	
@@ -177,7 +177,7 @@ u_char	num5tbl[] = {
 
 
 
-u_char	num6tbl[] = {
+unsigned char	num6tbl[] = {
 	0xc3, 0xfb,	
 	0xb2, 0xaf,	
 	0xcb, 0xfc,	

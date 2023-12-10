@@ -49,16 +49,16 @@ extern	int	ofsrec_num;
 
 
 static OffsetRec*
-makeoffset(u_char* ptr, int len, int ofs)
+makeoffset(unsigned char* ptr, int len, int ofs)
 {
 	OffsetRec *orec;
-	u_char	*p;
+	unsigned char	*p;
 
 	
 	orec = (OffsetRec *)Malloc(sizeof(OffsetRec));
 
 	
-	p = (u_char *)Malloc(len);
+	p = (unsigned char *)Malloc(len);
 	memcpy(p, ptr, len);
 
 	
@@ -74,7 +74,7 @@ makeoffset(u_char* ptr, int len, int ofs)
 
 
 void
-set_ofsrec(u_char* ptr, int len, int ofs)
+set_ofsrec(unsigned char* ptr, int len, int ofs)
 {
 	OffsetRec *orec;
 	int	low, high, mid;
@@ -121,7 +121,7 @@ set_ofsrec(u_char* ptr, int len, int ofs)
 
 
 int
-isknjexist(u_char* knj, int len)
+isknjexist(unsigned char* knj, int len)
 {
 	int	low, high, mid;
 	int	i;
@@ -162,7 +162,7 @@ clear_ofsrec(void)
 
 
 OffsetRec*
-real_ofsrec(u_char* ptr)
+real_ofsrec(unsigned char* ptr)
 {
 	int	ofs;
 	int	i;

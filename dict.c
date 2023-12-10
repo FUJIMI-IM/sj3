@@ -45,9 +45,9 @@
 void
 get_askknj(void)
 {
-	u_char	*p;
-	u_char	*q;
-	u_char	*r;
+	unsigned char	*p;
+	unsigned char	*q;
+	unsigned char	*r;
 	int	i = 0, csize;
 	int	flg;
 
@@ -89,7 +89,7 @@ seldict(TypeDicID id)
 }
 
 
-u_char*
+unsigned char*
 get_idxptr(TypeDicSeg seg)
 {
 	(*curdict->getofs)(curdict);

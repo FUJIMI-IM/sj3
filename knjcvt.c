@@ -47,7 +47,7 @@
 
 typedef struct div_list {
 	int	len;		
-	u_char	code[3];	
+	unsigned char	code[3];
 	struct div_list *child;	
 } DivList;
 
@@ -88,7 +88,7 @@ make_divrec(void)
 
 
 static int
-make_divlist(DivList* parent, u_char *knj, int len)
+make_divlist(DivList* parent, unsigned char *knj, int len)
 {
 	int	i, j;
 	int	num;
@@ -195,11 +195,11 @@ make_divlist(DivList* parent, u_char *knj, int len)
 
 
 
-u_char*
-knjofscvt(u_char* ptr, int len, int* ret)
+unsigned char*
+knjofscvt(unsigned char* ptr, int len, int* ret)
 {
 	int	i;
-	u_char	*p, *q;
+	unsigned char	*p, *q;
 	DivList parent, *dl;
 
 	
@@ -211,7 +211,7 @@ knjofscvt(u_char* ptr, int len, int* ret)
 	*ret = i;
 
 	
-	p = (u_char *)Malloc(i);
+	p = (unsigned char *)Malloc(i);
 	if (!p) {
 		fprintf(stderr, "\245\341\245\342\245\352\244\254\311\324\302\255\244\267\244\336\244\267\244\277");
 		exit(1);
@@ -234,11 +234,11 @@ knjofscvt(u_char* ptr, int len, int* ret)
 
 
 
-u_char*
-knjcvt(u_char* ptr, int len, int* ret)
+unsigned char*
+knjcvt(unsigned char* ptr, int len, int* ret)
 {
 	int	i;
-	u_char	*p, *q;
+	unsigned char	*p, *q;
 	DivList parent, *dl;
 
 	
@@ -247,7 +247,7 @@ knjcvt(u_char* ptr, int len, int* ret)
 	*ret = i;
 
 	
-	p = (u_char *)Malloc(i);
+	p = (unsigned char *)Malloc(i);
 	if (!p) {
 		fprintf(stderr, "\245\341\245\342\245\352\244\254\311\324\302\255\244\267\244\336\244\267\244\277");
 		exit(1);

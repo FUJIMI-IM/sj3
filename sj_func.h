@@ -40,11 +40,11 @@
 #include "sj_struct.h"
 #include "Struct.h"
 
-typedef	void	(*VFuncNT)(u_char*, u_char*, JREC*);
-typedef int	(*IFuncSetj)(u_char*);
-typedef int	(*IFuncHira)(u_char*, int*);
-typedef u_char* (*UCPFuncGK)(u_char*, u_char*, u_char*, int, int);
-typedef u_char* (*UCPFuncMK)(u_char*, u_char*, int);
+typedef	void	(*VFuncNT)(unsigned char*, unsigned char*, JREC*);
+typedef int	(*IFuncSetj)(unsigned char*);
+typedef int	(*IFuncHira)(unsigned char*, int*);
+typedef unsigned char* (*UCPFuncGK)(unsigned char*, unsigned char*, unsigned char*, int, int);
+typedef unsigned char* (*UCPFuncMK)(unsigned char*, unsigned char*, int);
 
 
 #endif /* _SJ_FUNC */

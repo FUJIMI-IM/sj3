@@ -31,8 +31,8 @@
  * $Id: dicttool.h,v 1.1 2004/07/01 17:11:27 hiroo Exp $
  */
 
-#ifndef _DICTTOLL_H_
-#define _DICTTOLL_H_  1
+#ifndef _DICTTOOL_H_
+#define _DICTTOOL_H_  1
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -41,14 +41,14 @@
 /* char.c */
 int cnvyomi (int code);
 int h2kcode (int code);
-int codesize (u_char code);
-void output_knj (FILE* fp, u_char* p, int l);
+int codesize (unsigned char code);
+void output_knj (FILE* fp, unsigned char* p, int l);
 void output_str (FILE* fp, char* p);
 void output_int (FILE* fp, int* p);
-void output_yomi (FILE* fp, u_char* p);
+void output_yomi (FILE* fp, unsigned char* p);
 
 /* cnvhinsi.c */
-int cnvhinsi (u_char *buf);
+int cnvhinsi (unsigned char *buf);
 
 /* file.c */
 FILE* Fopen (char* filename, char* type);
@@ -62,16 +62,16 @@ int Fgetc (FILE* fp);
 void Fflush (FILE* fp);
 
 /* hindo.c */
-int check_hindo (u_char* ptr, int len);
-void knjhnd_set (u_char* p, int l);
-void knjhnd_reset (u_char* p, int l);
+int check_hindo (unsigned char* ptr, int len);
+void knjhnd_set (unsigned char* p, int l);
+void knjhnd_reset (unsigned char* p, int l);
 int decide_knjask (void);
 void clear_hindo (void);
 void clear_assyuku (void);
 
 /* knjcvt.c */
-u_char* knjofscvt (u_char* ptr, int len, int* ret);
-u_char* knjcvt (u_char* ptr, int len, int* ret);
+unsigned char* knjofscvt (unsigned char* ptr, int len, int* ret);
+unsigned char* knjcvt (unsigned char* ptr, int len, int* ret);
 
 /* makedict.c */
 void parse (int argc, char** argv);
@@ -85,9 +85,9 @@ void flush_douon (void);
 void makelist (int* yomi, int* kanji, int hinsi, int*  atr);
 
 /* makeseg.c */
-size_t make_knjstr (u_char* src, int len, u_char* dst);
+size_t make_knjstr (unsigned char* src, int len, unsigned char* dst);
 void makeseg (void);
-void makehead (u_char* dict_name);
+void makehead (unsigned char* dict_name);
 
 /* memory.c */
 void* Malloc (size_t size);
@@ -95,21 +95,21 @@ void* Zalloc (size_t size);
 void Free (void *p);
 
 /* offset.c */
-void set_ofsrec (u_char* ptr, int len, int ofs);
-int  isknjexist (u_char* knj, int len);
+void set_ofsrec (unsigned char* ptr, int len, int ofs);
+int  isknjexist (unsigned char* knj, int len);
 void clear_ofsrec (void);
-OffsetRec* real_ofsrec (u_char* ptr);
+OffsetRec* real_ofsrec (unsigned char* ptr);
 
 /* readline.c */
 int* readline (void);
 void setline (void (*func)(int*, int*, int, int*));
 
 /* string.c */
-int bubun_str (u_char* p1, int l1, u_char* p2, int l2);
-int overlap_str (u_char *p1, int l1, u_char* p2, int l2);
+int bubun_str (unsigned char* p1, int l1, unsigned char* p2, int l2);
+int overlap_str (unsigned char *p1, int l1, unsigned char* p2, int l2);
 int top_strcmp (int* src, int* dst);
 int last_strcmp (int* src, int* dst);
-int string_cmp (u_char* p1, int l1, u_char* p2, int l2);
+int string_cmp (unsigned char* p1, int l1, unsigned char* p2, int l2);
 
-#endif /* _DICTTOLL_H_ */
+#endif /* _DICTTOOL_H_ */
 

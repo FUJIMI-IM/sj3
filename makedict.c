@@ -61,7 +61,7 @@ main(int argc, char** argv)
 
 	while (readline()) setline(makelist);
 	flush_douon();
-        makehead((u_char *)argv[2]);
+        makehead((unsigned char *)argv[2]);
 
 	return 0;
 }

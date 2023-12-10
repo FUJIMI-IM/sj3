@@ -61,8 +61,8 @@
 #include "server.h"
 
 typedef	struct	strlist {
-	u_char	*str1;
-	u_char	*str2;
+	unsigned char	*str1;
+	unsigned char	*str2;
 	struct	strlist	*link;
 } StrList;
 
@@ -121,7 +121,7 @@ RcWarning(char* p)
 
 
 static int
-cmpstr(u_char* src, u_char* dst)
+cmpstr(unsigned char* src, unsigned char* dst)
 {
 	int	flg;
 	int	c;
@@ -139,8 +139,8 @@ cmpstr(u_char* src, u_char* dst)
 
 
 
-static	u_char	*get_str(p, pv_dst)
-u_char	*p;
+static	unsigned char	*get_str(p, pv_dst)
+unsigned char	*p;
 void	*pv_dst;
 {
 	char		**dst;
@@ -154,8 +154,8 @@ void	*pv_dst;
 	while (*p++) ;
 	return p;
 }
-static	u_char	*get_int(p, pv_dst)
-u_char	*p;
+static	unsigned char	*get_int(p, pv_dst)
+unsigned char	*p;
 void	*pv_dst;
 {
 	char	*fmt;
@@ -167,8 +167,8 @@ void	*pv_dst;
 	while (*p++) ;
 	return p;
 }
-static	u_char	*get_flag(p, pv_dst)
-u_char	*p;
+static	unsigned char	*get_flag(p, pv_dst)
+unsigned char	*p;
 void	*pv_dst;
 {
 	int		*dst;
@@ -187,8 +187,8 @@ void	*pv_dst;
 }
 
 
-static u_char*
-get_list(u_char* p, StrList** dst)
+static unsigned char*
+get_list(unsigned char* p, StrList** dst)
 {
 	StrList	*s1, *s2;
 
@@ -197,13 +197,13 @@ get_list(u_char* p, StrList** dst)
 		if (!s1) RcError("no more memory");
 		s1 -> link = NULL;
 
-		s1 -> str1 = (u_char *)malloc(strlen((char *)p) + 1);
+		s1 -> str1 = (unsigned char *)malloc(strlen((char *)p) + 1);
 		if (!(s1 -> str1)) RcError("no more memory");
 		strcpy((char *)s1 -> str1, (char *)p);
 		while (*p++) ;
 
 		if (*p) {
-			s1 -> str2 = (u_char *)malloc(strlen((char *)p) + 1);
+			s1 -> str2 = (unsigned char *)malloc(strlen((char *)p) + 1);
 			if (!(s1 -> str2)) RcError("no more memory");
 			strcpy((char *)s1 -> str2, (char *)p);
 			while (*p++) ;
@@ -227,7 +227,7 @@ get_list(u_char* p, StrList** dst)
 
 struct	optlist {
 	char	*optname;
-	u_char	*(*optfunc)();
+	unsigned char	*(*optfunc)();
 	void	*optarg;
 } option[] = {
 /*
@@ -378,9 +378,9 @@ void
 read_runcmd(void)
 {
 	FILE	*fp;
-	u_char	buf[BUFSIZ];
+	unsigned char	buf[BUFSIZ];
 	struct	optlist *opt;
-	u_char	*p;
+	unsigned char	*p;
 
 	if (!(fp = fopen(runcmd_file, "r"))) {
 		warning_out("Can't open run-command file \"%s\"", runcmd_file);
@@ -388,7 +388,7 @@ read_runcmd(void)
 	}
 	line_number = 0;
 	while (read_line(fp, buf, sizeof(buf)) != EOF) {
-		for (opt = option ; (p = (u_char *)opt -> optname) != NULL ; opt++)
+		for (opt = option ; (p = (unsigned char *)opt -> optname) != NULL ; opt++)
 			if (!cmpstr(p, buf)) break;
 		if (p) {
 			p = buf; while (*p++) ;

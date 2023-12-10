@@ -48,7 +48,7 @@ void disp_version();
 exec_etc (key)
 int	key;
 {
-	u_short		row, col;
+	unsigned short	row, col;
 	int	inc;
 	int		chbun;
 	int 		edited;
@@ -220,8 +220,8 @@ int	key;
 helplevel ()
 {
 	wchar16_t                 wtmp[BUFFLENGTH];
-	u_char                  mtmp[BUFFLENGTH];
-	u_char			tmp[BUFFLENGTH];
+	unsigned char           mtmp[BUFFLENGTH];
+	unsigned char		tmp[BUFFLENGTH];
 	Conversion	*cv;
 
 	cv = GetConversion ();
@@ -266,7 +266,7 @@ exec_sjrc ()
 {
 	extern char	RCfile[];
 	char		tmp[BUFFLENGTH];
-	u_char         SUCCorFAIL[BUFFLENGTH];
+	unsigned char  SUCCorFAIL[BUFFLENGTH];
 	wchar16_t        wtmp[BUFFLENGTH];
 
 
@@ -305,7 +305,7 @@ change_weight ()
 	int	c;
 	char		s[2];
 	char		tmp[BUFFLENGTH];
-	u_char          mtmp[BUFFLENGTH];
+	unsigned char   mtmp[BUFFLENGTH];
         wchar16_t         wtmp[BUFFLENGTH];
 
 	(void) wcstombs((char *)mtmp, WCWeight_mes, BUFFLENGTH);
@@ -337,7 +337,7 @@ int aflag;
         int err;
 	char tmp[BUFFLENGTH];
 	wchar16_t wtmp[BUFFLENGTH];
-	u_char  dtmp[BUFFLENGTH];
+	unsigned char  dtmp[BUFFLENGTH];
 
 	if (!dcflag) {
                 (void) wcstombs((char *)dtmp, WCDiscon, BUFFLENGTH);
@@ -381,7 +381,7 @@ reconnect ()
 	char		tmp[BUFFLENGTH], *hp;
 	char		newserv[SHORTLENGTH * 2], *nsp;
 	wchar16_t wtmp[BUFFLENGTH];
-	u_char rtmp[BUFFLENGTH];
+	unsigned char rtmp[BUFFLENGTH];
 
 	strncpy(newserv, cur_serv, SHORTLENGTH * 2 - 1);
 	newserv[SHORTLENGTH * 2 - 1] = '\0';

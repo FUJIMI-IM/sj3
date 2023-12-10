@@ -52,7 +52,7 @@ exec_henkan ()
 	short			sp;
 	int			len, rlen, ilen;
 	int			opos, ipos, bnum;
-	u_char			index[BUFFLENGTH * 2], mode;
+	unsigned char		index[BUFFLENGTH * 2], mode;
 
 	cv = GetConversion ();
 	sp = 0;
@@ -283,9 +283,9 @@ Getcode (in, out)
 wchar16_t	*in, *out;
 {
 	int  c, i, j;
-	u_char        s[5];
+	unsigned char   s[5];
         int             base, c_code;
-        u_short         code;
+        unsigned short  code;
 	wchar16_t       sw[5];
 	wchar16_t       tmp[3];
 
@@ -308,7 +308,7 @@ wchar16_t	*in, *out;
 		in ++;
 		if (i == 4) {
 			s[i] = '\0';
-                       code = (u_short)strtol((char *)s, (char **)NULL, base);
+                       code = (unsigned short)strtol((char *)s, (char **)NULL, base);
                        switch (c_code) {
 			     case CODE_KUTEN :
 			     case CODE_KUTEN2 :
@@ -348,16 +348,16 @@ wchar16_t	*in, *out;
 }			
 
 
-static u_char	load_mode;	
+static unsigned char	load_mode;
 
 load_bun (num, s, type)
 int	num;
 wchar16_t	*s;
-u_char	type;
+unsigned char	type;
 {
 	Conversion	*cv;
 	int	len, ilen;
-	u_char		itype;
+	unsigned char	itype;
 	wchar16_t Htmp[BUFFLENGTH], Ztmp[BUFFLENGTH * 2];
 
 	cv = GetConversion ();
@@ -426,13 +426,13 @@ u_char	type;
 load_bun2(num, htmp, ztmp, omode)
 int	num;
 wchar16_t	*htmp, *ztmp;
-u_short *omode;
+unsigned short *omode;
 {
 	Conversion	*cv;
 	int	i;
 	int	len, ilen;
-	u_short		*op;
-	u_char		type;
+	unsigned short	*op;
+	unsigned char	type;
 	wchar16_t		Ztmp[DLEN + 1];
 
 
@@ -532,7 +532,7 @@ int	first;
 
 
 
-static u_char	Bstr_mode;	
+static unsigned char	Bstr_mode;
 
 Bstr (bnum, s)
 int	bnum;
@@ -669,7 +669,7 @@ Bdisp (redraw)
 	int             displen;
         int             amount = 0;
         int             tmpcol=0;
-        u_short         row, col;
+        unsigned short  row, col;
 
         CursorRead(&row, &col);
 
@@ -716,7 +716,7 @@ Rdisp ()
 	int             displen;
         int             amount=0;  
         int             tmpcol=0;
-        u_short         row, col;
+        unsigned short  row, col;
 
         CursorRead(&row, &col);
 
@@ -766,7 +766,7 @@ int	Total;
 	int             displen;
         int             amount=0;  
         int             tmpcol=0;
-        u_short         row, col;
+        unsigned short  row, col;
 
         CursorRead(&row, &col);
 

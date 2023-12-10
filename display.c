@@ -272,7 +272,7 @@ beep ()
 
 
 CursorSet (row, col)
-u_short	row, col;
+unsigned short	row, col;
 {
 	tputs(tgoto(CM, col - 1, row - 1), 1, outc);
 	Flush ();
@@ -304,7 +304,7 @@ int row1, row2;
 int	master_flush_flag = 1;
 
 CursorRead (row, col)
-u_short	*row, *col;
+unsigned short	*row, *col;
 {
 	
 	int	count;
@@ -454,7 +454,7 @@ Clear_EOL ()
 }
 
 StartGuide (row, col)
-u_short	*row, *col;
+unsigned short	*row, *col;
 {
 	Conversion	*cv;
 
@@ -471,7 +471,7 @@ u_short	*row, *col;
 }
 
 EndGuide (row, col)
-u_short	row, col;
+unsigned short	row, col;
 {
 	if (status_line) {
 		tputs (FS, 1, outc);

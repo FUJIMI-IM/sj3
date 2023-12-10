@@ -34,7 +34,7 @@
 #include "sj_typedef.h"
 
 int
-istrcmp(u_char *yomip, u_char *idxp, int ylen, int ilen)
+istrcmp(unsigned char *yomip, unsigned char *idxp, int ylen, int ilen)
 {
 	while (1) {
 		if ((ilen | ylen) == 0)

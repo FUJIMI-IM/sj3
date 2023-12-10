@@ -36,8 +36,8 @@
 #include "kanakan.h"
 
 
-u_char*
-skipkstr(u_char* ptr)
+unsigned char*
+skipkstr(unsigned char* ptr)
 {
 	int	contf = TRUE, csize;
 

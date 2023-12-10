@@ -49,7 +49,7 @@ srchidx(TypeDicSeg low, int len)
 	TypeDicSeg	high;
 	TypeDicSeg	mid;
 	int		cmp;
-	u_char		*target;
+	unsigned char	*target;
 
 	if ((high = curdict->segunit - 1) < 1) return 0;
 

@@ -50,19 +50,19 @@ void	mvmemi(), mvmemd(), mkidxtbl();
 
 
 void
-set_size (u_char *p, int size, int plen, int nlen)
+set_size (unsigned char *p, int size, int plen, int nlen)
 {
-	*p = (u_char)(size >> 8);
+	*p = (unsigned char)(size >> 8);
 	if (nlen & 0x10) *p |= NokoriYomiTop;
 	if (plen & 0x10) *p |= AssyukuYomiTop;
-	*(p + 1) = (u_char)size;
-	*(p + 2) = (u_char)((nlen & 0x0f) | ((plen & 0x0f) << 4));
+	*(p + 1) = (unsigned char)size;
+	*(p + 2) = (unsigned char)((nlen & 0x0f) | ((plen & 0x0f) << 4));
 }
 
 
 
 static	int
-isvyomi (u_char *yp)
+isvyomi (unsigned char *yp)
 {
 	int	len;
 
@@ -81,7 +81,7 @@ isvyomi (u_char *yp)
 
 
 static	int
-isvknj(u_char *kanji)
+isvknj(unsigned char *kanji)
 {
 	int	len;
 
@@ -132,10 +132,10 @@ isgrm (TypeGram gram)
 
 
 
-u_int
-addel_arg (u_char *yp, u_char *kp, TypeGram grm, u_char *nyp, int len)
+unsigned int
+addel_arg (unsigned char *yp, unsigned char *kp, TypeGram grm, unsigned char *nyp, int len)
 {
-	u_short	err = 0;
+	unsigned int	err = 0;
 
 	if (!sj2cd_str(yp, nyp, len)) err |= AD_BadYomi;
 	if (!isvyomi(nyp)) err |= AD_BadYomi;
@@ -147,7 +147,7 @@ addel_arg (u_char *yp, u_char *kp, TypeGram grm, u_char *nyp, int len)
 
 
 static	void
-yomi2kata (u_char *src, u_char *dst)
+yomi2kata (unsigned char *src, unsigned char *dst)
 {
 	int	first;
 	int	second;
@@ -171,7 +171,7 @@ yomi2kata (u_char *src, u_char *dst)
 
 
 static	int
-top_strcmp (u_char *src, u_char *dst)
+top_strcmp (unsigned char *src, unsigned char *dst)
 {
 	int	i;
 	for (i = 0 ; *src && (*src == *dst) ; src++, dst++) i++;
@@ -182,7 +182,7 @@ top_strcmp (u_char *src, u_char *dst)
 
 
 static	int
-last_strcmp (u_char *src, u_char *dst)
+last_strcmp (unsigned char *src, unsigned char *dst)
 {
 	int	slen;
 	int	dlen;
@@ -200,20 +200,20 @@ last_strcmp (u_char *src, u_char *dst)
 
 
 int
-cvtknj (u_char *yomi, u_char *knj, u_char *dst)
+cvtknj (unsigned char *yomi, unsigned char *knj, unsigned char *dst)
 {
-	u_char	kana[MaxWdYomiLen * 2 + 1];
+	unsigned char	kana[MaxWdYomiLen * 2 + 1];
 	int	len;
-	u_char	*keep;
+	unsigned char	*keep;
 
 	keep = dst;			
 	yomi2kata(yomi, kana);		
 
 	if ((len = top_strcmp(yomi, knj)) != 0) {
-                *dst = (u_char)(ZenHiraAssyuku | (len - 1));
+                *dst = (unsigned char)(ZenHiraAssyuku | (len - 1));
 	}
 	else if ((len = top_strcmp(kana, knj)) != 0) {
-                *dst = (u_char)(ZenKataAssyuku | (len - 1));
+                *dst = (unsigned char)(ZenKataAssyuku | (len - 1));
 	}
 
 	if (len) {
@@ -224,16 +224,16 @@ cvtknj (u_char *yomi, u_char *knj, u_char *dst)
 	if (*knj) {
 		for ( ; ; ) {
 			if ((len = last_strcmp(yomi, knj)) != 0) {
-				*dst++ = (u_char)(ZenHiraAssyuku | (len - 1));
+				*dst++ = (unsigned char)(ZenHiraAssyuku | (len - 1));
 				break;
 			}
 			else if ((len = last_strcmp(kana, knj)) != 0) {
-				*dst++ = (u_char)(ZenKataAssyuku | (len - 1));
+				*dst++ = (unsigned char)(ZenKataAssyuku | (len - 1));
 				break;
 			}
 			else if (*knj == SS2) {
 				knj++;
-				*dst++ = (u_char)LeadingHankaku;
+				*dst++ = (unsigned char)LeadingHankaku;
 				*dst++ = *knj++;
 			} else if (*knj == SS3) {
 				knj++;
@@ -244,7 +244,7 @@ cvtknj (u_char *yomi, u_char *knj, u_char *dst)
 				*dst++ = (*knj & NormalKanjiMask); knj++;
 			}
 			else {
-				*dst++ = (u_char)LeadingHankaku;
+				*dst++ = (unsigned char)LeadingHankaku;
 				*dst++ = *knj++;
 			}
 
@@ -262,12 +262,12 @@ cvtknj (u_char *yomi, u_char *knj, u_char *dst)
 
 
 int
-srchkana (u_char **ptr, int *saml)
+srchkana (unsigned char **ptr, int *saml)
 {
-	u_char	*p;
+	unsigned char	*p;
 	int	cmp;
 	int	cnt = 0;
-	u_char	same;
+	unsigned char	same;
 	int	flg = 0;
 
 	same = 0;
@@ -302,9 +302,9 @@ srchkana (u_char **ptr, int *saml)
 
 
 int
-srchgram (u_char *ptr, u_char **dst, TypeGram hinsi)
+srchgram (unsigned char *ptr, unsigned char **dst, TypeGram hinsi)
 {
-	u_char	*endp;
+	unsigned char	*endp;
 	int	cnt = 0, nlen;
 	int	flg = FALSE;
 
@@ -334,10 +334,10 @@ srchgram (u_char *ptr, u_char **dst, TypeGram hinsi)
 
 
 int
-srchkanji (u_char **dst, u_char *knj, int klen)
+srchkanji (unsigned char **dst, unsigned char *knj, int klen)
 {
-	u_char	*ptr;
-	u_char	*p, *q;
+	unsigned char	*ptr;
+	unsigned char	*p, *q;
 	int	len;
 	int	flg = FALSE;
 	int	cnt = 0;
@@ -370,7 +370,7 @@ srchkanji (u_char **dst, u_char *knj, int klen)
 TypeIdxOfs
 count_uidx (void)
 {
-	u_char	*p;
+	unsigned char	*p;
 
 	p = get_idxptr(curdict->segunit - 1);
 	while (*p++) ;
@@ -381,9 +381,9 @@ count_uidx (void)
 
 
 void
-chg_uidx (TypeDicSeg seg, u_char *yomi, int len)
+chg_uidx (TypeDicSeg seg, unsigned char *yomi, int len)
 {
-	u_char		*p, *q;
+	unsigned char	*p, *q;
 	int		olen;
 
 	p = get_idxptr(seg);

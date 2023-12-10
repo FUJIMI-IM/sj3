@@ -57,7 +57,7 @@ study(STDYOUT *stdy)
 
 	if (!StudyExist()) return StudyNoDict;
 
-	memcpy((u_char *)stdy, (u_char *)&outp, sizeof(outp));
+	memcpy((unsigned char *)stdy, (unsigned char *)&outp, sizeof(outp));
 
 	if (outp.stdy1.offset == 0) return StudyNotStudy;
 
@@ -95,7 +95,7 @@ study(STDYOUT *stdy)
 		}
 
 		if (p2) {
-			mvmemi((u_char *)(p2 + 1), (u_char *)p2,
+			mvmemi((unsigned char *)(p2 + 1), (unsigned char *)p2,
 				(StudyTail - p2) * StudyRecSize);
 			StudyCount -= 1;
 		}
@@ -123,8 +123,8 @@ study(STDYOUT *stdy)
 		p1++;
 	}
 
-	mvmemd((u_char *)(StudyTail - 1), (u_char *)StudyTail,
-			(u_char *)(StudyTail - 1) - (u_char *)p1);
+	mvmemd((unsigned char *)(StudyTail - 1), (unsigned char *)StudyTail,
+			(unsigned char *)(StudyTail - 1) - (unsigned char *)p1);
 	p1 -> offset = outp.stdy1.offset;
 	p1 -> seg    = outp.stdy1.seg;
 	p1 -> dicid  = outp.stdy1.dicid;

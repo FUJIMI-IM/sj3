@@ -57,9 +57,9 @@ extern int current_locale;
 #define sj_ishira(c) (c >= 0xa4a1 && c <= 0xa4f3)
 static wchar16_t intmp[MAXLLEN];
 static wchar16_t outtmp[MAXLLEN];
-static u_char  mtmp[MAXLLEN];
+static unsigned char  mtmp[MAXLLEN];
 
-static u_short HKtable[ZKATAn] = {
+static unsigned short HKtable[ZKATAn] = {
 	KANA_XA,	KANA_A,
 	KANA_XA + 1,	KANA_A	+ 1,
 	KANA_XA + 2,	KANA_A	+ 2,
@@ -124,8 +124,8 @@ static u_short HKtable[ZKATAn] = {
 };
 
 static struct ztohkktbl {
-	u_short zen;
-	u_short han;
+	unsigned short zen;
+	unsigned short han;
 } HKKtbl[8] = {
 	{ZEN_KTEN, 	KANA_KTEN},
 	{ZEN_FKAKKO, 	KANA_FKAKKO},
@@ -140,7 +140,7 @@ static struct ztohkktbl {
 
 static struct hzkigoutbl {
 	wchar16_t han;
-	u_short zen;
+	unsigned short zen;
 } HZKtbl[6] = {
 	{',',	ZEN_TTEN},
 	{'.',	ZEN_KTEN},
@@ -150,7 +150,7 @@ static struct hzkigoutbl {
 	{']',	ZEN_EKAKKO}
 };
 
-static u_short HZtbl[95] = {
+static unsigned short HZtbl[95] = {
 	0xa1a1, 0xa1aa, 0xa1c9, 0xa1f4, 0xa1f0, 0xa1f3, 0xa1f5, 0xa1c7,
 	0xa1ca, 0xa1cb, 0xa1f6, 0xa1dc, 0xa1a4, 0xa1dd, 0xa1a5, 0xa1bf,
 	0xa3b0, 0xa3b1, 0xa3b2, 0xa3b3, 0xa3b4, 0xa3b5, 0xa3b6, 0xa3b7,
@@ -169,7 +169,7 @@ static u_short HZtbl[95] = {
 setl_hktozh()
 {
 	int i;
-	u_short c, zen1;
+	unsigned short c, zen1;
 	wchar16_t rstr[2];
 	wchar16_t kstr[2];
 	RkTablW16 *rktp, *mktable();
@@ -226,9 +226,9 @@ mkkigou()
 }
 			
 sj_addten(prefix, c)
-u_short prefix, c;
+unsigned short prefix, c;
 {
-	u_short c1, cc;
+	unsigned short c1, cc;
 
 	cc = 0;
 	if ((c == ZEN_DTEN || c == ZEN_HDTEN) &&
@@ -247,10 +247,10 @@ u_short prefix, c;
 }
 
 sj_han2zen(c)
-u_short c;
+unsigned short c;
 {
 	int i;
-	u_short cc;
+	unsigned short cc;
 
 	if (WcIsHANKAKU(c) && iskana2(c)) {
 		for (i = 0; i < ZKATAn; i++) {
@@ -289,16 +289,16 @@ u_short c;
 int sj3_hantozen_w16(wchar16_t *, wchar16_t *);
 
 sj3_hantozen(out, in)
-u_char *out, *in;
+unsigned char *out, *in;
 {
 	wchar16_t *winstr, *woutstr;
-	u_char *mstr;
+	unsigned char *mstr;
 	int inlen, outlen, imflag = 0, omflag = 0, mmflag = 0, ret;
 
 	inlen = strlen(in) + 1;
 	if (current_locale == LC_CTYPE_EUC) {
 		if (inlen > sizeof(mtmp)) {
-			mstr = (u_char *) malloc(inlen);
+			mstr = (unsigned char *) malloc(inlen);
 			mmflag = 1;
 		} else {
 			mstr = mtmp;
@@ -349,7 +349,7 @@ u_char *out, *in;
 	}
 	outlen = ret * 3;
 	if (outlen > sizeof(mtmp)) {
-		mstr = (u_char *) malloc(outlen);
+		mstr = (unsigned char *) malloc(outlen);
 		if (!mstr) {
 			if (imflag) free(winstr);
 			if (omflag) free(woutstr);
@@ -382,10 +382,10 @@ u_char *out, *in;
 }
 
 sj3_hantozen_euc(out, in)
-u_char *out, *in;
+unsigned char *out, *in;
 {
 	wchar16_t *winstr, *woutstr;
-	u_char *mstr;
+	unsigned char *mstr;
 	int inlen, outlen, imflag = 0, omflag = 0, mmflag = 0, ret;
 
 	inlen = strlen(in) + 1;
@@ -393,7 +393,7 @@ u_char *out, *in;
 		mstr = in;
 	} else {
 		if (inlen > sizeof(mtmp)) {
-			mstr = (u_char *) malloc(inlen);
+			mstr = (unsigned char *) malloc(inlen);
 			mmflag = 1;
 		} else {
 			mstr = mtmp;
@@ -442,7 +442,7 @@ u_char *out, *in;
 	}
 	outlen = ret * 3;
 	if (outlen > sizeof(mtmp)) {
-		mstr = (u_char *) malloc(outlen);
+		mstr = (unsigned char *) malloc(outlen);
 		if (!mstr) {
 			if (imflag) free(winstr);
 			if (omflag) free(woutstr);
@@ -475,7 +475,7 @@ u_char *out, *in;
 }
 
 sj3_hantozen_mb(s1, s2)
-u_char *s1, *s2;
+unsigned char *s1, *s2;
 {
 	if (current_locale == LC_CTYPE_EUC) 
 	  return sj3_hantozen_euc(s1, s2);
@@ -494,7 +494,7 @@ sj_hantozen(s1, s2, len)
 wchar16_t *s1, *s2;
 int len;
 {
-	u_short c1, cc, prefix;
+	unsigned short c1, cc, prefix;
 	wchar16_t c;
 	int i;
 	int rlen;
@@ -525,10 +525,10 @@ int len;
 }
 
 sj_zen2han(c)
-u_short c;
+unsigned short c;
 {
 	int i;
-	u_short cc;
+	unsigned short cc;
 	
 	i = ZKATAn;
 	cc = c & MASK;
@@ -562,15 +562,15 @@ u_short c;
 int sj3_zentohan_w16(wchar16_t *, wchar16_t *);
 
 sj3_zentohan(out, in)
-u_char *out, *in;
+unsigned char *out, *in;
 {
 	wchar16_t *winstr, *woutstr;
-	u_char *mstr;
+	unsigned char *mstr;
 	int inlen, outlen, imflag = 0, omflag = 0, mmflag = 0, ret;
 
 	inlen = strlen(in) + 1;
 	if (inlen > sizeof(mtmp)) {
-		mstr = (u_char *) malloc(inlen);
+		mstr = (unsigned char *) malloc(inlen);
 		if (!mstr) {
 			return -1;
 		}
@@ -622,7 +622,7 @@ u_char *out, *in;
 	outlen = ret * 3;
 	if (current_locale == LC_CTYPE_EUC) {
 		if (outlen > sizeof(mtmp)) {
-			mstr = (u_char *) malloc(outlen);
+			mstr = (unsigned char *) malloc(outlen);
 			mmflag = 1;
 		} else {
 			mstr = mtmp;
@@ -652,15 +652,15 @@ u_char *out, *in;
 }
 
 sj3_zentohan_euc(out, in)
-u_char *out, *in;
+unsigned char *out, *in;
 {
 	wchar16_t *winstr, *woutstr;
-	u_char *mstr;
+	unsigned char *mstr;
 	int inlen, outlen, imflag = 0, omflag = 0, mmflag = 0, ret;
 
 	inlen = strlen(in) + 1;
 	if (inlen > sizeof(mtmp)) {
-		mstr = (u_char *) malloc(inlen);
+		mstr = (unsigned char *) malloc(inlen);
 		if (!mstr) {
 			return -1;
 		}
@@ -716,7 +716,7 @@ u_char *out, *in;
 		mstr = out;
 	} else {
 		if (outlen > sizeof(mtmp)) {
-			mstr = (u_char *) malloc(outlen);
+			mstr = (unsigned char *) malloc(outlen);
 			mmflag = 1;
 		} else {
 			mstr = mtmp;
@@ -743,7 +743,7 @@ u_char *out, *in;
 }
 
 sj3_zentohan_mb(s1, s2)
-u_char *s1, *s2;
+unsigned char *s1, *s2;
 {
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_zentohan_euc(s1, s2);
@@ -761,7 +761,7 @@ sj_zentohan(s1, s2, len)
 wchar16_t *s1, *s2;
 int len;
 {
-	u_short cc;
+	unsigned short cc;
 	wchar16_t c;
 	int i, rlen;
 

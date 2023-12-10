@@ -68,15 +68,15 @@
 
 typedef	struct rktable_w16 {
 	wchar16_t *r_key;
-	u_short *k_yomi;
+	unsigned short *k_yomi;
 	wchar16_t *r_str;
         struct rktable_w16 *next;
 } RkTablW16;
 
 typedef	struct rktable {
-	u_char *r_key;
-	u_short *k_yomi;
-	u_char *r_str;
+	unsigned char *r_key;
+	unsigned short *k_yomi;
+	unsigned char *r_str;
 	struct rktable *next;
 } RkTabl;
 

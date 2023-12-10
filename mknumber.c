@@ -44,11 +44,11 @@
 
 
 static int
-word2char(u_short wd, u_char* tbl, int keta, int flg)
+word2char(unsigned short wd, unsigned char* tbl, int keta, int flg)
 {
 	int	mask;
 	int	num;
-	u_char*	src;
+	unsigned char*	src;
 
 	for (mask = 0x1000 ; mask ; mask >>= 4) {
 		
@@ -83,12 +83,12 @@ word2char(u_short wd, u_char* tbl, int keta, int flg)
 
 
 static void
-words2num(u_short* wd, u_char* tbl, int flgc)
+words2num(unsigned short* wd, unsigned char* tbl, int flgc)
 {
 	int	i;
 	int	keta;
 	int	flg;
-	u_char	*kp = kanjitmp;
+	unsigned char	*kp = kanjitmp;
 
 	if (flgc) {
 		keta = NumKetaLength - 1;
@@ -114,9 +114,9 @@ words2num(u_short* wd, u_char* tbl, int flgc)
 
 
 void
-num_type00(u_char* s1, u_char* s2, JREC* jrec)
+num_type00(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -127,9 +127,9 @@ num_type00(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type01(u_char* s1, u_char* s2, JREC* jrec)
+num_type01(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -140,9 +140,9 @@ num_type01(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type02(u_char* s1, u_char* s2, JREC* jrec)
+num_type02(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -153,9 +153,9 @@ num_type02(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type03(u_char* s1, u_char* s2, JREC* jrec)
+num_type03(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -166,9 +166,9 @@ num_type03(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type04(u_char* s1, u_char* s2, JREC* jrec)
+num_type04(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -179,9 +179,9 @@ num_type04(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type05(u_char* s1, u_char* s2, JREC* jrec)
+num_type05(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -192,9 +192,9 @@ num_type05(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type06(u_char* s1, u_char* s2, JREC* jrec)
+num_type06(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -205,9 +205,9 @@ num_type06(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type07(u_char* s1, u_char* s2, JREC* jrec)
+num_type07(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -218,17 +218,17 @@ num_type07(u_char* s1, u_char* s2, JREC* jrec)
 
 
 static void
-kan_num(u_short* wd, u_char* tbl1, u_char* tbl2)
+kan_num(unsigned short* wd, unsigned char* tbl1, unsigned char* tbl2)
 {
 	int	ii;
-	u_short	tmp;
+	unsigned short	tmp;
 	int	mask;
 	int	num;
 	int	flg;
-	u_char*	kurai1;
-	u_char*	kurai2;
-	u_char*	src;
-	u_char*	keep = kanjitmp;
+	unsigned char*	kurai1;
+	unsigned char*	kurai2;
+	unsigned char*	src;
+	unsigned char*	keep = kanjitmp;
 
 	
 	kurai2 = Num6tbl - 2;
@@ -288,9 +288,9 @@ kan_num(u_short* wd, u_char* tbl1, u_char* tbl2)
 
 
 void
-num_type08(u_char* s1, u_char* s2, JREC* jrec)
+num_type08(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -301,9 +301,9 @@ num_type08(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type09(u_char* s1, u_char* s2, JREC* jrec)
+num_type09(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_short	num[NumWordBuf];
+	unsigned short	num[NumWordBuf];
 
 	
 	setwdnum(s1, (int)jrec -> numlen, num);
@@ -314,7 +314,7 @@ num_type09(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type10(u_char* s1, u_char* s2, JREC* jrec)
+num_type10(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
 	int	i;
 
@@ -333,7 +333,7 @@ num_type10(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type11(u_char* s1, u_char* s2, JREC* jrec)
+num_type11(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
 	int	i;
 	int	j;
@@ -363,7 +363,7 @@ num_type11(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type12(u_char* s1, u_char* s2, JREC* jrec)
+num_type12(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
 	int	i;
 	int	j;
@@ -381,11 +381,11 @@ num_type12(u_char* s1, u_char* s2, JREC* jrec)
 
 
 static void
-num_kurai(u_char* p, int len, u_char* tbl)
+num_kurai(unsigned char* p, int len, unsigned char* tbl)
 {
 	int	i;
 	int	j;
-	u_char	tmp;
+	unsigned char	tmp;
 
 	for (i = 0 ; i < len ; i++) {
 		tmp = *p++;
@@ -405,9 +405,9 @@ num_kurai(u_char* p, int len, u_char* tbl)
 
 
 void
-num_type13(u_char* s1, u_char* s2, JREC* jrec)
+num_type13(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_char	num[NumKetaLength];
+	unsigned char	num[NumKetaLength];
 	int	len;
 
 	
@@ -419,9 +419,9 @@ num_type13(u_char* s1, u_char* s2, JREC* jrec)
 
 
 void
-num_type14(u_char* s1, u_char* s2, JREC* jrec)
+num_type14(unsigned char* s1, unsigned char* s2, JREC* jrec)
 {
-	u_char	num[NumKetaLength];
+	unsigned char	num[NumKetaLength];
 	int	len;
 
 	

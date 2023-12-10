@@ -47,15 +47,15 @@ typedef	struct	jiritu {
 	TypeDicSeg	jseg;		
 	TypeDicOfs	jofsst;		
 	TypeDicOfs	jofsed;		
-	u_short		flags;		
+	unsigned short	flags;
 	TypeClass	class;		
 	TypeDicID	dicid;		
-	u_char		jlen;		
+	unsigned char	jlen;
 	TypeGram	hinsi;		
-	u_char		sttofs;		
-	u_char		stbofs;		
-	u_char		count;		
-	u_char		numlen;		
+	unsigned char	sttofs;
+	unsigned char	stbofs;
+	unsigned char	count;
+	unsigned char	numlen;
 } JREC;
 
 
@@ -64,16 +64,16 @@ typedef	struct	jiritu {
 typedef struct bunsetu {
 	JREC	*jnode;			
 	struct	bunsetu	*clsort;	
-	u_char		gobiln;		
-	u_char		cllen;		
+	unsigned char	gobiln;
+	unsigned char	cllen;
 
 	TypeCnct	right;		
-	u_char		cl2len;		
-	u_char		kubun;		
+	unsigned char	cl2len;
+	unsigned char	kubun;
 #if __STDC__
-	u_int		fzk_ka : 1;	
+	unsigned int	fzk_ka : 1;
 #else
-	u_char		fzk_ka : 1;	
+	unsigned char	fzk_ka : 1;
 #endif
 } CLREC;
 
@@ -84,19 +84,19 @@ typedef	struct	kouho {
 	CLREC		*clrec;		
 	TypeDicOfs	offs;		
 	TypeStyNum	styno;		
-	u_char		rank;		
+	unsigned char	rank;
 #if __STDC__
-	u_int		sttfg  :  1;	
-	u_int		sttkj  :  1;	
-	u_int		ka_fg  :  1;	
-	u_int		ka_kj  :  1;	
-	u_int		mode   :  4;	
+	unsigned int	sttfg  :  1;
+	unsigned int	sttkj  :  1;
+	unsigned int	ka_fg  :  1;
+	unsigned int	ka_kj  :  1;
+	unsigned int	mode   :  4;
 #else
-	u_char		sttfg  :  1;	
-	u_char		sttkj  :  1;	
-	u_char		ka_fg  :  1;	
-	u_char		ka_kj  :  1;	
-	u_char		mode   :  4;	
+	unsigned char	sttfg  :  1;
+	unsigned char	sttkj  :  1;
+	unsigned char	ka_fg  :  1;
+	unsigned char	ka_kj  :  1;
+	unsigned char	mode   :  4;
 #endif
 } KHREC;
 
@@ -104,7 +104,7 @@ typedef	struct	kouho {
 
 
 typedef	struct	conj {
-	u_char		len;		
+	unsigned char	len;
 	TypeCnct	right;		
 } CREC;
 
@@ -112,8 +112,8 @@ typedef	struct	conj {
 
 
 typedef	struct	fuzoku {
-	u_char		*yomip;		
-	u_char		*fzkp;		
+	unsigned char	*yomip;
+	unsigned char	*fzkp;
 
 } FREC;
 
@@ -125,13 +125,13 @@ typedef struct study_in {
 	TypeStyNum	styno;		
 	TypeDicID	dicid;		
 #if __STDC__
-	u_int		sttkj  :  1;	
-	u_int		ka_kj  :  1;	
-	u_int		nmflg  :  1;	
+	unsigned int	sttkj  :  1;
+	unsigned int	ka_kj  :  1;
+	unsigned int	nmflg  :  1;
 #else
-	u_char		sttkj  :  1;	
-	u_char		ka_kj  :  1;	
-	u_char		nmflg  :  1;	
+	unsigned char	sttkj  :  1;
+	unsigned char	ka_kj  :  1;
+	unsigned char	nmflg  :  1;
 #endif
 } STDYIN;
 
@@ -141,15 +141,15 @@ typedef struct study_in {
 typedef struct study_out {
 	STDYIN		stdy1;		
 	TypeGram	hinshi;		
-	u_char		len;		
+	unsigned char	len;
 #if __STDC__
-	u_int		sttlen :  2;	
-	u_int		sttfg  :  1;	
-	u_int		ka_fg  :  1;	
+	unsigned int	sttlen :  2;
+	unsigned int	sttfg  :  1;
+	unsigned int	ka_fg  :  1;
 #else
-	u_char		sttlen :  2;	
-	u_char		sttfg  :  1;	
-	u_char		ka_fg  :  1;	
+	unsigned char	sttlen :  2;
+	unsigned char	sttfg  :  1;
+	unsigned char	ka_fg  :  1;
 #endif
 } STDYOUT;
 
@@ -192,10 +192,10 @@ typedef struct	stdy {
 	STDYIN	*stdydic;	
 
 	short	clstdystep;	
-	u_short	*clstdyidx;	
+	unsigned short	*clstdyidx;
 
 	short	clstdylen;	
-	u_char	*clstdydic;	
+	unsigned char	*clstdydic;
 } STDY;
 
 #endif

@@ -42,7 +42,7 @@
 
 
 
-u_char	chrtbl[256] =
+unsigned char	chrtbl[256] =
 {
 	0,				
 	FZKTOP,				

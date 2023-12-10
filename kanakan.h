@@ -38,7 +38,7 @@
 #include "Struct.h"
 
 /* adddic.c */
-u_int adddic(u_char *yomi, u_char *kanji, TypeGram hinsi);
+unsigned int adddic(unsigned char *yomi, unsigned char *kanji, TypeGram hinsi);
 
 /* addelcmn.c */
 void set_size(unsigned char *p, int size, int plen, int nlen);
@@ -57,17 +57,17 @@ CLREC *alloc_clrec(void);
 void free_clrec(CLREC *p);
 
 /* charsize.c */
-int codesize(u_char code);
+int codesize(unsigned char code);
 
 /* cl2knj.c */
-int cl2knj(u_char *yomi, int len, u_char *kouho);
-int nextcl(u_char *kouho, int mode);
-int prevcl(u_char *kouho, int mode);
+int cl2knj(unsigned char *yomi, int len, unsigned char *kouho);
+int nextcl(unsigned char *kouho, int mode);
+int prevcl(unsigned char *kouho, int mode);
 int selectnum(void);
 
 /* clstudy.c */
-int clstudy(u_char *yomi1, u_char *yomi2, STDYOUT *stdy);
-void delclsub(u_char *target);
+int clstudy(unsigned char *yomi1, unsigned char *yomi2, STDYOUT *stdy);
+void delclsub(unsigned char *target);
 void mkclidx(void);
 
 /* cvtdict.c */
@@ -81,7 +81,7 @@ void cvtkouho(KHREC *krec);
 void setstyrec(KHREC *krec);
 
 /* deldic.c */
-u_int deldic(u_char *yomi, u_char *kanji, TypeGram hinsi);
+unsigned int deldic(unsigned char *yomi, unsigned char *kanji, TypeGram hinsi);
 
 /* depend.c */
 DictFile *opendict(char *name, char *passwd);
@@ -105,17 +105,17 @@ void get_stdysize(int *stynum, int *clstep, int *cllen);
 /* dict.c */
 void get_askknj(void);
 int seldict(TypeDicID id);
-u_char *get_idxptr(TypeDicSeg seg);
+unsigned char *get_idxptr(TypeDicSeg seg);
 
 /* getkanji.c */
-u_char *getkan_none(u_char *s, u_char *d, u_char *ym, int yl, int flg);
-u_char *getkan_hira(u_char *s, u_char *d, u_char *ym, int yl, int flg);
-u_char *getkan_kata(u_char *s, u_char *d, u_char *ym, int yl, int flg);
-u_char *getkan_knj(u_char *s, u_char *d, u_char *ym, int yl, int flg);
-u_char *getkan_ofs(u_char *s, u_char *d, u_char *ym, int yl, int flg);
-u_char *getkan_norm(u_char *s, u_char *d, u_char *ym, int yl, int flg);
-u_char *getkan_ascii(u_char *s, u_char *d, u_char *ym, int yl, int flg);
-int getkanji(u_char *ym, int yl, u_char *ptr, u_char *buf);
+unsigned char *getkan_none(unsigned char *s, unsigned char *d, unsigned char *ym, int yl, int flg);
+unsigned char *getkan_hira(unsigned char *s, unsigned char *d, unsigned char *ym, int yl, int flg);
+unsigned char *getkan_kata(unsigned char *s, unsigned char *d, unsigned char *ym, int yl, int flg);
+unsigned char *getkan_knj(unsigned char *s, unsigned char *d, unsigned char *ym, int yl, int flg);
+unsigned char *getkan_ofs(unsigned char *s, unsigned char *d, unsigned char *ym, int yl, int flg);
+unsigned char *getkan_norm(unsigned char *s, unsigned char *d, unsigned char *ym, int yl, int flg);
+unsigned char *getkan_ascii(unsigned char *s, unsigned char *d, unsigned char *ym, int yl, int flg);
+int getkanji(unsigned char *ym, int yl, unsigned char *ptr, unsigned char *buf);
 
 /* getrank.c */
 void getrank(void);
@@ -133,31 +133,31 @@ void mkjiritu(int mode);
 JREC *argjrec(int len, JREC *rec);
 
 /* mkkouho.c */
-u_char *makekan_none(u_char *s, u_char *d, int flg);
-u_char *makekan_1byte(u_char *s, u_char *d, int flg);
-u_char *makekan_knj(u_char *s, u_char *d, int flg);
-u_char *makekan_ofs(u_char *s, u_char *d, int flg);
-u_char *makekan_norm(u_char *s, u_char *d, int flg);
-u_char *makekan_ascii(u_char *s, u_char *d, int flg);
+unsigned char *makekan_none(unsigned char *s, unsigned char *d, int flg);
+unsigned char *makekan_1byte(unsigned char *s, unsigned char *d, int flg);
+unsigned char *makekan_knj(unsigned char *s, unsigned char *d, int flg);
+unsigned char *makekan_ofs(unsigned char *s, unsigned char *d, int flg);
+unsigned char *makekan_norm(unsigned char *s, unsigned char *d, int flg);
+unsigned char *makekan_ascii(unsigned char *s, unsigned char *d, int flg);
 void mkkouho(void);
 int sel_sjmode(JREC *jrec);
 
 /* mknumber.c */
-void num_type00(u_char *s1, u_char *s2, JREC *jrec);
-void num_type01(u_char *s1, u_char *s2, JREC *jrec);
-void num_type02(u_char *s1, u_char *s2, JREC *jrec);
-void num_type03(u_char *s1, u_char *s2, JREC *jrec);
-void num_type04(u_char *s1, u_char *s2, JREC *jrec);
-void num_type05(u_char *s1, u_char *s2, JREC *jrec);
-void num_type06(u_char *s1, u_char *s2, JREC *jrec);
-void num_type07(u_char *s1, u_char *s2, JREC *jrec);
-void num_type08(u_char *s1, u_char *s2, JREC *jrec);
-void num_type09(u_char *s1, u_char *s2, JREC *jrec);
-void num_type10(u_char *s1, u_char *s2, JREC *jrec);
-void num_type11(u_char *s1, u_char *s2, JREC *jrec);
-void num_type12(u_char *s1, u_char *s2, JREC *jrec);
-void num_type13(u_char *s1, u_char *s2, JREC *jrec);
-void num_type14(u_char *s1, u_char *s2, JREC *jrec);
+void num_type00(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type01(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type02(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type03(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type04(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type05(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type06(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type07(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type08(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type09(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type10(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type11(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type12(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type13(unsigned char *s1, unsigned char *s2, JREC *jrec);
+void num_type14(unsigned char *s1, unsigned char *s2, JREC *jrec);
 
 /* peepdic.c */
 int getusr(unsigned char *buf);
@@ -174,45 +174,45 @@ int ph_khtbl(CLREC *clrec);
 int setconj(TypeGram hinsi, JREC *jrec, CREC *crec);
 
 /* setjrec.c */
-int setj_atrb(u_char* p);
-int setj_ofs(u_char* p);
-int setj_knj(u_char* p);
-int setj_norm1(u_char* p);
-int setj_norm2(u_char* p);
-int setj_norm3(u_char* p);
-void setjrec(u_char* tagp, int mode);
-void setnumrec(u_char* tagp, JREC* rec, TypeGram gram);
-void setcrec(u_char* tagp);
+int setj_atrb(unsigned char* p);
+int setj_ofs(unsigned char* p);
+int setj_knj(unsigned char* p);
+int setj_norm1(unsigned char* p);
+int setj_norm2(unsigned char* p);
+int setj_norm3(unsigned char* p);
+void setjrec(unsigned char* tagp, int mode);
+void setnumrec(unsigned char* tagp, JREC* rec, TypeGram gram);
+void setcrec(unsigned char* tagp);
 
 /* setkouho.c */
 void setkouho(CLREC* clrec, TypeDicOfs offs, int mode);
 void ph_setkouho(CLREC* clrec, TypeDicOfs offs, STDYIN* sptr);
-int hiraknj_atrb(u_char*, int*);
-int hiraknj_ofs (u_char*, int*);
-int hiraknj_knj (u_char*, int*);
-int hiraknj_hask(u_char*, int*);
-int hiraknj_kask(u_char*, int*);
-int hiraknj_norm(u_char*, int*);
-int hiraknj_hira(u_char*, int*);
+int hiraknj_atrb(unsigned char*, int*);
+int hiraknj_ofs (unsigned char*, int*);
+int hiraknj_knj (unsigned char*, int*);
+int hiraknj_hask(unsigned char*, int*);
+int hiraknj_kask(unsigned char*, int*);
+int hiraknj_norm(unsigned char*, int*);
+int hiraknj_hira(unsigned char*, int*);
 
 /* setubi.c */
 unsigned char *getstb(TypeGram hinsi);
 void setubi(JREC *rec, unsigned char *stbtbl);
 
 /* skipkstr.c */
-u_char* skipkstr(u_char* ptr);
+unsigned char* skipkstr(unsigned char* ptr);
 
 /* srchdict.c */
-int yomicmp(u_char *ptr1, u_char *ptr2, u_char *saml);
-u_char *srchdict(u_char *tagp);
+int yomicmp(unsigned char *ptr1, unsigned char *ptr2, unsigned char *saml);
+unsigned char *srchdict(unsigned char *tagp);
 
 /* srchidx.c */
 TypeDicSeg srchidx(TypeDicSeg low, int len);
 
 /* srchnum.c */
 void srchnum(void);
-void setwdnum(u_char *p, int len, u_short *wd);
-int setucnum(u_char *p, int len, u_char *ud);
+void setwdnum(unsigned char *p, int len, unsigned short *wd);
+int setucnum(unsigned char *p, int len, unsigned char *ud);
 
 /* study.c */
 int study(STDYOUT *stdy);

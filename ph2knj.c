@@ -52,10 +52,10 @@ JREC	*free_jlst();
 
 
 int	ph2knj
-(u_char *zyomi, u_char *kanji, int knjlen)
+(unsigned char *zyomi, unsigned char *kanji, int knjlen)
 {
-	u_char	*ptr;
-	u_char	*dst;
+	unsigned char	*ptr;
+	unsigned char	*dst;
 	int	i;
 
 	for (ptr = zyomi, dst = hyomi, i = 0 ; *ptr ; ) {

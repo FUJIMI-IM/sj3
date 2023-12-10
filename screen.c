@@ -153,7 +153,7 @@ char	mod;
 {
 	Conversion	*cv;
 	int		i, col, oldcol, len;
-	u_short	*p;
+	unsigned short	*p;
 
 	cv = GetConversion ();
 	printU (s);
@@ -190,7 +190,7 @@ char	mod;
 {
 	Conversion	*cv;
 	int		i, col, oldcol, len;
-	u_short	*p;
+	unsigned short	*p;
 
 	cv = GetConversion ();
 	printR (s);
@@ -297,7 +297,7 @@ int	redraw;
 {
 	Conversion	*cv;
 	int	spaces;
-	u_short		row, col;
+	unsigned short	row, col;
 
 	if (redraw) {
 		cv = GetConversion ();
@@ -377,7 +377,7 @@ wchar16_t	*s;
 
 clear_guide_line ()
 {
-	u_short	row, col;
+	unsigned short	row, col;
 
 	StartGuide (&row, &col);
 	Clear_EOL ();
@@ -387,7 +387,7 @@ clear_guide_line ()
 
 print_guide_line ()
 {
-	u_short	row, col;
+	unsigned short	row, col;
 
 	StartGuide (&row, &col);
 	spaceR (Guide);
@@ -486,7 +486,7 @@ disp_mode ()
 
 TopGuide ()
 {
-	u_short	row, col;
+	unsigned short	row, col;
 
 	StartGuide (&row, &col);
 }
@@ -494,7 +494,7 @@ TopGuide ()
 guide_print (s1, s2)
 wchar16_t	*s1, *s2;
 {
-	u_short	row, col;
+	unsigned short	row, col;
 
 	StartGuide (&row, &col);
 	if (s1)

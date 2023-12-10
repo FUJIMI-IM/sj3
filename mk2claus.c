@@ -67,7 +67,7 @@ CLREC	*clrec;
 
 void	mk2claus()
 {
-	u_char	*keepptr;
+	unsigned char	*keepptr;
 	int	keeplen;
 	CLREC	*clrec;
 	int	len;
@@ -117,9 +117,9 @@ void	mk2claus()
 		}
 
 		if (Termtbl[clrec -> right] & T_SHUUJO)
-			clrec -> cl2len = (u_char)len;
+			clrec -> cl2len = (unsigned char)len;
 		else
-			clrec -> cl2len = (u_char)save2ln;
+			clrec -> cl2len = (unsigned char)save2ln;
 
 		if (selcl -> cl2len > clrec -> cl2len) continue;
 

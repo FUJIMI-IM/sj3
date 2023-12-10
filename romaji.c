@@ -48,12 +48,12 @@ wchar16_t	c;
 {
 	Conversion	*cv;
 	wchar16_t *p;
-	u_short c1, cc;
-	u_int c2;
-	u_short op;
-	u_char mode;
+	unsigned short c1, cc;
+	unsigned int c2;
+	unsigned short op;
+	unsigned char mode;
 	int len, i;
-	u_int rkstr[MAXLLEN], *rkp;
+	unsigned int rkstr[MAXLLEN], *rkp;
 	extern char erase_str[];
 
 	cv = GetConversion ();
@@ -253,9 +253,9 @@ int kval;
 }
 
 addten(pos, c)
-u_short pos, c;
+unsigned short pos, c;
 {
-	u_short prefix;
+	unsigned short prefix;
 	Conversion *cv;
 
 	cv = GetConversion();
@@ -264,7 +264,7 @@ u_short pos, c;
 }
 
 getipos(pos)
-u_short pos;
+unsigned short pos;
 {
 	Conversion *cv;
 
@@ -273,10 +273,10 @@ u_short pos;
 }
 
 getipos2(omode, pos)
-u_short *omode;
-u_short pos;
+unsigned short *omode;
+unsigned short pos;
 {
-	u_short ipos;
+	unsigned short ipos;
 	int i;
 
 	ipos = 0;
@@ -291,10 +291,10 @@ wchar16_t *s1, *s2;
 int len;
 {
 	int i, rlen;
-	u_int *kp;
+	unsigned int *kp;
 	int res, klen;
 	wchar16_t roma[SHORTBUFFSIZE + 1];
-	u_int kstr[MAXLLEN];
+	unsigned int kstr[MAXLLEN];
 
 	sj3_rkebell(0);
 	klen = 0;
@@ -344,15 +344,15 @@ int len;
 
 sj_rkconv2(s1, s2, omode, len)
 wchar16_t *s1, *s2;
-u_short *omode;
+unsigned short *omode;
 int len;
 {
 	int i, rlen;
-	u_int *kp;
+	unsigned int *kp;
 	int res, klen, mlen;
-	u_short cc, c, prefix;
+	unsigned short cc, c, prefix;
 	wchar16_t roma[SHORTBUFFSIZE + 1];
-	u_int kstr[BUFFLENGTH];
+	unsigned int kstr[BUFFLENGTH];
 
 	sj3_rkebell(0);
 	klen = 0;
@@ -461,14 +461,14 @@ int len;
 
 exec_romaji2(c, hbuf, kbuf, omode, cur, hcur)
 wchar16_t	c, *hbuf, *kbuf;
-u_short *omode;
+unsigned short *omode;
 int cur, hcur;
 {
-	u_short c1, cc;
-	u_int c2;
+	unsigned short c1, cc;
+	unsigned int c2;
 	int i;
 	int ocur, len, retv;
-	u_int rkstr[MAXLLEN], *rkp;
+	unsigned int rkstr[MAXLLEN], *rkp;
 
 	retv = 1;
 	ocur = cur;

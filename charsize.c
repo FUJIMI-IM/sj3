@@ -43,7 +43,7 @@
 #include "kanakan.h"
 
 int
-codesize(u_char code)
+codesize(unsigned char code)
 {
 	switch (code & KanjiModeMask) {
 	      case ZenHiraAssyuku:

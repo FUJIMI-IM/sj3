@@ -42,13 +42,13 @@
 #include "sj_right.h"
 #include "sj_left.h"
 
-static	u_char	fzk_wo[] = {
+static	unsigned char	fzk_wo[] = {
 (0<<5)+0,			L_WO,      R_WO,
 (0<<5)+0,			L_WO_S,	   R_WO_S,
 0xff
 };
 
-static	u_char	fzk_xtu[] = {
+static	unsigned char	fzk_xtu[] = {
 (0<<5) + 1,	_KE,		L_KKE,	   R_SHUUJO,
 (0<<5) + 3,	_TA,_XTU,_TE,	L_TTATTE,  R_TTATTE,
 (1<<5) + 1,	_RA,		L_TTARA,   R_TTARA,
@@ -69,7 +69,7 @@ static	u_char	fzk_xtu[] = {
 0xff
 };
 
-static	u_char	fzk_a[] = {
+static	unsigned char	fzk_a[] = {
 (0<<5) + 1,	_GE,		L_YOUGEN, R_AGE,
 (1<<5) + 1,	_YO,		L_YOUGEN, R_MEIREI2,
 (1<<5) + 1,	_RU,		L_YOUGEN, R_SHUUSI,
@@ -88,7 +88,7 @@ static	u_char	fzk_a[] = {
 0xff
 };
 
-static	u_char	fzk_i[] = {
+static	unsigned char	fzk_i[] = {
 (0<<5) + 0,			L_IRU,     R_I,
 (0<<5) + 1,	_I,		L_II,	   R_SHUUSI,
 (0<<5) + 1,	_KA,		L_YOUGEN,  R_MIZEN5,
@@ -111,21 +111,21 @@ static	u_char	fzk_i[] = {
 0xff
 };
 
-static	u_char	fzk_u[] = {
+static	unsigned char	fzk_u[] = {
 (0<<5) + 1,	_E,		L_UE,      R_UE,
 (0<<5) + 1,	_TI,		L_UTI,	   R_UTI,
 (0<<5) + 1,	_RU,		L_ERU,     R_SHUUSI,
 0xff
 };
 
-static	u_char	fzk_e[] = {
+static	unsigned char	fzk_e[] = {
 (0<<5) + 0,			L_ERU,     R_E,
 (0<<5) + 1,	_RU,		L_ERU,	   R_SHUUSI,
 (0<<5) + 1,	_RE,		L_ERU,     R_KATEI3,
 0xff
 };
 
-static	u_char	fzk_o[] = {
+static	unsigned char	fzk_o[] = {
 (0<<5) + 1,	_I,		L_YOUGEN,  R_ONBIN8,
 (1<<5) + 1,	_TE,		L_OITE,    R_OITE,
 (0<<5) + 1,	_KA,		L_YOUGEN,  R_MIZEN5,
@@ -141,7 +141,7 @@ static	u_char	fzk_o[] = {
 0xff
 };
 
-static	u_char	fzk_ka[] = {
+static	unsigned char	fzk_ka[] = {
 (0<<5) + 0 + 8,			L_KA1,     R_KA1,
 (0<<5) + 0 + 8,			L_KA2,     R_KA2,
 (0<<5) + 1,	_I,		L_KAI,	   R_SHUUJO,
@@ -166,7 +166,7 @@ static	u_char	fzk_ka[] = {
 0xff
 };
 
-static	u_char	fzk_ga[] = {
+static	unsigned char	fzk_ga[] = {
 (0<<5) + 0,			L_GA1,     R_GA1,
 (0<<5) + 0,			L_GA2,     R_GA2,
 (0<<5) + 2,	_TA,_I,		L_GATAI,   R_KSHUUSI,
@@ -186,13 +186,13 @@ static	u_char	fzk_ga[] = {
 0xff
 };
 
-static	u_char	fzk_ki[] = {
+static	unsigned char	fzk_ki[] = {
 (0<<5) + 0,			L_YOUGEN,  R_FZKKI,
 (0<<5) + 1,	_RI,		L_KIRI,    R_KIRI,
 0xff
 };
 
-static	u_char	fzk_ku[] = {
+static	unsigned char	fzk_ku[] = {
 (0<<5) + 2,	_SE,_NI,	L_KUSENI,   R_KUSENI,
 (0<<5) + 3,	_DA,_SA,_I,	L_KUDASARU, R_KUDASAI,
 (2<<5) + 1,	_XTU,		L_KUDASARU, R_ONBIN6,
@@ -208,13 +208,13 @@ static	u_char	fzk_ku[] = {
 0xff
 };
 
-static	u_char	fzk_gu[] = {
+static	unsigned char	fzk_gu[] = {
 (0<<5) + 2,	_RA,_I,		L_KURAI,    R_KURAI,
 (0<<5) + 2,	_RU,_MI,	L_GURUMI,   R_GURUMI,
 0xff
 };
 
-static	u_char	fzk_ke[] = {
+static	unsigned char	fzk_ke[] = {
 (0<<5) + 1,	_DO,		L_KEDO,     R_KEDO,
 (1<<5) + 1,	_MO,		L_KEDO,     R_KEDO,
 (0<<5) + 2,	_RE,_DO,	L_KEDO,     R_KEDO,
@@ -222,7 +222,7 @@ static	u_char	fzk_ke[] = {
 0xff
 };
 
-static	u_char	fzk_ko[] = {
+static	unsigned char	fzk_ko[] = {
 (0<<5) + 0,			L_YOUGEN,   R_KO,
 (0<<5) + 1,	_I,		L_YOUGEN,   R_MEIREI1,
 (0<<5) + 1,	_SO,		L_KOSO,     R_KOSO,
@@ -230,7 +230,7 @@ static	u_char	fzk_ko[] = {
 0xff
 };
 
-static	u_char	fzk_go[] = {
+static	unsigned char	fzk_go[] = {
 (0<<5) + 2,	_ZA,_I,		L_GOZAI,    R_GOZAI,
 (0<<5) + 2,	_TO,_KI,	L_GOTOSI,   R_GOTOKI,
 (1<<5) + 1,	_KU,		L_GOTOSI,   R_GOTOKU,
@@ -238,7 +238,7 @@ static	u_char	fzk_go[] = {
 0xff
 };
 
-static	u_char	fzk_sa[] = {
+static	unsigned char	fzk_sa[] = {
 (0<<5) + 0,			L_SA1,      R_MIZEN1,
 (0<<5) + 0,			L_SA2,      R_SHUUJO,
 (0<<5) + 1,	_E,		L_SAE,      R_SAE,
@@ -250,13 +250,13 @@ static	u_char	fzk_sa[] = {
 0xff
 };
 
-static	u_char	fzk_za[] = {
+static	unsigned char	fzk_za[] = {
 (0<<5) + 1,	_RU,		L_ZARU,     R_ZARU,
 (0<<5) + 1,	_RE,		L_ZARU,     R_KATEI2,
 0xff
 };
 
-static	u_char	fzk_si[] = {
+static	unsigned char	fzk_si[] = {
 (0<<5) + 0,			L_SI1,      R_SI1,
 (0<<5) + 0,			L_SI2,      R_SI2,
 (0<<5) + 0,			L_N_SI,	    R_N_SI,
@@ -272,7 +272,7 @@ static	u_char	fzk_si[] = {
 0xff
 };
 
-static	u_char	fzk_ji[] = {
+static	unsigned char	fzk_ji[] = {
 (0<<5) + 2,	_MA,_I,		L_JIMAU,    R_IKI,
 (1<<5) + 1,	_U,		L_JIMAU,    R_SHUUSI,
 (1<<5) + 1,	_E,		L_JIMAU,    R_IKE,
@@ -289,7 +289,7 @@ static	u_char	fzk_ji[] = {
 0xff
 };
 
-static	u_char	fzk_su[] = {
+static	unsigned char	fzk_su[] = {
 (0<<5) + 1,	_GI,		L_SUGIRU,   R_SUGI,
 (1<<5) + 1,	_RU,		L_SUGIRU,   R_SHUUSI,
 (1<<5) + 1,	_RE,		L_SUGIRU,   R_KATEI2,
@@ -303,7 +303,7 @@ static	u_char	fzk_su[] = {
 0xff
 };
 
-static	u_char	fzk_zu[] = {
+static	unsigned char	fzk_zu[] = {
 (0<<5) + 0,			L_ZU,       R_ZU,
 (0<<5) + 1,	_TU,		L_ZUTU,	    R_ZUTU,
 (0<<5) + 2,	_NI,_I,		L_ZU,	    R_I,
@@ -312,7 +312,7 @@ static	u_char	fzk_zu[] = {
 0xff
     };
 
-static	u_char	fzk_se[] = {
+static	unsigned char	fzk_se[] = {
 (0<<5) + 0,			L_SE,       R_MIZEN2,
 (0<<5) + 0,			L_SERU,     R_SASE,
 (0<<5) + 1,	_YO,		L_SEYO,     R_MEIREI2,
@@ -323,12 +323,12 @@ static	u_char	fzk_se[] = {
 0xff
 };
 
-static	u_char	fzk_ze[] = {
+static	unsigned char	fzk_ze[] = {
 (0<<5) + 0,			L_ZE,	    R_SHUUJO,
 0xff
 };
 
-static	u_char	fzk_so[] = {
+static	unsigned char	fzk_so[] = {
 (0<<5) + 1,	_U,		L_SOUDA,    R_SOU,
 (1<<5) + 1,	_DA,		L_SOUDA,    R_SOUDA,
 (2<<5) + 1,	_XTU,		L_YOUTAI,   R_ONBIN1,
@@ -345,12 +345,12 @@ static	u_char	fzk_so[] = {
 0xff
 };
 
-static	u_char	fzk_zo[] = {
+static	unsigned char	fzk_zo[] = {
 (0<<5) + 0,			L_ZO,       R_SHUUJO,
 0xff
 };
 
-static	u_char	fzk_ta[] = {
+static	unsigned char	fzk_ta[] = {
 (0<<5) + 0,			L_TA,       R_TA,
 (0<<5) + 1,	_I,		L_TAI,      R_TAI,
 (0<<5) + 2,	_KA,_XTU,	L_TAI,      R_ONBIN1,
@@ -376,7 +376,7 @@ static	u_char	fzk_ta[] = {
 0xff
 };
 
-static	u_char	fzk_da[] = {
+static	unsigned char	fzk_da[] = {
 (0<<5) + 0,			L_DA1,	    R_TA,
 (0<<5) + 0,			L_DA2,      R_DSHUUSI1,
 (0<<5) + 1,	_KE,		L_DAKE,     R_DAKE,
@@ -389,7 +389,7 @@ static	u_char	fzk_da[] = {
 0xff
 };
 
-static	u_char	fzk_ti[] = {
+static	unsigned char	fzk_ti[] = {
 (0<<5) + 2,	_MA,_I,		L_TIMAU,    R_IKI,
 (1<<5) + 1,	_U,		L_TIMAU,    R_SHUUSI,
 (1<<5) + 1,	_E,		L_TIMAU,    R_IKE,
@@ -406,12 +406,12 @@ static	u_char	fzk_ti[] = {
 0xff
 };
 
-static	u_char	fzk_di[] = {
+static	unsigned char	fzk_di[] = {
 (0<<5) + 1,	_XYA,		L_JYA,      R_JYA,
 0xff
 };
 
-static	u_char	fzk_tu[] = {
+static	unsigned char	fzk_tu[] = {
 (0<<5) + 2,	_I,_TE,		L_TUITE,    R_TUITE,
 (0<<5) + 1,	_KI,		L_TUKI,     R_TUKI,
 (0<<5) + 1,	_TU,		L_TUTU,     R_TUTU,
@@ -419,14 +419,14 @@ static	u_char	fzk_tu[] = {
 0xff
 };
 
-static	u_char	fzk_te[] = {
+static	unsigned char	fzk_te[] = {
 (0<<5) + 0,			L_TE1,      R_TE1,
 (0<<5) + 0,			L_TE2,      R_TE2,
 (0<<5) + 1,	_RU,		L_TERU,     R_TERU,
 0xff
 };
 
-static	u_char	fzk_de[] = {
+static	unsigned char	fzk_de[] = {
 (0<<5) + 0,			L_DE,       R_DE,
 (0<<5) + 0,			L_DA1,      R_TE2,
 (0<<5) + 3,	_A,_RO,_U,	L_DEAROU,   R_AROU,
@@ -442,7 +442,7 @@ static	u_char	fzk_de[] = {
 0xff
 };
 
-static	u_char	fzk_to[] = {
+static	unsigned char	fzk_to[] = {
 (0<<5) + 0,			L_TO1,      R_TO1,
 (0<<5) + 0,			L_TO2,      R_TO2,
 (0<<5) + 1,	_I,		L_TE2,      R_ONBIN8,
@@ -463,7 +463,7 @@ static	u_char	fzk_to[] = {
 0xff
 };
 
-static	u_char	fzk_do[] = {
+static	unsigned char	fzk_do[] = {
 (0<<5) + 0,			L_DO,       R_DO,
 (0<<5) + 1,	_I,		L_DA1,      R_ONBIN8,
 (0<<5) + 2,	_O,_RI,		L_DOORI,    R_DOORI,
@@ -478,7 +478,7 @@ static	u_char	fzk_do[] = {
 0xff
 };
 
-static	u_char	fzk_na[] = {
+static	unsigned char	fzk_na[] = {
 (0<<5) + 0,			L_NA1,      R_SHUUJO,
 (0<<5) + 0,			L_NA2,      R_NA2,
 (0<<5) + 1,	_XA,		L_NAA,      R_SHUUJO,
@@ -515,7 +515,7 @@ static	u_char	fzk_na[] = {
 0xff
 };
 
-static	u_char	fzk_ni[] = {
+static	unsigned char	fzk_ni[] = {
 (0<<5) + 0,			L_NI1,      R_NI1,
 (0<<5) + 0,			L_NI2,      R_NI2,
 (0<<5) + 0,			L_NI3,      R_NI3,
@@ -531,19 +531,19 @@ static	u_char	fzk_ni[] = {
 0xff
 };
 
-static	u_char	fzk_nu[] = {
+static	unsigned char	fzk_nu[] = {
 (0<<5) + 0,			L_NU,       R_NU,
 0xff
 };
 
-static	u_char	fzk_ne[] = {
+static	unsigned char	fzk_ne[] = {
 (0<<5) + 0,			L_NE1,      R_SHUUJO,
 (0<<5) + 0,			L_NE2,      R_KATEI2,
 (0<<5) + 1,	_E,		L_NEE,      R_SHUUJO,
 0xff
 };
 
-static	u_char	fzk_no[] = {
+static	unsigned char	fzk_no[] = {
 (0<<5) + 0,			L_NO1,      R_NO1,
 (0<<5) + 0,			L_NO2,      R_NO2,
 (0<<5) + 1,	_DE,		L_NODE,     R_NODE,
@@ -553,14 +553,14 @@ static	u_char	fzk_no[] = {
 0xff
 };
 
-static	u_char	fzk_ha[] = {
+static	unsigned char	fzk_ha[] = {
 (0<<5) + 0,			L_HA,       R_HA,
 (0<<5) + 1,	_SI,		L_HA,	    R_HASI,
 (0<<5) + 1,	_ZU,		L_HAZU,     R_HAZU,
 0xff
 };
 
-static	u_char	fzk_ba[] = {
+static	unsigned char	fzk_ba[] = {
 (0<<5) + 0,			L_BA,       R_BA,
 (0<<5) + 2,	_KA,_SI,	L_BAKARI,   R_BAKARI,
 (1<<5) + 1,	_RI,		L_BAKARI,   R_BAKARI,
@@ -569,7 +569,7 @@ static	u_char	fzk_ba[] = {
 0xff
 };
 
-static	u_char	fzk_hu[] = {
+static	unsigned char	fzk_hu[] = {
 (0<<5) + 2,	_U,_DA,		L_FUUDA,    R_SOUDA,
 (2<<5) + 1,	_XTU,		L_FUUDA,    R_ONBIN1,
 (2<<5) + 2,	_RO,_U,		L_FUUDA,    R_DAROU,
@@ -584,12 +584,12 @@ static	u_char	fzk_hu[] = {
 0xff
 };
 
-static	u_char	fzk_he[] = {
+static	unsigned char	fzk_he[] = {
 (0<<5)+0,			L_HE,       R_HE,
 0xff
 };
 
-static	u_char	fzk_be[] = {
+static	unsigned char	fzk_be[] = {
 (0<<5) + 2,	_KA,_RA,	L_BESI,     R_BEKARA,
 (0<<5) + 1,	_KI,		L_BESI,     R_BEKI,
 (0<<5) + 1,	_KU,		L_BESI,     R_BEKU,
@@ -597,14 +597,14 @@ static	u_char	fzk_be[] = {
 0xff
 };
 
-static	u_char	fzk_ho[] = {
+static	unsigned char	fzk_ho[] = {
 (0<<5) + 1,	_U,		L_HOU,      R_HOU,
 (0<<5) + 1,	_KA,		L_HOKA,     R_HOKA,
 (0<<5) + 1,	_DO,		L_HODO,     R_HODO,
 0xff
 };
 
-static	u_char	fzk_ma[] = {
+static	unsigned char	fzk_ma[] = {
 (0<<5) + 1,	_I,		L_MAI,      R_MAI,
 (0<<5) + 1,	_SI,		L_MASU,     R_DESHI,
 (1<<5) + 0,			L_MASU,	    R_MEIREI2,
@@ -620,7 +620,7 @@ static	u_char	fzk_ma[] = {
 0xff
 };
 
-static	u_char	fzk_mi[] = {
+static	unsigned char	fzk_mi[] = {
 (0<<5) + 0,			L_YOUGEN,   R_MI,
 (0<<5) + 2,	_TA,_I,		L_MITAIDA,  R_MITAI,
 (2<<5) + 1,	_DA,		L_MITAIDA,  R_MITAIDA,
@@ -641,7 +641,7 @@ static	u_char	fzk_mi[] = {
 0xff
 };
 
-static	u_char	fzk_mo[] = {
+static	unsigned char	fzk_mo[] = {
 (0<<5) + 0,			L_MO1,      R_MO1,
 (0<<5) + 0,			L_MO2,	    R_MO2,
 (0<<5) + 2,	_XTU,_TE,	L_MOTTE,    R_MOTTE,
@@ -657,7 +657,7 @@ static	u_char	fzk_mo[] = {
 0xff
 };
 
-static	u_char	fzk_ya[] = {
+static	unsigned char	fzk_ya[] = {
 (0<<5) + 0,			L_YA1,      R_YA1,
 (0<<5) + 0,			L_YA2,      R_YA2,
 (0<<5) + 2,	_SU,_I,		L_YASUI,    R_KSHUUSI,
@@ -676,12 +676,12 @@ static	u_char	fzk_ya[] = {
 0xff
 };
 
-static	u_char	fzk_yu[] = {
+static	unsigned char	fzk_yu[] = {
 (0<<5) + 1,	_E,		L_YUE,      R_YUE,
 0xff
 };
 
-static	u_char	fzk_yo[] = {
+static	unsigned char	fzk_yo[] = {
 (0<<5) + 0,			L_YO,	    R_SHUUJO,
 (0<<5) + 1,	_I,		L_YOI,      R_KSHUUSI,
 (0<<5) + 1,	_U,		L_YOU,      R_YOU1,
@@ -714,7 +714,7 @@ static	u_char	fzk_yo[] = {
 0xff
 };
 
-static	u_char	fzk_ra[] = {
+static	unsigned char	fzk_ra[] = {
 (0<<5) + 2,	_SI,_I,		L_RASII,    R_RASII,
 (1<<5) + 2,	_KA,_XTU,	L_RASII,    R_ONBIN1,
 (1<<5) + 1,	_KI,		L_RASII,    R_GOTOKI,
@@ -728,7 +728,7 @@ static	u_char	fzk_ra[] = {
 0xff
 };
 
-static	u_char	fzk_re[] = {
+static	unsigned char	fzk_re[] = {
 (0<<5) + 0,			L_RERU,	    R_RARE,
 (0<<5) + 1,	_YO,		L_RERU,     R_MEIREI2,
 (0<<5) + 1,	_RU,		L_RERU,     R_SHUUSI,
@@ -737,7 +737,7 @@ static	u_char	fzk_re[] = {
 0xff
 };
 
-static	u_char	fzk_wa[] = {
+static	unsigned char	fzk_wa[] = {
 (0<<5) + 0,			L_WA,	    R_SHUUJO,
 (0<<5) + 1,	_KE,		L_WAKE,     R_WAKE,
 (0<<5) + 1,	_NE,		L_WANE,     R_SHUUJO,
@@ -745,7 +745,7 @@ static	u_char	fzk_wa[] = {
 0xff
 };
 
-static	u_char	fzk_nn[] = {
+static	unsigned char	fzk_nn[] = {
 (0<<5) + 0,			L_NN1,      R_NN1,
 (0<<5) + 0,			L_NN2,      R_NN2,
 0xff
@@ -753,7 +753,7 @@ static	u_char	fzk_nn[] = {
 
 
 
-u_char	*fzkadr[] = {
+unsigned char	*fzkadr[] = {
 	0,	fzk_a,	0,	fzk_i,	0,
 	fzk_u,	0,	fzk_e,	0,	fzk_o,
 	fzk_ka,	fzk_ga,	fzk_ki,	0,	fzk_ku,

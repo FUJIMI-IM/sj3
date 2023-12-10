@@ -242,7 +242,7 @@ open_af_inet(void)
 #else
 	struct sockaddr_in	sin;
 	struct servent	*sp;
-	u_short	port;
+	unsigned short	port;
 #endif
 	int	true = 1;
 
@@ -804,8 +804,8 @@ put_int(int c)
 }
 
 
-u_char*
-put_string(u_char* p)
+unsigned char*
+put_string(unsigned char* p)
 {
 	if (p) {
 		do {
@@ -818,8 +818,8 @@ put_string(u_char* p)
 }
 
 
-u_char*
-put_ndata(u_char* p, int n)
+unsigned char*
+put_ndata(unsigned char* p, int n)
 {
 	while (n-- > 0) put_byte(p ? *p++ : 0);
 	return p;
@@ -877,7 +877,7 @@ get_int(void)
 
 
 int
-get_nstring(u_char* p, int n)
+get_nstring(unsigned char* p, int n)
 {
 	int	c;
 
@@ -890,8 +890,8 @@ get_nstring(u_char* p, int n)
 }
 
 
-u_char*
-get_ndata(u_char* p, int n)
+unsigned char*
+get_ndata(unsigned char* p, int n)
 {
 	while (n-- > 0) *p++ = get_byte();
 	return p;

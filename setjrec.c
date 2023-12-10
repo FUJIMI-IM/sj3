@@ -43,14 +43,14 @@
 
 
 int
-setj_atrb(u_char* p)
+setj_atrb(unsigned char* p)
 {
 	return 2;
 }
 
 
 int
-setj_ofs(u_char* p)
+setj_ofs(unsigned char* p)
 {
 	int	contf = TRUE;
 
@@ -92,7 +92,7 @@ setj_ofs(u_char* p)
 
 
 int
-setj_knj(u_char* p)
+setj_knj(unsigned char* p)
 {
 	int	contf = TRUE;
 
@@ -134,21 +134,21 @@ setj_knj(u_char* p)
 
 
 int
-setj_norm1(u_char* p)
+setj_norm1(unsigned char* p)
 {
 	return 1;
 }
 
 
 int
-setj_norm2(u_char* p)
+setj_norm2(unsigned char* p)
 {
 	return 2;
 }
 
 
 int
-setj_norm3(u_char* p)
+setj_norm3(unsigned char* p)
 {
 	return 3;
 }
@@ -179,12 +179,12 @@ chkhead(TypeGram gram)
 
 
 void
-setjrec(u_char* tagp, int mode)
+setjrec(unsigned char* tagp, int mode)
 {
 	TypeGram	gram;		
-	u_char	*ptr;		
-	u_char	*endp;		
-	u_char	*tmp;		
+	unsigned char	*ptr;
+	unsigned char	*endp;
+	unsigned char	*tmp;
 	JREC	*rec;		
 	int	plen;
 	int	nlen;
@@ -260,11 +260,11 @@ setjrec(u_char* tagp, int mode)
 
 
 void
-setnumrec(u_char* tagp, JREC* rec, TypeGram gram)
+setnumrec(unsigned char* tagp, JREC* rec, TypeGram gram)
 {
-	u_char		*ptr;		
-	u_char		*endp;		
-	u_char		*tmp;		
+	unsigned char		*ptr;
+	unsigned char		*endp;
+	unsigned char		*tmp;
 	int		plen, nlen, len;
 	JREC		*jrec;
 
@@ -329,7 +329,7 @@ setnumrec(u_char* tagp, JREC* rec, TypeGram gram)
 
 
 void
-setcrec(u_char* tagp)
+setcrec(unsigned char* tagp)
 {
 	JREC	*rec;		
 

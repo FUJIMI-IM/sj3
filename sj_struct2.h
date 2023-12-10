@@ -45,9 +45,9 @@
 
 typedef struct kanji_rec {
 	int	klen;			
-	u_char	*kptr;			
+	unsigned char	*kptr;
 	int	alen;			
-	u_char	*aptr;			
+	unsigned char	*aptr;
 	struct kanji_rec *knext;	
 } KanjiRec;
 
@@ -62,7 +62,7 @@ typedef struct hinsi_rec {
 
 
 typedef struct douon_rec {
-	u_char	*yptr;			
+	unsigned char	*yptr;
 	int	dlen;			
 	int	hrec_num;		
 	HinsiRec *hrec;			
@@ -73,7 +73,7 @@ typedef struct douon_rec {
 
 typedef struct hindo_rec {
 	int	klen;			
-	u_char	*kptr;			
+	unsigned char	*kptr;
 	int	exist;			
 	int	hindo;			
 
@@ -95,7 +95,7 @@ typedef struct assyuku_rec {
 
 typedef struct offset_rec {
 	int	klen;			
-	u_char	*kptr;			
+	unsigned char	*kptr;
 	int	offset;			
 } OffsetRec;
 

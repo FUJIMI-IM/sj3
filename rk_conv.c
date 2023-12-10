@@ -108,7 +108,7 @@ wchar16_t rline[MAXLLEN];
 wchar16_t lstr[MAXLLEN];	
 static wchar16_t intmp[MAXLLEN];
 static wchar16_t outtmp[MAXLLEN];
-static u_char  mtmp[MAXLLEN];
+static unsigned char  mtmp[MAXLLEN];
 static int rk_erase;	
 static int rk_errin = 0;
 static int rk_cflag;	
@@ -121,7 +121,7 @@ static RkTablW16 *rkhp;
 static StrbufRec strpbuf, *strpp;
 static wchar16_t *shp;
 static YmibufRec ymipbuf, *ymipp;
-static u_short *yhp;
+static unsigned short *yhp;
 
 
 sj3_rkcode(code)
@@ -146,8 +146,8 @@ rcode_sjis_init()
 {
 	int i, rkeylen = 0, ryomilen = 0, rstrlen = 0;
 	int klen, ylen, slen, tablnum = 0, tablsize;
-	u_char *mbstr, *mptr, mtmp[BUFSIZ], mtmp2[BUFSIZ];
-	u_short *wcstr, *wcptr;
+	unsigned char *mbstr, *mptr, mtmp[BUFSIZ], mtmp2[BUFSIZ];
+	unsigned short *wcstr, *wcptr;
 	RkTabl *tabl, *tabl_next, *tabl_prev;
 	RkTablW16 *tabl_w16;
 
@@ -176,19 +176,19 @@ rcode_sjis_init()
 		return 0;
 	}
 	memset(tabl, '\0', tablnum * tablsize);
-	mbstr = (u_char *) malloc(rkeylen + rstrlen);
+	mbstr = (unsigned char *) malloc(rkeylen + rstrlen);
         if (!mbstr) {
 		free(tabl);
 		return 0;
 	}
 	memset(mbstr, '\0', rkeylen + rstrlen);
-	wcptr = wcstr = (u_short *) malloc(ryomilen * sizeof(u_short));
+	wcptr = wcstr = (unsigned short *) malloc(ryomilen * sizeof(unsigned short));
         if (!wcstr) {
 		free(tabl);
 		free(mbstr);
 		return 0;
 	}
-        memset(wcptr, '\0', ryomilen * sizeof(u_short));
+        memset(wcptr, '\0', ryomilen * sizeof(unsigned short));
 
 	rkeylen *= 2;
 	rstrlen *= 2;
@@ -307,8 +307,8 @@ rcode_euc_init()
 {
 	int i, rkeylen = 0, ryomilen = 0, rstrlen = 0;
 	int klen, ylen, slen, tablnum = 0, tablsize;
-	u_char *mbstr, *mptr, mtmp[BUFSIZ], mtmp2[BUFSIZ];
-	u_short *wcstr, *wcptr;
+	unsigned char *mbstr, *mptr, mtmp[BUFSIZ], mtmp2[BUFSIZ];
+	unsigned short *wcstr, *wcptr;
 	RkTabl *tabl, *tabl_next, *tabl_prev;
 	RkTablW16 *tabl_w16;
 
@@ -337,19 +337,19 @@ rcode_euc_init()
 		return 0;
 	}
 	memset(tabl, '\0', tablnum * tablsize);
-	mbstr = (u_char *) malloc(rkeylen + rstrlen);
+	mbstr = (unsigned char *) malloc(rkeylen + rstrlen);
         if (!mbstr) {
 		free(tabl);
 		return 0;
 	}
 	memset(mbstr, '\0', rkeylen + rstrlen);
-	wcptr = wcstr = (u_short *) malloc(ryomilen * sizeof(u_short));
+	wcptr = wcstr = (unsigned short *) malloc(ryomilen * sizeof(unsigned short));
         if (!wcstr) {
 		free(tabl);
 		free(mbstr);
 		return 0;
 	}
-        memset(wcptr, '\0', ryomilen * sizeof(u_short));
+        memset(wcptr, '\0', ryomilen * sizeof(unsigned short));
 
 	rkeylen *= 2;
 	rstrlen *= 2;
@@ -494,7 +494,7 @@ int (*mbfunc)();
 	FILE *fp, *fopen();
 	char line[MAXLEN + 1];
 	wchar16_t rkey[MAXWLEN + 1], rstr[MAXWLEN + 1];
-	u_short kstr[MAXWLEN + 1];
+	unsigned short kstr[MAXWLEN + 1];
 	char *strcpy(), *getkey(), *rkgetyomi();
 	RkTablW16 *rktp, *mktable();
 
@@ -620,15 +620,15 @@ char *istr;
 wchar16_t *ostr;
 int *len;
 {
-	u_char c;
-	u_char *p;
+	unsigned char c;
+	unsigned char *p;
 	int i;
-	u_short cc;
+	unsigned short cc;
 
 	while (ENDMARK(*istr))
 		istr++;
 
-	p = (u_char *)istr;
+	p = (unsigned char *)istr;
 	i = 0;
 	while (!ENDMARK(*p)) {
 		if (SKLINE(*p))
@@ -839,7 +839,7 @@ int len;
 	int i;
 	RkTablW16 *nrktp, *orktp;
 	RkTablW16 *rktp;
-	u_int code;
+	unsigned int code;
 
 	nrktp = NULL;
 	orktp = NULL;
@@ -906,13 +906,13 @@ sj3_rkreset()
 
 sj3_rkconvc(c, rkstr)
 wchar16_t c;
-u_int *rkstr;
+unsigned int *rkstr;
 {
 	int i;
 	wchar16_t *p, *q;
 	int len;
 	wchar16_t wstr[MAXLLEN];
-	u_int kstr[MAXLLEN], *kp;
+	unsigned int kstr[MAXLLEN], *kp;
 
 	len = wslen(rline);
 	if (c == rk_erase) {
@@ -979,7 +979,7 @@ u_int *rkstr;
 
 sj3_rkconv2(wstr, kstr, wlen)
 wchar16_t *wstr;
-u_int *kstr;
+unsigned int *kstr;
 int wlen;
 {
 
@@ -988,7 +988,7 @@ int wlen;
 	int rlen, len;
 	wchar16_t svstr[MAXLLEN];
 	RkTablW16 *rktp;
-	u_short *kp;
+	unsigned short *kp;
 
 	len = 0;
 	if ((rktp = rktblp) == NULL)
@@ -1079,8 +1079,8 @@ int wlen;
 int sj3_rkconv_w16(wchar16_t *, wchar16_t *);
 
 sj3_rkconv(romaji, kana)
-u_char *romaji;
-u_char *kana;
+unsigned char *romaji;
+unsigned char *kana;
 {
 	wchar16_t *wstr;
 	int len, mflag = 0, ret;
@@ -1125,8 +1125,8 @@ u_char *kana;
 }
 
 sj3_rkconv_euc(romaji, kana)
-u_char *romaji;
-u_char *kana;
+unsigned char *romaji;
+unsigned char *kana;
 {
 	wchar16_t *wstr;
 	int len, mflag = 0, ret;
@@ -1171,8 +1171,8 @@ u_char *kana;
 }
 
 sj3_rkconv_mb(romaji, kana)
-u_char *romaji;
-u_char *kana;
+unsigned char *romaji;
+unsigned char *kana;
 {
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_rkconv_euc(romaji, kana);
@@ -1187,11 +1187,11 @@ wchar16_t *kstr;
 
 	int i;
 	wchar16_t *p, *q, *s;
-	u_short cc;
+	unsigned short cc;
 	int rlen, len;
 	wchar16_t svstr[MAXLLEN];
 	RkTablW16 *rktp;
-	u_short *kp;
+	unsigned short *kp;
 
 	len = wslen(wstr);
 	rktp = sj3_rcode_w16[WTOUPPER(*wstr)];

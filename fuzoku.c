@@ -50,8 +50,8 @@ int	terminate();
 
 
 static	int	fzkstrcmp(yptr, fzkp, saml)
-u_char	*yptr;
-u_char	*fzkp;
+unsigned char	*yptr;
+unsigned char	*fzkp;
 int	*saml;
 {
 	int	asklen, nkrlen;
@@ -95,7 +95,7 @@ int	*saml;
 
 void	setclrec(jrec, yptr, right)
 JREC		*jrec;		
-u_char		*yptr;
+unsigned char	*yptr;
 TypeCnct	right;		
 {
 	CLREC		*new;
@@ -185,7 +185,7 @@ static	int	fzkcnct(right, left)
 TypeCnct	right;
 TypeCnct	left;
 {
-	u_char	*cncttbl;
+	unsigned char	*cncttbl;
 
 	if (right && left) {
 		cncttbl = Rigtadr(right);
@@ -199,14 +199,14 @@ TypeCnct	left;
 
 void	srchfzk(jrec, yptr, right, level)
 JREC		*jrec;			
-u_char		*yptr;
+unsigned char	*yptr;
 TypeCnct	right;			
 int		level;
 {
-	u_char	*fzk;
+	unsigned char	*fzk;
 	int	len = 0;
 	int	cmp;
-	u_char	*next;
+	unsigned char	*next;
 	FREC	*fzkrec;	
 	int	i;
 	int	nlen;

@@ -40,7 +40,7 @@
 #include "sj_typedef.h"
 #include "sj_yomi.h"
 #include "sj_hinsi.h"
-static	u_char	name_stb[] = {
+static	unsigned char	name_stb[] = {
 	0x22, MEISI_1,	_KU, _NN,
 			0xb7, 0xaf,			
 	0x22, MEISI_1,	_SA, _MA,
@@ -56,7 +56,7 @@ static	u_char	name_stb[] = {
 	0x00
 };
 
-static	u_char	timei_stb[] = {
+static	unsigned char	timei_stb[] = {
 	0x22, MEISI_1,	_E, _KI,
 		 	0xb1, 0xd8,			
 	0x44, MEISI_1,	_E, _KI, _HA, _TU,
@@ -78,7 +78,7 @@ static	u_char	timei_stb[] = {
 	0x00
 };
 
-static	u_char	meisi_stb[] = {
+static	unsigned char	meisi_stb[] = {
 	0x44, MEISI_6,	_A, _TU, _KA, _I,
 			0xb0, 0xb7, 0xa4, 0xa4,		
 	0x1a, MEISI_6,	_KA,
@@ -94,7 +94,7 @@ static	u_char	meisi_stb[] = {
 	0x00
 };
 
-static	u_char	sahen_stb[] = {
+static	unsigned char	sahen_stb[] = {
 	0x44, MEISI_6,	_A, _TU, _KA, _I,
 			0xb0, 0xb7, 0xa4, 0xa4,		
 	0x1a, MEISI_6,	_KA,
@@ -120,13 +120,13 @@ static	u_char	sahen_stb[] = {
 	0x00
 };
 
-static	u_char	human_stb[] = {
+static	unsigned char	human_stb[] = {
 	0x24, MEISI_1,	_SA, _NN,
 			0xa4, 0xb5, 0xa4, 0xf3,		
 	0x00
 };
 
-static	u_char	ippan_stb[] = {
+static	unsigned char	ippan_stb[] = {
 	0x56, FUKUSI_1, _NI, _TO, _MO, _NA, _I,	
 			0xa4, 0xcb, 0xc8, 0xbc, 0xa4, 0xa4,	
 	0x56, FUKUSI_1, _NI, _TO, _MO, _NA, _U,	
@@ -134,7 +134,7 @@ static	u_char	ippan_stb[] = {
 	0x00
 };
 
-u_char	*stbadr[] = {
+unsigned char	*stbadr[] = {
 	0,
 	ippan_stb, ippan_stb, ippan_stb, meisi_stb, sahen_stb,
 	sahen_stb, sahen_stb, meisi_stb, meisi_stb, meisi_stb,

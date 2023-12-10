@@ -41,24 +41,24 @@
 #include "kanakan.h"
 
 
-u_char	*skiphblk();
+unsigned char	*skiphblk();
 
 static	void	add_yomi (void);
-static	void	cd2sjh_chr (u_char ch, u_char *dst);
+static	void	cd2sjh_chr (unsigned char ch, unsigned char *dst);
 static	int	next_douon (void);
 static	int	next_hinsi (void);
 static	int	next_kanji (void);
 static	int	prev_douon (void);
 static	int	prev_hinsi (void);
 static	int	prev_kanji (void);
-static	void	set_buf (u_char *buf);
+static	void	set_buf (unsigned char *buf);
 static	void	set_idxyomi (void);
 static	void	set_kanji (void);
 
 
 
 int
-getusr (u_char *buf)
+getusr (unsigned char *buf)
 {
 	int nlen;
 
@@ -90,7 +90,7 @@ getusr (u_char *buf)
 
 
 int
-nextusr (u_char *buf)
+nextusr (unsigned char *buf)
 {
 	(*curdict->getdic)(curdict, peepidx);
 	get_askknj();
@@ -107,7 +107,7 @@ nextusr (u_char *buf)
 
 
 int
-prevusr (u_char *buf)
+prevusr (unsigned char *buf)
 {
 	(*curdict->getdic)(curdict, peepidx);
 	get_askknj();
@@ -136,9 +136,9 @@ set_kanji (void)
 
 
 static	void
-set_buf (u_char *buf)
+set_buf (unsigned char *buf)
 {
-	u_char	*p;
+	unsigned char	*p;
 	int      i, csize;
 
 	for (p = peepyomi ; *p ; ) *buf++ = *p++;
@@ -159,8 +159,8 @@ set_buf (u_char *buf)
 static	int
 prev_kanji (void)
 {
-	u_char	*p1;
-	u_char	*p2;
+	unsigned char	*p1;
+	unsigned char	*p2;
 
 	p1 = peephptr + 1;
 	if (peepkptr <= p1) return prev_hinsi();
@@ -179,8 +179,8 @@ prev_kanji (void)
 static	int
 prev_hinsi (void)
 {
-	u_char	*p1;
-	u_char	*p2;
+	unsigned char	*p1;
+	unsigned char	*p2;
 	int     nlen;
 
 	nlen = getnlen(peepdptr);
@@ -210,8 +210,8 @@ prev_hinsi (void)
 static	int
 prev_douon (void)
 {
-	u_char	*p1;
-	u_char	*p2;
+	unsigned char	*p1;
+	unsigned char	*p2;
 	int     nlen;
 
 	if (peepdptr <= segtop()) {
@@ -266,7 +266,7 @@ prev_douon (void)
 static	int
 next_kanji (void)
 {
-	u_char	*p1;
+	unsigned char	*p1;
 
 	p1 = skipkstr(peepkptr);
 	if (*p1 == HinsiBlkTerm) return next_hinsi();
@@ -279,7 +279,7 @@ next_kanji (void)
 static	int
 next_hinsi (void)
 {
-	u_char	*p1;
+	unsigned char	*p1;
 
 	p1 = skiphblk(peephptr);
 	if (p1 >= getntag(peepdptr)) return next_douon();
@@ -294,7 +294,7 @@ next_hinsi (void)
 static	int
 next_douon (void)
 {
-	u_char	*p1;
+	unsigned char	*p1;
         int      nlen;
 
 	p1 = getntag(peepdptr);
@@ -331,7 +331,7 @@ next_douon (void)
 static	void
 set_idxyomi (void)
 {
-	u_char	*p1, *p2;
+	unsigned char	*p1, *p2;
 
 	if ((p2 = get_idxptr(peepidx)) != NULL) {
 		p1 = peepyomi;
@@ -349,7 +349,7 @@ static	void
 add_yomi (void)
 {
 	int	nlen;
-	u_char	*p1, *p2;
+	unsigned char	*p1, *p2;
 
 	nlen = getnlen(peepdptr);
 	p1 = peepyomi + getplen(peepdptr) * 2;
@@ -366,7 +366,7 @@ add_yomi (void)
 
 
 static	void
-cd2sjh_chr (u_char ch, u_char *dst)
+cd2sjh_chr (unsigned char ch, unsigned char *dst)
 {
 	if (ch == _TYOUON) {			
 		*dst++ = 0xa1;

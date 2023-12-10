@@ -94,7 +94,7 @@ cvtphknj (void)
                 ystart += clt1st -> cllen;
 
                 j = hzstrlen(inputyomi, (int)clt1st -> cllen);
-		kanjibuf[0] = (u_char)j;
+		kanjibuf[0] = (unsigned char)j;
 
 		
 		inputyomi += j;
@@ -163,7 +163,7 @@ setstyrec (KHREC *krec)
 	JREC	*jrec;
 	KHREC	*kptr;
 	int	ii;
-	u_char	*fptr;
+	unsigned char	*fptr;
 	STDYOUT	stdy;
 
 	jrec  = krec -> clrec -> jnode;
@@ -207,7 +207,7 @@ setstyrec (KHREC *krec)
 		stdy.sttlen = 0;
 
 	
-	memcpy((u_char *)&stdy, kanjitmp, sizeof(STDYOUT));
+	memcpy((unsigned char *)&stdy, kanjitmp, sizeof(STDYOUT));
 	kanjitmp += sizeof(STDYOUT);
 }
 
