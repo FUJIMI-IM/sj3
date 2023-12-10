@@ -52,7 +52,7 @@ static int ccnt = 0;
 
 codeconv(c, rkstr)
 wchar16_t c;
-unsignedint *rkstr;
+unsigned int *rkstr;
 {
 	unsigned short ccode, i;
         unsigned short CheckCcode();
