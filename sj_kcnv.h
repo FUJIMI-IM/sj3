@@ -49,4 +49,3 @@
 #include "const.h"
 #include "Struct.h"
 #include "sj_global.h"
-#include "sj_define.h"

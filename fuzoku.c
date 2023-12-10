@@ -49,7 +49,7 @@ int	terminate();
 
 
 
-Static	int	fzkstrcmp(yptr, fzkp, saml)
+static	int	fzkstrcmp(yptr, fzkp, saml)
 u_char	*yptr;
 u_char	*fzkp;
 int	*saml;
@@ -181,7 +181,7 @@ TypeCnct	right;
 		new -> kubun = K_TAIGEN;
 }
 
-Static	int	fzkcnct(right, left)
+static	int	fzkcnct(right, left)
 TypeCnct	right;
 TypeCnct	left;
 {

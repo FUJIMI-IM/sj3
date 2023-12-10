@@ -40,7 +40,7 @@
 #include "sj_right.h"
 #include "sj_prty.h"
 
-Static	int	isfukusi(hinsi)
+static	int	isfukusi(hinsi)
 TypeGram	hinsi;
 {
 	if (FUKUSI_1 <= hinsi && hinsi <= FUKUSI_7)
@@ -50,7 +50,7 @@ TypeGram	hinsi;
 	return FALSE;
 }
 
-Static	int	istaigen(right)
+static	int	istaigen(right)
 TypeCnct	right;
 {
 	if (right == R_MEISI || right == R_DMEISI || right == R_SMEISI1)
@@ -62,7 +62,7 @@ TypeCnct	right;
 	return FALSE;
 }
 
-Static	int	taicnt(hinsi1, hinsi2)
+static	int	taicnt(hinsi1, hinsi2)
 TypeGram	hinsi1;
 TypeGram	hinsi2;
 {
@@ -91,7 +91,7 @@ TypeGram	hinsi2;
 	}
 }
 
-Static	int	sttcnt(hinsi1, hinsi2)
+static	int	sttcnt(hinsi1, hinsi2)
 TypeGram	hinsi1;
 TypeGram	hinsi2;
 {
