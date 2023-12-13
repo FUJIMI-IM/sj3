@@ -36,6 +36,7 @@
 
 
 
+#include <string.h>
 #include "sj_hinsi.h"
 
 static	struct	hlist {
