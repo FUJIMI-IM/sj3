@@ -42,8 +42,8 @@
 #include <sys/types.h>
 #include "sj_typedef.h"
 
-typedef	struct	jiritu {
-	struct jiritu	*jsort;		
+typedef	struct	jrec {
+	struct jrec	*jsort;		
 	TypeDicSeg	jseg;		
 	TypeDicOfs	jofsst;		
 	TypeDicOfs	jofsed;		
@@ -61,9 +61,9 @@ typedef	struct	jiritu {
 
 
 
-typedef struct bunsetu {
+typedef struct clrec {
 	JREC	*jnode;			
-	struct	bunsetu	*clsort;	
+	struct	clrec	*clsort;	
 	unsigned char	gobiln;
 	unsigned char	cllen;
 
@@ -80,7 +80,7 @@ typedef struct bunsetu {
 
 
 
-typedef	struct	kouho {
+typedef	struct	khrec {
 	CLREC		*clrec;		
 	TypeDicOfs	offs;		
 	TypeStyNum	styno;		
@@ -103,7 +103,7 @@ typedef	struct	kouho {
 
 
 
-typedef	struct	conj {
+typedef	struct	crec {
 	unsigned char	len;
 	TypeCnct	right;		
 } CREC;
@@ -111,7 +111,7 @@ typedef	struct	conj {
 
 
 
-typedef	struct	fuzoku {
+typedef	struct	frec {
 	unsigned char	*yomip;
 	unsigned char	*fzkp;
 
@@ -119,7 +119,7 @@ typedef	struct	fuzoku {
 
 
 
-typedef struct study_in {
+typedef struct stdyin {
 	TypeDicOfs	offset;		
 	TypeDicSeg	seg;		
 	TypeStyNum	styno;		
@@ -138,7 +138,7 @@ typedef struct study_in {
 
 
 
-typedef struct study_out {
+typedef struct stdyout {
 	STDYIN		stdy1;		
 	TypeGram	hinshi;		
 	unsigned char	len;
