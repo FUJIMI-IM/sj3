@@ -98,11 +98,9 @@ h2kcode(int code)
 {
 	unsigned short	hh;
 	unsigned char	high;
-	unsigned char	low;
 
 	hh = ((code >> 16) & 0xffff);
 	high = ((code >> 8) & 0xff);
-	low = (code & 0xff);
 
 	if (!hh) {
 		if (high != 0xa4)		
