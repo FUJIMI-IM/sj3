@@ -49,6 +49,7 @@
 #include <netdb.h>
 #include <setjmp.h>
 #include <errno.h>
+#include "server.h"
 #ifdef SVR4
 #include <sys/filio.h>
 #include <sys/signal.h>
