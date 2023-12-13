@@ -37,7 +37,13 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
+#include "server.h"
+#include "sj3lib.h"
+
+void	printout_mb(), printout();
+char	*hns2str();
 
 void
 dictdisp(output)
