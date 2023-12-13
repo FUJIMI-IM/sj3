@@ -39,6 +39,8 @@
 #include <stdio.h>
 #include "sj3err.h"
 
+void printout();
+
 void
 sj3error(fp, code)
 FILE	*fp;
