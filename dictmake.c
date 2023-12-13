@@ -38,15 +38,13 @@
 
 #include "sj_sysvdef.h"
 #include <stdio.h>
-#ifdef SVR4
+#include <stdlib.h>
 #include <string.h>
-#else
-#include <strings.h>
-#endif
 #include <ctype.h>
 #include "sjctype.h"
 #include "sj3lib.h"
 #include "sjtool.h"
+#include "server.h"
 
 #define	IsEOL(c)	((c) == '\0')
 #define	IsBlank(c)	((c) == ' ' || (c) == '\t')
@@ -54,6 +52,10 @@
 extern	int	force_flag;
 extern	int	verbose_flag;
 extern  int     _sys_code;
+
+void	normal_out();
+int	str2hns();
+char	*hns2str();
 
 static void touroku(y, k, h)
 char	*y, *k, *h;
