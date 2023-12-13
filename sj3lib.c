@@ -55,7 +55,7 @@ static int     _sys_code = SYS_NOTDEF;
 
 char			*sj3_user_dir = "user";
 static char		*path_delimiter = "/";
-static SJ3_CLIENT_ENV	 client = { -1, 0 };
+static SJ3_CLIENT_ENV	 client = { -1, 0, 0, 0, 0, {0, 0} };
 static long		 mdicid = 0;
 static long		 udicid = 0;
 static int		 defuse = 0;
