@@ -77,7 +77,6 @@ int	l;
 	CLREC	*cpk;
 	CLREC	*cp;
 	CLREC	*cn;
-	int	i = FALSE;
 
 	cp = cpk = NULL;
 

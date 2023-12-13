@@ -104,7 +104,7 @@ sj3_str_euctosjis(unsigned char *out, int outlen, unsigned char *in,
 {
 	unsigned char *euc = in, *sjis = out;
 	int n = 0;
-	unsigned short code, default_code;
+	unsigned short code;
 
 	sjis[0] = '\0';
 	*useflag = 0;

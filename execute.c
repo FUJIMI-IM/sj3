@@ -1333,7 +1333,6 @@ exec_makedict (void)
 	struct stat    sbuf;
 	char	path[PathNameLen];
 	int	err;
-	int	ofslen;
 	int	idxlen;
 	int	seglen;
 	int	segnum;

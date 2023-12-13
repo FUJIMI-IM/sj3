@@ -110,7 +110,6 @@ readhinsi(void)
 	static int	c = 0;
 	int	i;
 	unsigned char	hinsi[128];
-	int	flg;
 
 retry:
 	
