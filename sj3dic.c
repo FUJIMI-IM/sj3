@@ -48,7 +48,11 @@
 #include "sjtool.h"
 #include "sj3lib.h"
 #include "sj3dic.h"
+#include "server.h"
 
+
+int init_code(void), getsjrc(void);
+void dictdisp(char *output), dictmake(char *input);
 
 static void _open_error(int err);
 static void _close_error(int err);
