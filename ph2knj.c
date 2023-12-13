@@ -48,6 +48,8 @@ void	freework();
 void    selclrec();
 CLREC	*free_clst();
 JREC	*free_jlst();
+void	free_clall();
+void	free_jall();
 
 
 
