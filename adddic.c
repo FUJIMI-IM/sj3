@@ -42,6 +42,8 @@
 #include "sj_kcnv.h"
 #include "kanakan.h"
 
+void	mvmemi(), mvmemd(), mkidxtbl();
+int	cmpstr();
 
 static unsigned int checkdict(unsigned char* kanji, TypeGram grm);
 static int cal_nextym(unsigned char* ptr);
@@ -296,7 +298,7 @@ adddic(unsigned char* yomi, unsigned char* kanji, TypeGram  hinsi)
 static int
 checksub(unsigned char* kanji, TypeGram grm)
 {
-	unsigned char	*tagp;
+	unsigned char	*tagp = NULL;
 	unsigned char	*ptr;
 	unsigned char	*endp;
 	int	flg, nlen;
