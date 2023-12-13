@@ -50,6 +50,7 @@
 #include <setjmp.h>
 #include <errno.h>
 #include "server.h"
+#include "kanakan.h"
 #ifdef SVR4
 #include <sys/filio.h>
 #include <sys/signal.h>
