@@ -49,6 +49,8 @@
 #include "sj3err.h"
 #include "Dict.h"
 #include "server.h"
+#include "kanakan.h"
+#include "sj3lib.h"
 
 
 #define SJIS_PROTO 1
@@ -81,10 +83,7 @@ static	Client	*cur_cli;
 static unsigned char defaultchar[2] = {(unsigned char)0x81, (unsigned char)0x40};
 static int  defuse=0, defuse2=0;
 
-DictFile *opendict();
-int	closedict();
-StdyFile *openstdy();
-int	closestdy();
+void	initwork(), server_terminate();
 
 unsigned char	*put_ndata(), *put_string();
 
