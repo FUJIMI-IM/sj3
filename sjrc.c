@@ -38,11 +38,14 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <locale.h>
 #include <ctype.h>
 #include <sys/types.h>
 #include "sjctype.h"
 #include "sjtool.h"
+#include "sj3dic.h"
+#include "sj3lib.h"
 
 struct wordent {
 	char	word_str[MAXWORD];
@@ -60,11 +63,13 @@ static int	user_euc = 0;
 static int	file_code = SYS_SJIS;	
 
 void	setrc();
-int	set_dict(), set_server();
+void	set_dict(), set_server();
+int	getword(), much();
+int	IsTerminator(), isTerminator(), IsEscape(), IsDelimitor();
 
 struct functbl {
 	char *keyword;
-	int (*func)();
+	void (*func)();
 } funcs[] = {
 	{"dictionary",	set_dict},
 	{"userdic",	set_dict},
@@ -306,14 +311,14 @@ unsigned char	c;
 	return (c == ' ' || c == '\t' || c == '.') ? 1 : 0;
 }
 
-int
+void
 set_dict (word)
 struct wordent	word[];
 {
 	setdicname(word[1].word_str);
 }
 
-int
+void
 set_server(word)
 struct wordent	word[];
 {
