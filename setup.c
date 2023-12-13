@@ -301,7 +301,7 @@ FILE	*fp;
 	while (c != '\n' && c != EOF) c = getc(fp);
 	return c;
 }
-static	readln(fp, p, len)
+static	int	readln(fp, p, len)
 FILE	*fp;
 char	*p;
 int	len;		
