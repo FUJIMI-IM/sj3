@@ -111,7 +111,7 @@ fputfile(FILE* fp, long pos, int len, unsigned char* p)
 	return SJ3_NormalEnd;
 }
 
-static int
+static int  __attribute__((unused))
 getfile(int fd, off_t pos, int len, void* p)
 {
 	if (lseek(fd, pos, L_SET) == ERROR) {
@@ -440,7 +440,7 @@ openstdy(char* name, char* passwd)
 	STDYIN		*sp;
 	unsigned short	*cip;
 	unsigned char	*clp;
-	long		stdycnt, stdypos, stdylen, stdymax;
+	long		stdycnt, stdypos, stdylen __attribute__((unused)), stdymax;
 	long		clidxpos, clidxlen;
 	long		clstdypos, clstdylen, clstdystep;
 	long		len;
