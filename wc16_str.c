@@ -42,6 +42,7 @@
 #if defined(__sony_news) && defined(SVR4)
 #include <sonyils.h>
 #endif
+#include "sj3lib.h"
 
 #define MSB 0x80
 
@@ -298,7 +299,7 @@ int n;
 	
 	while (*ws && (i < n)) {
 		code = sj3_wc2euc16(*ws);
-		if (c = ((code >> 16) & 0xff)) {
+		if ((c = ((code >> 16) & 0xff))) {
 			*mb++ = c;
 			i++;
 			if (i == n) break;
@@ -308,14 +309,14 @@ int n;
 			*mb++ = code & 0xff;
 		        i++;
 			if (i == n) break;
-		} else if (c = ((code >> 8) & 0xff)) {
+		} else if ((c = ((code >> 8) & 0xff))) {
 			*mb++ = c;
 			i++;
 			if (i == n) break;
 			*mb++ = code & 0xff;
 		        i++;
 			if (i == n) break;
-		} else if (c = (code & 0xff)) {
+		} else if ((c = (code & 0xff))) {
 			*mb++ = c;
 			i++;
 		} else {
@@ -343,14 +344,14 @@ int n;
 	
 	while (*ws && (i < n)) {
 		code = sj3_wc2sjis16(*ws);
-		if (c = ((code >> 8) & 0xff)) {
+		if ((c = ((code >> 8) & 0xff))) {
 			*mb++ = c;
 			i++;
 			if (i == n) break;
 			*mb++ = code & 0xff;
 			i++;
 			if (i == n) break;
-		} else if (c = (code & 0xff)) {
+		} else if ((c = (code & 0xff))) {
 			*mb++ = c;
 			i++;
 		} else {
