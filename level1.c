@@ -103,7 +103,7 @@ put_byte(int c)
 	putbuf[putpos++] = c;
 }
 
-static void
+static void __attribute__((unused))
 put_word(int c)
 {
 	put_byte(c >> 8);
@@ -214,7 +214,7 @@ get_byte(void)
 	return (getbuf[getpos++] & 0xff);
 }
 
-static int
+static int __attribute__((unused))
 get_word(void)
 {
 	int	i;
@@ -382,8 +382,6 @@ sj3_make_connection(SJ3_CLIENT_ENV *client,
 	char	 host[MAXHOSTNAMELEN];
 	int	 tmp;
 	int	 hostlen, userlen, proglen, datalen, buflen;
-	int	 curlen;
-	char	*curdata;
 
 	client->fd = -1;
 
