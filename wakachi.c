@@ -43,6 +43,7 @@
 
 int	terminate();
 void	setclrec(), srchfzk();
+void	free_jall();
 
 void
 wakachi (void)
