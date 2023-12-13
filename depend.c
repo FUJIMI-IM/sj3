@@ -57,6 +57,7 @@
 extern	int	serv_errno;
 extern	Global	*work_base;
 
+void	mkidxtbl();
 
 DictFile *dictlink = NULL;
 StdyFile *stdylink = NULL;
