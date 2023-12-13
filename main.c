@@ -45,12 +45,15 @@
 
 #include "const.h"
 #include "server.h"
+#include "kanakan.h"
 
 extern int	 fork_flag;
 extern char	*lock_file;
 
 char	*version_number = "2.08C";
 char	*time_stamp = "Mon Mar 23 16:42:59 JST 1998";
+
+
 
 static void
 opening(void)
@@ -81,13 +84,13 @@ erase_lockfile(void)
 }
 #endif
 
-static int
+static void
 signal_handler(int sig)
 {
 	warning_out("signal %d catched.", sig);
 }
 
-static int
+static void
 terminate_handler(int sig)
 {
 	close_socket();
