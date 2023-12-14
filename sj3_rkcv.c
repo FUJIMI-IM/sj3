@@ -40,6 +40,7 @@
 #include "kana.h"
 #include "rk.h"
 #include "kctype.h"
+#include "sj3lib.h"
 
 #if defined(__sony_news) && (SVR4)
 #define wscmp sj3_wscmp16
@@ -165,14 +166,26 @@ static unsigned short HZtbl[95] = {
 	0xa3f8, 0xa3f9, 0xa3fa, 0xa1d0, 0xa1c3, 0xa1d1, 0xa1b1
 };
 
+RkTablW16 *mktable(wchar16_t *, int);
+int kstradd(wchar16_t **, wchar16_t *, int);
+int sj3_mbstowcs16(wchar16_t *, unsigned char *, int);
+int sj3_wcstombs16(unsigned char *, wchar16_t *, int);
+int sj3_wslen16(wchar16_t *);
+
+int sj3_hantozen_w16(wchar16_t *, wchar16_t *);
+int sj_hantozen(wchar16_t *, wchar16_t *, int);
+unsigned short sj_zen2han(unsigned short);
+int sj3_zentohan_w16(wchar16_t *, wchar16_t *);
+int sj_zentohan(wchar16_t *, wchar16_t *, int);
+
 #ifdef ADDHK
-setl_hktozh()
+void setl_hktozh(void)
 {
 	int i;
 	unsigned short c, zen1;
 	wchar16_t rstr[2];
 	wchar16_t kstr[2];
-	RkTablW16 *rktp, *mktable();
+	RkTablW16 *rktp;
 
 	zen1 = (ZHIRA1 << 8);
 	rstr[1] = '\0';
@@ -204,12 +217,12 @@ setl_hktozh()
 #endif
 
 
-mkkigou()
+void mkkigou(void)
 {
 	int i;
 	wchar16_t rstr[2];
 	wchar16_t kstr[2];
-	RkTablW16 *rktp, *mktable();
+	RkTablW16 *rktp;
 
 	rstr[1] = '\0';
 	kstr[1] = 0;
@@ -225,8 +238,7 @@ mkkigou()
 	}
 }
 			
-sj_addten(prefix, c)
-unsigned short prefix, c;
+unsigned short sj_addten(unsigned short prefix, unsigned short c)
 {
 	unsigned short c1, cc;
 
@@ -246,8 +258,7 @@ unsigned short prefix, c;
 	return(cc);
 }
 
-sj_han2zen(c)
-unsigned short c;
+unsigned short sj_han2zen(unsigned short c)
 {
 	int i;
 	unsigned short cc;
@@ -286,10 +297,7 @@ unsigned short c;
 }
 
 
-int sj3_hantozen_w16(wchar16_t *, wchar16_t *);
-
-sj3_hantozen(out, in)
-unsigned char *out, *in;
+int sj3_hantozen(unsigned char *out, unsigned char *in)
 {
 	wchar16_t *winstr, *woutstr;
 	unsigned char *mstr;
@@ -381,8 +389,7 @@ unsigned char *out, *in;
 	}
 }
 
-sj3_hantozen_euc(out, in)
-unsigned char *out, *in;
+int sj3_hantozen_euc(unsigned char *out, unsigned char *in)
 {
 	wchar16_t *winstr, *woutstr;
 	unsigned char *mstr;
@@ -474,8 +481,7 @@ unsigned char *out, *in;
 	}
 }
 
-sj3_hantozen_mb(s1, s2)
-unsigned char *s1, *s2;
+int sj3_hantozen_mb(unsigned char *s1, unsigned char *s2)
 {
 	if (current_locale == LC_CTYPE_EUC) 
 	  return sj3_hantozen_euc(s1, s2);
@@ -483,16 +489,13 @@ unsigned char *s1, *s2;
   	  return sj3_hantozen(s1, s2);
 }
 
-int sj3_hantozen_w16(s1, s2)
-wchar16_t *s1, *s2;
+int sj3_hantozen_w16(wchar16_t *s1, wchar16_t *s2)
 {
 	return sj_hantozen(s1, s2, wslen(s2));
 }
 
 
-sj_hantozen(s1, s2, len)
-wchar16_t *s1, *s2;
-int len;
+int sj_hantozen(wchar16_t *s1, wchar16_t *s2, int len)
 {
 	unsigned short c1, cc, prefix;
 	wchar16_t c;
@@ -524,8 +527,7 @@ int len;
 	return(rlen);
 }
 
-sj_zen2han(c)
-unsigned short c;
+unsigned short sj_zen2han(unsigned short c)
 {
 	int i;
 	unsigned short cc;
@@ -559,10 +561,7 @@ unsigned short c;
 	return(cc);
 }
 
-int sj3_zentohan_w16(wchar16_t *, wchar16_t *);
-
-sj3_zentohan(out, in)
-unsigned char *out, *in;
+int sj3_zentohan(unsigned char *out, unsigned char *in)
 {
 	wchar16_t *winstr, *woutstr;
 	unsigned char *mstr;
@@ -651,8 +650,7 @@ unsigned char *out, *in;
 	return ret;
 }
 
-sj3_zentohan_euc(out, in)
-unsigned char *out, *in;
+int sj3_zentohan_euc(unsigned char *out, unsigned char *in)
 {
 	wchar16_t *winstr, *woutstr;
 	unsigned char *mstr;
@@ -742,8 +740,7 @@ unsigned char *out, *in;
 	return ret;
 }
 
-sj3_zentohan_mb(s1, s2)
-unsigned char *s1, *s2;
+int sj3_zentohan_mb(unsigned char *s1, unsigned char *s2)
 {
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_zentohan_euc(s1, s2);
@@ -751,15 +748,12 @@ unsigned char *s1, *s2;
 	  return sj3_zentohan(s1, s2);
 }
 
-int sj3_zentohan_w16 (s1, s2)
-wchar16_t *s1, *s2;
+int sj3_zentohan_w16 (wchar16_t *s1, wchar16_t *s2)
 {
 	return sj_zentohan(s1, s2, wslen(s2));
 }
 
-sj_zentohan(s1, s2, len)
-wchar16_t *s1, *s2;
-int len;
+int sj_zentohan(wchar16_t *s1, wchar16_t *s2, int len)
 {
 	unsigned short cc;
 	wchar16_t c;
@@ -791,8 +785,7 @@ int len;
 	return(rlen);
 }
 
-sj_tokata(c)
-wchar16_t c;
+wchar16_t sj_tokata(wchar16_t c)
 {
 	if (sj_ishira(c)) {
 		c += 0x0100;
@@ -800,8 +793,7 @@ wchar16_t c;
 	return(c);
 }
 
-sj_tohira(c)
-wchar16_t c;
+wchar16_t sj_tohira(wchar16_t c)
 {
 	if (sj_iskata(c) && (short) c <= (short) 0xa5f3) {
 		c -= 0x0100;
@@ -809,8 +801,7 @@ wchar16_t c;
 	return(c);
 }
 
-sj_htok(s1, s2)
-wchar16_t *s1, *s2;
+void sj_htok(wchar16_t *s1, wchar16_t *s2)
 {
 	wchar16_t cc;
 	wchar16_t c;
@@ -825,8 +816,7 @@ wchar16_t *s1, *s2;
 	*s1 = (wchar16_t) '\0';
 }
 
-sj_ktoh(s1, s2)
-wchar16_t *s1, *s2;
+void sj_ktoh(wchar16_t *s1, wchar16_t *s2)
 {
 	wchar16_t cc;
 	wchar16_t c;
