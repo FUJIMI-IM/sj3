@@ -266,7 +266,7 @@ get_nstring(unsigned char *p, int n)
 	return n;
 }
 
-static unsigned char *
+static void *
 get_ndata(void *p, int n)
 {
 	unsigned char *pp = (unsigned char *)p;

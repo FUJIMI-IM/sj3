@@ -1092,7 +1092,7 @@ int sj3_rkconv(wchar16_t *romaji, wchar16_t *kana)
 		return -1;
 	}
 	if (current_locale == LC_CTYPE_EUC) {
-		len = euctosjis(kana, MAXLLEN*2, mtmp, sizeof(mtmp));
+		len = euctosjis((unsigned char *)kana, MAXLLEN*2, mtmp, sizeof(mtmp));
 	} else {
 		(void) memcpy(kana, mtmp, strlen((char *)mtmp) + 1);
 	}
@@ -1154,7 +1154,7 @@ int sj3_rkconv_mb(unsigned char *romaji, unsigned char *kana)
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_rkconv_euc(romaji, kana);
 	else
-	  return sj3_rkconv(romaji, kana);
+	  return sj3_rkconv((wchar16_t *)romaji, (wchar16_t *)kana);
 }
 
 int sj3_rkconv_w16(wchar16_t *wstr, wchar16_t *kstr)

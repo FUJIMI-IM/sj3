@@ -54,7 +54,7 @@ int get_word(void);
 int get_int(void);
 #endif
 int get_nstring(unsigned char *p, int n);
-unsigned char *get_ndata(unsigned char *p, int n);
+void *get_ndata(void *p, int n);
 
 /* error.c */
 int open_debug(void);
