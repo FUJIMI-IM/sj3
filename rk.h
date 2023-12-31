@@ -34,6 +34,8 @@
  */
 
 
+#ifndef SJ3_RK_H_
+#define SJ3_RK_H_
 
 #include <sys/types.h>
 #include "wchar16.h"
@@ -80,3 +82,4 @@ typedef	struct rktable {
 	struct rktable *next;
 } RkTabl;
 
+#endif /* SJ3_RK_H_ */
