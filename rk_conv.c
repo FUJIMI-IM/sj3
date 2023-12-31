@@ -120,7 +120,7 @@ static wchar16_t *shp;
 static YmibufRec ymipbuf, *ymipp;
 static unsigned short *yhp;
 
-
+/* rk_conv.c */
 int sj3_rkinit_mb(char *);
 char *getkey(char *, wchar16_t *, int *);
 char *rkgetyomi(char *, wchar16_t *, int *);
@@ -128,7 +128,7 @@ void cltable(void);
 int chk_rstr(wchar16_t *, wchar16_t *, int, int);
 int stradd(wchar16_t **, wchar16_t *, int);
 int kstradd(wchar16_t **, wchar16_t *, int);
-RkTablW16 *mktable(wchar16_t *key, int len);
+RkTablW16 *mktable(wchar16_t *, int);
 void sj3_rkclear(void);
 void sj3_rkreset(void);
 int sj3_rkconv2(wchar16_t *, unsigned int *, int);
@@ -136,6 +136,7 @@ int sj3_rkinit_sub(char *, int (*)(void));
 int sj3_rkconv_w16(wchar16_t *, wchar16_t *);
 int rkmatch(wchar16_t *, wchar16_t *, int);
 
+/* wc16_str.c */
 int sj3_wslen16(wchar16_t *);
 int sj3_wscmp16(wchar16_t *, wchar16_t *);
 int sj3_wsncmp16(wchar16_t *, wchar16_t *, int);

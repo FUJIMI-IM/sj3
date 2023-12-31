@@ -53,12 +53,14 @@ extern	int	force_flag;
 extern	int	verbose_flag;
 extern  int     _sys_code;
 
-void	normal_out();
-int	str2hns();
-char	*hns2str();
+/* codecnv.c */
+void normal_out(char *, ...);
 
-static void touroku(y, k, h)
-char	*y, *k, *h;
+/* hinsi.c */
+char *hns2str(int);
+int str2hns(char *);
+
+static void touroku(char *y, char *k, char *h)
 {
 	int	err;
 	int	grm;
@@ -131,14 +133,12 @@ char	*y, *k, *h;
 	case SJ3_TOUROKU_FAILED:
 	default:
 		error_out("\305\320\317\277\244\307\244\255\244\336\244\273\244\363\244\307\244\267\244\277 %s:%s:%s(%d)",
-				y, k, hns2str(h), h);
+				y, k, h, str2hns(h));
 		break;
 	}
 }
 
-void
-dictmake(input)
-char	*input;
+void dictmake(char *input)
 {
 	unsigned char	buf[BUFSIZ];
 	FILE	*fp;

@@ -42,12 +42,14 @@
 #include "server.h"
 #include "sj3lib.h"
 
-void	printout_mb(), printout();
-char	*hns2str();
+/* codecnv.c */
+void printout_mb(FILE *, unsigned char *);
+void printout(FILE *, unsigned char *);
 
-void
-dictdisp(output)
-char	*output;
+/* hinsi.c */
+char *hns2str(int);
+
+void dictdisp(char *output)
 {
 	unsigned char	buf[BUFSIZ];
 	unsigned char	*p;

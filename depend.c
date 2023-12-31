@@ -57,14 +57,14 @@
 extern	int	serv_errno;
 extern	Global	*work_base;
 
-void	mkidxtbl();
+/* init.c */
+void	mkidxtbl(DICT *);
 
 DictFile *dictlink = NULL;
 StdyFile *stdylink = NULL;
 
 
-static long
-get4byte(unsigned char* p)
+static long get4byte(unsigned char* p)
 {
 	long	i;
 
@@ -74,8 +74,7 @@ get4byte(unsigned char* p)
 	return ((i << 8) + *++p);
 }
 
-static void
-Put4byte(unsigned char* p, long n)
+static void Put4byte(unsigned char* p, long n)
 {
 	p += 3;
 	*p-- = n; n >>= 8;
@@ -87,8 +86,7 @@ Put4byte(unsigned char* p, long n)
 #define	put4byte(p, n)	Put4byte((p), (long)(n))
 
 
-static int
-fgetfile(FILE* fp, long pos, int len, void* p)
+static int fgetfile(FILE* fp, long pos, int len, void* p)
 {
 	if (fseek(fp, pos, 0) == ERROR) {
 		serv_errno = SJ3_FileSeekError; return ERROR;
@@ -99,8 +97,7 @@ fgetfile(FILE* fp, long pos, int len, void* p)
 	return SJ3_NormalEnd;
 }
 
-static int
-fputfile(FILE* fp, long pos, int len, unsigned char* p)
+static int fputfile(FILE* fp, long pos, int len, unsigned char* p)
 {
 	if (fseek(fp, pos, 0) == ERROR) {
 		serv_errno = SJ3_FileSeekError; return ERROR;
@@ -111,8 +108,7 @@ fputfile(FILE* fp, long pos, int len, unsigned char* p)
 	return SJ3_NormalEnd;
 }
 
-static int  __attribute__((unused))
-getfile(int fd, off_t pos, int len, void* p)
+static int  __attribute__((unused)) getfile(int fd, off_t pos, int len, void* p)
 {
 	if (lseek(fd, pos, L_SET) == ERROR) {
 		serv_errno = SJ3_FileSeekError; return ERROR;
@@ -123,8 +119,7 @@ getfile(int fd, off_t pos, int len, void* p)
 	return SJ3_NormalEnd;
 }
 
-static int
-putfile(int fd, off_t pos, int len, void* p)
+static int putfile(int fd, off_t pos, int len, void* p)
 {
 	if (lseek(fd, pos, L_SET) == ERROR) {
 		serv_errno = SJ3_FileSeekError; return ERROR;
@@ -136,29 +131,25 @@ putfile(int fd, off_t pos, int len, void* p)
 }
 
 
-static int
-check_passwd(unsigned char* buf, char* passwd)
+static int check_passwd(unsigned char* buf, char* passwd)
 {
 	buf += PasswdPos;
 	return (*buf && strncmp(passwd, buf, PasswdLen)) ? FALSE : TRUE;
 }
 
-static void
-set_passwd(unsigned char* buf, char* passwd)
+static void set_passwd(unsigned char* buf, char* passwd)
 {
 	strncpy(buf + PasswdPos, passwd, PasswdLen);
 }
 
 
-static int
-check_dictfile(unsigned char* buf)
+static int check_dictfile(unsigned char* buf)
 {
 	return (DictVersion != get4byte(buf + VersionPos)) ? FALSE : TRUE;
 }
 
 
-static DictFile*
-search_same_dict(ino_t ino)
+static DictFile* search_same_dict(ino_t ino)
 {
 	DictFile *p;
 
@@ -169,36 +160,31 @@ search_same_dict(ino_t ino)
 }
 
 
-static int
-getofs(DictFile* dp)
+static int getofs(DictFile* dp)
 {
 	idxofs = dp -> ofsptr;
 	return 0;
 }
 
-static int
-getidx(DictFile* dp)
+static int getidx(DictFile* dp)
 {
 	idxbuf = dp -> buffer + dp -> idxstrt;
 	return 0;
 }
 
-static int
-getdic(DictFile* dp, TypeDicSeg seg)
+static int getdic(DictFile* dp, TypeDicSeg seg)
 {
 	if (seg >= dp->dict.segunit) return -1;
 	dicbuf = dp->buffer + dp->segstrt + dp->dict.seglen * seg;
 	return 0;
 }
 
-static int
-putidx(DictFile* dp, TypeDicSeg seg)
+static int putidx(DictFile* dp, TypeDicSeg seg)
 {
 	return putfile(dp->fd, dp->idxstrt, dp->dict.idxlen, idxbuf);
 }
 
-static int
-putdic(DictFile* dp, TypeDicSeg seg)
+static int putdic(DictFile* dp, TypeDicSeg seg)
 {
 	unsigned char	*p;
 	long	i, j;
@@ -226,8 +212,7 @@ putdic(DictFile* dp, TypeDicSeg seg)
 	return putfile(dp->fd, i, dp->dict.seglen, p);
 }
 
-static int
-rszdic(DictFile* dp, TypeDicSeg seg)
+static int rszdic(DictFile* dp, TypeDicSeg seg)
 {
 	long	i;
 	unsigned char	*p;
@@ -253,8 +238,7 @@ rszdic(DictFile* dp, TypeDicSeg seg)
 }
 
 
-DictFile*
-opendict(char* name, char* passwd)
+DictFile* opendict(char* name, char* passwd)
 {
 	FILE		*fp;
 	struct stat	sbuf;
@@ -359,8 +343,7 @@ error1:	fclose(fp);
 }
 
 
-int
-closedict(DictFile* dfp)
+int closedict(DictFile* dfp)
 {
 	DictFile	*df;
 
@@ -392,34 +375,29 @@ closedict(DictFile* dfp)
 
 static	fd_set zero_fd_set = { { 0 } };
 
-void
-lock_dict(DictFile* p, int fd)
+void lock_dict(DictFile* p, int fd)
 {
 	FD_SET(fd, &(p -> lock));
 }
 
-void
-unlock_dict(DictFile* p, int fd)
+void unlock_dict(DictFile* p, int fd)
 {
 	FD_CLR(fd, &(p -> lock));
 }
 
-int
-is_dict_locked(DictFile* p)
+int is_dict_locked(DictFile* p)
 {
 	return memcmp(&(p -> lock), &zero_fd_set, sizeof(zero_fd_set));
 }
 
 
-static int
-check_stdyfile(unsigned char* buf)
+static int check_stdyfile(unsigned char* buf)
 {
 	return (StdyVersion != get4byte(buf + VersionPos)) ? FALSE : TRUE;
 }
 
 
-static StdyFile*
-search_same_stdy(ino_t ino)
+static StdyFile* search_same_stdy(ino_t ino)
 {
 	StdyFile *p;
 
@@ -430,8 +408,7 @@ search_same_stdy(ino_t ino)
 }
 
 
-StdyFile*
-openstdy(char* name, char* passwd)
+StdyFile* openstdy(char* name, char* passwd)
 {
 	FILE		*fp;
 	struct stat	sbuf;
@@ -547,8 +524,7 @@ error0:	free((char *)hd);
 }
 
 
-int
-closestdy(StdyFile* sfp)
+int closestdy(StdyFile* sfp)
 {
 	StdyFile	*sf;
 
@@ -580,8 +556,7 @@ closestdy(StdyFile* sfp)
 }
 
 
-int
-putstydic(void)
+int putstydic(void)
 {
 	int	fd;
 	unsigned char	*hd;
@@ -606,8 +581,7 @@ putstydic(void)
 	return putfile(fd, get4byte(hd + StdyNormPos), len, sf -> stdy.stdydic);
 }
 
-int
-putcldic(void)
+int putcldic(void)
 {
 	int	fd;
 	unsigned char	*hd;
@@ -625,8 +599,7 @@ putcldic(void)
 }
 
 
-int
-makedict(char* path, int idxlen, int seglen, int segnum)
+int makedict(char* path, int idxlen, int seglen, int segnum)
 {
 	FILE	*fp;
 	unsigned char	tmp[HeaderLength + CommentLength];
@@ -683,8 +656,7 @@ error:
 }
 
 
-int
-makestdy(char* path, int stynum, int clstep, int cllen)
+int makestdy(char* path, int stynum, int clstep, int cllen)
 {
 	FILE	*fp;
 	unsigned char	tmp[HeaderLength + CommentLength];
@@ -763,23 +735,20 @@ error:
 }
 
 
-void
-sj_closeall(void)
+void sj_closeall(void)
 {
 	while (dictlink) closedict(dictlink);
 	while (stdylink) closestdy(stdylink);
 }
 
 
-int
-set_dictpass(DictFile* dp, char* pass)
+int set_dictpass(DictFile* dp, char* pass)
 {
 	set_passwd(dp -> buffer, pass);
 	return putfile(dp->fd, 0, HeaderLength+CommentLength, dp->buffer);
 }
 
-int
-set_stdypass(char* pass)
+int set_stdypass(char* pass)
 {
 	StdyFile	*sp;
 
@@ -790,21 +759,18 @@ set_stdypass(char* pass)
 
 
 
-static void
-set_comment(unsigned char* buf, char* comment)
+static void set_comment(unsigned char* buf, char* comment)
 {
 	strncpy(buf + HeaderLength, comment, CommentLength);
 }
 
-int
-set_dictcmnt(DictFile* dp, char* cmnt)
+int set_dictcmnt(DictFile* dp, char* cmnt)
 {
 	set_comment(dp -> buffer, cmnt);
 	return putfile(dp->fd, 0, HeaderLength+CommentLength, dp->buffer);
 }
 
-int
-set_stdycmnt(char* cmnt)
+int set_stdycmnt(char* cmnt)
 {
 	StdyFile	*sp;
 
@@ -814,8 +780,7 @@ set_stdycmnt(char* cmnt)
 }
 
 
-void
-get_stdysize(int* stynum, int* clstep, int* cllen)
+void get_stdysize(int* stynum, int* clstep, int* cllen)
 {
 	*stynum = StudyMax;
 	*clstep = ClStudyStep;

@@ -40,6 +40,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <string.h>
 #include <time.h>
 #include "sj_typedef.h"
@@ -55,8 +56,7 @@ static	FILE	*logfp = NULL;
 static	FILE	*dbgfp = NULL;
 
 
-int
-open_error(void)
+int open_error(void)
 {
 	extern	char	*error_file;
 	int	flg = 0;
@@ -76,13 +76,15 @@ open_error(void)
 }
 
 
-void
-error_out(char* s, int p1, int p2, int p3, int p4, int p5)
+void error_out(char* s, ...)
 {
 	char	tmp[BUFSIZ];
+	va_list	ap;
 
 	if (errfp) {
-		sprintf(tmp, s, p1, p2, p3, p4, p5);
+		va_start(ap, s);
+		vsprintf(tmp, s, ap);
+		va_end(ap);
 		fprintf(errfp, "%s: %s\r\n", program_name, tmp);
 		fflush(errfp);
 	}
@@ -90,21 +92,22 @@ error_out(char* s, int p1, int p2, int p3, int p4, int p5)
 }
 
 
-void
-warning_out(char* s, int p1, int p2, int p3, int p4, int p5)
+void warning_out(char* s, ...)
 {
 	char	tmp[BUFSIZ];
+	va_list	ap;
 
 	if (errfp) {
-		sprintf(tmp, s, p1, p2, p3, p4);
+		va_start(ap, s);
+		vsprintf(tmp, s, ap);
+		va_end(ap);
 		fprintf(errfp, "%s: warning: %s\r\n", program_name, tmp);
 		fflush(errfp);
 	}
 }
 
 
-int
-open_log(void)
+int open_log(void)
 {
 	extern	char	*log_file;
 	int	flg = 0;
@@ -134,21 +137,22 @@ open_log(void)
 }
 
 
-void
-logging_out(char* s, int p1, int p2, int p3, int p4, int p5)
+void logging_out(char* s, ...)
 {
 	char	tmp[BUFSIZ];
+	va_list	ap;
 
 	if (logfp) {
-		sprintf(tmp, s, p1, p2, p3, p4, p5);
+		va_start(ap, s);
+		vsprintf(tmp, s, ap);
+		va_end(ap);
 		fprintf(logfp, "%s\r\n", tmp);
 		fflush(logfp);
 	}
 }
 
 
-int
-open_debug(void)
+int open_debug(void)
 {
 	extern	char	*debug_file;
 	int	flg = 0;
@@ -168,11 +172,14 @@ open_debug(void)
 }
 
 
-void
-debug_out(int lvl, char* s, int p1, int p2, int p3, int p4, int p5)
+void debug_out(int lvl, char* s, ...)
 {
+	va_list	ap;
+
 	if (lvl <= debug_level && dbgfp) {
-		fprintf(dbgfp, s, p1, p2, p3, p4, p5);
+		va_start(ap, s);
+		vfprintf(dbgfp, s, ap);
+		va_end(ap);
 		fflush(dbgfp);
 	}
 }

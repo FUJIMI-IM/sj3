@@ -41,12 +41,17 @@
 #include "sj_hinsi.h"
 #include "kanakan.h"
 
-int	terminate();
-void	setclrec(), srchfzk();
-void	free_jall();
+/* fuzoku.c */
+void setclrec(JREC *, unsigned char *, TypeCnct);
+void srchfzk(JREC *, unsigned char *, TypeCnct, int);
 
-void
-wakachi (void)
+/* memory2.c */
+void free_jall(JREC *);
+
+/* terminat.c */
+int terminate(TypeCnct, unsigned char *);
+
+void wakachi (void)
 {
 	JREC		*jrec;
 	CLREC		*clrec;

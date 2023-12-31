@@ -64,7 +64,7 @@
 #define	RKZEN		0xff00
 
 #define SetMojilen(c)	(((c) << 16) & 0x00ff0000)
-#define GetMojilen(c)	(((c) & ERRCODE) ? (1) : (((c) >> 16) & 0xff)) 
+#define GetMojilen(c)	(((c) & ERRCODE) ? (1) : (((c) >> 16) & 0xff))
 
 typedef	struct rktable_w16 {
 	wchar16_t *r_key;

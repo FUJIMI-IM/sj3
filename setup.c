@@ -101,8 +101,7 @@ static	int	line_number;
 
 #ifdef	OLD
 #else /* !OLD */
-void
-RcError(char* p)
+void RcError(char* p)
 {
 	fprintf(stderr, "%s: \"%s\", line %d: %s\r\n",
 		program_name, runcmd_file, line_number, p);
@@ -110,8 +109,7 @@ RcError(char* p)
 	exit(1);
 }
 
-void
-RcWarning(char* p)
+void RcWarning(char* p)
 {
 	fprintf(stderr, "%s: warning: \"%s\", line %d: %s\r\n",
 		program_name, runcmd_file, line_number, p);
@@ -120,8 +118,7 @@ RcWarning(char* p)
 #endif /* !OLD */
 
 
-static int
-cmpstr(unsigned char* src, unsigned char* dst)
+static int cmpstr(unsigned char* src, unsigned char* dst)
 {
 	int	flg;
 	int	c;
@@ -139,9 +136,7 @@ cmpstr(unsigned char* src, unsigned char* dst)
 
 
 
-static	unsigned char	*get_str(p, pv_dst)
-unsigned char	*p;
-void	*pv_dst;
+static	unsigned char	*get_str(unsigned char *p, void *pv_dst)
 {
 	char		**dst;
 
@@ -154,9 +149,8 @@ void	*pv_dst;
 	while (*p++) ;
 	return p;
 }
-static	unsigned char	*get_int(p, pv_dst)
-unsigned char	*p;
-void	*pv_dst;
+
+static	unsigned char	*get_int(unsigned char *p, void *pv_dst)
 {
 	char	*fmt;
 	int		*dst;
@@ -167,9 +161,8 @@ void	*pv_dst;
 	while (*p++) ;
 	return p;
 }
-static	unsigned char	*get_flag(p, pv_dst)
-unsigned char	*p;
-void	*pv_dst;
+
+static	unsigned char	*get_flag(unsigned char *p, void *pv_dst)
 {
 	int		*dst;
 
@@ -187,8 +180,7 @@ void	*pv_dst;
 }
 
 
-static unsigned char*
-get_list(unsigned char* p, StrList** dst)
+static unsigned char* get_list(unsigned char* p, StrList** dst)
 {
 	StrList	*s1, *s2;
 
@@ -283,8 +275,7 @@ struct	optlist {
 
 
 
-static	int	skip_blank(fp)
-FILE	*fp;
+static	int	skip_blank(FILE *fp)
 {
 	int	c;
 
@@ -292,8 +283,8 @@ FILE	*fp;
 	while (c == ' ' || c == '\t') c = getc(fp);
 	return c;
 }
-static	int	skip_line(fp)
-FILE	*fp;
+
+static	int	skip_line(FILE *fp)
 {
 	int	c;
 
@@ -301,10 +292,8 @@ FILE	*fp;
 	while (c != '\n' && c != EOF) c = getc(fp);
 	return c;
 }
-static	int	readln(fp, p, len)
-FILE	*fp;
-char	*p;
-int	len;		
+
+static	int	readln(FILE *fp, char *p, int len)
 {
 	int	c;
 	int	quote = EOF;
@@ -359,8 +348,7 @@ int	len;
 	return c;
 }
 
-int
-read_line(FILE* fp, char* buf, int len)
+int read_line(FILE* fp, char* buf, int len)
 {
 	int	flg;
 
@@ -374,8 +362,7 @@ read_line(FILE* fp, char* buf, int len)
 
 
 
-void
-read_runcmd(void)
+void read_runcmd(void)
 {
 	FILE	*fp;
 	unsigned char	buf[BUFSIZ];
@@ -404,8 +391,7 @@ read_runcmd(void)
 }
 
 
-static void
-set_defstr(char** d, char* s)
+static void set_defstr(char** d, char* s)
 {
 	if (*d == NULL && s) {
 		*d = malloc(strlen(s) + 1);
@@ -415,15 +401,13 @@ set_defstr(char** d, char* s)
 }
 
 
-static void
-set_defint(int* d, int s)
+static void set_defint(int* d, int s)
 {
 	if (*d < 0) *d = s;
 }
 
 
-void
-set_default(void)
+void set_default(void)
 {
 	set_defstr(&debug_file,		DebugOutFile);
 	set_defstr(&error_file,		ErrorOutFile);
@@ -451,8 +435,7 @@ set_default(void)
 }
 
 
-void
-parse_arg(int argc, char** argv)
+void parse_arg(int argc, char** argv)
 {
 	int	c;
 	int	errflg = 0;
@@ -488,8 +471,7 @@ parse_arg(int argc, char** argv)
 }
 
 
-void
-preload_dict(void)
+void preload_dict(void)
 {
 	StrList	*p;
 	char	filename[PathNameLen];
@@ -516,8 +498,7 @@ preload_dict(void)
 	free(work_base);
 }
 
-void
-preopen_dict(void)
+void preopen_dict(void)
 {
 	StrList	*p;
 	char	filename[PathNameLen];
@@ -554,8 +535,7 @@ preopen_dict(void)
 }
 
 
-static int
-str_match(char* s, char* d)
+static int str_match(char* s, char* d)
 {
 	while (*d) {
 		if (*s == '*') {
@@ -575,8 +555,7 @@ str_match(char* s, char* d)
 }
 
 
-int
-check_user(char* user, char* host)
+int check_user(char* user, char* host)
 {
 	StrList	*p;
 

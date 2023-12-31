@@ -43,7 +43,7 @@
 #include "sj_typedef.h"
 
 typedef	struct	jrec {
-	struct jrec	*jsort;		
+	struct jrec	*jsort;
 	TypeDicSeg	jseg;		
 	TypeDicOfs	jofsst;		
 	TypeDicOfs	jofsed;		
@@ -63,7 +63,7 @@ typedef	struct	jrec {
 
 typedef struct clrec {
 	JREC	*jnode;			
-	struct	clrec	*clsort;	
+	struct	clrec	*clsort;
 	unsigned char	gobiln;
 	unsigned char	cllen;
 

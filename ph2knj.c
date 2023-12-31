@@ -41,20 +41,23 @@
 #include "sj_yomi.h"
 #include "kanakan.h"
 
+/* memory2.c */
+JREC *free_jlst(JREC *);
+CLREC *free_clst(CLREC *, int);
+void free_clall(CLREC *);
+void free_jall(JREC *);
+void freework(void);
 
-int	sj2cd_chr();
-void	mk2claus();
-void	freework();
-void    selclrec();
-CLREC	*free_clst();
-JREC	*free_jlst();
-void	free_clall();
-void	free_jall();
+/* mk2claus.c */
+void mk2claus(void);
 
+/* selclrec.c */
+void selclrec(void);
 
+/* sj2code.c */
+int sj2cd_chr(unsigned char *, unsigned char *);
 
-int	ph2knj
-(unsigned char *zyomi, unsigned char *kanji, int knjlen)
+int ph2knj(unsigned char *zyomi, unsigned char *kanji, int knjlen)
 {
 	unsigned char	*ptr;
 	unsigned char	*dst;

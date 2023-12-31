@@ -113,8 +113,7 @@ static	int	buflen = 0;
 static	int	getpos = 0;		
 
 
-void
-socket_init(void)
+void socket_init(void)
 {
 #ifdef SVR4
 	int i;
@@ -133,8 +132,7 @@ socket_init(void)
 
 
 
-static void
-set_fd(int fd)
+static void set_fd(int fd)
 {
 #ifdef SVR4
         poll_fds[maxfds].fd = fd;
@@ -148,8 +146,7 @@ set_fd(int fd)
 
 
 
-static void
-clr_fd(int fd)
+static void clr_fd(int fd)
 {
 #ifdef SVR4
 	int i, j;
@@ -182,8 +179,7 @@ clr_fd(int fd)
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 
-static void
-open_af_unix(void)
+static void open_af_unix(void)
 {
 	struct sockaddr_un	sunix;
 
@@ -228,8 +224,7 @@ struct netconfig *nconf;
 #endif
 
 
-static void
-open_af_inet(void)
+static void open_af_inet(void)
 {
 #ifdef TLI
         struct t_bind *req;
@@ -386,8 +381,7 @@ open_af_inet(void)
 	set_fd(fd_inet);
 }
 
-void
-open_socket(void)
+void open_socket(void)
 {
 	open_af_inet();
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
@@ -398,8 +392,7 @@ open_socket(void)
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 
-static int
-connect_af_unix(void)
+static int connect_af_unix(void)
 {
 	struct sockaddr_un	sunix;
 	int	i = sizeof(sunix);
@@ -412,8 +405,7 @@ connect_af_unix(void)
 #endif
 
 #ifdef TLI
-int
-accept_func(int fd, struct t_call* callptr, char* name, int closeflg)
+int accept_func(int fd, struct t_call* callptr, char* name, int closeflg)
 {
         int newfd;  
         int look;
@@ -447,8 +439,7 @@ accept_func(int fd, struct t_call* callptr, char* name, int closeflg)
 
 
 
-static int
-connect_af_inet(void)
+static int connect_af_inet(void)
 {
 #ifndef TLI
 	struct sockaddr_in	sin;
@@ -473,8 +464,7 @@ connect_af_inet(void)
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 
 
-static void
-close_af_unix(void)
+static void close_af_unix(void)
 {
 	struct sockaddr_un	sunix;
 	int	true = 1;
@@ -494,8 +484,7 @@ close_af_unix(void)
 
 
 
-static void
-close_af_inet(void)
+static void close_af_inet(void)
 {
 #ifndef TLI
 	struct sockaddr_in	sin;
@@ -524,8 +513,7 @@ close_af_inet(void)
 #endif
 }
 
-void
-close_socket(void)
+void close_socket(void)
 {
 #if (!defined(TLI) || (defined(TLI) && defined(SOCK_UNIX)))
 	close_af_unix();
@@ -535,11 +523,10 @@ close_socket(void)
 
 
 
-static void
 #ifdef SVR4
-connect_client(struct pollfd *readfds)
+static void connect_client(struct pollfd *readfds)
 #else
-connect_client(fd_set *readfds)
+static void connect_client(fd_set *readfds)
 #endif
 {
 	int	fd;
@@ -640,8 +627,7 @@ connect_client(fd_set *readfds)
 
 
 
-static Client*
-disconnect_client(Client *cp)
+static Client* disconnect_client(Client *cp)
 {
 	WorkArea *wp;
 	StdyFile *sp;
@@ -702,8 +688,7 @@ disconnect_client(Client *cp)
 #include <signal.h>
 #endif
 
-void
-communicate(void)
+void communicate(void)
 {
 	
 	signal(SIGPIPE, SIG_IGN);
@@ -762,8 +747,7 @@ communicate(void)
 }
 
 
-void
-put_flush(void)
+void put_flush(void)
 {
 	int	len;
 	int	i;
@@ -780,24 +764,21 @@ put_flush(void)
 }
 
 
-void
-put_byte(int c)
+void put_byte(int c)
 {
 	putbuf[putpos++] = c;
 	if (putpos >= sizeof(putbuf)) put_flush();
 }
 
 
-void
-put_work(int c)
+void put_work(int c)
 {
 	put_byte(c >> 8);
 	put_byte(c & 0xff);
 }
 
 
-void
-put_int(int c)
+void put_int(int c)
 {
 	put_byte(c >> (8 * 3));
 	put_byte(c >> (8 * 2));
@@ -806,8 +787,7 @@ put_int(int c)
 }
 
 
-unsigned char*
-put_string(unsigned char* p)
+unsigned char* put_string(unsigned char* p)
 {
 	if (p) {
 		do {
@@ -820,16 +800,14 @@ put_string(unsigned char* p)
 }
 
 
-unsigned char*
-put_ndata(unsigned char* p, int n)
+unsigned char* put_ndata(unsigned char* p, int n)
 {
 	while (n-- > 0) put_byte(p ? *p++ : 0);
 	return p;
 }
 
 
-void
-get_buf(void)
+void get_buf(void)
 {
 	int	i;
 
@@ -846,16 +824,14 @@ get_buf(void)
 }
 
 
-int
-get_byte(void)
+int get_byte(void)
 {
 	if (getpos >= buflen) get_buf();
 	return (getbuf[getpos++] & 0xff);
 }
 
 
-int
-get_word(void)
+int get_word(void)
 {
 	int	i;
 
@@ -864,8 +840,7 @@ get_word(void)
 }
 
 
-int
-get_int(void)
+int get_int(void)
 {
 	int	i0;
 	int	i1;
@@ -878,8 +853,7 @@ get_int(void)
 }
 
 
-int
-get_nstring(unsigned char* p, int n)
+int get_nstring(unsigned char* p, int n)
 {
 	int	c;
 
@@ -892,8 +866,7 @@ get_nstring(unsigned char* p, int n)
 }
 
 
-void*
-get_ndata(void * p, int n)
+void* get_ndata(void * p, int n)
 {
 	unsigned char *pp = (unsigned char *)p;
 	while (n-- > 0) *pp++ = get_byte();

@@ -38,6 +38,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <ctype.h>
 #include <locale.h>
 #include "sjctype.h"
@@ -46,8 +47,7 @@
 
 static	int	euc_mode;
 
-int
-init_code()
+int init_code(void)
 {
 	char *loc;
 
@@ -77,9 +77,7 @@ init_code()
 	return 1;
 }
 
-void
-cnvcode(s)
-unsigned char	*s;
+void cnvcode(unsigned char *s)
 {
 	if (euc_mode) {
 		unsigned short	i;
@@ -114,19 +112,13 @@ unsigned char	*s;
 	}
 }
 
-void
-printout_mb(fp, s)
-FILE    *fp;
-unsigned char   *s;
+void printout_mb(FILE *fp, unsigned char *s)
 {
 	fputs((char *)s, fp);
 	fflush(fp);
 }
 
-void
-printout(fp, s) 
-FILE	*fp;
-unsigned char	*s;
+void printout(FILE *fp, unsigned char *s)
 {
 	unsigned char	buf[BUFSIZ];
 
@@ -138,25 +130,25 @@ unsigned char	*s;
 	fflush(fp);
 }
 
-void
-normal_out(fmt, p1, p2, p3, p4, p5)
-char	*fmt;
-int	p1, p2, p3, p4, p5;
+void normal_out(char *fmt, ...)
 {
 	char	buf[BUFSIZ];
+	va_list	ap;
 
-	sprintf(buf, fmt, p1, p2, p3, p4, p5);
+	va_start(ap, fmt);
+	vsprintf(buf, fmt, ap);
+	va_end(ap);
 	printout(stdout, buf);
 }
 
-void
-error_out(fmt, p1, p2, p3, p4, p5)
-char	*fmt;
-int	p1, p2, p3, p4, p5;
+void error_out(char *fmt, ...)
 {
 	char	buf[BUFSIZ];
+	va_list	ap;
 
-	sprintf(buf, fmt, p1, p2, p3, p4, p5);
+	va_start(ap, fmt);
+	vsprintf(buf, fmt, ap);
+	va_end(ap);
 	strcat(buf, "\n");
 	printout(stderr, buf);
 }

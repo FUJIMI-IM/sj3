@@ -53,10 +53,7 @@ extern char	*lock_file;
 char	*version_number = "2.08C";
 char	*time_stamp = "Mon Mar 23 16:42:59 JST 1998";
 
-
-
-static void
-opening(void)
+static void opening(void)
 {
 	printf("Kana-Kanji Conversion Server Version %s\r\n", version_number);
 	printf("Copyright (c) 1990-1995 Sony Corporation\r\n");
@@ -65,8 +62,7 @@ opening(void)
 
 #ifdef	LOCK_FILE
 
-int
-make_lockfile(void)
+int make_lockfile(void)
 {
 	int	fd;
 
@@ -77,21 +73,18 @@ make_lockfile(void)
 	return 0;
 }
 
-int
-erase_lockfile(void)
+int erase_lockfile(void)
 {
 	return unlink(lock_file);
 }
 #endif
 
-static void
-signal_handler(int sig)
+static void signal_handler(int sig)
 {
 	warning_out("signal %d catched.", sig);
 }
 
-static void
-terminate_handler(int sig)
+static void terminate_handler(int sig)
 {
 	close_socket();
 	sj_closeall();
@@ -101,8 +94,7 @@ terminate_handler(int sig)
 	exit(0);
 }
 
-void
-server_terminate(void)
+void server_terminate(void)
 {
 	close_socket();
 	sj_closeall();
@@ -112,8 +104,7 @@ server_terminate(void)
 	exit(0);
 }
 
-static void
-exec_fork(void)
+static void exec_fork(void)
 {
 	int	tmp;
 
@@ -142,8 +133,7 @@ exec_fork(void)
 		signal(SIGTSTP, SIG_IGN);
 }
 
-static void
-leave_tty(void)
+static void leave_tty(void)
 {
 	int	tmp;
 
@@ -164,8 +154,7 @@ leave_tty(void)
 	}
 }
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	opening();
 #ifndef __NetBSD__

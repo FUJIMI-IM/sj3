@@ -63,18 +63,14 @@
 
 extern int current_locale;
 
-int 
-sj3_iswcntrl16(wc)
-wchar16_t wc;
+int sj3_iswcntrl16(wchar16_t wc)
 {
 	if ((wc < 0x20) || (wc == 0x7f)) return TRUE;
 
 	return FALSE;
 }
 
-int 
-sj3_iswupper16(wc)
-wchar16_t wc;
+int  sj3_iswupper16(wchar16_t wc)
 {
 	if (((0x40 < wc) && (wc < 0x5b)) || 
 	    ((0xa3c0 < wc) && (wc < 0xa3db))) return TRUE;
@@ -82,9 +78,7 @@ wchar16_t wc;
 	return FALSE;
 }
 
-int 
-sj3_iswdigit16(wc)
-wchar16_t wc;
+int sj3_iswdigit16(wchar16_t wc)
 {
 	if (((0x29 < wc) && (wc < 0x3a)) || 
 	    ((0xa3af < wc) && (wc < 0xa3ba))) return TRUE;
@@ -92,9 +86,7 @@ wchar16_t wc;
 	return FALSE;
 }
 
-int 
-sj3_iswxdigit16(wc)
-wchar16_t wc;
+int sj3_iswxdigit16(wchar16_t wc)
 {
 	if (((0x29 < wc) && (wc < 0x3a)) || 
 	    ((0xa3af < wc) && (wc < 0xa3ba))) return TRUE;
@@ -108,9 +100,7 @@ wchar16_t wc;
 	return FALSE;
 }
 
-int
-sj3_wslen16(ws)
-wchar16_t *ws;
+int sj3_wslen16(wchar16_t *ws)
 {
 	int i=0;
 
@@ -120,9 +110,7 @@ wchar16_t *ws;
 	return i;
 }
 
-int
-sj3_wscmp16(ws1, ws2)
-wchar16_t *ws1, *ws2;
+int sj3_wscmp16(wchar16_t *ws1, wchar16_t *ws2)
 {
 	while ((*ws1 && *ws2) && (*ws1 == *ws2)) {
 		ws1++;
@@ -135,10 +123,7 @@ wchar16_t *ws1, *ws2;
 	return  1;
 }
 
-int 
-sj3_wsncmp16(ws1, ws2, n)
-wchar16_t *ws1, *ws2;
-int n;
+int sj3_wsncmp16(wchar16_t *ws1, wchar16_t *ws2, int n)
 {
 	int i=0;
 
@@ -155,9 +140,7 @@ int n;
 	return 1;
 }
 
-wchar16_t *
-sj3_wscpy16(ws1, ws2)
-wchar16_t *ws1, *ws2;
+wchar16_t *sj3_wscpy16(wchar16_t *ws1, wchar16_t *ws2)
 {
 	wchar16_t *ws;
 
@@ -171,10 +154,7 @@ wchar16_t *ws1, *ws2;
 	return ws1;
 }
 
-wchar16_t *
-sj3_wsncpy16(ws1, ws2, n)
-wchar16_t *ws1, *ws2;
-int n;
+wchar16_t *sj3_wsncpy16(wchar16_t *ws1, wchar16_t *ws2, int n)
 {
 	wchar16_t *ws;
 	int i=0;
@@ -190,9 +170,7 @@ int n;
 	return ws1;
 }
 
-wchar16_t *
-sj3_wscat16(ws1, ws2)
-wchar16_t *ws1, *ws2;
+wchar16_t *sj3_wscat16(wchar16_t *ws1, wchar16_t *ws2)
 {
 	wchar16_t *ws;
 
@@ -211,9 +189,7 @@ wchar16_t *ws1, *ws2;
 }
 
 
-wchar16_t
-sj3_euc2wc16(code)
-unsigned int code;
+wchar16_t sj3_euc2wc16(unsigned int code)
 {
 	wchar16_t wc = 0;
 
@@ -228,9 +204,7 @@ unsigned int code;
 	return wc;
 }
 		
-wchar16_t 
-sj3_sjis2wc16(code)
-unsigned int code;
+wchar16_t sj3_sjis2wc16(unsigned int code)
 {
 	unsigned short ch;
 
@@ -244,9 +218,7 @@ unsigned int code;
 	return (sj3_euc2wc16(ch));
 }
 
-unsigned int
-sj3_wc2euc16(wc)
-wchar16_t wc;
+unsigned int sj3_wc2euc16(wchar16_t wc)
 {
 	unsigned int code = 0;
 	unsigned char tmp;
@@ -269,9 +241,7 @@ wchar16_t wc;
 	return code;
 }
 
-unsigned int
-sj3_wc2sjis16(wc)
-wchar16_t wc;
+unsigned int sj3_wc2sjis16(wchar16_t wc)
 {
 	unsigned int ch;
 
@@ -287,11 +257,7 @@ wchar16_t wc;
 	}
 }
 
-int
-sj3_wcs2eucs16(mb, ws, n)
-unsigned char *mb;
-wchar16_t *ws;
-int n;
+int sj3_wcs2eucs16(unsigned char *mb, wchar16_t *ws, int n)
 {
 	int i = 0;
 	unsigned int code;
@@ -332,11 +298,7 @@ int n;
 	return i;
 }
 	
-int
-sj3_wcs2sjiss16(mb, ws, n)
-unsigned char *mb;
-wchar16_t *ws;
-int n;
+int sj3_wcs2sjiss16(unsigned char *mb, wchar16_t *ws, int n)
 {
 	int i = 0;
 	unsigned int code;
@@ -367,11 +329,7 @@ int n;
 	return i;
 }
 
-int 
-sj3_eucs2wcs16(ws, mb, n)
-wchar16_t *ws;
-unsigned char *mb;
-int n;
+int sj3_eucs2wcs16(wchar16_t *ws, unsigned char *mb, int n)
 {
 	int i = 0;
 	unsigned int code;
@@ -399,11 +357,7 @@ int n;
 	return i;
 }
 
-int
-sj3_sjiss2wcs16(ws, mb, n)
-wchar16_t *ws;
-unsigned char *mb;
-int n;
+int sj3_sjiss2wcs16(wchar16_t *ws, unsigned char *mb, int n)
 {
 	int i = 0;
 	unsigned int code;
@@ -427,11 +381,7 @@ int n;
 	return i;
 }
 
-int
-sj3_mbstowcs16(ws, mb, n)
-wchar16_t *ws;
-unsigned char *mb;
-int n;
+int sj3_mbstowcs16(wchar16_t *ws, unsigned char *mb, int n)
 {
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_eucs2wcs16(ws, mb, n);
@@ -439,11 +389,7 @@ int n;
 	  return sj3_sjiss2wcs16(ws, mb, n);
 }
 
-int
-sj3_wcstombs16(mb, ws, n)
-unsigned char *mb;
-wchar16_t *ws;
-int n;
+int sj3_wcstombs16(unsigned char *mb, wchar16_t *ws, int n)
 {
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_wcs2eucs16(mb, ws, n);

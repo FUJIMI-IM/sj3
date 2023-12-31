@@ -166,17 +166,21 @@ static unsigned short HZtbl[95] = {
 	0xa3f8, 0xa3f9, 0xa3fa, 0xa1d0, 0xa1c3, 0xa1d1, 0xa1b1
 };
 
-RkTablW16 *mktable(wchar16_t *, int);
+/* rk_conv.c */
 int kstradd(wchar16_t **, wchar16_t *, int);
-int sj3_mbstowcs16(wchar16_t *, unsigned char *, int);
-int sj3_wcstombs16(unsigned char *, wchar16_t *, int);
-int sj3_wslen16(wchar16_t *);
+RkTablW16 *mktable(wchar16_t *, int);
 
+/* sj3_rkcv.c */
 int sj3_hantozen_w16(wchar16_t *, wchar16_t *);
 int sj_hantozen(wchar16_t *, wchar16_t *, int);
 unsigned short sj_zen2han(unsigned short);
 int sj3_zentohan_w16(wchar16_t *, wchar16_t *);
 int sj_zentohan(wchar16_t *, wchar16_t *, int);
+
+/* wc16_str.c */
+int sj3_wslen16(wchar16_t *);
+int sj3_mbstowcs16(wchar16_t *, unsigned char *, int);
+int sj3_wcstombs16(unsigned char *, wchar16_t *, int);
 
 #ifdef ADDHK
 void setl_hktozh(void)
