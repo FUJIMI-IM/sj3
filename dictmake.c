@@ -45,6 +45,7 @@
 #include "sj3lib.h"
 #include "sjtool.h"
 #include "server.h"
+#include "Funcs.h"
 
 #define	IsEOL(c)	((c) == '\0')
 #define	IsBlank(c)	((c) == ' ' || (c) == '\t')
@@ -52,13 +53,6 @@
 extern	int	force_flag;
 extern	int	verbose_flag;
 extern  int     _sys_code;
-
-/* codecnv.c */
-void normal_out(char *, ...);
-
-/* hinsi.c */
-char *hns2str(int);
-int str2hns(char *);
 
 static void touroku(char *y, char *k, char *h)
 {

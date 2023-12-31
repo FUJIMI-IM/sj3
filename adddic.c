@@ -41,18 +41,7 @@
 #include "sj_euc.h"
 #include "sj_kcnv.h"
 #include "kanakan.h"
-
-/* cmpstr.c */
-int cmpstr(unsigned char *, unsigned char *);
-
-/* init.c */
-void mkidxtbl(DICT *);
-
-/* mvmemd.c */
-void mvmemd(unsigned char *, unsigned char *, int);
-
-/* mvmemi.c */
-void mvmemi(unsigned char *, unsigned char *, int);
+#include "Funcs.h"
 
 static unsigned int checkdict(unsigned char* kanji, TypeGram grm);
 static int cal_nextym(unsigned char* ptr);

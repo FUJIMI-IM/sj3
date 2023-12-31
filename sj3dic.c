@@ -49,18 +49,7 @@
 #include "sj3lib.h"
 #include "sj3dic.h"
 #include "server.h"
-
-/* codecnv.c */
-int init_code(void);
-
-/* dictdisp.c */
-void dictdisp(char *output);
-
-/* dictmake.c */
-void  dictmake(char *input);
-
-/* sjrc.c */
-int getsjrc(void);
+#include "Funcs.h"
 
 static void _open_error(int err);
 static void _close_error(int err);

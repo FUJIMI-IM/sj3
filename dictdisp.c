@@ -41,13 +41,7 @@
 #include <ctype.h>
 #include "server.h"
 #include "sj3lib.h"
-
-/* codecnv.c */
-void printout_mb(FILE *, unsigned char *);
-void printout(FILE *, unsigned char *);
-
-/* hinsi.c */
-char *hns2str(int);
+#include "Funcs.h"
 
 void dictdisp(char *output)
 {

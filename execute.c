@@ -51,6 +51,7 @@
 #include "server.h"
 #include "kanakan.h"
 #include "sj3lib.h"
+#include "Funcs.h"
 
 
 #define SJIS_PROTO 1
@@ -83,15 +84,6 @@ static	Client	*cur_cli;
 static unsigned char defaultchar[2] = {(unsigned char)0x81, (unsigned char)0x40};
 static int  defuse=0, defuse2=0;
 
-/* comuni.c */
-unsigned char *put_string(unsigned char *);
-unsigned char *put_ndata(unsigned char *, int);
-
-/* init.c */
-void initwork(void);
-
-/* main.c */
-void server_terminate(void);
 
 
 int make_full_path (char *path)

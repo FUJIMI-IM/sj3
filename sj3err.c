@@ -38,13 +38,9 @@
 
 #include <stdio.h>
 #include "sj3err.h"
+#include "Funcs.h"
 
-void printout();
-
-void
-sj3error(fp, code)
-FILE	*fp;
-int	code;
+void sj3error(FILE *fp, int code)
 {
 	unsigned char	tmp[BUFSIZ];
 

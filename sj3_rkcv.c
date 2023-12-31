@@ -41,6 +41,7 @@
 #include "rk.h"
 #include "kctype.h"
 #include "sj3lib.h"
+#include "Funcs.h"
 
 #if defined(__sony_news) && (SVR4)
 #define wscmp sj3_wscmp16
@@ -165,22 +166,6 @@ static unsigned short HZtbl[95] = {
 	0xa3f0, 0xa3f1, 0xa3f2, 0xa3f3, 0xa3f4, 0xa3f5, 0xa3f6, 0xa3f7,
 	0xa3f8, 0xa3f9, 0xa3fa, 0xa1d0, 0xa1c3, 0xa1d1, 0xa1b1
 };
-
-/* rk_conv.c */
-int kstradd(wchar16_t **, wchar16_t *, int);
-RkTablW16 *mktable(wchar16_t *, int);
-
-/* sj3_rkcv.c */
-int sj3_hantozen_w16(wchar16_t *, wchar16_t *);
-int sj_hantozen(wchar16_t *, wchar16_t *, int);
-unsigned short sj_zen2han(unsigned short);
-int sj3_zentohan_w16(wchar16_t *, wchar16_t *);
-int sj_zentohan(wchar16_t *, wchar16_t *, int);
-
-/* wc16_str.c */
-int sj3_wslen16(wchar16_t *);
-int sj3_mbstowcs16(wchar16_t *, unsigned char *, int);
-int sj3_wcstombs16(unsigned char *, wchar16_t *, int);
 
 #ifdef ADDHK
 void setl_hktozh(void)

@@ -47,6 +47,7 @@
 #include "Dict.h"
 #include "sj3err.h"
 #include "kanakan.h"
+#include "Funcs.h"
 
 
 #if defined(__FD_SET) && !defined(FD_SET)
@@ -56,9 +57,6 @@
 
 extern	int	serv_errno;
 extern	Global	*work_base;
-
-/* init.c */
-void	mkidxtbl(DICT *);
 
 DictFile *dictlink = NULL;
 StdyFile *stdylink = NULL;

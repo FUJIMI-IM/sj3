@@ -46,6 +46,7 @@
 #include "sjtool.h"
 #include "sj3dic.h"
 #include "sj3lib.h"
+#include "Funcs.h"
 
 struct wordent {
 	char	word_str[MAXWORD];
@@ -63,13 +64,7 @@ static int	user_euc = 0;
 static int	file_code = SYS_SJIS;	
 
 /* sjrc.c */
-void setrc(char *, FILE *);
-int much(char *, char *);
 int getword(char *, struct wordent[]);
-int IsTerminator(unsigned char);
-int isTerminator(unsigned char);
-int IsEscape(unsigned char);
-int IsDelimitor(unsigned char);
 void set_dict(struct wordent[]);
 void set_server(struct wordent[]);
 
