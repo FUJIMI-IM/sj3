@@ -54,23 +54,16 @@ int get_word(void);
 int get_int(void);
 #endif
 int get_nstring(unsigned char *p, int n);
-unsigned char *get_ndata(unsigned char *p, int n);
+void *get_ndata(void *p, int n);
 
 /* error.c */
 int open_debug(void);
 int open_error(void);
 int open_log(void);
-#if 0
-void error_out(char *s, int p1, int p2, int p3, int p4, int p5);
-void warning_out(char *s, int p1, int p2, int p3, int p4, int p5);
-void logging_out(char *s, int p1, int p2, int p3, int p4, int p5);
-void debug_out(int lvl, char *s, int p1, int p2, int p3, int p4, int p5);
-#else /* correct solution is to make the functions take arbitrary parameters... */
-void error_out ();
-void warning_out ();
-void logging_out ();
-void debug_out ();
-#endif
+void error_out (char *s, ...);
+void warning_out (char *s, ...);
+void logging_out (char *s, ...);
+void debug_out (int lvl, char *s, ...);
 
 /* execute.c */
 int make_full_path(char *path);

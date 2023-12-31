@@ -40,12 +40,9 @@
 #include "sj_right.h"
 #include "sj_hinsi.h"
 #include "kanakan.h"
+#include "Funcs.h"
 
-int	terminate();
-void	setclrec(), srchfzk();
-
-void
-wakachi (void)
+void wakachi (void)
 {
 	JREC		*jrec;
 	CLREC		*clrec;

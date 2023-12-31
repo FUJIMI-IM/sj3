@@ -52,8 +52,7 @@ static	int	atr[MaxAtrNumber + 1];
 
 
 
-static void
-error(char *s)
+static void error(char *s)
 {
 	if (s) fprintf(stderr, "%s\n", s);
 	mark_file(stderr);
@@ -63,8 +62,7 @@ error(char *s)
 
 
 
-static int
-readchar(void)
+static int readchar(void)
 {
 	int	c1;
 	int	c2;
@@ -90,8 +88,7 @@ readchar(void)
 
 
 
-static int
-skip_blank(void)
+static int skip_blank(void)
 {
 	int	c;
 
@@ -104,13 +101,11 @@ skip_blank(void)
 
 
 
-static int
-readhinsi(void)
+static int readhinsi(void)
 {
 	static int	c = 0;
 	int	i;
 	unsigned char	hinsi[128];
-	int	flg;
 
 retry:
 	
@@ -185,8 +180,7 @@ retry:
 
 
 
-int*
-readline(void)
+int* readline(void)
 {
 	int	c;
 	int	i;
@@ -266,8 +260,7 @@ readline(void)
 }
 
 
-void
-setline(void (*func)(int*, int*, int, int*))
+void setline(void (*func)(int*, int*, int, int*))
 {
 	int	i;
 

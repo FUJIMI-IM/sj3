@@ -36,11 +36,9 @@
 
 
 #include "sj_kcnv.h"
+#include "kanakan.h"
 
-void	free_jrec(), free_clrec();
-
-JREC	*free_jlst(p)
-JREC	*p;
+JREC	*free_jlst(JREC *p)
 {
 	JREC	*jpk;
 	JREC	*jp;
@@ -70,14 +68,11 @@ JREC	*p;
 	return jpk;
 }
 
-CLREC	*free_clst(p, l)
-CLREC	*p;
-int	l;
+CLREC	*free_clst(CLREC *p, int l)
 {
 	CLREC	*cpk;
 	CLREC	*cp;
 	CLREC	*cn;
-	int	i = FALSE;
 
 	cp = cpk = NULL;
 
@@ -115,8 +110,7 @@ int	l;
 	return cpk;
 }
 
-void	free_clall(p)
-CLREC	*p;
+void	free_clall(CLREC *p)
 {
 	CLREC	*next;
 
@@ -128,8 +122,7 @@ CLREC	*p;
 	}
 }
 
-void	free_jall(p)
-JREC	*p;
+void	free_jall(JREC *p)
 {
 	JREC	*next;
 
@@ -140,7 +133,7 @@ JREC	*p;
 	}
 }
 
-void	freework()
+void	freework(void)
 {
 	free_clall(maxclptr);
 	clt1st = maxclptr = NULL;

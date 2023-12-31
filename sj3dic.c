@@ -48,7 +48,8 @@
 #include "sjtool.h"
 #include "sj3lib.h"
 #include "sj3dic.h"
-
+#include "server.h"
+#include "Funcs.h"
 
 static void _open_error(int err);
 static void _close_error(int err);
@@ -93,8 +94,7 @@ int	init_flag = 0;
 int	force_flag = 0;
 
 
-int
-main(int argc, char** argv)
+int main(int argc, char** argv)
 {
 	int	err;
 	int	mode;
@@ -129,8 +129,7 @@ main(int argc, char** argv)
 	if ((err = sj3_close())) _close_error(err);
 }
 
-static void
-init_env(void)
+static void init_env(void)
 {
 	char	*un, *hp, *tn;
 	struct	passwd	*pwd;
@@ -163,8 +162,7 @@ init_env(void)
 	strcpy(term_name, tn);
 }
 
-static void
-usage(int ret)
+static void usage(int ret)
 {
 	fprintf(stderr,
 		"Usage: %s -{text|dict} [-H host_name] [file_name]\n",
@@ -172,8 +170,7 @@ usage(int ret)
 	exit(ret);
 }
 
-static int
-parsearg(int argc, char* argv[])
+static int parsearg(int argc, char* argv[])
 {
 	int	errflg = 0;
 	int	i, j;
@@ -242,8 +239,7 @@ parsearg(int argc, char* argv[])
 	return mode;
 }
 
-static void
-make_dicname(void)
+static void make_dicname(void)
 {
 	if (dict_name[0] != '\0') return;
 
@@ -252,16 +248,14 @@ make_dicname(void)
 	strcat(dict_name, "sj2usr.dic");
 }
 
-void
-setdicname(char* dictname)
+void setdicname(char* dictname)
 {
 	if (dict_name[0] != '\0') return;
 	if (dictname == NULL) return;
 	strcpy(dict_name, dictname);
 }
 
-void
-setsjserv(char* hostname)
+void setsjserv(char* hostname)
 {
 	if (serv_name[0] != '\0') return;
 	if (hostname == NULL) return;
@@ -274,8 +268,7 @@ struct	errlist	{
 	int	flg;
 };
 
-static void
-_error_and(int err, struct errlist* list)
+static void _error_and(int err, struct errlist* list)
 {
 	int	flag = 0;
 
@@ -290,8 +283,7 @@ _error_and(int err, struct errlist* list)
 	if (flag) exit(1);
 }
 
-static void
-_open_error(int err)
+static void _open_error(int err)
 {
 	static	struct	errlist	err_msg[] = {
 	{ SJ3_SERVER_DEAD,	"\245\265\241\274\245\320\244\254\273\340\244\363\244\307\244\244\244\336\244\271",			1 },
@@ -310,8 +302,7 @@ _open_error(int err)
 	_error_and(err, err_msg);
 }
 
-static void
-_close_error(int err)
+static void _close_error(int err)
 {
 	static	struct	errlist	err_msg[] = {
 	{ SJ3_SERVER_DEAD,	"\245\265\241\274\245\320\241\274\244\254\273\340\244\363\244\307\244\244\244\336\244\271",		1 },

@@ -36,8 +36,7 @@
 #include "const.h"
 
 
-int
-cnvyomi(int code)
+int cnvyomi(int code)
 {
 	unsigned short	hh;
 	unsigned char	high;
@@ -93,16 +92,13 @@ cnvyomi(int code)
 }
 
 
-int
-h2kcode(int code)
+int h2kcode(int code)
 {
 	unsigned short	hh;
 	unsigned char	high;
-	unsigned char	low;
 
 	hh = ((code >> 16) & 0xffff);
 	high = ((code >> 8) & 0xff);
-	low = (code & 0xff);
 
 	if (!hh) {
 		if (high != 0xa4)		
@@ -117,8 +113,7 @@ h2kcode(int code)
 }
 
 
-int
-codesize(unsigned char code)
+int codesize(unsigned char code)
 {
 	switch (code&KanjiModeMask) {
 	      case ZenHiraAssyuku: 
@@ -136,8 +131,7 @@ codesize(unsigned char code)
 }
 
 
-void
-output_knj(FILE* fp, unsigned char* p, int l)
+void output_knj(FILE* fp, unsigned char* p, int l)
 {
 	while (l > 0) {
 		switch (*p & KanjiModeMask) {
@@ -186,15 +180,13 @@ output_knj(FILE* fp, unsigned char* p, int l)
 }
 
 
-void
-output_str(FILE* fp, char* p)
+void output_str(FILE* fp, char* p)
 {
 	while (*p) { fputc(*p, fp); p++; }
 }
 
 
-void
-output_int(FILE* fp, int* p)
+void output_int(FILE* fp, int* p)
 {
 	while (*p) {
 		if (*p < 0x100) {
@@ -219,8 +211,7 @@ output_int(FILE* fp, int* p)
 }
 
 
-static int
-yomi2zen(int code)
+static int yomi2zen(int code)
 {
 	static	char	num[] = {
 		'0', '1', '2', '3', '4', '5', '6', '7',
@@ -257,8 +248,7 @@ yomi2zen(int code)
 }
 
 
-void
-output_yomi(FILE* fp, unsigned char* p)
+void output_yomi(FILE* fp, unsigned char* p)
 {
 	int	i;
 

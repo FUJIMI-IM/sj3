@@ -41,7 +41,7 @@
 #include "sj_euc.h"
 #include "sj_kcnv.h"
 #include "kanakan.h"
-
+#include "Funcs.h"
 
 static unsigned int checkdict(unsigned char* kanji, TypeGram grm);
 static int cal_nextym(unsigned char* ptr);
@@ -50,8 +50,7 @@ static void sprt_seg(TypeDicSeg seg, TypeDicOfs ofs);
 static void apnd_uidx(TypeDicSeg seg, unsigned char* yomi, int len);
 
 
-unsigned int
-adddic(unsigned char* yomi, unsigned char* kanji, TypeGram  hinsi)
+unsigned int adddic(unsigned char* yomi, unsigned char* kanji, TypeGram  hinsi)
 {
 	unsigned int	err;
 	unsigned char	yptr[MaxWdYomiLen+1];
@@ -293,10 +292,9 @@ adddic(unsigned char* yomi, unsigned char* kanji, TypeGram  hinsi)
 }
 
 
-static int
-checksub(unsigned char* kanji, TypeGram grm)
+static int checksub(unsigned char* kanji, TypeGram grm)
 {
-	unsigned char	*tagp;
+	unsigned char	*tagp = NULL;
 	unsigned char	*ptr;
 	unsigned char	*endp;
 	int	flg, nlen;
@@ -336,8 +334,7 @@ checksub(unsigned char* kanji, TypeGram grm)
 }
 
 
-static unsigned int
-checkdict(unsigned char* kanji, TypeGram grm)
+static unsigned int checkdict(unsigned char* kanji, TypeGram grm)
 {
 	DICTL	*dp;
 	int	dounum = 0;
@@ -362,8 +359,7 @@ checkdict(unsigned char* kanji, TypeGram grm)
 }
 
 
-static int
-cal_nextym(unsigned char* ptr)
+static int cal_nextym(unsigned char* ptr)
 {
 	int	count = 0;
 	unsigned char	*src;
@@ -386,8 +382,7 @@ cal_nextym(unsigned char* ptr)
 }
 
 
-static int
-usr_freelen(void)
+static int usr_freelen(void)
 {
 	unsigned char* ptr;
 
@@ -398,8 +393,7 @@ usr_freelen(void)
 }
 
 
-static void
-sprt_seg(TypeDicSeg seg, TypeDicOfs ofs)
+static void sprt_seg(TypeDicSeg seg, TypeDicOfs ofs)
 {
 	TypeDicSeg	s;
 	unsigned char	*pos;
@@ -473,8 +467,7 @@ sprt_seg(TypeDicSeg seg, TypeDicOfs ofs)
 }
 
 
-static void
-apnd_uidx(TypeDicSeg seg, unsigned char* yomi, int len)
+static void apnd_uidx(TypeDicSeg seg, unsigned char* yomi, int len)
 {
 	unsigned char	*p;
 	unsigned char	*q;
