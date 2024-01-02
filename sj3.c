@@ -147,6 +147,7 @@ int	slave;
 struct	termios	b;
 int	erase_char;
 wchar16_t	erase_str[2];	
+void	(*sigpipe)(int);
 
 int Pid_shell;                  
 
@@ -192,12 +193,6 @@ static void (*set_signal_handler (int sig, void (*handler)(int)))(int)
 }
 
 
-static void sigpipe (__attribute__((unused)) int a)
-{
-	set_signal_handler (SIGPIPE, SIG_IGN);
-}
-
-
 void init (char** argv)
 {
 	set_signal_handler (SIGTERM, done);
@@ -206,7 +201,7 @@ void init (char** argv)
 	set_signal_handler (SIGBUS, makecore);
 	set_signal_handler (SIGSEGV, makecore);
 	set_signal_handler (SIGFPE, makecore);
-	set_signal_handler (SIGPIPE, sigpipe);
+	sigpipe = set_signal_handler (SIGPIPE, SIG_IGN);
 
 	if (argv [0][0] == '-')
 		Lflag ++;
@@ -579,7 +574,6 @@ void forkshell (void)
 	set_signal_handler (SIGINT, fail);
 	set_signal_handler (SIGTERM, fail);
 	set_signal_handler (SIGWINCH, onwinch);
-	set_signal_handler (SIGCHLD, exitprocess);
 }
 
 
