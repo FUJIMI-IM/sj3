@@ -35,28 +35,31 @@
 
 
 
-#include "sj_sysvdef.h"
 #include "wchar16.h"
 #include "kctype.h"
-#ifdef SVR4
-#include <sys/stream.h>
-#include <sys/stropts.h>
 #include <sys/types.h>
-#include <sys/fcntl.h>
-#endif
-#ifdef linux
-#include <sys/types.h>
-#include <sys/fcntl.h>
-#endif
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
-#define	USE_OLD_TTY
-#include <curses.h>
-#endif
+#include <fcntl.h>
+#include <termios.h>
 
+#include <unistd.h>
 #include <errno.h>
+#include <string.h>
 #include <sys/file.h>
 #include "sj2.h"
 #include "select.h"
+
+/* display.c */
+void output_master (void);
+
+/* sjgetchar.c */
+void write_stdout(unsigned char *, int);
+int SJ_read (wchar16_t *, int);
+void SJ_print (wchar16_t *);
+
+/* wc16_str.c */
+wchar16_t *sj3_wsncpy16(wchar16_t *, wchar16_t *, int);
+int sj3_mbstowcs16(wchar16_t *, unsigned char *, int);
+int sj3_wcstombs16(unsigned char *, wchar16_t *, int);
 
 #if !defined(FREAD) && defined(O_RDONLY)
 #define		FREAD		(O_RDONLY+1)
@@ -71,7 +74,7 @@ static wchar16_t  backup = (wchar16_t) 0;
 static int    eucmode = 0;
 extern int	master;
 
-wchar16_t SJ_getchar()
+wchar16_t SJ_getchar(void)
 {
 	SELECT_FD	ifds;
 	wchar16_t		c;
@@ -107,163 +110,12 @@ wchar16_t SJ_getchar()
 	}
 }
 
-#ifdef SVR4
-#define TIOCPKT_DOSTOP 0x10		
-#define TIOCPKT_NOSTOP 0x20		
-
-static int stopmode = TIOCPKT_DOSTOP;
-static char stopc = CTRL('s');
-static char startc = CTRL('q');
-static char outbuf[BUFSIZ];
-extern int slave;
-extern char *slave_name, *ptsname(int);
-
-output_master()
-{
-	struct strbuf ctlbuf;
-	struct strbuf databuf;
-	int flags = 0;
-	unsigned char ctlstuff;
-	int f, stop, ixon, ret;
-	struct iocblk *ioc;
-	struct termios *tp;
-	struct termio *ti;
-	struct tchars	tc, tc1;
-
-	memset((char *)&ctlbuf, '\0', sizeof(ctlbuf));
-	memset((char *)&databuf,'\0', sizeof(databuf));
-	ctlbuf.maxlen = sizeof(ctlstuff);
-	ctlbuf.buf = (char *)&ctlstuff;
-	databuf.maxlen = BUFSIZ;
-	databuf.buf = outbuf;
-	if ((ret = getmsg(master, &ctlbuf, &databuf, &flags)) == -1) {
-		return;
-	}
-        if (ctlbuf.len <= 0) {
-		errno = EWOULDBLOCK;
-		return;
-	}
-	if (ret & MORECTL) {
-		errno = EWOULDBLOCK;
-		return;
-	}
-	if ((ctlstuff != M_DATA) && (ret & MOREDATA)) {
-		errno = EWOULDBLOCK;
-		return;
-	}
-	if (ctlbuf.len != sizeof(ctlstuff)) {
-		errno = EWOULDBLOCK;
-		return;
-	}
-	switch (ctlstuff) {
-	case M_DATA:
-	
-		write_stdout((unsigned char *)&outbuf[0], databuf.len);
-		fflush (stdout);
-		while (ret & MOREDATA) {
-			if ((ret = getmsg(master, &ctlbuf, &databuf, &flags)) == -1) {
-				  return;
-			}
-			write_stdout((unsigned char *)&outbuf[0], databuf.len);
-			fflush (stdout);
-		}
-		return;
-		break;
-
-	case M_FLUSH:
-		if (databuf.len <= 0) {
-			errno = EWOULDBLOCK;
-			return;
-		}
-		fflush (stdout);
-		break;
-
-	case M_IOCTL:
-		ioc = (struct iocblk *)databuf.buf;
-		if (databuf.len <= sizeof(struct iocblk)) {
-			errno = EWOULDBLOCK;
-			return;
-		}
-		switch (ioc->ioc_cmd) {
-		case TCSETS:
-		case TCSETSW:
-		case TCSETSF:
-			if (databuf.len < (sizeof(struct termios)
-						+ sizeof(struct iocblk))) {
-				errno = EWOULDBLOCK;
-				return;
-			}
-			tp = (struct termios *)(databuf.buf + sizeof (struct iocblk));
-			stopc = tp->c_cc[VSTOP];
-			startc = tp->c_cc[VSTART];
-			ixon = tp->c_iflag & IXON;
-			break;
-		case TCSETA:
-		case TCSETAW:
-		case TCSETAF:
-			if (databuf.len < (sizeof (struct termio)
-					+ sizeof (struct iocblk))) {
-				errno = EWOULDBLOCK;
-				return;
-			}
-			ti = (struct termio *)(databuf.buf + sizeof (struct iocblk));
-			ixon = ti->c_iflag & IXON;
-			break;
-
-		default:
-			errno = EWOULDBLOCK;
-			return;
-		}
-		stop = (ixon && (stopc == CTRL('s')) && (startc == CTRL('q')));
-		if (stopmode == TIOCPKT_NOSTOP) {
-			if (stop) {
-				ioctl (STDOUT, TIOCGETC, &tc);
-				
-
-				if (slave == 0) {
-					slave_name = ptsname(master); 
-					slave = open(slave_name, O_RDWR);
-				}
-				ioctl (slave, TIOCGETC, &tc1);
-				tc.t_stopc = tc1.t_stopc;
-				tc.t_startc = tc1.t_startc;
-				ioctl (STDOUT, TIOCSETC, &tc);
-				stopmode = TIOCPKT_DOSTOP;
-			}
-		} else {
-			if (!stop) {
-				ioctl (STDOUT, TIOCGETC, &tc);
-				tc.t_stopc = -1;
-				tc.t_startc = -1;
-				ioctl (STDOUT, TIOCSETC, &tc);
-				stopmode = TIOCPKT_NOSTOP;
-			}
-		}
-		errno = EWOULDBLOCK;
-		return;
-		break;
-	default:
-		
-		errno = EWOULDBLOCK;
-		return;
-		break;
-	}
-}
-#else 
-#if defined(linux) && defined (__GLIBC__) && (__GLIBC__ >= 2)
-#include <termios.h>
-#endif
-
-output_master()
+void output_master(void)
 {
 	int	n, m;
 	char		outbuf[BUFSIZ];
 	int		f;
-#ifdef SYSV_TERMIOS
 	struct termios	tc, tc1;
-#else
-	struct tchars	tc, tc1;
-#endif
 	extern int	master;
 
 	if ((n = read (master, outbuf, BUFSIZ)) > 0) {
@@ -276,59 +128,42 @@ output_master()
 			return;
 		}
 		else if (m & (TIOCPKT_FLUSHREAD | TIOCPKT_FLUSHWRITE)) {
-			f = 0;
-			if (m & TIOCPKT_FLUSHREAD)
-				f |= FREAD;
-			if (m & TIOCPKT_FLUSHWRITE)
-				f |= FWRITE;
+			switch (m & (TIOCPKT_FLUSHREAD | TIOCPKT_FLUSHWRITE)) {
+			case TIOCPKT_FLUSHREAD:
+				f = TCIFLUSH;
+				break;
+			case TIOCPKT_FLUSHWRITE:
+				f = TCOFLUSH;
+				break;
+			default:
+				f = TCIOFLUSH;
+				break;
+			}
 			fflush (stdout);
-#ifdef TCFLSH
-			ioctl (STDOUT, TCFLSH, &f);
-#else
-			ioctl (STDOUT, TIOCFLUSH, &f);
-#endif
+			tcflush (STDOUT, f);
 		}
 		else if (m & TIOCPKT_NOSTOP) {
-#ifdef SYSV_TERMIOS
-			ioctl (1, TCGETS, &tc);
+			tcgetattr(1, &tc);
 			tc.c_cc[VSTOP] = 0;
 			tc.c_cc[VSTART] = 0;
-			ioctl (STDOUT, TCSETS, &tc);
-#else
- 
-			ioctl (1, TIOCGETC, &tc);
-			tc.t_stopc = -1;
-			tc.t_startc = -1;
-			ioctl (STDOUT, TIOCSETC, &tc);
-#endif
+			tcsetattr(STDOUT, TCSANOW, &tc);
 		}
 		else if (m & TIOCPKT_DOSTOP) {
-#ifdef SYSV_TERMIOS
-			ioctl (master, TCGETS, &tc1);
-			ioctl (STDOUT, TCGETS, &tc);
+			tcgetattr(master, &tc1);
+			tcgetattr(STDOUT, &tc);
 			tc.c_cc[VSTOP] = tc1.c_cc[VSTOP];
 			tc.c_cc[VSTART] = tc1.c_cc[VSTART];
-			ioctl (STDOUT, TCSETS, &tc);
-#else
-			ioctl (master, TIOCGETC, &tc1);
-			ioctl (STDOUT, TIOCGETC, &tc);
-			tc.t_stopc = tc1.t_stopc;
-			tc.t_startc = tc1.t_startc;
-			ioctl (STDOUT, TIOCSETC, &tc);
-#endif
+			tcsetattr(STDOUT, TCSANOW, &tc);
 		}
 	}
 }
-#endif 
 
-set_eucmode ()
+void set_eucmode (void)
 {
        eucmode = 1;
 }
 
-SJ_write (s, n)
-wchar16_t         *s;
-int	n;
+int SJ_write (wchar16_t *s, int n)
 {
 	int	val;
 	wchar16_t wb[BUFFLENGTH];
@@ -348,9 +183,7 @@ int	n;
 	return(val);
 }
 
-write_stdout(s, n)
-unsigned char *s;
-int n;
+void write_stdout(unsigned char *s, int n)
 {
       static unsigned char knj1st = 0, knj2nd = 0;
 
@@ -379,9 +212,7 @@ int n;
 }
 
 
-SJ_read (s, n)
-wchar16_t *s;
-int	n;
+int SJ_read (wchar16_t *s, int n)
 {
 	unsigned char buff[BUFFLENGTH];
 	wchar16_t wcbuff[BUFFLENGTH];
@@ -399,23 +230,6 @@ int	n;
 	remain = 0;
 	for (i = 0; i < count; i++) {
 		c = buff[i];
-#ifdef __sony_news
-		if (is3byte(c)) {
-			if (i + 2 >= count) {
-				if (i + 2 == count) {
-					remain = 1;
-					break;
-				} else
-				        remain = 2;
-		        } else
-			        i += 2;
-		} else if (is2byte(c)) {
-			if (i + 1 >= count)
-			        remain = 1;
-			else
-			        i++;
-		}
-#else
 		if (current_locale == LC_CTYPE_EUC) {
 			if (iseuc3byte(c)) {
 				if (i + 2 >= count) {
@@ -440,8 +254,6 @@ int	n;
 				  i++;
 			}
 		}
-#endif
-
 	}
 	if (remain) {
 		if ((i = read(STDIN, &buff[count], remain)) > 0)
@@ -461,14 +273,12 @@ int	n;
 	return(wnum);
 }
 
-SJ_warnning (s)
-wchar16_t	*s;
+void SJ_warnning (wchar16_t *s)
 {
 	SJ_print (s);
 }
 
-SJ_print (s)
-wchar16_t *s;
+void SJ_print (wchar16_t *s)
 {
 	unsigned char buff[BUFFLENGTH * 3];
 	size_t num;
@@ -478,9 +288,7 @@ wchar16_t *s;
 	  printf("%s", buff);
 }
 
-SJ_through (s, n)
-wchar16_t *s;
-int	n;
+void SJ_through (wchar16_t *s, int n)
 {
 	SJ_write (s, n);
 }

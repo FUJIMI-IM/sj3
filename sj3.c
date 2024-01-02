@@ -34,128 +34,126 @@
  */
 
 
+#if defined(__linux__)
+#define _GNU_SOURCE
+#endif
 
-#include "sj_sysvdef.h"
-#include "wchar16.h"
+#include <string.h>
 #include <signal.h>
 #include <errno.h>
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
-#define	USE_OLD_TTY
-#if defined(__NetBSD__)
-#define LACKOF_SETLOCALE
+#include <sys/types.h>
+#include <sys/ioctl.h>
+#include <termios.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <unistd.h>
+#include <time.h>
+#include <locale.h>
+#if defined(__linux__)
+#include <pty.h>
+#elif defined(__FreeBSD__) || defined(__DragonFly__)
+#include <libutil.h>
+#elif defined(__NetBSD__) || defined(__OpenBSD__)
+#include <util.h>
 #endif
-#if defined(__FreeBSD__)
-#include <sys/ioctl_compat.h>
-#endif
-#include <curses.h>
-#endif
-
+#include "wchar16.h"
 #include "select.h"
 #include "common.h"
-#ifdef SVR4
-#include <sys/fcntl.h>
-#include <sys/stropts.h>
-#include <netdb.h>
-#endif
-#include <locale.h>
 #include "sj3.h"
 
+/* common.c */
+void inputprocess(void);
+void InitConversion(void);
+
+/* conv.c */
+void EndConversion(void);
+
+/* etc.c */
+suseconds_t UsecWeight(int);
+
+/* eucmessage.c */
+int init_messages(void);
+
+/* display.c */
+void checkterm(void);
+void start_guideline(void);
+void end_guideline(void);
+void RegionSet(int, int);
+
+/* libif.c */
+void SJ2_henkan_end(void);
+int SJ2_henkan_init(void);
+
+/* screen.c */
+void clear_guide_line(void);
+void print_guide_line(void);
+
+/* sj3ver.c */
+void print_version(void);
+
+/* sjgetchar.c */
+void output_master(void);
+void set_eucmode(void);
+
+/* sjrc2.c */
+void getsjrc(void);
+void getsjrk(int);
+
+/* stat_conv.c */
+void set_bs(int);
+
 #ifndef _PATH_UTMP
-#define _PATH_UTMP "/etc/utmp"
+#define _PATH_UTMP "/var/run/utmp"
 #endif
 
-
-#ifdef SVR4
-#define killpg(pid, sig) kill(-(pid),(sig))
-#define signal sigset
-#endif
-#ifndef linux
-#define	DEFAULTSHELL	"/bin/csh"
-#else
 #define DEFAULTSHELL	"/bin/sh"
-#endif
-
-#if defined(linux) && defined (__GLIBC__) && (__GLIBC__ >= 2)
-#include <termios.h>
-#endif
 
 int	Lflag = 0;		
 int	shell_flag = 0;		
 
-
-
-char	progname[LONGLENGTH];		
+#if defined(_GNU_SOURCE)
+#define progname program_invocation_short_name
+#else
+#define progname getprogname()
+#endif
 char	shellname[LONGLENGTH];		
 char	home[LONGLENGTH];		
 char	user_name[SHORTLENGTH];		
 char	term_name[SHORTLENGTH];		
 char	shellprog[LONGLENGTH];		
 char	tty_name[SHORTLENGTH];		
-#ifdef SVR4
-char    *slave_name;
-#else
 char	slave_name[SHORTLENGTH];	
-#endif
 char	*shellargs[SHORTLENGTH];	
-#ifdef SVR4
-char	*mptname = "/dev/ptmx";		
-char    *ptsname(int);
-#else
 static char	line[SHORTLENGTH];		
-#endif
 char  *cur_serv;                      
 
 char  my_hname[MAXHOSTNAMELEN];       
 char  **serv_list;                    
 
-
-
 extern	int	vflag;		
 extern	char	**environ;
 extern 	int 	status_line;
 
-
-
-
-#ifdef SYSV_TERMIOS
 struct	winsize	Ttysize;
 #define ts_lines ws_row
 #define ts_cols ws_col
-#else
+#if !defined(__linux__)
 int	Ttyslot;
-struct	ttysize	Ttysize;
 #endif
 int	master;
 int	slave;
 
-#ifdef SYSV_TERMIOS
 struct	termios	b;
-#else
-struct	sgttyb	b;
-struct	tchars	tc, tc1;
-struct	ltchars	lc, lc1;
-int	lb;
-int	l;
-#endif
-#ifdef __sony_news
-int	jmode, jmode2;
-struct	jtchars	jtc;
-#endif
 int	erase_char;
 wchar16_t	erase_str[2];	
-#ifdef SIGTYPE_VOID
-void	(*sigpipe)();	
-#else
-int	(*sigpipe)();	
-#endif
+void	(*sigpipe)(int);
 
 int Pid_shell;                  
 
-
 int current_locale; 
 
-int
-main (int argc, char** argv)
+int main (int argc, char** argv)
 {
 	init (argv);		
 	get_ttymode ();         
@@ -169,11 +167,10 @@ main (int argc, char** argv)
 	sjinit ();		
 	forkshell ();		
 	inputprocess ();	
-	done ();		
+	done (0);
 }
 
-void
-makecore (void)
+void makecore (__attribute__((unused)) int a)
 {
 	chdir ("/tmp");
 	setgid (getgid ());
@@ -182,40 +179,38 @@ makecore (void)
 }
 
 
-void
-init (char** argv)
+static void (*set_signal_handler (int sig, void (*handler)(int)))(int)
 {
-	char		*cp;
+	struct sigaction act, oact;
+	sigset_t mask;
 
-	(void) signal (SIGTERM, (void (*)())done);
-	(void) signal (SIGWINCH, SIG_IGN);
-	(void) signal (SIGQUIT, (void (*)())makecore);
-	(void) signal (SIGBUS, (void (*)())makecore);
-	(void) signal (SIGSEGV, (void (*)())makecore);
-	(void) signal (SIGFPE, (void (*)())makecore);
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-#ifdef SIGTYPE_VOID
-	sigpipe = (void(*)()) signal (SIGPIPE, SIG_IGN);
-#else
-	sigpipe = (int(*)()) signal (SIGPIPE, SIG_IGN);
-#endif
+	sigemptyset(&mask);
+	sigaddset(&mask, sig);
+	act.sa_handler = handler;
+	act.sa_mask = mask;
+	act.sa_flags = SA_RESTART;
+	return (sigaction(sig, &act, &oact) < 0) ? NULL : oact.sa_handler;
+}
+
+
+void init (char** argv)
+{
+	set_signal_handler (SIGTERM, done);
+	set_signal_handler (SIGWINCH, SIG_IGN);
+	set_signal_handler (SIGQUIT, makecore);
+	set_signal_handler (SIGBUS, makecore);
+	set_signal_handler (SIGSEGV, makecore);
+	set_signal_handler (SIGFPE, makecore);
+	sigpipe = set_signal_handler (SIGPIPE, SIG_IGN);
 
 	if (argv [0][0] == '-')
 		Lflag ++;
-	if ((cp = strrchr (argv [0], '/')) == NULL)
-		cp = argv [0];
-	else
-		cp ++;
-	strcpy (progname, cp);
+
 	init_env();
 }
 
 
-void
-init_env(void)
+void init_env(void)
 {
 	char *uname, *hp, *tname;
         int  i;
@@ -229,7 +224,7 @@ init_env(void)
         gethostname(my_hname, MAXHOSTNAMELEN);
         if ((serv_list = (char **)malloc(MAXSERVER * sizeof(char *))) == NULL){
                 fprintf (stderr, "init_env: can't alloc memory\n\r");
-                done3();  
+                done3();
         }
         for (i = 0; i < MAXSERVER; i++)
                 serv_list[i] = NULL;
@@ -261,8 +256,7 @@ init_env(void)
 }
 
 
-void
-parsearg (int argc, char** argv)
+void parsearg (int argc, char** argv)
 {
 	int	ap;
 	char	c;
@@ -341,8 +335,7 @@ parsearg (int argc, char** argv)
 }
 
 
-void
-usage(void)
+void usage(void)
 {
 	aprintf ("Usage: %s [-option ...]\n\r", progname);
 	aprintf ("\t-option\n\r");
@@ -362,8 +355,7 @@ usage(void)
 }
 
 
-void
-sjinit (void)
+void sjinit (void)
 {
 	getfixtty ();		
 	setshellname ();	
@@ -375,8 +367,7 @@ sjinit (void)
 }
 
 
-void
-setshellname (void)
+void setshellname (void)
 {
 	char	*s;
 	char	*namep;
@@ -390,10 +381,8 @@ setshellname (void)
 	}
 	if (Lflag)
 		strcpy (shellname, "-");
-#ifndef SVR4
 	else
 		strcpy (shellname, "J");
-#endif 
 	if ((namep = strrchr (shellprog, '/')) == NULL)
 		namep = shellprog;
 	else
@@ -407,8 +396,7 @@ setshellname (void)
 }
 
 
-void
-getfixtty (void)
+void getfixtty (void)
 {
 	getmaster ();		
 	fixtty ();		
@@ -416,153 +404,39 @@ getfixtty (void)
 }
 
 
-void
-get_ttymode (void)
+void get_ttymode (void)
 {
-#ifdef SYSV_TERMIOS
-	ioctl (0, TCGETS, (char *)&b);
+	tcgetattr (0, &b);
 	erase_char = b.c_cc[VERASE];
 	set_bs(erase_char);
 	erase_str[0] = erase_char;
 	erase_str[1] = '\0';
-#else 
-	ioctl (0, TIOCGETP, (char *)&b);
-	erase_char = b.sg_erase;
-	set_bs(erase_char);
-	erase_str[0] = erase_char;
-	erase_str[1] = '\0';
-	ioctl (0, TIOCGETC, (char *)&tc);
-	ioctl (0, TIOCGETC, (char *)&tc1);
-	ioctl (0, TIOCGETD, (char *)&l);
-	ioctl (0, TIOCGLTC, (char *)&lc);
-	ioctl (0, TIOCGLTC, (char *)&lc1);
-	ioctl (0, TIOCLGET, (char *)&lb);
-#endif 
-#ifdef __sony_news
-	ioctl (0, TIOCKGET, (char *)&jmode);
-	jmode2 = set_jmode (jmode);
-	ioctl (0, TIOCKGETC, (char *)&jtc);
-#else
+
         (void) set_jmode();
-#endif
 }
 
 
-void
-getmaster (void)
+void getmaster (void)
 {
-#ifdef SVR4
-	struct stat	stb;
+	int n;
 
-	if ((master = open(mptname, O_RDWR)) < 0) { 
+	/* not POSIX compatible, but easy to use Linux and *BSD */
+	if (openpty (&master, &slave, line, NULL, NULL) < 0) {
 		aprintf ("Out of pty's\n\r");
 		done3 ();
 	}
 
-	ioctl(master, I_PUSH, "pckt");		
-#else 
-/*
- * Change pseudo-devices.
- * Because FreeBSD's master pseudo-devices are pty[p-sP-S][0-9a-v].
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-#if defined(__FreeBSD__) || defined(__DragonFly__)
-	struct stat	stb;
-	int		h, i, j, k1, k2;
-#else /* !__FreeBSD__ */
-	char		c;
-	struct stat	stb;
-	int		i, j, k1, k2;
-#endif /* __FreeBSD__ */
-
-	strcpy(line, "/dev/ptyXX");
-
-	k1 = strlen("/dev/pty");
-	k2 = strlen ("/dev/ptyp");
-
-/*
- * Change pseudo-devices.
- * Because FreeBSD's master pseudo-devices are pty[p-sP-S][0-9a-v].
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-#if defined(__FreeBSD__) || defined(__DragonFly__)
-	for (h = 0; h < 8; h++) {
-		line[k1] = "pqrsPQRS"[h];
-		line[k2] = '0';
-		if (stat (line, &stb) < 0)
-			break;
-		for (i = 0; i < 32; i++) {
-			line[k2] = "0123456789abcdefghijklmnopqrstuv"[i];
-#else /* !__FreeBSD__ */
-	for (c = 'p'; c <= 'z'; c ++) { 
-		line[k1] = c;
-		line[k2] = '0';
-		if (stat (line, &stb) < 0)
-			break;
-		for (i = 0; i < 16; i++) {
-			line[k2] = "0123456789abcdef"[i];
-#endif /* __FreeBSD__ */
-			master = open (line, 2);
-			if (master >= 0) {
-				j = 1;
-				ioctl (master, TIOCPKT, &j);
-				return;
-			}
-		}
-	}
-	aprintf ("Out of pty's\n\r");
-	done3 ();
-#endif 
+	n = 1;
+	ioctl (master, TIOCPKT, &n);
 }
 
 
-void
-#ifdef __sony_news
-set_jmode (int mode)
-#else
-set_jmode (void)
-#endif
+void set_jmode (void)
 {
-#ifdef __sony_news
-	int	term_mode;
-
-	term_mode = mode & KM_KANJI;
-	if (term_mode == KM_JIS) {
-		aprintf ("error: tty jis terminal mode\n\r");
-		fflush (stdout);
-		exit (1);
-	}
-	if (term_mode == KM_ASCII) {
-		aprintf ("error: tty ascii terminal mode\n\r");
-		fflush (stdout);
-		exit (1);
-	}
-	else if (term_mode == KM_EUC) {
-		set_eucmode ();
-		mode &= ~KM_SYSSJIS;
-		mode |= KM_SYSEUC;
-		(void) setlocale(LC_CTYPE, "ja_JP.EUC");
-		current_locale = LC_CTYPE_EUC;
-	}
-	else if (term_mode == KM_SJIS) {
-		mode &= ~KM_SYSEUC;
-		mode |= KM_SYSSJIS;
-		(void) setlocale(LC_CTYPE, "ja_JP.SJIS");
-		current_locale = LC_CTYPE_SHIFTJIS;
-        } else {
-		aprintf ("error: unknown tty terminal code\n\r");
-		fflush (stdout);
-		exit (1);
-	}
-	return (mode);
-#else  
 	char *loc;
 
-#ifdef LACKOF_SETLOCALE
-	loc = getenv("LANG");
-#else
 	loc = setlocale(LC_CTYPE, "");
-#endif
+
 	if (!loc) {
 		aprintf("error: bad locale\n");
 		fflush(stdout);
@@ -579,14 +453,11 @@ set_jmode (void)
 		fflush(stdout);
 		exit(1);
 	}
-#endif /* __sony_news */
 }
 
 
-void
-fixtty (void)
+void fixtty (void)
 {
-#ifdef SYSV_TERMIOS
 	struct termios sbuf;
 
 	sbuf = b;
@@ -605,49 +476,14 @@ fixtty (void)
 	sbuf.c_cc[VDISCARD] = 0;
 	sbuf.c_cc[VWERASE] = 0;
 	sbuf.c_cc[VLNEXT] = 0;
-	(void) ioctl(0, TCSETSW, (char *)&sbuf);
-#else 
-	struct sgttyb sbuf;
-
-	sbuf = b;
-	sbuf.sg_flags &= ~(EVENP|ODDP|ECHO|CRMOD|RAW|TBDELAY);
-	sbuf.sg_flags |= CBREAK;
-	sbuf.sg_flags |= TANDEM;
-	ioctl (0, TIOCSETN, (char *)&sbuf);
-
-
-
-	tc1.t_intrc = -1;
-	tc1.t_quitc = -1;
-	tc1.t_eofc = -1;
-	ioctl (0, TIOCSETC, (char *)&tc1);
-
-	lc1.t_suspc = -1;
-	lc1.t_dsuspc = -1;
-	lc1.t_rprntc = -1;
-	lc1.t_flushc = -1;
-	lc1.t_werasc = -1;
-	lc1.t_lnextc = -1;
-	ioctl (0, TIOCSLTC, (char *)&lc1);
-#endif 
-
-#ifdef __sony_news
-        ioctl (0, TIOCKSET, (char *)&jmode2);
-#endif 
+	tcsetattr (0, TCSADRAIN, &sbuf);
 }
 
-#ifdef BSD43	
-#include <grp.h>
-#endif
 
-
-void
-setdev (void)
+void setdev (void)
 {
 	char	*cp;
-#ifdef BSD43	
 	struct group	*ttygrp;
-#endif
 	Conversion	*cv;
 
 	cv = current_conversion;
@@ -656,30 +492,20 @@ setdev (void)
 		strcpy (tty_name, cp);
 	else
 		*tty_name = '\0';
-#ifndef SVR4
+
 	strcpy (slave_name, line);
-	slave_name[strlen ("/dev/")] = 't';
-#endif 
-#ifdef BSD43	
+
 	if ((ttygrp = getgrnam ("tty")) != NULL)
 		chown(slave_name, getuid(), ttygrp->gr_gid);
 	else
 		chown(slave_name, getuid(), getgid());
 	chmod(slave_name, 0620);
-#else 
-	chown(slave_name, getuid(), getgid());
-	chmod(slave_name, 0622);
+
+#if !defined(__linux__)
+	Ttyslot = ttyslot();
 #endif
-#ifndef SYSV_TERMIOS
-	Ttyslot = nmttyslot (slave_name);
-#endif 
 
-
-#ifdef SYSV_TERMIOS
 	if (ioctl(0, TIOCGWINSZ, &Ttysize) == 0)
-#else
-	if (ioctl(0, TIOCGSIZE, &Ttysize) == 0)
-#endif
 	{
 		if (!status_line)
 			--Ttysize.ts_lines;
@@ -722,29 +548,18 @@ setdev (void)
 		aprintf ("column %d\n\r", cv->column);
 	}
 
-#ifndef SVR4
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-	(void) signal (SIGCHLD, (void (*)())exitprocess);
-#endif 
+	set_signal_handler (SIGCHLD, exitprocess);
 }
 
 
 static char	shellbuf[128];
 
-void
-forkshell (void)
+void forkshell (void)
 {
-#ifdef SVR4
-  struct sigaction action; 
-  sigset_t sset;
-#endif
 	Pid_shell = fork ();
 	if (Pid_shell < 0) {
 		perror ("fork");
-		done ();
+		done (0);
 	}
 	if (Pid_shell == 0) {
 		shellprocess ();
@@ -755,23 +570,14 @@ forkshell (void)
 		aprintf ("shell pid = %d\n\r", Pid_shell);
 	}
 
-	(void) signal (SIGHUP, (void (*)())fail);
-	(void) signal (SIGINT, (void (*)())fail);
-	(void) signal (SIGTERM, (void (*)())fail);
-	(void) signal (SIGWINCH, (void (*)())onwinch);
-#ifdef SVR4
-        (void) sigemptyset(&sset);
-        (void) sigaddset(&sset, SIGCHLD);
-        action.sa_handler = (void (*)()) exitprocess;
-        action.sa_mask =  sset;
-        action.sa_flags = SA_RESTART;
-        (void) sigaction(SIGCHLD, &action, NULL);
-#endif
+	set_signal_handler (SIGHUP, fail);
+	set_signal_handler (SIGINT, fail);
+	set_signal_handler (SIGTERM, fail);
+	set_signal_handler (SIGWINCH, onwinch);
 }
 
 
-void
-sj3_setenv (char* ename, char* eval, char* buf)
+void sj3_setenv (char* ename, char* eval, char* buf)
 {
 	char *cp, *dp;
 	char **ep = environ;
@@ -790,17 +596,10 @@ sj3_setenv (char* ename, char* eval, char* buf)
 }
 
 
-void
-shellprocess (void)
+void shellprocess (void)
 {
-	int	t, f;
-#ifdef SYSV_TERMIOS
-#ifdef SYSV_UTMP
+#if defined(__linux__)
 	struct utmp Utmp;
-#else
-	struct utmpx Utmp;
-#endif
-
 	
 	setsid();
 	getslave ();
@@ -810,7 +609,6 @@ shellprocess (void)
 	(void) strncpy(Utmp.ut_line, &slave_name[sizeof("/dev/")-1],
 							sizeof(Utmp.ut_line));
 	Utmp.ut_type = USER_PROCESS;
-#ifdef SYSV_UTMP
 	Utmp.ut_pid = (pid_t)getpid();
 	strncpy(Utmp.ut_id, &Utmp.ut_line[2], 4);
 	Utmp.ut_id[0] = 't';
@@ -819,21 +617,11 @@ shellprocess (void)
 	getutid(&Utmp);
 	pututline(&Utmp);
 	endutent();
-#else
-	Utmp.ut_pid = (o_pid_t)getpid();
-	Utmp.ut_id[0] = 's';
-	Utmp.ut_id[1] = 'j';
-	Utmp.ut_id[2] = SC_WILDC;
-	Utmp.ut_id[3] = SC_WILDC;
-	Utmp.ut_exit.e_termination = 0;
-	Utmp.ut_exit.e_exit = 0;
-	(void) time (&Utmp.ut_tv.tv_sec);
-	if (makeutx(&Utmp) == NULL)
-		aprintf ("%s:\tmakeutx failed\r\n", progname);
-#endif /* SYSV_UTMP */
-#else /* SYSV_TERMIOS */
+
+#else /* __linux__ */
 	struct utmp		Utmp;
 	char		*p;
+	int		f;
 /*
  * Remove warning.
  * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
@@ -852,32 +640,32 @@ shellprocess (void)
 	SCPYN(Utmp.ut_line, strrchr (slave_name, '/') + 1);
 	time (&Utmp.ut_time);
 
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
-	if (setsid() < 0)
+	if (setsid() < 0) {
 		perror("setsid()");
-#else
-	t = open ("/dev/tty", 2);
-	if (t >= 0) {
-		ioctl (t, TIOCNOTTY, (char *)0);
-		(void) close(t);
+	} else {
+		int t = open ("/dev/tty", O_RDWR);
+		if (t >= 0) {
+			ioctl (t, TIOCNOTTY, (char *)0);
+			(void) close(t);
+		}
 	}
-#endif  
 
 	getslave ();
-#endif /* SYSV_TERMIOS */
+#endif /* __linux__ */
+
 	(void) close (master);
 	dup2 (slave, 0);
 	dup2 (slave, 1);
 	dup2 (slave, 2);
 	(void) close (slave);
 
-#ifndef SYSV_TERMIOS
-	if (Ttyslot > 0 && (f = open (_PATH_UTMP, 1)) >= 0) {
+#if !defined(__linux__)
+	if (Ttyslot > 0 && (f = open (_PATH_UTMP, O_WRONLY)) >= 0) {
 		lseek (f, (long) (Ttyslot * sizeof (Utmp)), 0);
 		write (f, (char *)&Utmp, sizeof (Utmp));
 		close (f);
 	}
-#endif /* SYSV_TERMIOS */
+#endif /* __linux__ */
 
 	setgid (getgid ());
 	setuid (getuid ());
@@ -887,11 +675,7 @@ shellprocess (void)
 		shellargs[1] = (char *) 0;
 	}
 
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-	(void) signal (SIGPIPE, (void (*)())sigpipe);
+	set_signal_handler (SIGPIPE, sigpipe);
 	if ( *shellprog == '/' ) {
 		if (shell_flag) {
 			strcpy (shellbuf, "SHELL=");
@@ -907,59 +691,14 @@ shellprocess (void)
 }
 
 
-void
-getslave (void)
+void getslave (void)
 {
-#ifdef SVR4
-	grantpt(master);		 
-	unlockpt(master);		 
-	slave_name = ptsname(master);	 
-	slave = open(slave_name, O_RDWR); 
-	if (slave < 0) {		 
-		perror(slave_name);
-		done2();
-	}
-	ioctl(slave, I_PUSH, "ptem");	  
-	ioctl(slave, I_PUSH, "ldterm");	  
-	ioctl(slave, I_PUSH, "ttcompat"); 
-
-	(void) ioctl(slave, TCSETSF, (char *)&b);
+	tcsetattr (slave, TCSAFLUSH, &b);
 	(void) ioctl(slave, TIOCSWINSZ, (char *)&Ttysize);
-#ifdef __sony_news
-	(void) ioctl(slave, TIOCKSET, (char *)&jmode);
-	(void) ioctl(slave, TIOCKSETC, (char *)&jtc);
-#endif
-#else
-	line[strlen ("/dev/")] = 't';
-	slave = open (line, 2);
-	if (slave < 0) {
-		perror (line);
-		done2 ();
-	}
-#ifndef SYSV_TERMIOS
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__bsdi__) || defined(__DragonFly__)
-	ioctl(slave, TIOCSCTTY, NULL);
-#endif
-	ioctl (slave, TIOCSETP, (char *)&b);
-	ioctl (slave, TIOCSETC, (char *)&tc);
-	ioctl (slave, TIOCSLTC, (char *)&lc);
-	ioctl (slave, TIOCLSET, (char *)&lb);
-	ioctl (slave, TIOCSETD, (char *)&l);
-#ifdef __sony_news
-	ioctl (slave, TIOCKSET, (char *)&jmode);
-	ioctl (slave, TIOCKSETC, (char *)&jtc);
-#endif
-	ioctl (slave, TIOCSSIZE, &Ttysize);
-#else /* SYSV_TERMIOS */
-	(void) ioctl(slave, TCSETSF, (char *)&b);
-	(void) ioctl(slave, TIOCSWINSZ, (char *)&Ttysize);
-#endif /* SYSV_TERMIOS */
-#endif /* SVR4 */
 }
 
 
-void
-execcmd (char* cmd, char** ap)
+void execcmd (char* cmd, char** ap)
 {
 	int	c;
 	char	*getenv ();
@@ -996,18 +735,16 @@ execcmd (char* cmd, char** ap)
 }
 
 
-void
-fail (void)
+void fail (__attribute__((unused)) int a)
 {
 	(void) kill (0, SIGTERM);
-	done ();
+	done (0);
 }
 
 
-void
-done (void)
+void done (__attribute__((unused)) int a)
 {
-	(void) signal (SIGWINCH, SIG_IGN);
+	set_signal_handler (SIGWINCH, SIG_IGN);
 
 	clear_guide_line ();
 	end_guideline ();
@@ -1015,21 +752,11 @@ done (void)
 }
 
 
-void
-done2 (void)
+void done2 (void)
 {
 	chown (slave_name, 0, 0);
 	chmod (slave_name, 0666);
-#ifdef SYSV_TERMIOS
-	ioctl (0, TCSETSW, (char *)&b);		
-#else /* SYSV_TERMIOS */
-	ioctl (0, TIOCSETP, (char *)&b);	
-	ioctl (0, TIOCSETC, (char *)&tc);	
-	ioctl (0, TIOCSLTC, (char *)&lc);	
-#endif /* SYSV_TERMIOS */
-#ifdef __sony_news
-	ioctl (0, TIOCKSET, (char *)&jmode);	
-#endif 
+	tcsetattr (0, TCSADRAIN, &b);
 	if (!status_line) {
 		++Ttysize.ts_lines;
 		SetRegion();
@@ -1041,49 +768,28 @@ done2 (void)
 }
 
 
-void
-done3 (void)
+void done3 (void)
 {
 	aprintf ("\r\nexit %s.\r\n", progname);
 	exit (0);
 }
 
 
-void
-exitprocess (void)
+void exitprocess (__attribute__((unused)) int a)
 {
-#ifdef SVR4
-        siginfo_t       info;
+	int		status;
 
-        (void) waitid (P_ALL, 0, &info, 
-		      WNOHANG | WUNTRACED | WEXITED | WTRAPPED | WCONTINUED);
-        if ((info.si_code == CLD_CONTINUED) ||(info.si_code == CLD_TRAPPED))
-           return;
-        if (info.si_code == CLD_STOPPED)
-#else
-	int		pid, status;
-
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-	pid = wait3 (&status, (WNOHANG|WUNTRACED), 0);
+	wait3 (&status, (WNOHANG|WUNTRACED), 0);
 	if (WIFSTOPPED (status))
-#endif
 		suspend();
         else
-		done ();
+		done (0);
 }
 
 
-void
-suspend (void)
+void suspend (void)
 {
-#ifdef SIGTYPE_VOID
-	void		(*old_sigtstp) ();
-#else
-	int		(*old_sigtstp) ();
-#endif
+	void		(*old_sigtstp)(int);
 	SELECT_FD	ifds;
 	int		nc;
 	struct timeval	t;
@@ -1105,48 +811,20 @@ cont:
 			goto cont;
 		}
 		if (ioctl (master, TIOCOUTQ, &nc) < 0)
-#ifdef SVR4
-                        break;
-#else
-			fail ();
-#endif
+			fail (0);
 	} while (nc > 0);
 
-#ifdef SYSV_TERMIOS
-	ioctl (0, TCSETSW, (char *)&b);		
-#else /* SYSV_TERMIOS */
-	ioctl (0, TIOCSETP, (char *)&b);	
-	ioctl (0, TIOCSETC, (char *)&tc);	
-	ioctl (0, TIOCSLTC, (char *)&lc);	
-#endif /* SYSV_TERMIOS */
-#ifdef __sony_news
-	ioctl (0, TIOCKSET, (char *)&jmode);	
-#endif 
+	tcsetattr (0, TCSADRAIN, &b);
 
 	if (!status_line) {
 		++Ttysize.ts_lines;
 		SetRegion();
 	}
 
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-#ifdef SIGTYPE_VOID
-	old_sigtstp = (void(*)()) signal (SIGTSTP, SIG_DFL);
-#else
-	old_sigtstp = (int(*)()) signal (SIGTSTP, SIG_DFL);
-#endif
-
+	old_sigtstp = set_signal_handler (SIGTSTP, SIG_DFL);
 	kill (0, SIGTSTP);
 
-	
-
-/*
- * Remove warning.
- * Patched by Hidekazu Kuroki(hidekazu@cs.titech.ac.jp)		1996/8/10
- */
-	(void) signal (SIGTSTP, (void (*)())old_sigtstp);
+	set_signal_handler (SIGTSTP, old_sigtstp);
 	killpg (Pid_shell, SIGCONT);
 	fixtty ();
 
@@ -1158,50 +836,8 @@ cont:
 	print_guide_line ();
 }
 
-#ifdef SVR4
-void
-clearutmpentry(void)
-{
-	struct utmpx		*up;
-#ifdef SVR4
-  struct sigaction action;
-  sigset_t sset;
-
-  sigemptyset(&sset);
-  sigaddset(&sset, SIGCHLD);
-  action.sa_handler = SIG_IGN;
-  action.sa_mask =  sset;
-  action.sa_flags = SA_RESTART;
-  (void) sigaction(SIGCHLD, &action, NULL);
-#else
-	signal(SIGCHLD, SIG_IGN); 
-#endif
-	setutxent();
-	while ( (up = getutxent()) ) {
-		if (up->ut_pid != (o_pid_t)Pid_shell)
-			continue;
-		up->ut_type = DEAD_PROCESS;
-		up->ut_exit.e_termination = 0;
-		up->ut_exit.e_exit = 0;
-		(void) time (&up->ut_tv.tv_sec);
-		if (modutx(up) == NULL)
-			aprintf("%s:\tmodutx failed\r\n", progname);
-		break;
-	}
-	endutxent();
-#ifdef SVR4
-  action.sa_handler = (void (*)()) exitprocess;
-  action.sa_mask =  sset;
-  action.sa_flags = SA_RESTART;
-  (void) sigaction(SIGCHLD, &action, NULL);
-#else
-	signal (SIGCHLD, (void (*)())exitprocess);
-#endif
-}
-#else /* SVR4 */
-#ifdef SYSV_UTMP
-void
-clearutmpentry (void)
+#if defined(__linux__)
+void clearutmpentry (void)
 {
 	struct utmp             Utmp;
 
@@ -1219,9 +855,8 @@ clearutmpentry (void)
 	pututline(&Utmp);
 	endutent();
 }
-#else /* SYSV_UTMP */
-void
-clearutmpentry (void)
+#else /* __linux__ */
+void clearutmpentry (void)
 {
 	int			f;
 	struct utmp		Utmp;
@@ -1231,30 +866,24 @@ clearutmpentry (void)
 	Utmp.ut_host[0] = '\0';
 	Utmp.ut_time = 0;
 
-	if (Ttyslot > 0 && (f = open (_PATH_UTMP, 1)) >= 0) {
+	if (Ttyslot > 0 && (f = open (_PATH_UTMP, O_WRONLY)) >= 0) {
 		lseek (f, (long) (Ttyslot * sizeof (Utmp)), 0);
 		write (f, (char *)&Utmp, sizeof (Utmp));
 		close (f);
 	}
 }
-#endif /* SYSV_UTMP */
-#endif /* SVR4 */
+#endif /* __linux__ */
 
 
-void
-onwinch (void)
+void onwinch (__attribute__((unused)) int a)
 {
 	int ttypgrp;
 	Conversion	*cv;
 
 	cv = current_conversion;
-	(void) signal (SIGWINCH, SIG_IGN);
+	set_signal_handler (SIGWINCH, SIG_IGN);
 
-#ifdef SYSV_TERMIOS
 	if (ioctl (0, TIOCGWINSZ, &Ttysize) == 0)
-#else /* SYSV_TERMIOS */
-	if (ioctl (0, TIOCGSIZE, &Ttysize) == 0)
-#endif /* SYSV_TERMIOS */
 	{
 		if (!status_line) {
 			clear_guide_line ();
@@ -1285,12 +914,11 @@ onwinch (void)
 			killpg (ttypgrp, SIGWINCH);
 	}
 
-	(void) signal (SIGWINCH, (void (*)())onwinch);
+	set_signal_handler (SIGWINCH, onwinch);
 }
 
 
-void
-SetRegion (void)
+void SetRegion (void)
 {
 	set_tty_size ();
 	
@@ -1299,20 +927,13 @@ SetRegion (void)
 }
 
 
-void
-set_tty_size (void)
+void set_tty_size (void)
 {
-	
-#ifdef SYSV_TERMIOS
 	ioctl (master, TIOCSWINSZ, &Ttysize);
-#else /* SYSV_TERMIOS */
-	ioctl (master, TIOCSSIZE, &Ttysize);
-#endif /* SYSV_TERMIOS */
 }
 
 
-void
-setsjserv(char* hname)
+void setsjserv(char* hname)
 {
         char *p;
         int i;
@@ -1338,8 +959,7 @@ setsjserv(char* hname)
 }
 
 
-char *
-chmyhname(char* hname)
+char *chmyhname(char* hname)
 {
         if (hname != NULL) {
                 if (strcmp(my_hname, hname) == 0 ||

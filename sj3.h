@@ -49,7 +49,7 @@ wchar16_t parse_command(wchar16_t *s, int *count);
 
 /* sj3.c */
 int main(int argc, char **argv);
-void makecore(void);
+void makecore(int);
 void init(char **argv);
 void init_env(void);
 void parsearg(int argc, char **argv);
@@ -59,11 +59,7 @@ void setshellname(void);
 void getfixtty(void);
 void get_ttymode(void);
 void getmaster(void);
-#ifdef __sony_news
-void set_jmode(int mode);
-#else
 void set_jmode(void);
-#endif
 void fixtty(void);
 void setdev(void);
 void forkshell(void);
@@ -71,14 +67,14 @@ void sj3_setenv(char *ename, char *eval, char *buf);
 void shellprocess(void);
 void getslave(void);
 void execcmd(char *cmd, char **ap);
-void fail(void);
-void done(void);
+void fail(int);
+void done(int);
 void done2(void);
 void done3(void);
-void exitprocess(void);
+void exitprocess(int);
 void suspend(void);
 void clearutmpentry(void);
-void onwinch(void);
+void onwinch(int);
 void SetRegion(void);
 void set_tty_size(void);
 void setsjserv(char *hname);
