@@ -1039,7 +1039,7 @@ int sj3_rkconv2(wchar16_t *wstr, unsigned int *kstr, int wlen)
 
 
 
-int sj3_rkconv(wchar16_t *romaji, wchar16_t *kana)
+int sj3_rkconv(unsigned char *romaji, unsigned char *kana)
 {
 	wchar16_t *wstr;
 	int len, mflag = 0, ret;
@@ -1132,7 +1132,7 @@ int sj3_rkconv_mb(unsigned char *romaji, unsigned char *kana)
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_rkconv_euc(romaji, kana);
 	else
-	  return sj3_rkconv((wchar16_t *)romaji, (wchar16_t *)kana);
+	  return sj3_rkconv(romaji, kana);
 }
 
 int sj3_rkconv_w16(wchar16_t *wstr, wchar16_t *kstr)
