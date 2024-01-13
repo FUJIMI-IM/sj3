@@ -38,15 +38,14 @@
 
 #include "sj_sysvdef.h"
 #include <stdio.h>
-#ifdef SVR4
+#include <stdlib.h>
 #include <string.h>
-#else
-#include <strings.h>
-#endif
 #include <ctype.h>
 #include "sjctype.h"
 #include "sj3lib.h"
 #include "sjtool.h"
+#include "server.h"
+#include "Funcs.h"
 
 #define	IsEOL(c)	((c) == '\0')
 #define	IsBlank(c)	((c) == ' ' || (c) == '\t')
@@ -55,8 +54,7 @@ extern	int	force_flag;
 extern	int	verbose_flag;
 extern  int     _sys_code;
 
-static void touroku(y, k, h)
-char	*y, *k, *h;
+static void touroku(char *y, char *k, char *h)
 {
 	int	err;
 	int	grm;
@@ -129,14 +127,12 @@ char	*y, *k, *h;
 	case SJ3_TOUROKU_FAILED:
 	default:
 		error_out("\305\320\317\277\244\307\244\255\244\336\244\273\244\363\244\307\244\267\244\277 %s:%s:%s(%d)",
-				y, k, hns2str(h), h);
+				y, k, h, str2hns(h));
 		break;
 	}
 }
 
-void
-dictmake(input)
-char	*input;
+void dictmake(char *input)
 {
 	unsigned char	buf[BUFSIZ];
 	FILE	*fp;

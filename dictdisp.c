@@ -37,11 +37,13 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
+#include "server.h"
+#include "sj3lib.h"
+#include "Funcs.h"
 
-void
-dictdisp(output)
-char	*output;
+void dictdisp(char *output)
 {
 	unsigned char	buf[BUFSIZ];
 	unsigned char	*p;

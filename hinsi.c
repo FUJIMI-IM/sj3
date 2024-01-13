@@ -36,6 +36,7 @@
 
 
 
+#include <string.h>
 #include "sj_hinsi.h"
 
 static	struct	hlist {
@@ -232,8 +233,7 @@ static	struct	hlist {
 	{0,		0}
 };
 
-char	*hns2str(code)
-int	code;
+char	*hns2str(int code)
 {
 	struct	hlist	*p;
 
@@ -245,8 +245,7 @@ int	code;
 	return "ERROR";
 }
 
-int	str2hns(str)
-char	*str;
+int	str2hns(char *str)
 {
 	struct	hlist	*p;
 

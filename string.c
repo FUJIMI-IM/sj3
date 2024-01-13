@@ -51,9 +51,7 @@
 #define iseuc(c)     ((0xa1 <= (c)) && ((c) <= 0xfe))
 #define iskana(c)   ((0xa1 <= (c)) && ((c) <= 0xdf))
 
-int
-sj3_str_sjistoeuc(unsigned char *out, int outlen, unsigned char *in,
-    unsigned char *sjis_default, int *useflag)
+int sj3_str_sjistoeuc(unsigned char *out, int outlen, unsigned char *in, unsigned char *sjis_default, int *useflag)
 {
 	unsigned char *sjis = in, *euc = out;
 	int n = 0;
@@ -98,13 +96,11 @@ sj3_str_sjistoeuc(unsigned char *out, int outlen, unsigned char *in,
 	return n;
 }
 
-int
-sj3_str_euctosjis(unsigned char *out, int outlen, unsigned char *in,
-    unsigned char *sjis_default, int *useflag)
+int sj3_str_euctosjis(unsigned char *out, int outlen, unsigned char *in, unsigned char *sjis_default, int *useflag)
 {
 	unsigned char *euc = in, *sjis = out;
 	int n = 0;
-	unsigned short code, default_code;
+	unsigned short code;
 
 	sjis[0] = '\0';
 	*useflag = 0;
@@ -148,8 +144,7 @@ sj3_str_euctosjis(unsigned char *out, int outlen, unsigned char *in,
 	return n;
 }
 
-int
-sj3_sjistoeuclen(unsigned char *str, int max)
+int sj3_sjistoeuclen(unsigned char *str, int max)
 {
 	int len = 0, bytes = 1;
 
@@ -178,32 +173,28 @@ sj3_sjistoeuclen(unsigned char *str, int max)
 
 static unsigned char def_char[] = {0x81, 0x40};
 
-int
-sj3_sjistoeuc(unsigned char *e, int elen, unsigned char *s, int slen)
+int sj3_sjistoeuc(unsigned char *e, int elen, unsigned char *s, int slen)
 {
 	int dummy;
 
 	return sj3_str_sjistoeuc(e, elen, s, def_char, &dummy);
 }
 
-int
-sj3_euctosjis(unsigned char *s, int slen, unsigned char *e, int elen)
+int sj3_euctosjis(unsigned char *s, int slen, unsigned char *e, int elen)
 {
 	int dummy;
 
 	return sj3_str_euctosjis(s, slen, e, def_char, &dummy);
 }
 
-void
-sj_euc2sjis(unsigned char *s)
+void sj_euc2sjis(unsigned char *s)
 {
 	s[0] &= MASK;
 	s[1] &= MASK;
 	sj_jis2sjis(s);
 }
 
-void
-sj_jis2sjis(unsigned char *s)
+void sj_jis2sjis(unsigned char *s)
 {
 	int    high, low;
 	int    nh, nl;
@@ -223,16 +214,14 @@ sj_jis2sjis(unsigned char *s)
 	s[1] = nl;
 }
 
-void
-sj_sjis2euc(unsigned char *s)
+void sj_sjis2euc(unsigned char *s)
 {
 	sj_sjis2jis(s);
 	s[0] |= MSB;
 	s[1] |= MSB;
 }
 
-void
-sj_sjis2jis(unsigned char *s)
+void sj_sjis2jis(unsigned char *s)
 {
 	int byte1, byte2;
 	unsigned char *sp;
@@ -257,8 +246,7 @@ sj_sjis2jis(unsigned char *s)
 	}
 }
 
-unsigned short
-sj3_jis2sjis(unsigned short code)
+unsigned short sj3_jis2sjis(unsigned short code)
 {
 	unsigned char tmp[3];
 
@@ -273,8 +261,7 @@ sj3_jis2sjis(unsigned short code)
 	return (code);
 }
 
-unsigned short
-sj3_jis2euc(unsigned short code)
+unsigned short sj3_jis2euc(unsigned short code)
 {
 	unsigned char tmp[3];
 
@@ -287,8 +274,7 @@ sj3_jis2euc(unsigned short code)
 	return (code);
 }
 
-unsigned short
-sj3_sjis2jis(unsigned short code)
+unsigned short sj3_sjis2jis(unsigned short code)
 {
 	unsigned char tmp[3];
 
@@ -303,8 +289,7 @@ sj3_sjis2jis(unsigned short code)
 	return (code);
 }
 
-unsigned short
-sj3_euc2sjis(unsigned short code)
+unsigned short sj3_euc2sjis(unsigned short code)
 {
 	unsigned char tmp[3];
 
@@ -319,8 +304,7 @@ sj3_euc2sjis(unsigned short code)
 	return (code);
 }
 
-unsigned short
-sj3_sjis2euc(unsigned short code)
+unsigned short sj3_sjis2euc(unsigned short code)
 {
 	unsigned char tmp[3];
 

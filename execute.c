@@ -49,6 +49,9 @@
 #include "sj3err.h"
 #include "Dict.h"
 #include "server.h"
+#include "kanakan.h"
+#include "sj3lib.h"
+#include "Funcs.h"
 
 
 #define SJIS_PROTO 1
@@ -81,17 +84,9 @@ static	Client	*cur_cli;
 static unsigned char defaultchar[2] = {(unsigned char)0x81, (unsigned char)0x40};
 static int  defuse=0, defuse2=0;
 
-DictFile *opendict();
-int	closedict();
-StdyFile *openstdy();
-int	closestdy();
-
-unsigned char	*put_ndata(), *put_string();
 
 
-
-int
-make_full_path (char *path)
+int make_full_path (char *path)
 {
 	char	tmp[PathNameLen];
 	char    *index;
@@ -122,8 +117,7 @@ make_full_path (char *path)
 
 
 
-WorkArea*
-alloc_workarea (void)
+WorkArea* alloc_workarea (void)
 {
 	WorkArea *p;
 
@@ -142,8 +136,7 @@ alloc_workarea (void)
 	return p;
 }
 
-void
-free_workarea (WorkArea *p)
+void free_workarea (WorkArea *p)
 {
 	if (!p) return;
 	if (--(p -> refcnt)) return;
@@ -169,8 +162,7 @@ free_workarea (WorkArea *p)
 
 
 
-void
-exec_connect (void)
+void exec_connect (void)
 {
 	int	version;
 	char	hostname[HostNameLen];
@@ -225,8 +217,7 @@ exec_connect (void)
 
 
 
-void
-exec_disconnect (void)
+void exec_disconnect (void)
 {
 	if (cur_cli -> stdy) {
 		closestdy(cur_cli -> stdy);
@@ -244,8 +235,7 @@ exec_disconnect (void)
 
 
 
-void
-exec_opendict (void)
+void exec_opendict (void)
 {
 	char	filename[PathNameLen];
 	char	password[PassWordLen];
@@ -320,8 +310,7 @@ exec_opendict (void)
 
 
 
-void
-exec_closedict (void)
+void exec_closedict (void)
 {
 	TypeDicID	id;
 	DICTL	*dictl;
@@ -355,8 +344,7 @@ exec_closedict (void)
 
 
 
-void
-close_dictlist(DICTL *dictl)
+void close_dictlist (DICTL *dictl)
 {
 	DICTL	*p;
 
@@ -371,8 +359,7 @@ close_dictlist(DICTL *dictl)
 
 
 
-void
-exec_openstdy (void)
+void exec_openstdy (void)
 {
 	char	filename[PathNameLen];
 	char	password[PassWordLen];
@@ -393,8 +380,7 @@ exec_openstdy (void)
 
 
 
-void
-exec_closestdy (void)
+void exec_closestdy (void)
 {
 	if (!cur_cli -> stdy) longjmp(error_ret, SJ3_StdyFileNotOpened);
 
@@ -406,8 +392,7 @@ exec_closestdy (void)
 
 
 
-void
-exec_stdysize (void)
+void exec_stdysize (void)
 {
 	put_int(SJ3_NormalEnd);
 	put_int(sizeof(STDYOUT));
@@ -415,8 +400,7 @@ exec_stdysize (void)
 
 
 
-static	void
-exec_lock (void)
+static	void exec_lock (void)
 {
 	int	lock;
 	DICTL	*dl;
@@ -440,8 +424,7 @@ exec_lock (void)
 
 
 
-static	void
-exec_unlock (void)
+static	void exec_unlock (void)
 {
 	int	lock;
 	DICTL	*dl;
@@ -465,8 +448,7 @@ exec_unlock (void)
 
 
 
-static	void
-lock_check_for_read (void)
+static	void lock_check_for_read (void)
 {
 	int	lock;
 
@@ -482,8 +464,7 @@ lock_check_for_read (void)
 }
 
 
-void
-exec_ph2knj (int mb_flag)
+void exec_ph2knj (int mb_flag)
 {
 	int	i, j, l, stdy_size, buf_size, srchead = 0, srclen;
 	unsigned char	*p,*q;
@@ -559,8 +540,7 @@ CCONVERR:
 }
 
 
-void
-exec_cl2knj (int mb_flag)
+void exec_cl2knj (int mb_flag)
 {
 	int	len, stdy_size, buf_size;
 	int	i, j, l;
@@ -624,8 +604,7 @@ CCONVERR:
 }
 
 
-void
-exec_nextcl (int mb_flag)
+void exec_nextcl (int mb_flag)
 {
 	int	mode, stdy_size, buf_size;
 	int	i, l;
@@ -677,8 +656,7 @@ CCONVERR:
 }
 
 
-void
-exec_prevcl (int mb_flag)
+void exec_prevcl (int mb_flag)
 {
 	int	mode, stdy_size, buf_size;
 	int	i, l;
@@ -731,8 +709,7 @@ CCONVERR:
 }
 
 
-void
-exec_cl2knj_cnt(int mb_flag)
+void exec_cl2knj_cnt(int mb_flag)
 {
 	int	len, buf_size, stdy_size;
 	int	i;
@@ -779,8 +756,7 @@ CCONVERR:
 }
 
 
-void
-exec_cl2knj_all (int mb_flag)
+void exec_cl2knj_all (int mb_flag)
 {
 	int	len, stdy_size, buf_size;
 	int	i, l;
@@ -879,8 +855,7 @@ CCONVERR:
 
 
 
-void
-exec_study (void)
+void exec_study (void)
 {
 	int	err;
 	STDYOUT	stdy;
@@ -907,8 +882,7 @@ exec_study (void)
 }
 
 
-void
-exec_clstudy (int mb_flag)
+void exec_clstudy (int mb_flag)
 {
 	int	err;
 	STDYOUT	stdy;
@@ -952,8 +926,7 @@ CCONVERR:
 }
 
 
-void
-exec_adddict (int mb_flag)
+void exec_adddict (int mb_flag)
 {
 	TypeDicID	dicid;
 	TypeGram	gram;
@@ -1015,8 +988,7 @@ CCONVERR:
         return;
 }
 
-void
-exec_deldict (int mb_flag)
+void exec_deldict (int mb_flag)
 {
 	TypeDicID	dicid;
 	TypeGram	gram;
@@ -1076,8 +1048,7 @@ CCONVERR:
 }
 
 
-void
-exec_getdict (int mb_flag)
+void exec_getdict (int mb_flag)
 {
 	TypeDicID	dicid;
 	int		err, buf_size, l;
@@ -1160,8 +1131,7 @@ CCONVERR:
 
 
 
-void
-exec_nextdict (int mb_flag)
+void exec_nextdict (int mb_flag)
 {
 	TypeDicID	dicid;
 	int		err, buf_size, l;
@@ -1244,8 +1214,7 @@ CCONVERR:
 
 
 
-void
-exec_prevdict (int mb_flag)
+void exec_prevdict (int mb_flag)
 {
 	TypeDicID	dicid;
 	int		err, buf_size, l;
@@ -1328,13 +1297,11 @@ CCONVERR:
 
 
 
-void
-exec_makedict (void)
+void exec_makedict (void)
 {
 	struct stat    sbuf;
 	char	path[PathNameLen];
 	int	err;
-	int	ofslen;
 	int	idxlen;
 	int	seglen;
 	int	segnum;
@@ -1358,8 +1325,7 @@ exec_makedict (void)
 
 
 
-void
-exec_makestdy (void)
+void exec_makestdy (void)
 {
 	struct stat    sbuf;
 	char	path[PathNameLen];
@@ -1387,8 +1353,7 @@ exec_makestdy (void)
 
 
 
-void
-exec_access (void)
+void exec_access (void)
 {
 	char	path[PathNameLen];
 	int	mode;
@@ -1404,8 +1369,7 @@ exec_access (void)
 
 
 
-void
-exec_makedir (void)
+void exec_makedir (void)
 {
 	char	path[PathNameLen];
 	int	i;
@@ -1427,8 +1391,7 @@ exec_makedir (void)
 
 
 
-void
-exec_who (void)
+void exec_who (void)
 {
 	int	i;
 	Client	*cli;
@@ -1454,8 +1417,7 @@ exec_who (void)
 
 
 
-void
-exec_kill (void)
+void exec_kill (void)
 {
 	put_int(SJ3_NormalEnd);
 	put_flush();
@@ -1465,8 +1427,7 @@ exec_kill (void)
 
 
 
-void
-exec_quit (void)
+void exec_quit (void)
 {
 	if (client_num > 1) longjmp(error_ret, SJ3_UserConnected);
 	exec_kill();
@@ -1474,8 +1435,7 @@ exec_quit (void)
 
 
 
-void
-exec_version (void)
+void exec_version (void)
 {
 	extern	char	*version_number, *time_stamp;
 	static	char	*Version = "version : ";
@@ -1491,8 +1451,7 @@ exec_version (void)
 
 
 
-void
-exec_dictpass (void)
+void exec_dictpass (void)
 {
 	TypeDicID	dicid;
 	char		buf[PasswdLen + 1];
@@ -1517,8 +1476,7 @@ exec_dictpass (void)
 
 
 
-void
-exec_dictcmnt (void)
+void exec_dictcmnt (void)
 {
 	TypeDicID	dicid;
 	char		buf[CommentLength + 1];
@@ -1543,8 +1501,7 @@ exec_dictcmnt (void)
 
 
 
-void
-exec_stdypass (void)
+void exec_stdypass (void)
 {
 	char	buf[PasswdLen + 1];
 	int	err;
@@ -1562,8 +1519,7 @@ exec_stdypass (void)
 
 
 
-void
-exec_stdycmnt (void)
+void exec_stdycmnt (void)
 {
 	char	buf[CommentLength + 1];
 	int	err;
@@ -1581,8 +1537,7 @@ exec_stdycmnt (void)
 
 
 
-void
-exec_stdypara (void)
+void exec_stdypara (void)
 {
 	int	stynum, clstep, cllen;
 
@@ -1598,8 +1553,7 @@ exec_stdypara (void)
 
 
 
-void
-execute_cmd (void)
+void execute_cmd (void)
 {
 	int	i;
 

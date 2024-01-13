@@ -43,16 +43,14 @@ static char rcsid[] = "$Header: /export/work/contrib/sj3/sj3rkcv/RCS/rk_conv.c,v
 #include "wchar16.h"
 #include <stdio.h>
 #include <ctype.h>
-#ifdef SVR4
 #include <string.h>
-#else
-#include <strings.h>
-#endif
 #ifdef __sony_news
 #include <jctype.h>
 #endif
 #include "kctype.h"
 #include "rk.h"
+#include "sj3lib.h"
+#include "Funcs.h"
 
 #if defined(__sony_news) && defined(SVR4)
 #define wscmp sj3_wscmp16
@@ -124,8 +122,7 @@ static YmibufRec ymipbuf, *ymipp;
 static unsigned short *yhp;
 
 
-sj3_rkcode(code)
-int code;
+void sj3_rkcode(int code)
 {
 	if (code)
 		file_code = SJ3_NO;
@@ -134,15 +131,13 @@ int code;
 
 
 
-sj3_rkinit2(rkfile, erase)
-char *rkfile;
-int erase;
+int sj3_rkinit2(char *rkfile, int erase)
 {
 	rk_erase = erase;
 	return(sj3_rkinit_mb(rkfile));
 }
 
-rcode_sjis_init()
+int rcode_sjis_init(void)
 {
 	int i, rkeylen = 0, ryomilen = 0, rstrlen = 0;
 	int klen, ylen, slen, tablnum = 0, tablsize;
@@ -303,7 +298,7 @@ rcode_sjis_init()
 				
 }
 
-rcode_euc_init()
+int rcode_euc_init(void)
 {
 	int i, rkeylen = 0, ryomilen = 0, rstrlen = 0;
 	int klen, ylen, slen, tablnum = 0, tablsize;
@@ -464,20 +459,17 @@ rcode_euc_init()
 				
 }
 
-sj3_rkinit(rkfile)
-char *rkfile;
+int sj3_rkinit(char *rkfile)
 {
 	return sj3_rkinit_sub(rkfile, rcode_sjis_init);
 }
 
-sj3_rkinit_euc(rkfile)
-char *rkfile;
+int sj3_rkinit_euc(char *rkfile)
 {
 	return sj3_rkinit_sub(rkfile, rcode_euc_init);
 }
 
-sj3_rkinit_mb(rkfile)
-char *rkfile;
+int sj3_rkinit_mb(char *rkfile)
 {
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_rkinit_sub(rkfile, rcode_euc_init);
@@ -485,18 +477,15 @@ char *rkfile;
 	  return sj3_rkinit_sub(rkfile, rcode_sjis_init);
 }
 
-sj3_rkinit_sub(rkfile, mbfunc)
-char *rkfile;
-int (*mbfunc)();
+int sj3_rkinit_sub(char *rkfile, int (*mbfunc)(void))
 {
 	char *p;
 	int len, klen, rlen, retv;
-	FILE *fp, *fopen();
+	FILE *fp;
 	char line[MAXLEN + 1];
 	wchar16_t rkey[MAXWLEN + 1], rstr[MAXWLEN + 1];
 	unsigned short kstr[MAXWLEN + 1];
-	char *strcpy(), *getkey(), *rkgetyomi();
-	RkTablW16 *rktp, *mktable();
+	RkTablW16 *rktp;
 
 	if (rkfile == NULL || *rkfile == NSTR)
 		fp = stdin;
@@ -556,11 +545,7 @@ int (*mbfunc)();
 
 
 
-char *
-getkey(istr, ostr, len)
-char *istr;
-wchar16_t *ostr;
-int *len;
+char *getkey(char *istr, wchar16_t *ostr, int *len)
 {
 	char c, *p;
 	int i;
@@ -614,11 +599,7 @@ int *len;
 
 
 
-char *
-rkgetyomi(istr, ostr, len)
-char *istr;
-wchar16_t *ostr;
-int *len;
+char *rkgetyomi(char *istr, wchar16_t *ostr, int *len)
 {
 	unsigned char c;
 	unsigned char *p;
@@ -680,7 +661,7 @@ int *len;
 
 
 
-cltable()
+void cltable(void)
 {
 	int i;
 
@@ -700,11 +681,8 @@ cltable()
 
 
 
-chk_rstr(rstr, rkey, rlen, klen)
-wchar16_t *rstr, *rkey;
-int rlen, klen;
+int chk_rstr(wchar16_t *rstr, wchar16_t *rkey, int rlen, int klen)
 {
-	int i;
 	wchar16_t *p;
 
 	if (rlen >= klen)
@@ -721,8 +699,7 @@ int rlen, klen;
 
 
 
-RkTablW16 *
-rkalloc()
+RkTablW16 *rkalloc(void)
 {
 	RkTablW16 *rkp;
 	RkbufRec *rkbrp;
@@ -757,10 +734,7 @@ rkalloc()
 
 
 
-stradd(cp, str, len)
-wchar16_t **cp;
-wchar16_t *str;
-int len;
+int stradd(wchar16_t **cp, wchar16_t *str, int len)
 {
 	wchar16_t *strp;
 	StrbufRec *sbrp;
@@ -794,9 +768,7 @@ int len;
 		
 
 
-kstradd(cp, kstr, len)
-wchar16_t **cp, *kstr;
-int len;
+int kstradd(wchar16_t **cp, wchar16_t *kstr, int len)
 {
 	int i;
 	wchar16_t *usp;
@@ -831,10 +803,7 @@ int len;
 
 
 
-RkTablW16 *
-mktable(key, len)
-wchar16_t *key;
-int len;
+RkTablW16 *mktable(wchar16_t *key, int len)
 {
 	int i;
 	RkTablW16 *nrktp, *orktp;
@@ -880,15 +849,14 @@ int len;
 
 
 
-sj3_rkebell(err)
-int err;
+void sj3_rkebell(int err)
 {
 	rk_errin = err;
 }
 
 
 
-sj3_rkclear()
+void sj3_rkclear(void)
 {
 	rline[0] = NSTR;
 	lstr[0] = NSTR;
@@ -897,16 +865,14 @@ sj3_rkclear()
 	sj3_rkreset();
 }
 
-sj3_rkreset()
+void sj3_rkreset(void)
 {
 	rk_cflag = -1;
 }
 
 
 
-sj3_rkconvc(c, rkstr)
-wchar16_t c;
-unsigned int *rkstr;
+void sj3_rkconvc(wchar16_t c, unsigned int *rkstr)
 {
 	int i;
 	wchar16_t *p, *q;
@@ -977,10 +943,7 @@ unsigned int *rkstr;
 
 
 
-sj3_rkconv2(wstr, kstr, wlen)
-wchar16_t *wstr;
-unsigned int *kstr;
-int wlen;
+int sj3_rkconv2(wchar16_t *wstr, unsigned int *kstr, int wlen)
 {
 
 	int i;
@@ -1076,11 +1039,7 @@ int wlen;
 
 
 
-int sj3_rkconv_w16(wchar16_t *, wchar16_t *);
-
-sj3_rkconv(romaji, kana)
-unsigned char *romaji;
-unsigned char *kana;
+int sj3_rkconv(unsigned char *romaji, unsigned char *kana)
 {
 	wchar16_t *wstr;
 	int len, mflag = 0, ret;
@@ -1111,7 +1070,7 @@ unsigned char *kana;
 		return -1;
 	}
 	if (current_locale == LC_CTYPE_EUC) {
-		len = euctosjis(kana, MAXLLEN*2, mtmp, sizeof(mtmp));
+		len = euctosjis((unsigned char *)kana, MAXLLEN*2, mtmp, sizeof(mtmp));
 	} else {
 		(void) memcpy(kana, mtmp, strlen((char *)mtmp) + 1);
 	}
@@ -1124,9 +1083,7 @@ unsigned char *kana;
 	}
 }
 
-sj3_rkconv_euc(romaji, kana)
-unsigned char *romaji;
-unsigned char *kana;
+int sj3_rkconv_euc(unsigned char *romaji, unsigned char *kana)
 {
 	wchar16_t *wstr;
 	int len, mflag = 0, ret;
@@ -1170,9 +1127,7 @@ unsigned char *kana;
 	}
 }
 
-sj3_rkconv_mb(romaji, kana)
-unsigned char *romaji;
-unsigned char *kana;
+int sj3_rkconv_mb(unsigned char *romaji, unsigned char *kana)
 {
 	if (current_locale == LC_CTYPE_EUC)
 	  return sj3_rkconv_euc(romaji, kana);
@@ -1180,9 +1135,7 @@ unsigned char *kana;
 	  return sj3_rkconv(romaji, kana);
 }
 
-int sj3_rkconv_w16(wstr, kstr)
-wchar16_t *wstr;
-wchar16_t *kstr;
+int sj3_rkconv_w16(wchar16_t *wstr, wchar16_t *kstr)
 {
 
 	int i;
@@ -1244,9 +1197,7 @@ wchar16_t *kstr;
 
 
 
-rkmatch(s1, s2, len)
-wchar16_t *s1, *s2;
-int len;
+int rkmatch(wchar16_t *s1, wchar16_t *s2, int len)
 {
 	int i;
 

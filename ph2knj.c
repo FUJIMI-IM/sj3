@@ -40,19 +40,9 @@
 #include "sj_kcnv.h"
 #include "sj_yomi.h"
 #include "kanakan.h"
+#include "Funcs.h"
 
-
-int	sj2cd_chr();
-void	mk2claus();
-void	freework();
-void    selclrec();
-CLREC	*free_clst();
-JREC	*free_jlst();
-
-
-
-int	ph2knj
-(unsigned char *zyomi, unsigned char *kanji, int knjlen)
+int ph2knj(unsigned char *zyomi, unsigned char *kanji, int knjlen)
 {
 	unsigned char	*ptr;
 	unsigned char	*dst;
